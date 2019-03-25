@@ -97,7 +97,7 @@ namespace Lenguaje
 
         //Metodos para el analizador lexico
 
-        public void ObtenerToken(string Palabra, ref List<string> tokens)
+        public static void ObtenerToken(string Palabra, ref List<string> tokens)
         {
             int intEstadoActual = 0;
             bool bandera = false;
@@ -115,7 +115,7 @@ namespace Lenguaje
             tokens.Add(ObtenerToken(intEstadoActual));
 
         }
-        public int NuevoEstado(char c, int intEstadoActual, ref bool bandera)
+        public static int NuevoEstado(char c, int intEstadoActual, ref bool bandera)
         {
             int Estado = 0;
 
@@ -140,7 +140,7 @@ namespace Lenguaje
             }
             return Estado;
         }
-        public string ObtenerToken(int intEstadoActual)
+        public static string ObtenerToken(int intEstadoActual)
         {
             string token = "";
             using (SqlConnection con = ObtenerConexion())
@@ -151,7 +151,7 @@ namespace Lenguaje
             }
             return token;
         }
-        SqlConnection ObtenerConexion()
+        static SqlConnection ObtenerConexion()
         {
             SqlConnection con = new SqlConnection(@"Data Source=HERNANDEZ109; Initial Catalog = LENGUAJE; Server=HERNANDEZ109\SQLEXPRESS; Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
             con.Open();
