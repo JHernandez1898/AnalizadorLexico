@@ -122,5 +122,39 @@ namespace Lenguaje
         {
             int Estado = 0;
 
+            using (SqlConnection con = ObtenerConexion())
+            {
+                SqlCommand comando = new SqlCommand("EXEC NUEVOESTADO '"+c+"',"+intEstadoActual+"");
+                SqlDataReader estado = comando.ExecuteReader();
+                if (estado.Read()) if (!estado.IsDBNull(0)) Estado = estado.GetInt32(0);
+                //LO DE ABAJO NO LO CUBRE EL PROCEDIMIENTO ALMACENADO DE PABLO
+                comando = new SqlCommand("SELECT TOKEN FROM TRANSICION WHERE ESTADO = " + Estado, con);
+                estado = comando.ExecuteReader();
+                if (estado.Read())
+                {
+                    if (!estado.IsDBNull(0))
+                        bandera = true;
+                }
+                //------------------------------------------------------------------------------
+            }
+            return Estado;
+        }
+        public static string ObtenerToken(int intEstadoActual)
+        {
+            string token = "";
+            using (SqlConnection con = ObtenerConexion())
+            {
+                SqlCommand comando = new SqlCommand("select token from transicion where estado = " + intEstadoActual, con);
+                SqlDataReader tok = comando.ExecuteReader();
+                if (tok.Read()) if (!tok.IsDBNull(0)) token = tok.GetString(0);
+            }
+            return token;
+        }
+        static SqlConnection ObtenerConexion()
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=HERNANDEZ109; Initial Catalog = LENGUAJE; Server=HERNANDEZ109\SQLEXPRESS; Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
+            con.Open();
+            return (con);
+        }
     }    
 }
