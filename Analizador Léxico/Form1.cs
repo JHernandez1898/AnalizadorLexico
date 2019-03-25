@@ -30,9 +30,14 @@ namespace Analizador_Léxico
         {
             rtxtcodigointermedio.Text = "";
             string strEntrada = rtxtentrada.Text;
-            List<string> tokens = new List<string>();
-            ConexionBD.ObtenerToken(strEntrada, ref tokens);
-            foreach (string token in tokens) rtxtcodigointermedio.Text += token + " ";
+            string[] strLineas = strEntrada.Split('\n');
+            foreach (string Linea in strLineas)
+            {
+                List<string> tokens = new List<string>();
+                ConexionBD.ObtenerToken(Linea, ref tokens);
+                foreach (string token in tokens) rtxtcodigointermedio.Text += token +" " ;
+                rtxtcodigointermedio.Text +="\n";
+            }
         }
 
     }
