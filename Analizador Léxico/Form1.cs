@@ -31,34 +31,15 @@ namespace Analizador_Léxico
         {
             rtxtcodigointermedio.Text = "";
             string strEntrada = rtxtentrada.Text;
-            List<string> tokens = new List<string>();
-
-            ObtenerToken(strEntrada, ref tokens);
-            foreach (string token in tokens) rtxtcodigointermedio.Text += token + " ";
-        }
-
-
-        public void ObtenerToken(string Palabra, ref List<string> tokens)
-        {
-            int intEstadoActual = 0;
-            bool bandera = false;
-            foreach (char c in Palabra)
+            string[] strLineas = strEntrada.Split('\n');
+            foreach (string Linea in strLineas)
             {
-                intEstadoActual = NuevoEstado(c, intEstadoActual,ref bandera);
-                if (bandera)
-                {
-                    tokens.Add(ObtenerToken(intEstadoActual));
-                    intEstadoActual = 0;
-                    bandera = false;
-                }      
+                List<string> tokens = new List<string>();
+                ConexionBD.ObtenerToken(Linea, ref tokens);
+                foreach (string token in tokens) rtxtcodigointermedio.Text += token +" " ;
+                rtxtcodigointermedio.Text +="\n";
             }
-            intEstadoActual = NuevoEstado(' ', intEstadoActual, ref bandera);
-            tokens.Add(ObtenerToken(intEstadoActual));
-
         }
-        public int NuevoEstado(char c, int intEstadoActual,ref bool bandera)
-        {
-            int Estado = 0;
 
             using (SqlConnection con = ConexionMatriz.ObtenerConexion())
             {

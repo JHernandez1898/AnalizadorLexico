@@ -100,7 +100,27 @@ namespace Lenguaje
 
         //Metodos para el analizador lexico
 
+        public void ObtenerToken(string Palabra, ref List<string> tokens)
+        {
+            int intEstadoActual = 0;
+            bool bandera = false;
+            foreach (char c in Palabra)
+            {
+                intEstadoActual = NuevoEstado(c, intEstadoActual, ref bandera);
+                if (bandera)
+                {
+                    tokens.Add(ObtenerToken(intEstadoActual));
+                    intEstadoActual = 0;
+                    bandera = false;
+                }
+            }
+            intEstadoActual = NuevoEstado(' ', intEstadoActual, ref bandera);
+            tokens.Add(ObtenerToken(intEstadoActual));
 
+        }
+        public int NuevoEstado(char c, int intEstadoActual, ref bool bandera)
+        {
+            int Estado = 0;
 
     }    
 }
