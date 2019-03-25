@@ -86,7 +86,8 @@ namespace Lenguaje
         {
             //LA-DIVERTIDA
             //HERNANDEZ109
-            return Conectar(@"Data Source=LA-DIVERTIDA; Initial Catalog = LENGUAJE; Server=LA-DIVERTIDA\SQLEXPRESS; Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
+            //LAPTOP-EF1M9DTE
+            return Conectar(@"Data Source=LAPTOP-EF1M9DTE Initial Catalog = LENGUAJE; Server=LAPTOP-EF1M9DTE\\KINGBRADLEY; Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
         }
         private static SqlConnection Conectar(string strCadenaConexion)
         {
@@ -153,7 +154,7 @@ namespace Lenguaje
         }
         static SqlConnection ObtenerConexion()
         {
-            SqlConnection con = new SqlConnection(@"Data Source=HERNANDEZ109; Initial Catalog = LENGUAJE; Server=HERNANDEZ109\SQLEXPRESS; Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
+            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-EF1M9DTE Initial Catalog = LENGUAJE; Server=LAPTOP-EF1M9DTE\\KINGBRADLEY; Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
             con.Open();
             return (con);
         }

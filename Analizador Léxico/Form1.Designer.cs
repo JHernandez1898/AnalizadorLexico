@@ -124,6 +124,7 @@
             this.rtxtcodigointermedio.Size = new System.Drawing.Size(386, 163);
             this.rtxtcodigointermedio.TabIndex = 10;
             this.rtxtcodigointermedio.Text = "";
+            this.rtxtcodigointermedio.TextChanged += new System.EventHandler(this.rtxtcodigointermedio_TextChanged);
             // 
             // btnleersiguiente
             // 
@@ -133,6 +134,7 @@
             this.btnleersiguiente.TabIndex = 11;
             this.btnleersiguiente.Text = "Leer Siguiente";
             this.btnleersiguiente.UseVisualStyleBackColor = true;
+            this.btnleersiguiente.Click += new System.EventHandler(this.btnleersiguiente_Click);
             // 
             // btnleertodo
             // 

@@ -38,7 +38,7 @@
     </Reference>
     <Reference Include="Lenguaje, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lenguaje\bin\Debug\Lenguaje.dll</HintPath>
+      <HintPath>..\Lenguaje\bin\Release\Lenguaje.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

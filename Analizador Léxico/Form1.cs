@@ -35,6 +35,15 @@ namespace Analizador_Léxico
             foreach (string token in tokens) rtxtcodigointermedio.Text += token + " ";
         }
 
+        private void rtxtcodigointermedio_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnleersiguiente_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
