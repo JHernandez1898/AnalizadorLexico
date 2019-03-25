@@ -36,9 +36,6 @@
     <Reference Include="Bunifu_UI_v1.5.3">
       <HintPath>..\..\..\..\..\..\Source\ClubCampestre-master\ClubCampestre-master\Bunifu_UI_v1.5.3.dll</HintPath>
     </Reference>
-    <Reference Include="Lenguaje">
-      <HintPath>..\Lenguaje\bin\Debug\Lenguaje.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,6 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clases\ConexionMatriz.cs" />
+    <Compile Include="Clases\Identificador.cs" />
+    <Compile Include="Clases\MetodosAL.cs" />
+    <Compile Include="Clases\NumericoEntero.cs" />
+    <Compile Include="Clases\NumericoExponencial.cs" />
+    <Compile Include="Clases\NumericoExpReal.cs" />
+    <Compile Include="Clases\NumericoReal.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
