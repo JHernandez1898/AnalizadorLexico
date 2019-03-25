@@ -8,8 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using Lenguaje;
-
+using Analizador_Léxico.Clases;
 
 
 namespace Analizador_Léxico
@@ -23,27 +22,27 @@ namespace Analizador_Léxico
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
+            {
+                MessageBox.Show("Conexion chida, Todo chido.");
+            }
         }
 
         private void btnleertodo_Click(object sender, EventArgs e)
         {
             rtxtcodigointermedio.Text = "";
             string strEntrada = rtxtentrada.Text;
-            List<string> tokens = new List<string>();
-            ConexionBD.ObtenerToken(strEntrada, ref tokens);
-            foreach (string token in tokens) rtxtcodigointermedio.Text += token + " ";
+            string[] strLineas = strEntrada.Split('\n');
+            foreach (string Linea in strLineas)
+            {
+                List<string> tokens = new List<string>();
+
+               MetodosAL.ObtenerToken(Linea, ref tokens);
+                foreach (string token in tokens) rtxtcodigointermedio.Text += token +" " ;
+                rtxtcodigointermedio.Text +="\n";
+            }
         }
 
-        private void rtxtcodigointermedio_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnleersiguiente_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 
 }

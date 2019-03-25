@@ -9,7 +9,7 @@ namespace Lenguaje
 {
     public abstract class ConexionBD
     {
-        /*Metodos para crear la matriz*/
+        /*Metodos para crear la matriz
         public static int ContarEstados()
         {
             int numeroEstados = 0;
@@ -22,8 +22,9 @@ namespace Lenguaje
                 while (Mostrar.Read()) numeroEstados = Mostrar.GetInt32(0);
             }
             return numeroEstados;
-        }
-        public static void IngresarPalabra(string strPalabra, string strToken, SqlConnection unaConexion)
+        }*/
+
+        /*public static void IngresarPalabra(string strPalabra, string strToken, SqlConnection unaConexion)
         {
             unaConexion.Close();
             unaConexion.Open();
@@ -72,8 +73,9 @@ namespace Lenguaje
             comando.ExecuteNonQuery();
             comando.Dispose();
             unaConexion.Close();
-        }
-        public static int OmitirDuplicados(char unCaracterNoVerificado,SqlConnection unaConexion,int intEstadoActual)
+        }*/
+
+        /*public static int OmitirDuplicados(char unCaracterNoVerificado,SqlConnection unaConexion,int intEstadoActual)
         {
             unaConexion.Close();
             unaConexion.Open();
@@ -81,8 +83,9 @@ namespace Lenguaje
             SqlCommand cmd = new SqlCommand(consulta, unaConexion);
             SqlDataReader rd = cmd.ExecuteReader();
             return (rd.Read() ? Convert.ToInt32(rd[0]) : -1);
-        }
-        public static SqlConnection ObtenerConexionAutenticadaWindows()
+        }*/
+
+        /*public static SqlConnection ObtenerConexionAutenticadaWindows()
         {
             //LA-DIVERTIDA
             //HERNANDEZ109
@@ -93,12 +96,12 @@ namespace Lenguaje
         {
             SqlConnection con = new SqlConnection(strCadenaConexion);            
             return con;
-        }
+        }*/
 
 
         //Metodos para el analizador lexico
 
-        public static void ObtenerToken(string Palabra, ref List<string> tokens)
+        public void ObtenerToken(string Palabra, ref List<string> tokens)
         {
             int intEstadoActual = 0;
             bool bandera = false;
@@ -116,19 +119,15 @@ namespace Lenguaje
             tokens.Add(ObtenerToken(intEstadoActual));
 
         }
-        public static int NuevoEstado(char c, int intEstadoActual, ref bool bandera)
+        public int NuevoEstado(char c, int intEstadoActual, ref bool bandera)
         {
             int Estado = 0;
 
             using (SqlConnection con = ObtenerConexion())
             {
-                SqlCommand comando = new SqlCommand();
-                comando = new SqlCommand("select [" + c.ToString() + "] from transicion where estado = " + intEstadoActual, con);
-                if (c >= 'a' && c <= 'z' | c == 'ñ') comando = new SqlCommand("select [" + c.ToString() + "m] from transicion where estado = " + intEstadoActual, con);
-                else if (c == ']') comando = new SqlCommand("select [" + c.ToString() + "]] from transicion where estado = " + intEstadoActual, con);
+                SqlCommand comando = new SqlCommand("EXEC NUEVOESTADO '"+c+"',"+intEstadoActual+"");
                 SqlDataReader estado = comando.ExecuteReader();
                 if (estado.Read()) if (!estado.IsDBNull(0)) Estado = estado.GetInt32(0);
-
                 //LO DE ABAJO NO LO CUBRE EL PROCEDIMIENTO ALMACENADO DE PABLO
                 comando = new SqlCommand("SELECT TOKEN FROM TRANSICION WHERE ESTADO = " + Estado, con);
                 estado = comando.ExecuteReader();
