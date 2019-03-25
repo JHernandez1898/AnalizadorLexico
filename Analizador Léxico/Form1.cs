@@ -31,30 +31,31 @@ namespace Analizador_Léxico
             rtxtcodigointermedio.Text = "";
             string strEntrada = rtxtentrada.Text;
             List<string> tokens = new List<string>();
-           
-            //ConexionBD.LlenarListaTokens(strEntrada, ref tokens);
+
+            ObtenerToken(strEntrada, ref tokens);
             foreach (string token in tokens) rtxtcodigointermedio.Text += token + " ";
         }
-    }
-}
-   /*     public void ObtenerToken(string Palabra, ref List<string> tokens)
+
+
+        public void ObtenerToken(string Palabra, ref List<string> tokens)
         {
             int intEstadoActual = 0;
             bool bandera = false;
             foreach (char c in Palabra)
             {
-                //if (c == '"' || (c == '-' && intEstadoActual != 0) || c == '/' && intEstadoActual != 0) { bandera = !bandera; }
-                intEstadoActual = NuevoEstado(c, intEstadoActual,bandera);
+                intEstadoActual = NuevoEstado(c, intEstadoActual,ref bandera);
                 if (bandera)
                 {
-                    ObtenerToken(intEstadoActual);
+                    tokens.Add(ObtenerToken(intEstadoActual));
                     intEstadoActual = 0;
-                }
-                //if (c == ' ' && bandera) { tokens.Add(ObtenerToken(intEstadoActual)); intEstadoActual = 0; }
+                    bandera = false;
+                }      
             }
-           
+            intEstadoActual = NuevoEstado(' ', intEstadoActual, ref bandera);
+            tokens.Add(ObtenerToken(intEstadoActual));
+
         }
-        public int NuevoEstado(char c, int intEstadoActual,bool bandera)
+        public int NuevoEstado(char c, int intEstadoActual,ref bool bandera)
         {
             int Estado = 0;
 
@@ -65,14 +66,14 @@ namespace Analizador_Léxico
                 if (c >= 'a' && c <= 'z' | c == 'ñ') comando = new SqlCommand("select [" + c.ToString() + "m] from transicion where estado = " + intEstadoActual, con);
                 else if (c == ']') comando = new SqlCommand("select [" + c.ToString() + "]] from transicion where estado = " + intEstadoActual, con);
                 SqlDataReader estado = comando.ExecuteReader();
-                if (estado.Read()) Estado = estado.GetInt32(0);
+                if (estado.Read()) if (!estado.IsDBNull(0)) Estado = estado.GetInt32(0);
 
                 comando = new SqlCommand("SELECT TOKEN FROM TRANSICION WHERE ESTADO = " + Estado, con);
                 estado = comando.ExecuteReader();
                 if (estado.Read())
                 {
-                    if(!estado.IsDBNull(0))
-                    bandera = true;
+                    if (!estado.IsDBNull(0))
+                        bandera = true;
                 }
             }
             return Estado;
@@ -84,7 +85,7 @@ namespace Analizador_Léxico
             {
                 SqlCommand comando = new SqlCommand("select token from transicion where estado = " + intEstadoActual, con);
                 SqlDataReader tok = comando.ExecuteReader();
-                if (tok.Read()) token = tok.GetString(0);
+                if (tok.Read())if(!tok.IsDBNull(0)) token = tok.GetString(0);
             }
             return token;
         }
@@ -95,5 +96,5 @@ namespace Analizador_Léxico
             return (con);
         }
     }
+
 }
-*/
