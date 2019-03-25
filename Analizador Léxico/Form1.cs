@@ -35,31 +35,13 @@ namespace Analizador_Léxico
             foreach (string Linea in strLineas)
             {
                 List<string> tokens = new List<string>();
-                ConexionBD.ObtenerToken(Linea, ref tokens);
+                MetodosAL.ObtenerToken(Linea, ref tokens);
                 foreach (string token in tokens) rtxtcodigointermedio.Text += token +" " ;
                 rtxtcodigointermedio.Text +="\n";
             }
         }
 
-            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
-            {
-                SqlCommand comando = new SqlCommand();
-                comando = new SqlCommand("select [" + c.ToString() + "] from transicion where estado = " + intEstadoActual, con);
-                if (c >= 'a' && c <= 'z' | c == 'ñ') comando = new SqlCommand("select [" + c.ToString() + "m] from transicion where estado = " + intEstadoActual, con);
-                else if (c == ']') comando = new SqlCommand("select [" + c.ToString() + "]] from transicion where estado = " + intEstadoActual, con);
-                SqlDataReader estado = comando.ExecuteReader();
-                if (estado.Read()) if (!estado.IsDBNull(0)) Estado = estado.GetInt32(0);
-
-                comando = new SqlCommand("SELECT TOKEN FROM TRANSICION WHERE ESTADO = " + Estado, con);
-                estado = comando.ExecuteReader();
-                if (estado.Read())
-                {
-                    if (!estado.IsDBNull(0))
-                        bandera = true;
-                }
-            }
-            return Estado;
-        }
+        
         public string ObtenerToken(int intEstadoActual)
         {
             string token = "";
