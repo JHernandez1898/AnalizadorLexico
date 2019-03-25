@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using Analizador_Léxico.Clases;
 using System.Diagnostics;
 
+
 namespace Analizador_Léxico
 {
     public partial class Form1 : Form
@@ -48,19 +49,6 @@ namespace Analizador_Léxico
             stopwatch.Stop();
             MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador léxico", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-        }
-
-        
-        public string ObtenerToken(int intEstadoActual)
-        {
-            string token = "";
-            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
-            {
-                SqlCommand comando = new SqlCommand("select token from transicion where estado = " + intEstadoActual, con);
-                SqlDataReader tok = comando.ExecuteReader();
-                if (tok.Read())if(!tok.IsDBNull(0)) token = tok.GetString(0);
-            }
-            return token;
         }
     }
 
