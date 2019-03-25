@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using Analizador_Léxico.Clases;
+using System.Diagnostics;
 
 namespace Analizador_Léxico
 {
@@ -29,6 +30,10 @@ namespace Analizador_Léxico
 
         private void btnleertodo_Click(object sender, EventArgs e)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            //Anlizador Lexico
             rtxtcodigointermedio.Text = "";
             string strEntrada = rtxtentrada.Text;
             string[] strLineas = strEntrada.Split('\n');
@@ -36,9 +41,13 @@ namespace Analizador_Léxico
             {
                 List<string> tokens = new List<string>();
                 MetodosAL.ObtenerToken(Linea, ref tokens);
-                foreach (string token in tokens) rtxtcodigointermedio.Text += token +" " ;
-                rtxtcodigointermedio.Text +="\n";
+                foreach (string token in tokens) rtxtcodigointermedio.Text += token + " ";
+                rtxtcodigointermedio.Text += "\n";
             }
+
+            stopwatch.Stop();
+            MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador léxico", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
 
         
