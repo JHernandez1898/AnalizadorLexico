@@ -16,12 +16,6 @@ namespace Analizador_Léxico
 {
     public partial class Form1 : Form
     {
-
-        string strEntrada;
-        char[] strCaracteres;
-        bool BanderaCaracteres=false;
-        int ContadorArreglo = 0;
-
         public Form1()
         {
             InitializeComponent();
@@ -78,94 +72,79 @@ namespace Analizador_Léxico
             foreach (NumericoExpReal exporeal in MetodosAL.ConstantesNumericasExpReales)
                 dgvConstantesExpo.Rows.Add("CNRE" + exporeal.Index, exporeal.Contenido, exporeal.Exponencial);
         }
-
+        static int indx = 0;
+        static int palabra = 0;
+        static int intEstadoActual = 0;
+        static int linea = 1;
+        static List<char> caracteres = new List<char>();
         private void btnCaracterXCaracter_Click(object sender, EventArgs e)
         {
-            if(BanderaCaracteres==false)
+
+            string strEntrada = rtxtentrada.Text;
+            if (indx ==0)
             {
-                ContadorArreglo = 0;
-                txtEstadoAnt.Text = "";
-                string strEntrada = rtxtentrada.Text;
-                strCaracteres =rtxtentrada.Text.ToCharArray();
-                BanderaCaracteres = true;
-                txtCaracter.Text = strCaracteres[ContadorArreglo].ToString();
-                txtEstadoActual.Text = MetodosAL.CaracterPorCaracter(strCaracteres[ContadorArreglo], 0).ToString();
-                ContadorArreglo++;
+                Depurar();
+                rtxtcodigointermedio.Text = "";
             }
-            else
+            strEntrada = strEntrada.Replace('\n', ' ');
+            string[] strPalabras = strEntrada.Split(' ');
+            strEntrada = rtxtentrada.Text;
+            List<string> tokens = new List<string>();
+            txtSubcadena.Text = strPalabras[palabra];//Mostrar la subcadena actual
+            string palabraActual = strPalabras[palabra];
+            bool bandera = false;
+            if (strEntrada.Length > indx)
             {
-                if(ContadorArreglo == strCaracteres.Length)
+                char c = strEntrada[indx];
+                caracteres.Add(c);
+                if (c != '\n')
                 {
-                    txtEstadoAnt.Text = txtEstadoActual.Text;
-                    txtEstadoActual.Text=MetodosAL.CaracterPorCaracter(' ', int.Parse(txtEstadoActual.Text)).ToString();
-                    txtCaracter.Text = ' '+"del";
-                    rtxtcodigointermedio.Text+= MetodosAL.ObtenerToken(int.Parse(txtEstadoActual.Text))+'\n';
-                    txtEstadoAnt.Text = txtEstadoActual.Text;
-                    txtEstadoActual.Text = "0";
-                    BanderaCaracteres = false;
-                    MostrarIdentificadoresConstantes();
-                    return;
-                }
-                if(txtEstadoActual.Text == "196")
-                {
-                    txtEstadoAnt.Text = txtEstadoActual.Text;
-                    txtEstadoActual.Text = MetodosAL.CaracterPorCaracter('/', int.Parse(txtEstadoActual.Text)).ToString();
-                    txtCaracter.Text = '/' + "del";
-                    rtxtcodigointermedio.Text += MetodosAL.ObtenerToken(int.Parse(txtEstadoActual.Text)) + '\n';
-                    txtEstadoAnt.Text = txtEstadoActual.Text;
-                    if (ContadorArreglo < strCaracteres.Length)
+                    txtEstadoAnt.Text = intEstadoActual.ToString();
+                    txtCaracter.Text = c.ToString();
+                    txtnumrenglon.Text = linea.ToString();
+                    intEstadoActual = MetodosAL.NuevoEstado(c, intEstadoActual, ref bandera);
+                    if (bandera)
                     {
-                        txtEstadoActual.Text = "0";
-                        ContadorArreglo+=2;
-                        return;
+                        string tokn = MetodosAL.ObtenerToken(intEstadoActual, caracteres);
+                        tokens.Add(tokn);
+                        txttoken.Text = tokn;
+                        foreach (string tkn in tokens) txtcadenatokens.Text += tkn + " "; //Muestro la cadena de tokens
+                        intEstadoActual = 0;
+                        palabra++; //Avanzo a la siguiente palabra
+                        bandera = false;
+                        caracteres.Clear();
                     }
-                    else
-                    {
-                        txtEstadoActual.Text = "0";
-                        BanderaCaracteres = false;
-                        MostrarIdentificadoresConstantes();
-                        return;
-                    }
-                }
-                if((strCaracteres[ContadorArreglo]==' '&&txtEstadoActual.Text!="195"))
-                {
-                    txtEstadoAnt.Text = txtEstadoActual.Text;
-                    txtEstadoActual.Text = MetodosAL.CaracterPorCaracter(' ', int.Parse(txtEstadoActual.Text)).ToString();
-                    txtCaracter.Text = ' ' + "del";
-                    rtxtcodigointermedio.Text += MetodosAL.ObtenerToken(int.Parse(txtEstadoActual.Text)) + ' ';
-                    txtEstadoAnt.Text = txtEstadoActual.Text;                   
-                    ContadorArreglo++;
-                    txtEstadoActual.Text = MetodosAL.CaracterPorCaracter(strCaracteres[ContadorArreglo], int.Parse(txtEstadoActual.Text)).ToString();
-                    MostrarIdentificadoresConstantes();
-                    return;
-                }
-                if(strCaracteres[ContadorArreglo]=='\n')
-                {
-                   
-                    txtEstadoAnt.Text = txtEstadoActual.Text;
-                    txtEstadoActual.Text = MetodosAL.CaracterPorCaracter(' ', int.Parse(txtEstadoActual.Text)).ToString();
-                    txtCaracter.Text = ' ' + "del";
-                    rtxtcodigointermedio.Text += MetodosAL.ObtenerToken(int.Parse(txtEstadoActual.Text)) + '\n';
-                    txtEstadoAnt.Text = txtEstadoActual.Text;
-                    ContadorArreglo++;
-                    txtEstadoActual.Text = MetodosAL.CaracterPorCaracter(strCaracteres[ContadorArreglo], int.Parse(txtEstadoActual.Text)).ToString();
-                    MostrarIdentificadoresConstantes();
-                }
-                if (MetodosAL.ObtenerToken(int.Parse(txtEstadoActual.Text))!="")
-                {
-                    MetodosAL.ObtenerToken(int.Parse(txtEstadoActual.Text));
-                    txtEstadoAnt.Text = txtEstadoActual.Text;
-                    txtEstadoActual.Text = "0";
+                    txtEstadoActual.Text = intEstadoActual.ToString(); 
                 }
                 else
                 {
-                    txtEstadoAnt.Text = txtEstadoActual.Text;
-                    txtCaracter.Text = strCaracteres[ContadorArreglo].ToString();
-                    txtEstadoActual.Text = MetodosAL.CaracterPorCaracter(strCaracteres[ContadorArreglo], int.Parse(txtEstadoActual.Text)).ToString();
-                    ContadorArreglo++;
+                    linea++;
+                    CambiarEstado(' ', ref bandera, ref tokens);
+                    palabra++;
                 }
+                indx++;
             }
-            
+            else
+            {
+                CambiarEstado(' ', ref bandera, ref tokens);
+                indx = 0;
+                palabra = 0;
+            }
+            MostrarIdentificadoresConstantes();
+        }
+        void CambiarEstado(char c, ref bool bandera, ref List<string> tokens)
+        {
+            txtEstadoAnt.Text = intEstadoActual.ToString();
+            intEstadoActual = MetodosAL.NuevoEstado(' ', intEstadoActual, ref bandera);
+            txtEstadoActual.Text = intEstadoActual.ToString();
+            string tokn = MetodosAL.ObtenerToken(intEstadoActual, caracteres);
+            tokens.Add(tokn);
+            txttoken.Text = tokn;
+            foreach (string tkn in tokens) txtcadenatokens.Text += tkn + " "; //Muestro la cadena de tokens
+            rtxtcodigointermedio.Text += txtcadenatokens.Text + "\n";
+            txtcadenatokens.Text = "";
+            caracteres.Clear();
+            intEstadoActual = 0;
         }
 
         int intContadorPalabras = 0;
