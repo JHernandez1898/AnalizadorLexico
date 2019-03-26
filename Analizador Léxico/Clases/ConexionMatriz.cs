@@ -13,6 +13,8 @@ namespace Analizador_Léxico.Clases
         {
              SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-EF1M9DTE; Initial Catalog = LENGUAJE; Server=LAPTOP-EF1M9DTE\KINGBRADLEY; Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
             //SqlConnection con = new SqlConnection(@"Data Source=localhost; Initial Catalog = LENGUAJE; Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
+            //SqlConnection con = new SqlConnection(@"Data Source=HERNANDEZ109; Initial Catalog = LENGUAJE; Server=HERNANDEZ109\SQLEXPRESS; Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
+              SqlConnection con = new SqlConnection(@"Data Source=localhost; Initial Catalog = LENGUAJE; Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
             con.Open();
             return (con);
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Analizador_Léxico.Clases
 {
-    class NumericoReal : IEquatable<NumericoReal>, IComparable<NumericoReal>
+    public class NumericoReal : IEquatable<NumericoReal>, IComparable<NumericoReal>
     {
         private int _intIndex;
 

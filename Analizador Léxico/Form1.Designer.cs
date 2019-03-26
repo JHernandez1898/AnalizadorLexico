@@ -42,13 +42,24 @@
             this.btnleertodo = new System.Windows.Forms.Button();
             this.rtxtentrada = new System.Windows.Forms.RichTextBox();
             this.lblcodigointermedio = new System.Windows.Forms.Label();
-            this.txtEstadoAnt = new System.Windows.Forms.TextBox();
-            this.lblEstado = new System.Windows.Forms.Label();
-            this.btnCaracterXCaracter = new System.Windows.Forms.Button();
-            this.txtEstadoActual = new System.Windows.Forms.TextBox();
+            this.dgvIDE = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtCaracter = new System.Windows.Forms.TextBox();
-            this.lblChar = new System.Windows.Forms.Label();
+            this.dgvConstatesNumericas = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dgvConstantesExpo = new System.Windows.Forms.DataGridView();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvIDE)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConstatesNumericas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConstantesExpo)).BeginInit();
             this.SuspendLayout();
             // 
             // lblEntrada
@@ -94,7 +105,7 @@
             // 
             // txtnumrenglon
             // 
-            this.txtnumrenglon.Location = new System.Drawing.Point(468, 26);
+            this.txtnumrenglon.Location = new System.Drawing.Point(445, 25);
             this.txtnumrenglon.Name = "txtnumrenglon";
             this.txtnumrenglon.Size = new System.Drawing.Size(138, 20);
             this.txtnumrenglon.TabIndex = 7;
@@ -102,7 +113,7 @@
             // lblnumrenglon
             // 
             this.lblnumrenglon.AutoSize = true;
-            this.lblnumrenglon.Location = new System.Drawing.Point(465, 9);
+            this.lblnumrenglon.Location = new System.Drawing.Point(442, 8);
             this.lblnumrenglon.Name = "lblnumrenglon";
             this.lblnumrenglon.Size = new System.Drawing.Size(67, 13);
             this.lblnumrenglon.TabIndex = 6;
@@ -110,7 +121,7 @@
             // 
             // txttoken
             // 
-            this.txttoken.Location = new System.Drawing.Point(468, 149);
+            this.txttoken.Location = new System.Drawing.Point(445, 70);
             this.txttoken.Name = "txttoken";
             this.txttoken.Size = new System.Drawing.Size(138, 20);
             this.txttoken.TabIndex = 9;
@@ -118,7 +129,7 @@
             // lbltoken
             // 
             this.lbltoken.AutoSize = true;
-            this.lbltoken.Location = new System.Drawing.Point(465, 128);
+            this.lbltoken.Location = new System.Drawing.Point(442, 53);
             this.lbltoken.Name = "lbltoken";
             this.lbltoken.Size = new System.Drawing.Size(38, 13);
             this.lbltoken.TabIndex = 8;
@@ -134,7 +145,7 @@
             // 
             // btnleersiguiente
             // 
-            this.btnleersiguiente.Location = new System.Drawing.Point(485, 244);
+            this.btnleersiguiente.Location = new System.Drawing.Point(466, 113);
             this.btnleersiguiente.Name = "btnleersiguiente";
             this.btnleersiguiente.Size = new System.Drawing.Size(98, 34);
             this.btnleersiguiente.TabIndex = 11;
@@ -143,7 +154,7 @@
             // 
             // btnleertodo
             // 
-            this.btnleertodo.Location = new System.Drawing.Point(485, 297);
+            this.btnleertodo.Location = new System.Drawing.Point(466, 157);
             this.btnleertodo.Name = "btnleertodo";
             this.btnleertodo.Size = new System.Drawing.Size(98, 34);
             this.btnleertodo.TabIndex = 12;
@@ -168,68 +179,157 @@
             this.lblcodigointermedio.TabIndex = 14;
             this.lblcodigointermedio.Text = "Codigo Intermedio";
             // 
-            // txtEstadoAnt
+            // dgvIDE
             // 
-            this.txtEstadoAnt.Location = new System.Drawing.Point(469, 65);
-            this.txtEstadoAnt.Name = "txtEstadoAnt";
-            this.txtEstadoAnt.Size = new System.Drawing.Size(37, 20);
-            this.txtEstadoAnt.TabIndex = 16;
+            this.dgvIDE.AllowUserToAddRows = false;
+            this.dgvIDE.AllowUserToDeleteRows = false;
+            this.dgvIDE.AllowUserToResizeColumns = false;
+            this.dgvIDE.AllowUserToResizeRows = false;
+            this.dgvIDE.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvIDE.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4});
+            this.dgvIDE.Location = new System.Drawing.Point(12, 403);
+            this.dgvIDE.Name = "dgvIDE";
+            this.dgvIDE.RowHeadersVisible = false;
+            this.dgvIDE.Size = new System.Drawing.Size(200, 163);
+            this.dgvIDE.TabIndex = 15;
             // 
-            // lblEstado
+            // Column1
             // 
-            this.lblEstado.AutoSize = true;
-            this.lblEstado.Location = new System.Drawing.Point(466, 49);
-            this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(79, 13);
-            this.lblEstado.TabIndex = 15;
-            this.lblEstado.Text = "Estado Anterior";
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column1.HeaderText = "No.";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
-            // btnCaracterXCaracter
+            // Column2
             // 
-            this.btnCaracterXCaracter.Location = new System.Drawing.Point(485, 191);
-            this.btnCaracterXCaracter.Name = "btnCaracterXCaracter";
-            this.btnCaracterXCaracter.Size = new System.Drawing.Size(98, 34);
-            this.btnCaracterXCaracter.TabIndex = 17;
-            this.btnCaracterXCaracter.Text = "Leer Caracter";
-            this.btnCaracterXCaracter.UseVisualStyleBackColor = true;
-            this.btnCaracterXCaracter.Click += new System.EventHandler(this.btnCaracterXCaracter_Click);
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.HeaderText = "Nombre";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             // 
-            // txtEstadoActual
+            // Column3
             // 
-            this.txtEstadoActual.Location = new System.Drawing.Point(560, 65);
-            this.txtEstadoActual.Name = "txtEstadoActual";
-            this.txtEstadoActual.Size = new System.Drawing.Size(37, 20);
-            this.txtEstadoActual.TabIndex = 19;
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column3.HeaderText = "Tipo";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column4.HeaderText = "Cont.";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(557, 49);
+            this.label1.Location = new System.Drawing.Point(9, 387);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 13);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Estado Actual";
+            this.label1.Size = new System.Drawing.Size(76, 13);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Identificadores";
             // 
-            // txtCaracter
+            // dgvConstatesNumericas
             // 
-            this.txtCaracter.Location = new System.Drawing.Point(469, 105);
-            this.txtCaracter.Name = "txtCaracter";
-            this.txtCaracter.Size = new System.Drawing.Size(37, 20);
-            this.txtCaracter.TabIndex = 21;
+            this.dgvConstatesNumericas.AllowUserToAddRows = false;
+            this.dgvConstatesNumericas.AllowUserToDeleteRows = false;
+            this.dgvConstatesNumericas.AllowUserToResizeColumns = false;
+            this.dgvConstatesNumericas.AllowUserToResizeRows = false;
+            this.dgvConstatesNumericas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvConstatesNumericas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.Column5});
+            this.dgvConstatesNumericas.Location = new System.Drawing.Point(218, 403);
+            this.dgvConstatesNumericas.Name = "dgvConstatesNumericas";
+            this.dgvConstatesNumericas.RowHeadersVisible = false;
+            this.dgvConstatesNumericas.Size = new System.Drawing.Size(200, 163);
+            this.dgvConstatesNumericas.TabIndex = 17;
             // 
-            // lblChar
+            // label2
             // 
-            this.lblChar.AutoSize = true;
-            this.lblChar.Location = new System.Drawing.Point(466, 88);
-            this.lblChar.Name = "lblChar";
-            this.lblChar.Size = new System.Drawing.Size(80, 13);
-            this.lblChar.TabIndex = 20;
-            this.lblChar.Text = "Caracter Actual";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(218, 387);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(113, 13);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Constantes Numericas";
+            // 
+            // dgvConstantesExpo
+            // 
+            this.dgvConstantesExpo.AllowUserToAddRows = false;
+            this.dgvConstantesExpo.AllowUserToDeleteRows = false;
+            this.dgvConstantesExpo.AllowUserToResizeColumns = false;
+            this.dgvConstantesExpo.AllowUserToResizeRows = false;
+            this.dgvConstantesExpo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvConstantesExpo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn8,
+            this.Column6});
+            this.dgvConstantesExpo.Location = new System.Drawing.Point(424, 403);
+            this.dgvConstantesExpo.Name = "dgvConstantesExpo";
+            this.dgvConstantesExpo.RowHeadersVisible = false;
+            this.dgvConstantesExpo.Size = new System.Drawing.Size(200, 163);
+            this.dgvConstantesExpo.TabIndex = 19;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(421, 387);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(132, 13);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "Constantes Exponenciales";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn1.HeaderText = "No.";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Contenido";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn5.HeaderText = "No.";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn8.HeaderText = "Contenido";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column6.HeaderText = "Exponente";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(628, 570);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.dgvConstantesExpo);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.dgvConstatesNumericas);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dgvIDE);
             this.ClientSize = new System.Drawing.Size(633, 398);
             this.Controls.Add(this.txtCaracter);
             this.Controls.Add(this.lblChar);
@@ -254,7 +354,9 @@
             this.Controls.Add(this.lblEntrada);
             this.Name = "Form1";
             this.Text = "Analizador Léxico";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvIDE)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConstatesNumericas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConstantesExpo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,6 +385,21 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCaracter;
         private System.Windows.Forms.Label lblChar;
+        private System.Windows.Forms.DataGridView dgvIDE;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridView dgvConstatesNumericas;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dgvConstantesExpo;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
     }
 }
 
