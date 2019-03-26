@@ -52,7 +52,17 @@ namespace Analizador_Léxico.Clases
             }
             return Estado;
         }
-
+        public static string ObtenerToken(int intEstadoActual)
+        {
+            string token = "";
+            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
+            {
+                SqlCommand comando = new SqlCommand("select token from transicion where estado = " + intEstadoActual, con);
+                SqlDataReader tok = comando.ExecuteReader();
+                if (tok.Read()) if (!tok.IsDBNull(0)) token = tok.GetString(0).Trim();
+            }
+            return token;
+        }
         public static string ObtenerToken(int intEstadoActual, List<char> Palabra)
         {
             string token = "";
@@ -68,7 +78,18 @@ namespace Analizador_Léxico.Clases
         public static int CaracterPorCaracter(char c, int intEstadoActual)
         {
             int Estado = 0;
-
+            
+            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
+            {
+                SqlCommand comando = new SqlCommand("EXEC NUEVOESTADO '" + c + "'," + intEstadoActual + "", con);
+                SqlDataReader estado = comando.ExecuteReader();
+                if (estado.Read()) if (!estado.IsDBNull(0)) Estado = estado.GetInt32(0);
+                comando = new SqlCommand("SELECT TOKEN FROM TRANSICION WHERE ESTADO = " + Estado, con);
+                estado = comando.ExecuteReader();
+                if (estado.Read()) if (!estado.IsDBNull(0)) return Estado;
+            }
+            return Estado;
+        }
         private static void IdentificarToken(List<char> C, ref string token, int EstadoFinal)
         {
             string Palabra = "";

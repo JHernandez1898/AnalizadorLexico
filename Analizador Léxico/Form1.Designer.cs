@@ -47,16 +47,22 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
             this.dgvConstatesNumericas = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dgvConstantesExpo = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dgvConstantesExpo = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnCaracterxCarter = new System.Windows.Forms.Button();
+            this.txtCaracter = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtEstadoActual = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtEstadoAnt = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIDE)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConstatesNumericas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConstantesExpo)).BeginInit();
@@ -145,7 +151,7 @@
             // 
             // btnleersiguiente
             // 
-            this.btnleersiguiente.Location = new System.Drawing.Point(466, 113);
+            this.btnleersiguiente.Location = new System.Drawing.Point(455, 259);
             this.btnleersiguiente.Name = "btnleersiguiente";
             this.btnleersiguiente.Size = new System.Drawing.Size(98, 34);
             this.btnleersiguiente.TabIndex = 11;
@@ -154,7 +160,7 @@
             // 
             // btnleertodo
             // 
-            this.btnleertodo.Location = new System.Drawing.Point(466, 157);
+            this.btnleertodo.Location = new System.Drawing.Point(455, 299);
             this.btnleertodo.Name = "btnleertodo";
             this.btnleertodo.Size = new System.Drawing.Size(98, 34);
             this.btnleertodo.TabIndex = 12;
@@ -225,15 +231,6 @@
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 387);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 13);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Identificadores";
-            // 
             // dgvConstatesNumericas
             // 
             this.dgvConstatesNumericas.AllowUserToAddRows = false;
@@ -249,6 +246,19 @@
             this.dgvConstatesNumericas.RowHeadersVisible = false;
             this.dgvConstatesNumericas.Size = new System.Drawing.Size(200, 163);
             this.dgvConstatesNumericas.TabIndex = 17;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn1.HeaderText = "No.";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Contenido";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
             // 
             // label2
             // 
@@ -276,28 +286,6 @@
             this.dgvConstantesExpo.Size = new System.Drawing.Size(200, 163);
             this.dgvConstantesExpo.TabIndex = 19;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(421, 387);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(132, 13);
-            this.label3.TabIndex = 20;
-            this.label3.Text = "Constantes Exponenciales";
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn1.HeaderText = "No.";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Contenido";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -319,25 +307,90 @@
             this.Column6.Name = "Column6";
             this.Column6.ReadOnly = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(421, 387);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(132, 13);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "Constantes Exponenciales";
+            // 
+            // btnCaracterxCarter
+            // 
+            this.btnCaracterxCarter.Location = new System.Drawing.Point(455, 218);
+            this.btnCaracterxCarter.Name = "btnCaracterxCarter";
+            this.btnCaracterxCarter.Size = new System.Drawing.Size(98, 34);
+            this.btnCaracterxCarter.TabIndex = 21;
+            this.btnCaracterxCarter.Text = "Caracter por Caracter";
+            this.btnCaracterxCarter.UseVisualStyleBackColor = true;
+            this.btnCaracterxCarter.Click += new System.EventHandler(this.btnCaracterXCaracter_Click);
+            // 
+            // txtCaracter
+            // 
+            this.txtCaracter.Location = new System.Drawing.Point(445, 165);
+            this.txtCaracter.Name = "txtCaracter";
+            this.txtCaracter.Size = new System.Drawing.Size(47, 20);
+            this.txtCaracter.TabIndex = 23;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(442, 149);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(80, 13);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Caracter Actual";
+            // 
+            // txtEstadoActual
+            // 
+            this.txtEstadoActual.Location = new System.Drawing.Point(530, 121);
+            this.txtEstadoActual.Name = "txtEstadoActual";
+            this.txtEstadoActual.Size = new System.Drawing.Size(65, 20);
+            this.txtEstadoActual.TabIndex = 25;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(527, 104);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(73, 13);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Estado Actual";
+            // 
+            // txtEstadoAnt
+            // 
+            this.txtEstadoAnt.Location = new System.Drawing.Point(445, 121);
+            this.txtEstadoAnt.Name = "txtEstadoAnt";
+            this.txtEstadoAnt.Size = new System.Drawing.Size(76, 20);
+            this.txtEstadoAnt.TabIndex = 27;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(442, 104);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(79, 13);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "Estado Anterior";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(628, 570);
+            this.ClientSize = new System.Drawing.Size(827, 617);
+            this.Controls.Add(this.txtEstadoAnt);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.txtEstadoActual);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtCaracter);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.btnCaracterxCarter);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dgvConstantesExpo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dgvConstatesNumericas);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvIDE);
-            this.ClientSize = new System.Drawing.Size(633, 398);
-            this.Controls.Add(this.txtCaracter);
-            this.Controls.Add(this.lblChar);
-            this.Controls.Add(this.txtEstadoActual);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnCaracterXCaracter);
-            this.Controls.Add(this.txtEstadoAnt);
-            this.Controls.Add(this.lblEstado);
             this.Controls.Add(this.lblcodigointermedio);
             this.Controls.Add(this.rtxtentrada);
             this.Controls.Add(this.btnleertodo);
@@ -378,15 +431,12 @@
         private System.Windows.Forms.Button btnleertodo;
         private System.Windows.Forms.RichTextBox rtxtentrada;
         private System.Windows.Forms.Label lblcodigointermedio;
-        private System.Windows.Forms.TextBox txtEstadoAnt;
-        private System.Windows.Forms.Label lblEstado;
-        private System.Windows.Forms.Button btnCaracterXCaracter;
-        private System.Windows.Forms.TextBox txtEstadoActual;
+       
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtCaracter;
+        
         private System.Windows.Forms.Label lblChar;
         private System.Windows.Forms.DataGridView dgvIDE;
-        private System.Windows.Forms.Label label1;
+        
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
@@ -400,6 +450,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.Button btnCaracterxCarter;
+        private System.Windows.Forms.TextBox txtCaracter;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtEstadoActual;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtEstadoAnt;
+        private System.Windows.Forms.Label label6;
     }
 }
 
