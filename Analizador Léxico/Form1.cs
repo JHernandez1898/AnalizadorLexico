@@ -186,9 +186,9 @@ namespace Analizador_Léxico
                 }
 
                 List<string> tokens = new List<string>();
-
-                if (strPalabras[intContadorPalabras] != "\n")
-                {
+                string strPalabra = strPalabras[intContadorPalabras];
+                if (!strPalabras[intContadorPalabras].Contains("\n"))
+                {                    
                     MetodosAL.ObtenerToken(strPalabras[intContadorPalabras], ref tokens);
                     foreach (string token in tokens)
                     {
@@ -200,8 +200,21 @@ namespace Analizador_Léxico
                 }
                 else
                 {
-                    intLinea++;
-                    rtxtcodigointermedio.Text += "\n";
+                    string strPalabraEspaciada = strPalabras[intContadorPalabras];
+                    if (strPalabras[intContadorPalabras] != "\n")
+                    {                        
+                        strPalabraEspaciada = strPalabraEspaciada.Replace("\n","");
+                    }
+                    MetodosAL.ObtenerToken(strPalabraEspaciada, ref tokens);
+                    foreach (string token in tokens)
+                    {
+                        rtxtcodigointermedio.Text += token + " ";
+                        txttoken.Text = token;
+                    }
+                    rtxtcodigointermedio.Text += " ";
+                    rtxtcodigointermedio.Text += " \n";
+                    MostrarIdentificadoresConstantes();
+                    intLinea++;                    
                 }
                 txtnumrenglon.Text = intLinea.ToString();
                 intContadorPalabras++;
@@ -210,6 +223,7 @@ namespace Analizador_Léxico
             {
                 intContadorPalabras = 0;
                 intCantidadPalabras = 0;
+                intLinea = 1;
                 Depurar();
             }
         }

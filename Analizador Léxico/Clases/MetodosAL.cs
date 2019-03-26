@@ -43,7 +43,7 @@ namespace Analizador_Léxico.Clases
             int Estado = 0;
             using (SqlConnection con = ConexionMatriz.ObtenerConexion())
             {
-                SqlCommand comando = new SqlCommand("EXEC NUEVOESTADO '" + c + "'," + intEstadoActual + "",con);
+                SqlCommand comando = new SqlCommand("EXEC NUEVOESTADO '" + c + "'," + intEstadoActual + "",con);                
                 SqlDataReader estado = comando.ExecuteReader();
                 if (estado.Read()) if (!estado.IsDBNull(0)) Estado = estado.GetInt32(0);
                 comando = new SqlCommand("SELECT TOKEN FROM TRANSICION WHERE ESTADO = " + Estado, con);
