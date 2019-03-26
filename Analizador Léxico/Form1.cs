@@ -102,6 +102,7 @@ namespace Analizador_Léxico
                     txtEstadoAnt.Text = txtEstadoActual.Text;
                     txtEstadoActual.Text = "0";
                     BanderaCaracteres = false;
+                    MostrarIdentificadoresConstantes();
                     return;
                 }
                 if(txtEstadoActual.Text == "196")
@@ -111,9 +112,19 @@ namespace Analizador_Léxico
                     txtCaracter.Text = '/' + "del";
                     rtxtcodigointermedio.Text += MetodosAL.ObtenerToken(int.Parse(txtEstadoActual.Text)) + '\n';
                     txtEstadoAnt.Text = txtEstadoActual.Text;
-                    txtEstadoActual.Text = "0";
-                    BanderaCaracteres = false;
-                    return;
+                    if (ContadorArreglo < strCaracteres.Length)
+                    {
+                        txtEstadoActual.Text = "0";
+                        ContadorArreglo+=2;
+                        return;
+                    }
+                    else
+                    {
+                        txtEstadoActual.Text = "0";
+                        BanderaCaracteres = false;
+                        MostrarIdentificadoresConstantes();
+                        return;
+                    }
                 }
                 if((strCaracteres[ContadorArreglo]==' '&&txtEstadoActual.Text!="195"))
                 {
@@ -124,7 +135,20 @@ namespace Analizador_Léxico
                     txtEstadoAnt.Text = txtEstadoActual.Text;                   
                     ContadorArreglo++;
                     txtEstadoActual.Text = MetodosAL.CaracterPorCaracter(strCaracteres[ContadorArreglo], int.Parse(txtEstadoActual.Text)).ToString();
+                    MostrarIdentificadoresConstantes();
                     return;
+                }
+                if(strCaracteres[ContadorArreglo]=='\n')
+                {
+                   
+                    txtEstadoAnt.Text = txtEstadoActual.Text;
+                    txtEstadoActual.Text = MetodosAL.CaracterPorCaracter(' ', int.Parse(txtEstadoActual.Text)).ToString();
+                    txtCaracter.Text = ' ' + "del";
+                    rtxtcodigointermedio.Text += MetodosAL.ObtenerToken(int.Parse(txtEstadoActual.Text)) + '\n';
+                    txtEstadoAnt.Text = txtEstadoActual.Text;
+                    ContadorArreglo++;
+                    txtEstadoActual.Text = MetodosAL.CaracterPorCaracter(strCaracteres[ContadorArreglo], int.Parse(txtEstadoActual.Text)).ToString();
+                    MostrarIdentificadoresConstantes();
                 }
                 if (MetodosAL.ObtenerToken(int.Parse(txtEstadoActual.Text))!="")
                 {

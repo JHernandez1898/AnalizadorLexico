@@ -60,6 +60,7 @@ namespace Analizador_Léxico.Clases
                 SqlCommand comando = new SqlCommand("select token from transicion where estado = " + intEstadoActual, con);
                 SqlDataReader tok = comando.ExecuteReader();
                 if (tok.Read()) if (!tok.IsDBNull(0)) token = tok.GetString(0).Trim();
+
             }
             return token;
         }
@@ -138,5 +139,8 @@ namespace Analizador_Léxico.Clases
                     break;
             }
         }
+        
+        
+        
     }
 }
