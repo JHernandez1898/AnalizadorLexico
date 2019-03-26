@@ -21,14 +21,6 @@ namespace Analizador_Léxico
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
-            {
-                MessageBox.Show("Conexion chida, Todo chido.");
-            }
-        }
-
         private void btnleertodo_Click(object sender, EventArgs e)
         {
             Stopwatch stopwatch = new Stopwatch();
@@ -45,10 +37,37 @@ namespace Analizador_Léxico
                 foreach (string token in tokens) rtxtcodigointermedio.Text += token + " ";
                 rtxtcodigointermedio.Text += "\n";
             }
+            MostrarIdentificadoresConstantes();
+            Depurar();
 
             stopwatch.Stop();
             MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador léxico", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
+        private void Depurar()
+        {
+            MetodosAL.Identificadores.Clear();
+            MetodosAL.ConstantesNumericasEnteras.Clear();
+            MetodosAL.ConstantesNumericasReales.Clear();
+            MetodosAL.ConstantesNumericasExponenciales.Clear();
+            MetodosAL.ConstantesNumericasExpReales.Clear();
+        }
+
+        private void MostrarIdentificadoresConstantes()
+        {
+            dgvIDE.Rows.Clear();
+            dgvConstatesNumericas.Rows.Clear();
+            dgvConstantesExpo.Rows.Clear();
+            foreach (Identificador IDE in MetodosAL.Identificadores)
+                dgvIDE.Rows.Add("ID"+IDE.Index, IDE.Nombre, "", "");
+            foreach (NumericoEntero Num in MetodosAL.ConstantesNumericasEnteras)
+                dgvConstatesNumericas.Rows.Add("CNE" + Num.Index, Num.Contenido);
+            foreach (NumericoReal Real in MetodosAL.ConstantesNumericasReales)
+                dgvConstatesNumericas.Rows.Add("CNR" + Real.Index, Real.Contenido);
+            foreach (NumericoExponencial expo in MetodosAL.ConstantesNumericasExponenciales)
+                dgvConstantesExpo.Rows.Add("CNEE" + expo.Index, expo.Contenido, expo.Exponencial);
+            foreach (NumericoExpReal exporeal in MetodosAL.ConstantesNumericasExpReales)
+                dgvConstantesExpo.Rows.Add("CNRE" + exporeal.Index, exporeal.Contenido, exporeal.Exponencial);
         }
     }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Analizador_Léxico.Clases
 {
-    class NumericoEntero : IEquatable<NumericoEntero>, IComparable<NumericoEntero>
+    public class NumericoEntero : IEquatable<NumericoEntero>, IComparable<NumericoEntero>
     {
         private int _intIndex;
 
