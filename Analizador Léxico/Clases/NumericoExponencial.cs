@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Analizador_Léxico.Clases
 {
-    class NumericoExponencial : IEquatable<NumericoExponencial>, IComparable<NumericoExponencial>
+    public class NumericoExponencial : IEquatable<NumericoExponencial>, IComparable<NumericoExponencial>
     {
         private int _intIndex;
 
