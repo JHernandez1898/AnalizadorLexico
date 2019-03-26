@@ -153,16 +153,17 @@
             // 
             this.btnleersiguiente.Location = new System.Drawing.Point(455, 259);
             this.btnleersiguiente.Name = "btnleersiguiente";
-            this.btnleersiguiente.Size = new System.Drawing.Size(98, 34);
+            this.btnleersiguiente.Size = new System.Drawing.Size(145, 34);
             this.btnleersiguiente.TabIndex = 11;
-            this.btnleersiguiente.Text = "Leer Siguiente";
+            this.btnleersiguiente.Text = "Palabra por palabra";
             this.btnleersiguiente.UseVisualStyleBackColor = true;
+            this.btnleersiguiente.Click += new System.EventHandler(this.btnleersiguiente_Click);
             // 
             // btnleertodo
             // 
             this.btnleertodo.Location = new System.Drawing.Point(455, 299);
             this.btnleertodo.Name = "btnleertodo";
-            this.btnleertodo.Size = new System.Drawing.Size(98, 34);
+            this.btnleertodo.Size = new System.Drawing.Size(145, 34);
             this.btnleertodo.TabIndex = 12;
             this.btnleertodo.Text = "Leer Todo";
             this.btnleertodo.UseVisualStyleBackColor = true;
@@ -320,7 +321,7 @@
             // 
             this.btnCaracterxCarter.Location = new System.Drawing.Point(455, 218);
             this.btnCaracterxCarter.Name = "btnCaracterxCarter";
-            this.btnCaracterxCarter.Size = new System.Drawing.Size(98, 34);
+            this.btnCaracterxCarter.Size = new System.Drawing.Size(145, 34);
             this.btnCaracterxCarter.TabIndex = 21;
             this.btnCaracterxCarter.Text = "Caracter por Caracter";
             this.btnCaracterxCarter.UseVisualStyleBackColor = true;
@@ -330,7 +331,7 @@
             // 
             this.txtCaracter.Location = new System.Drawing.Point(445, 165);
             this.txtCaracter.Name = "txtCaracter";
-            this.txtCaracter.Size = new System.Drawing.Size(47, 20);
+            this.txtCaracter.Size = new System.Drawing.Size(77, 20);
             this.txtCaracter.TabIndex = 23;
             // 
             // label4
@@ -378,7 +379,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(827, 617);
+            this.ClientSize = new System.Drawing.Size(641, 617);
             this.Controls.Add(this.txtEstadoAnt);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtEstadoActual);

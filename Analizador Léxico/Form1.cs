@@ -21,6 +21,7 @@ namespace Analizador_Léxico
         char[] strCaracteres;
         bool BanderaCaracteres=false;
         int ContadorArreglo = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -165,6 +166,52 @@ namespace Analizador_Léxico
                 }
             }
             
+        }
+
+        int intContadorPalabras = 0;
+        int intCantidadPalabras = 0;
+        int intLinea = 1;
+        string[] strPalabras;
+
+        private void btnleersiguiente_Click(object sender, EventArgs e)
+        {
+            if (intContadorPalabras <= intCantidadPalabras)
+            {
+                if (intContadorPalabras == 0)
+                {
+                    rtxtcodigointermedio.Text = "";
+                    string strEntrada = rtxtentrada.Text;
+                    strPalabras = strEntrada.Split(' ');
+                    intCantidadPalabras = strPalabras.Length - 1;
+                }
+
+                List<string> tokens = new List<string>();
+
+                if (strPalabras[intContadorPalabras] != "\n")
+                {
+                    MetodosAL.ObtenerToken(strPalabras[intContadorPalabras], ref tokens);
+                    foreach (string token in tokens)
+                    {
+                        rtxtcodigointermedio.Text += token + " ";
+                        txttoken.Text = token;
+                    }
+                    rtxtcodigointermedio.Text += " ";
+                    MostrarIdentificadoresConstantes();
+                }
+                else
+                {
+                    intLinea++;
+                    rtxtcodigointermedio.Text += "\n";
+                }
+                txtnumrenglon.Text = intLinea.ToString();
+                intContadorPalabras++;
+            }
+            else
+            {
+                intContadorPalabras = 0;
+                intCantidadPalabras = 0;
+                Depurar();
+            }
         }
     }
 
