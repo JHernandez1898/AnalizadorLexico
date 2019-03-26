@@ -42,8 +42,11 @@ namespace Analizador_Léxico
             {
                 List<string> tokens = new List<string>();
                 MetodosAL.ObtenerToken(Linea, ref tokens);
-                foreach (string token in tokens) rtxtcodigointermedio.Text += token + " ";
-                rtxtcodigointermedio.Text += "\n";
+                if (Linea != "")
+                {
+                    foreach (string token in tokens) rtxtcodigointermedio.Text += token + " ";
+                    rtxtcodigointermedio.Text += "\n";
+                }
             }
 
             stopwatch.Stop();
