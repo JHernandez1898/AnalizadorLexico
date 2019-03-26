@@ -100,7 +100,8 @@ namespace Lenguaje
 
 
         //Metodos para el analizador lexico
-
+        
+        
         public void ObtenerToken(string Palabra, ref List<string> tokens)
         {
             int intEstadoActual = 0;

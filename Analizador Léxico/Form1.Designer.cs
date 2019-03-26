@@ -42,6 +42,13 @@
             this.btnleertodo = new System.Windows.Forms.Button();
             this.rtxtentrada = new System.Windows.Forms.RichTextBox();
             this.lblcodigointermedio = new System.Windows.Forms.Label();
+            this.txtEstadoAnt = new System.Windows.Forms.TextBox();
+            this.lblEstado = new System.Windows.Forms.Label();
+            this.btnCaracterXCaracter = new System.Windows.Forms.Button();
+            this.txtEstadoActual = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtCaracter = new System.Windows.Forms.TextBox();
+            this.lblChar = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblEntrada
@@ -103,7 +110,7 @@
             // 
             // txttoken
             // 
-            this.txttoken.Location = new System.Drawing.Point(468, 71);
+            this.txttoken.Location = new System.Drawing.Point(468, 149);
             this.txttoken.Name = "txttoken";
             this.txttoken.Size = new System.Drawing.Size(138, 20);
             this.txttoken.TabIndex = 9;
@@ -111,7 +118,7 @@
             // lbltoken
             // 
             this.lbltoken.AutoSize = true;
-            this.lbltoken.Location = new System.Drawing.Point(465, 54);
+            this.lbltoken.Location = new System.Drawing.Point(465, 128);
             this.lbltoken.Name = "lbltoken";
             this.lbltoken.Size = new System.Drawing.Size(38, 13);
             this.lbltoken.TabIndex = 8;
@@ -124,7 +131,6 @@
             this.rtxtcodigointermedio.Size = new System.Drawing.Size(386, 163);
             this.rtxtcodigointermedio.TabIndex = 10;
             this.rtxtcodigointermedio.Text = "";
-            this.rtxtcodigointermedio.TextChanged += new System.EventHandler(this.rtxtcodigointermedio_TextChanged);
             // 
             // btnleersiguiente
             // 
@@ -134,7 +140,6 @@
             this.btnleersiguiente.TabIndex = 11;
             this.btnleersiguiente.Text = "Leer Siguiente";
             this.btnleersiguiente.UseVisualStyleBackColor = true;
-            this.btnleersiguiente.Click += new System.EventHandler(this.btnleersiguiente_Click);
             // 
             // btnleertodo
             // 
@@ -163,11 +168,76 @@
             this.lblcodigointermedio.TabIndex = 14;
             this.lblcodigointermedio.Text = "Codigo Intermedio";
             // 
+            // txtEstadoAnt
+            // 
+            this.txtEstadoAnt.Location = new System.Drawing.Point(469, 65);
+            this.txtEstadoAnt.Name = "txtEstadoAnt";
+            this.txtEstadoAnt.Size = new System.Drawing.Size(37, 20);
+            this.txtEstadoAnt.TabIndex = 16;
+            // 
+            // lblEstado
+            // 
+            this.lblEstado.AutoSize = true;
+            this.lblEstado.Location = new System.Drawing.Point(466, 49);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(79, 13);
+            this.lblEstado.TabIndex = 15;
+            this.lblEstado.Text = "Estado Anterior";
+            // 
+            // btnCaracterXCaracter
+            // 
+            this.btnCaracterXCaracter.Location = new System.Drawing.Point(485, 191);
+            this.btnCaracterXCaracter.Name = "btnCaracterXCaracter";
+            this.btnCaracterXCaracter.Size = new System.Drawing.Size(98, 34);
+            this.btnCaracterXCaracter.TabIndex = 17;
+            this.btnCaracterXCaracter.Text = "Leer Caracter";
+            this.btnCaracterXCaracter.UseVisualStyleBackColor = true;
+            this.btnCaracterXCaracter.Click += new System.EventHandler(this.btnCaracterXCaracter_Click);
+            // 
+            // txtEstadoActual
+            // 
+            this.txtEstadoActual.Location = new System.Drawing.Point(560, 65);
+            this.txtEstadoActual.Name = "txtEstadoActual";
+            this.txtEstadoActual.Size = new System.Drawing.Size(37, 20);
+            this.txtEstadoActual.TabIndex = 19;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(557, 49);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 13);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Estado Actual";
+            // 
+            // txtCaracter
+            // 
+            this.txtCaracter.Location = new System.Drawing.Point(469, 105);
+            this.txtCaracter.Name = "txtCaracter";
+            this.txtCaracter.Size = new System.Drawing.Size(37, 20);
+            this.txtCaracter.TabIndex = 21;
+            // 
+            // lblChar
+            // 
+            this.lblChar.AutoSize = true;
+            this.lblChar.Location = new System.Drawing.Point(466, 88);
+            this.lblChar.Name = "lblChar";
+            this.lblChar.Size = new System.Drawing.Size(80, 13);
+            this.lblChar.TabIndex = 20;
+            this.lblChar.Text = "Caracter Actual";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(633, 398);
+            this.Controls.Add(this.txtCaracter);
+            this.Controls.Add(this.lblChar);
+            this.Controls.Add(this.txtEstadoActual);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnCaracterXCaracter);
+            this.Controls.Add(this.txtEstadoAnt);
+            this.Controls.Add(this.lblEstado);
             this.Controls.Add(this.lblcodigointermedio);
             this.Controls.Add(this.rtxtentrada);
             this.Controls.Add(this.btnleertodo);
@@ -206,6 +276,13 @@
         private System.Windows.Forms.Button btnleertodo;
         private System.Windows.Forms.RichTextBox rtxtentrada;
         private System.Windows.Forms.Label lblcodigointermedio;
+        private System.Windows.Forms.TextBox txtEstadoAnt;
+        private System.Windows.Forms.Label lblEstado;
+        private System.Windows.Forms.Button btnCaracterXCaracter;
+        private System.Windows.Forms.TextBox txtEstadoActual;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtCaracter;
+        private System.Windows.Forms.Label lblChar;
     }
 }
 

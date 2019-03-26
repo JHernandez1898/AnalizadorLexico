@@ -52,6 +52,26 @@ namespace Analizador_Léxico.Clases
             }
             return token;
         }
+        public static int CaracterPorCaracter(char c, int intEstadoActual)
+        {
+            int Estado = 0;
 
+            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
+            {
+                SqlCommand comando = new SqlCommand("EXEC NUEVOESTADO '" + c + "'," + intEstadoActual + "",con);
+                SqlDataReader estado = comando.ExecuteReader();
+                if (estado.Read()) if (!estado.IsDBNull(0)) Estado = estado.GetInt32(0);
+                //LO DE ABAJO NO LO CUBRE EL PROCEDIMIENTO ALMACENADO DE PABLO
+                comando = new SqlCommand("SELECT TOKEN FROM TRANSICION WHERE ESTADO = " + Estado, con);
+                estado = comando.ExecuteReader();
+                if (estado.Read())
+                {
+                    if (!estado.IsDBNull(0))
+                        return Estado;
+                }
+                //------------------------------------------------------------------------------
+            }
+            return Estado;
+        }
     }
 }
