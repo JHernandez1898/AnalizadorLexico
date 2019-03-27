@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Analizador_Léxico.Clases
 {
-    public class NumericoEntero : IEquatable<NumericoEntero>, IComparable<NumericoEntero>
+    public class NumericoEntero : IEquatable<NumericoEntero>
     {
         private int _intIndex;
 
@@ -24,7 +24,7 @@ namespace Analizador_Léxico.Clases
         }
         public bool Equals(NumericoEntero otroNumero)
         {
-            return (this.Index.Equals(otroNumero.Index));
+            return (this.Contenido.Equals(otroNumero.Contenido));
         }
         public int CompareTo(NumericoEntero otroNumero)
         {

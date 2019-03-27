@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Analizador_Léxico.Clases
 {
-    public class Identificador
+    public class Identificador :IEquatable<Identificador>
     {
         private int _intIndex;
 
@@ -45,6 +45,10 @@ namespace Analizador_Léxico.Clases
                 if (value is NumericoExpReal || value is NumericoReal)
                     this.Tipo = "double";
             }
+        }
+        public bool Equals(Identificador otroidentificador)
+        {
+            return (this.Nombre == otroidentificador.Nombre);
         }
     }
 }

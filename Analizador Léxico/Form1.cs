@@ -23,28 +23,32 @@ namespace Analizador_Léxico
 
         private void btnleertodo_Click(object sender, EventArgs e)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+            
+            
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
 
-            //Anlizador Lexico
-            rtxtcodigointermedio.Text = "";
-            string strEntrada = rtxtentrada.Text;
-            string[] strLineas = strEntrada.Split('\n');
-            foreach (string Linea in strLineas)
-            {
-                List<string> tokens = new List<string>();
-                MetodosAL.ObtenerToken(Linea, ref tokens);
-                if (Linea != "")
+                //Anlizador Lexico
+                rtxtcodigointermedio.Text = "";
+                string strEntrada = rtxtentrada.Text;
+                string[] strLineas = strEntrada.Split('\n');
+                foreach (string Linea in strLineas)
                 {
-                    foreach (string token in tokens) rtxtcodigointermedio.Text += token + " ";
-                    rtxtcodigointermedio.Text += "\n";
+                    List<string> tokens = new List<string>();
+                    MetodosAL.ObtenerToken(Linea, ref tokens);
+                    if (Linea != "")
+                    {
+                        foreach (string token in tokens) rtxtcodigointermedio.Text += token + " ";
+                        rtxtcodigointermedio.Text += "\n";
+                    }
                 }
-            }
-            MostrarIdentificadoresConstantes();
-            Depurar();
+                MostrarIdentificadoresConstantes();
+                Depurar();
 
-            stopwatch.Stop();
-            MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador léxico", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                stopwatch.Stop();
+                MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador léxico", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+           
         }
 
         private void Depurar()
@@ -79,59 +83,65 @@ namespace Analizador_Léxico
         static List<char> caracteres = new List<char>();
         private void btnCaracterXCaracter_Click(object sender, EventArgs e)
         {
-
-            string strEntrada = rtxtentrada.Text;
-            if (indx ==0)
-            {
-                Depurar();
-                rtxtcodigointermedio.Text = "";
-            }
-            strEntrada = strEntrada.Replace('\n', ' ');
-            string[] strPalabras = strEntrada.Split(' ');
-            strEntrada = rtxtentrada.Text;
-            List<string> tokens = new List<string>();
-            txtSubcadena.Text = strPalabras[palabra];//Mostrar la subcadena actual
-            string palabraActual = strPalabras[palabra];
-            bool bandera = false;
-            if (strEntrada.Length > indx)
-            {
-                char c = strEntrada[indx];
-                caracteres.Add(c);
-                if (c != '\n')
+            try {
+                string strEntrada = rtxtentrada.Text;
+                if (indx == 0)
                 {
-                    txtEstadoAnt.Text = intEstadoActual.ToString();
-                    txtCaracter.Text = c.ToString();
-                    txtnumrenglon.Text = linea.ToString();
-                    intEstadoActual = MetodosAL.NuevoEstado(c, intEstadoActual, ref bandera);
-                    if (bandera)
+                    Depurar();
+                    rtxtcodigointermedio.Text = "";
+                }
+                strEntrada = strEntrada.Replace('\n', ' ');
+                string[] strPalabras = strEntrada.Split(' ');
+                strEntrada = rtxtentrada.Text;
+                List<string> tokens = new List<string>();
+                txtSubcadena.Text = strPalabras[palabra];//Mostrar la subcadena actual
+                string palabraActual = strPalabras[palabra];
+                bool bandera = false;
+                if (strEntrada.Length > indx)
+                {
+                    char c = strEntrada[indx];
+                    caracteres.Add(c);
+                    if (c != '\n')
                     {
-                        string tokn = MetodosAL.ObtenerToken(intEstadoActual, caracteres);
-                        tokens.Add(tokn);
-                        txttoken.Text = tokn;
-                        foreach (string tkn in tokens) txtcadenatokens.Text += tkn + " "; //Muestro la cadena de tokens
-                        intEstadoActual = 0;
-                        palabra++; //Avanzo a la siguiente palabra
-                        bandera = false;
-                        caracteres.Clear();
+                        txtEstadoAnt.Text = intEstadoActual.ToString();
+                        txtCaracter.Text = c.ToString();
+                        txtnumrenglon.Text = linea.ToString();
+                        intEstadoActual = MetodosAL.NuevoEstado(c, intEstadoActual, ref bandera);
+                        if (bandera)
+                        {
+                            string tokn = MetodosAL.ObtenerToken(intEstadoActual, caracteres);
+                            tokens.Add(tokn);
+                            txttoken.Text = tokn;
+                            foreach (string tkn in tokens) txtcadenatokens.Text += tkn + " "; //Muestro la cadena de tokens
+                            intEstadoActual = 0;
+                            palabra++; //Avanzo a la siguiente palabra
+                            bandera = false;
+                            caracteres.Clear();
+                        }
+                        txtEstadoActual.Text = intEstadoActual.ToString();
                     }
-                    txtEstadoActual.Text = intEstadoActual.ToString(); 
+                    else
+                    {
+                        linea++;
+                        CambiarEstado(' ', ref bandera, ref tokens);
+                        palabra++;
+                    }
+                    indx++;
                 }
                 else
                 {
-                    linea++;
                     CambiarEstado(' ', ref bandera, ref tokens);
-                    palabra++;
+                    indx = 0;
+                    palabra = 0;
                 }
-                indx++;
+                MostrarIdentificadoresConstantes();
             }
-            else
+            catch(Exception ex)
             {
-                CambiarEstado(' ', ref bandera, ref tokens);
-                indx = 0;
-                palabra = 0;
+               // MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            MostrarIdentificadoresConstantes();
-        }
+            }
+        
         void CambiarEstado(char c, ref bool bandera, ref List<string> tokens)
         {
             txtEstadoAnt.Text = intEstadoActual.ToString();
@@ -152,60 +162,60 @@ namespace Analizador_Léxico
         int intLinea = 1;
         string[] strPalabras;
 
-        private void btnleersiguiente_Click(object sender, EventArgs e)
-        {
-            if (intContadorPalabras <= intCantidadPalabras)
-            {
-                if (intContadorPalabras == 0)
-                {
-                    rtxtcodigointermedio.Text = "";
-                    string strEntrada = rtxtentrada.Text;
-                    strPalabras = strEntrada.Split(' ');
-                    intCantidadPalabras = strPalabras.Length - 1;
-                }
+        //private void btnleersiguiente_Click(object sender, EventArgs e)
+        //{
+        //    if (intContadorPalabras <= intCantidadPalabras)
+        //    {
+        //        if (intContadorPalabras == 0)
+        //        {
+        //            rtxtcodigointermedio.Text = "";
+        //            string strEntrada = rtxtentrada.Text;
+        //            strPalabras = strEntrada.Split(' ');
+        //            intCantidadPalabras = strPalabras.Length - 1;
+        //        }
 
-                List<string> tokens = new List<string>();
-                string strPalabra = strPalabras[intContadorPalabras];
-                if (!strPalabras[intContadorPalabras].Contains("\n"))
-                {                    
-                    MetodosAL.ObtenerToken(strPalabras[intContadorPalabras], ref tokens);
-                    foreach (string token in tokens)
-                    {
-                        rtxtcodigointermedio.Text += token + " ";
-                        txttoken.Text = token;
-                    }
-                    rtxtcodigointermedio.Text += " ";
-                    MostrarIdentificadoresConstantes();
-                }
-                else
-                {
-                    string strPalabraEspaciada = strPalabras[intContadorPalabras];
-                    if (strPalabras[intContadorPalabras] != "\n")
-                    {                        
-                        strPalabraEspaciada = strPalabraEspaciada.Replace("\n","");
-                    }
-                    MetodosAL.ObtenerToken(strPalabraEspaciada, ref tokens);
-                    foreach (string token in tokens)
-                    {
-                        rtxtcodigointermedio.Text += token + " ";
-                        txttoken.Text = token;
-                    }
-                    rtxtcodigointermedio.Text += " ";
-                    rtxtcodigointermedio.Text += " \n";
-                    MostrarIdentificadoresConstantes();
-                    intLinea++;                    
-                }
-                txtnumrenglon.Text = intLinea.ToString();
-                intContadorPalabras++;
-            }
-            else
-            {
-                intContadorPalabras = 0;
-                intCantidadPalabras = 0;
-                intLinea = 1;
-                Depurar();
-            }
-        }
+        //        List<string> tokens = new List<string>();
+        //        string strPalabra = strPalabras[intContadorPalabras];
+        //        if (!strPalabras[intContadorPalabras].Contains("\n"))
+        //        {                    
+        //            MetodosAL.ObtenerToken(strPalabras[intContadorPalabras], ref tokens);
+        //            foreach (string token in tokens)
+        //            {
+        //                rtxtcodigointermedio.Text += token + " ";
+        //                txttoken.Text = token;
+        //            }
+        //            rtxtcodigointermedio.Text += " ";
+        //            MostrarIdentificadoresConstantes();
+        //        }
+        //        else
+        //        {
+        //            string strPalabraEspaciada = strPalabras[intContadorPalabras];
+        //            if (strPalabras[intContadorPalabras] != "\n")
+        //            {                        
+        //                strPalabraEspaciada = strPalabraEspaciada.Replace("\n","");
+        //            }
+        //            MetodosAL.ObtenerToken(strPalabraEspaciada, ref tokens);
+        //            foreach (string token in tokens)
+        //            {
+        //                rtxtcodigointermedio.Text += token + " ";
+        //                txttoken.Text = token;
+        //            }
+        //            rtxtcodigointermedio.Text += " ";
+        //            rtxtcodigointermedio.Text += " \n";
+        //            MostrarIdentificadoresConstantes();
+        //            intLinea++;                    
+        //        }
+        //        txtnumrenglon.Text = intLinea.ToString();
+        //        intContadorPalabras++;
+        //    }
+        //    else
+        //    {
+        //        intContadorPalabras = 0;
+        //        intCantidadPalabras = 0;
+        //        intLinea = 1;
+        //        Depurar();
+        //    }
+        //}
     }
 
 }

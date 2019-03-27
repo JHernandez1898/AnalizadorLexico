@@ -38,7 +38,6 @@
             this.txttoken = new System.Windows.Forms.TextBox();
             this.lbltoken = new System.Windows.Forms.Label();
             this.rtxtcodigointermedio = new System.Windows.Forms.RichTextBox();
-            this.btnleersiguiente = new System.Windows.Forms.Button();
             this.btnleertodo = new System.Windows.Forms.Button();
             this.rtxtentrada = new System.Windows.Forms.RichTextBox();
             this.lblcodigointermedio = new System.Windows.Forms.Label();
@@ -149,19 +148,9 @@
             this.rtxtcodigointermedio.TabIndex = 10;
             this.rtxtcodigointermedio.Text = "";
             // 
-            // btnleersiguiente
-            // 
-            this.btnleersiguiente.Location = new System.Drawing.Point(455, 259);
-            this.btnleersiguiente.Name = "btnleersiguiente";
-            this.btnleersiguiente.Size = new System.Drawing.Size(145, 34);
-            this.btnleersiguiente.TabIndex = 11;
-            this.btnleersiguiente.Text = "Palabra por palabra";
-            this.btnleersiguiente.UseVisualStyleBackColor = true;
-            this.btnleersiguiente.Click += new System.EventHandler(this.btnleersiguiente_Click);
-            // 
             // btnleertodo
             // 
-            this.btnleertodo.Location = new System.Drawing.Point(455, 299);
+            this.btnleertodo.Location = new System.Drawing.Point(445, 267);
             this.btnleertodo.Name = "btnleertodo";
             this.btnleertodo.Size = new System.Drawing.Size(145, 34);
             this.btnleertodo.TabIndex = 12;
@@ -319,7 +308,7 @@
             // 
             // btnCaracterxCarter
             // 
-            this.btnCaracterxCarter.Location = new System.Drawing.Point(455, 218);
+            this.btnCaracterxCarter.Location = new System.Drawing.Point(445, 218);
             this.btnCaracterxCarter.Name = "btnCaracterxCarter";
             this.btnCaracterxCarter.Size = new System.Drawing.Size(145, 34);
             this.btnCaracterxCarter.TabIndex = 21;
@@ -379,7 +368,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(641, 617);
+            this.ClientSize = new System.Drawing.Size(634, 583);
             this.Controls.Add(this.txtEstadoAnt);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtEstadoActual);
@@ -395,7 +384,6 @@
             this.Controls.Add(this.lblcodigointermedio);
             this.Controls.Add(this.rtxtentrada);
             this.Controls.Add(this.btnleertodo);
-            this.Controls.Add(this.btnleersiguiente);
             this.Controls.Add(this.rtxtcodigointermedio);
             this.Controls.Add(this.txttoken);
             this.Controls.Add(this.lbltoken);
@@ -428,7 +416,6 @@
         private System.Windows.Forms.TextBox txttoken;
         private System.Windows.Forms.Label lbltoken;
         private System.Windows.Forms.RichTextBox rtxtcodigointermedio;
-        private System.Windows.Forms.Button btnleersiguiente;
         private System.Windows.Forms.Button btnleertodo;
         private System.Windows.Forms.RichTextBox rtxtentrada;
         private System.Windows.Forms.Label lblcodigointermedio;

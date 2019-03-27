@@ -49,6 +49,7 @@ namespace Analizador_Léxico.Clases
                 comando = new SqlCommand("SELECT TOKEN FROM TRANSICION WHERE ESTADO = " + Estado, con);
                 estado = comando.ExecuteReader();
                 if (estado.Read()) if (!estado.IsDBNull(0)) bandera = true;
+                   
             }
             return Estado;
         }
@@ -60,6 +61,7 @@ namespace Analizador_Léxico.Clases
                 SqlCommand comando = new SqlCommand("select token from transicion where estado = " + intEstadoActual, con);
                 SqlDataReader tok = comando.ExecuteReader();
                 if (tok.Read()) if (!tok.IsDBNull(0)) token = tok.GetString(0).Trim();
+              
 
             }
             return token;
@@ -100,40 +102,45 @@ namespace Analizador_Léxico.Clases
             {
                 case 201:
                     Identificador unIdentificador = new Identificador();
+                    unIdentificador.Nombre = Palabra.Trim();
+                    foreach (Identificador otroIdentificador in Identificadores){if(otroIdentificador.Equals(unIdentificador)){token += otroIdentificador.Index.ToString();return;}}
                     unIdentificador.Index = Identificadores.Count + 1;
                     token += unIdentificador.Index.ToString();
-                    unIdentificador.Nombre = Palabra;
                     Identificadores.Add(unIdentificador);
                     break;
                 case 212:
                     NumericoEntero unNumericoEntero = new NumericoEntero();
+                    unNumericoEntero.Contenido = int.Parse(Palabra);
+                    foreach(NumericoEntero otroNE in ConstantesNumericasEnteras) { if (otroNE.Equals(unNumericoEntero)) { token += otroNE.Index.ToString();return;}}
                     unNumericoEntero.Index = ConstantesNumericasEnteras.Count + 1;
                     token += unNumericoEntero.Index.ToString();
-                    unNumericoEntero.Contenido = int.Parse(Palabra);
                     ConstantesNumericasEnteras.Add(unNumericoEntero);
                     break;
                 case 211:
                     NumericoReal unNumericoReal = new NumericoReal();
-                    unNumericoReal.Index = ConstantesNumericasReales.Count + 1;
-                    token += unNumericoReal.Index.ToString();
                     unNumericoReal.Contenido = double.Parse(Palabra);
+                    foreach (NumericoReal otroNR in ConstantesNumericasReales) { if (otroNR.Equals(unNumericoReal)) { token += otroNR.Index.ToString(); return; } }
+                    unNumericoReal.Index = ConstantesNumericasReales.Count + 1;
+                    token += unNumericoReal.Index.ToString();                  
                     ConstantesNumericasReales.Add(unNumericoReal);
                     break;
                 case 216:
                     NumericoExponencial unNumericoExponencial = new NumericoExponencial();
-                    unNumericoExponencial.Index = ConstantesNumericasExponenciales.Count + 1;
-                    token += unNumericoExponencial.Index.ToString();
                     string[] partesExponente = Palabra.Split('E');
                     unNumericoExponencial.Contenido = int.Parse(partesExponente[0]);
+                    foreach (NumericoExponencial otroNEX in ConstantesNumericasExponenciales) { if (otroNEX.Equals(unNumericoExponencial)) { token += otroNEX.Index.ToString(); return; } }
+                    unNumericoExponencial.Index = ConstantesNumericasExponenciales.Count + 1;
+                    token += unNumericoExponencial.Index.ToString();
                     unNumericoExponencial.Exponencial = int.Parse(partesExponente[1]);
                     ConstantesNumericasExponenciales.Add(unNumericoExponencial);
                     break;
                 case 210:
                     NumericoExpReal unNumericoExpReal = new NumericoExpReal();
-                    unNumericoExpReal.Index = ConstantesNumericasExpReales.Count + 1;
-                    token += unNumericoExpReal.Index.ToString();
                     string[] partesExponentereal = Palabra.Split('E');
                     unNumericoExpReal.Contenido = double.Parse(partesExponentereal[0]);
+                    foreach (NumericoExpReal otroNER in ConstantesNumericasExpReales) { if (otroNER.Equals(unNumericoExpReal)) { token += otroNER.Index.ToString(); return; } }
+                    unNumericoExpReal.Index = ConstantesNumericasExpReales.Count + 1;
+                    token += unNumericoExpReal.Index.ToString();
                     unNumericoExpReal.Exponencial = int.Parse(partesExponentereal[1]);
                     ConstantesNumericasExpReales.Add(unNumericoExpReal);
                     break;

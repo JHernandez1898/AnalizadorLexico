@@ -24,7 +24,7 @@ namespace Analizador_Léxico.Clases
         }
         public bool Equals(NumericoReal otroNumero)
         {
-            return (this.Index.Equals(otroNumero.Index));
+            return (this.Contenido.Equals(otroNumero.Contenido));
         }
         public int CompareTo(NumericoReal otroNumero)
         {

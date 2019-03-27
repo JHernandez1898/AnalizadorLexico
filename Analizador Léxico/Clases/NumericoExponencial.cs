@@ -31,7 +31,7 @@ namespace Analizador_Léxico.Clases
         }
         public bool Equals(NumericoExponencial otroNumero)
         {
-            return (this.Index.Equals(otroNumero.Index));
+            return (this.Contenido.Equals(otroNumero.Contenido));
         }
         public int CompareTo(NumericoExponencial otroNumero)
         {
