@@ -45,11 +45,10 @@ namespace Analizador_Léxico.Clases
             {
                 SqlCommand comando = new SqlCommand("EXEC NUEVOESTADO '" + c + "'," + intEstadoActual + "",con);                
                 SqlDataReader estado = comando.ExecuteReader();
-                if (estado.Read()) if (!estado.IsDBNull(0)) Estado = estado.GetInt32(0);
+                if (estado.Read()) { if (!estado.IsDBNull(0)) Estado = estado.GetInt32(0); else throw new Exception("Se encontró un error en la línea "); }
                 comando = new SqlCommand("SELECT TOKEN FROM TRANSICION WHERE ESTADO = " + Estado, con);
                 estado = comando.ExecuteReader();
-                if (estado.Read()) if (!estado.IsDBNull(0)) bandera = true;
-                   
+                if (estado.Read())  if (!estado.IsDBNull(0)) bandera = true;   
             }
             return Estado;
         }
@@ -60,9 +59,7 @@ namespace Analizador_Léxico.Clases
             {
                 SqlCommand comando = new SqlCommand("select token from transicion where estado = " + intEstadoActual, con);
                 SqlDataReader tok = comando.ExecuteReader();
-                if (tok.Read()) if (!tok.IsDBNull(0)) token = tok.GetString(0).Trim();
-              
-
+                if (tok.Read())  if (!tok.IsDBNull(0)) token = tok.GetString(0).Trim(); 
             }
             return token;
         }
@@ -73,7 +70,7 @@ namespace Analizador_Léxico.Clases
             {
                 SqlCommand comando = new SqlCommand("select token from transicion where estado = " + intEstadoActual, con);
                 SqlDataReader tok = comando.ExecuteReader();
-                if (tok.Read()) if (!tok.IsDBNull(0)) token = tok.GetString(0).Trim();
+                if (tok.Read())  if (!tok.IsDBNull(0)) token = tok.GetString(0).Trim(); 
             }
             IdentificarToken(Palabra, ref token, intEstadoActual);
             return token;
@@ -86,10 +83,10 @@ namespace Analizador_Léxico.Clases
             {
                 SqlCommand comando = new SqlCommand("EXEC NUEVOESTADO '" + c + "'," + intEstadoActual + "", con);
                 SqlDataReader estado = comando.ExecuteReader();
-                if (estado.Read()) if (!estado.IsDBNull(0)) Estado = estado.GetInt32(0);
+                if (estado.Read()) { if (!estado.IsDBNull(0)) Estado = estado.GetInt32(0); else throw new Exception(); }
                 comando = new SqlCommand("SELECT TOKEN FROM TRANSICION WHERE ESTADO = " + Estado, con);
                 estado = comando.ExecuteReader();
-                if (estado.Read()) if (!estado.IsDBNull(0)) return Estado;
+                if (estado.Read())  if (!estado.IsDBNull(0)) return Estado; 
             }
             return Estado;
         }

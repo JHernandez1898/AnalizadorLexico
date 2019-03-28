@@ -23,32 +23,41 @@ namespace Analizador_Léxico
 
         private void btnleertodo_Click(object sender, EventArgs e)
         {
-            
-            
+            try
+            {
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
 
                 //Anlizador Lexico
                 rtxtcodigointermedio.Text = "";
                 string strEntrada = rtxtentrada.Text;
-                string[] strLineas = strEntrada.Split('\n');
+                linea = 0;
+                txtnumrenglon.Text = linea.ToString();
+                string[] strLineas = strEntrada.Split('\n');                             
                 foreach (string Linea in strLineas)
                 {
+                    linea++;
+                    txtnumrenglon.Text = linea.ToString();
                     List<string> tokens = new List<string>();
                     MetodosAL.ObtenerToken(Linea, ref tokens);
                     if (Linea != "")
                     {
                         foreach (string token in tokens) rtxtcodigointermedio.Text += token + " ";
-                        rtxtcodigointermedio.Text += "\n";
+                        rtxtcodigointermedio.Text += "\n";                        
                     }
+                    txtnumrenglon.Text = linea.ToString();
                 }
                 MostrarIdentificadoresConstantes();
                 Depurar();
-
+                linea = 1;
                 stopwatch.Stop();
                 MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador léxico", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            
-           
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + linea + ".\nVerifique el uso apropiado del léxico.", "Error de analizador léxico", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                linea = 1;
+            }
         }
 
         private void Depurar()
@@ -83,7 +92,7 @@ namespace Analizador_Léxico
         static List<char> caracteres = new List<char>();
         private void btnCaracterXCaracter_Click(object sender, EventArgs e)
         {
-            try {
+            try {                            
                 string strEntrada = rtxtentrada.Text;
                 if (indx == 0)
                 {
@@ -133,15 +142,16 @@ namespace Analizador_Léxico
                     CambiarEstado(' ', ref bandera, ref tokens);
                     indx = 0;
                     palabra = 0;
+                    linea = 1;
                 }
                 MostrarIdentificadoresConstantes();
             }
-            catch(Exception ex)
+             catch (Exception ex)
             {
-               // MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message + linea + ".\nVerifique el uso apropiado del léxico, y el caracter actual.", "Error de analizador léxico", MessageBoxButtons.OK, MessageBoxIcon.Error);            
             }
-            }
-        
+        }
+
         void CambiarEstado(char c, ref bool bandera, ref List<string> tokens)
         {
             txtEstadoAnt.Text = intEstadoActual.ToString();
