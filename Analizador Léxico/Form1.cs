@@ -185,7 +185,7 @@ namespace Analizador_Léxico
             
             for (int i = 0; i <instancias.Rows.Count ; i++)
             {
-                cmbServidores.Items.Add(instancias.Rows[i].Field<string>(1).ToString());
+                cmbServidores.Items.Add(instancias.Rows[i][1].ToString());
             }
             MessageBox.Show("Seleccione un servidor para la conexion");
             btnCaracterxCarter.Enabled = false;
