@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using Analizador_Léxico.Clases;
 using System.Diagnostics;
-
+using System.Data.Sql;
 
 namespace Analizador_Léxico
 {
@@ -171,6 +171,51 @@ namespace Analizador_Léxico
         int intCantidadPalabras = 0;
         int intLinea = 1;
         string[] strPalabras;
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            EstablecerConexion();
+        }
+
+        public void EstablecerConexion()
+        {
+            
+            SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
+            DataTable instancias = instance.GetDataSources();
+            
+            for (int i = 0; i <instancias.Rows.Count ; i++)
+            {
+                cmbServidores.Items.Add(instancias.Rows[i].Field<string>(1).ToString());
+            }
+            MessageBox.Show("Seleccione un servidor para la conexion");
+            btnCaracterxCarter.Enabled = false;
+            btnleertodo.Enabled = false;
+            cmbServidores.Focus();
+        }
+
+        private void cmbServidores_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+               if(ConexionMatriz.ProbarConexion(cmbServidores.SelectedItem.ToString()))
+                {
+                    MessageBox.Show("Conectado al servidor");
+                    btnCaracterxCarter.Enabled = true;
+                    btnleertodo.Enabled =true;
+                    MetodosAL.Servidor = cmbServidores.SelectedItem.ToString();
+                }
+               else
+                {
+                    MessageBox.Show("Conexion fallida");
+                    btnCaracterxCarter.Enabled = false;
+                    btnleertodo.Enabled = false;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         //private void btnleersiguiente_Click(object sender, EventArgs e)
         //{

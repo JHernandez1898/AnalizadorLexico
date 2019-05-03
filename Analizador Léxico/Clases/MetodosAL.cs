@@ -10,6 +10,18 @@ namespace Analizador_Léxico.Clases
     public class MetodosAL
     {
 
+        private static string _strServidor;
+
+        public static string Servidor
+        {
+            get { return _strServidor; }
+            set { _strServidor = value; }
+        }
+        public MetodosAL(string server)
+        {
+            Servidor = server;
+        }
+
         public static List<Identificador> Identificadores = new List<Identificador>();
         public static List<NumericoEntero> ConstantesNumericasEnteras = new List<NumericoEntero>();
         public static List<NumericoExponencial> ConstantesNumericasExponenciales = new List<NumericoExponencial>();
@@ -41,7 +53,7 @@ namespace Analizador_Léxico.Clases
         public static int NuevoEstado(char c, int intEstadoActual, ref bool bandera)
         {
             int Estado = 0;
-            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
+            using (SqlConnection con = ConexionMatriz.ObtenerConexion(Servidor))
             {
                 SqlCommand comando = new SqlCommand("EXEC NUEVOESTADO '" + c + "'," + intEstadoActual + "",con);                
                 SqlDataReader estado = comando.ExecuteReader();
@@ -55,7 +67,7 @@ namespace Analizador_Léxico.Clases
         public static string ObtenerToken(int intEstadoActual)
         {
             string token = "";
-            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
+            using (SqlConnection con = ConexionMatriz.ObtenerConexion(Servidor))
             {
                 SqlCommand comando = new SqlCommand("select token from transicion where estado = " + intEstadoActual, con);
                 SqlDataReader tok = comando.ExecuteReader();
@@ -66,7 +78,7 @@ namespace Analizador_Léxico.Clases
         public static string ObtenerToken(int intEstadoActual, List<char> Palabra)
         {
             string token = "";
-            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
+            using (SqlConnection con = ConexionMatriz.ObtenerConexion(Servidor))
             {
                 SqlCommand comando = new SqlCommand("select token from transicion where estado = " + intEstadoActual, con);
                 SqlDataReader tok = comando.ExecuteReader();
@@ -79,7 +91,7 @@ namespace Analizador_Léxico.Clases
         {
             int Estado = 0;
             
-            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
+            using (SqlConnection con = ConexionMatriz.ObtenerConexion(Servidor))
             {
                 SqlCommand comando = new SqlCommand("EXEC NUEVOESTADO '" + c + "'," + intEstadoActual + "", con);
                 SqlDataReader estado = comando.ExecuteReader();

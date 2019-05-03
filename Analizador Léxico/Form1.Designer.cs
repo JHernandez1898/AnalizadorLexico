@@ -62,6 +62,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtEstadoAnt = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.cmbServidores = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIDE)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConstatesNumericas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConstantesExpo)).BeginInit();
@@ -110,7 +111,7 @@
             // 
             // txtnumrenglon
             // 
-            this.txtnumrenglon.Location = new System.Drawing.Point(445, 25);
+            this.txtnumrenglon.Location = new System.Drawing.Point(444, 82);
             this.txtnumrenglon.Name = "txtnumrenglon";
             this.txtnumrenglon.Size = new System.Drawing.Size(138, 20);
             this.txtnumrenglon.TabIndex = 7;
@@ -118,7 +119,7 @@
             // lblnumrenglon
             // 
             this.lblnumrenglon.AutoSize = true;
-            this.lblnumrenglon.Location = new System.Drawing.Point(442, 8);
+            this.lblnumrenglon.Location = new System.Drawing.Point(441, 65);
             this.lblnumrenglon.Name = "lblnumrenglon";
             this.lblnumrenglon.Size = new System.Drawing.Size(67, 13);
             this.lblnumrenglon.TabIndex = 6;
@@ -126,7 +127,7 @@
             // 
             // txttoken
             // 
-            this.txttoken.Location = new System.Drawing.Point(445, 70);
+            this.txttoken.Location = new System.Drawing.Point(444, 127);
             this.txttoken.Name = "txttoken";
             this.txttoken.Size = new System.Drawing.Size(138, 20);
             this.txttoken.TabIndex = 9;
@@ -134,7 +135,7 @@
             // lbltoken
             // 
             this.lbltoken.AutoSize = true;
-            this.lbltoken.Location = new System.Drawing.Point(442, 53);
+            this.lbltoken.Location = new System.Drawing.Point(441, 110);
             this.lbltoken.Name = "lbltoken";
             this.lbltoken.Size = new System.Drawing.Size(38, 13);
             this.lbltoken.TabIndex = 8;
@@ -150,7 +151,7 @@
             // 
             // btnleertodo
             // 
-            this.btnleertodo.Location = new System.Drawing.Point(445, 267);
+            this.btnleertodo.Location = new System.Drawing.Point(444, 324);
             this.btnleertodo.Name = "btnleertodo";
             this.btnleertodo.Size = new System.Drawing.Size(145, 34);
             this.btnleertodo.TabIndex = 12;
@@ -308,7 +309,7 @@
             // 
             // btnCaracterxCarter
             // 
-            this.btnCaracterxCarter.Location = new System.Drawing.Point(445, 218);
+            this.btnCaracterxCarter.Location = new System.Drawing.Point(444, 275);
             this.btnCaracterxCarter.Name = "btnCaracterxCarter";
             this.btnCaracterxCarter.Size = new System.Drawing.Size(145, 34);
             this.btnCaracterxCarter.TabIndex = 21;
@@ -318,7 +319,7 @@
             // 
             // txtCaracter
             // 
-            this.txtCaracter.Location = new System.Drawing.Point(445, 165);
+            this.txtCaracter.Location = new System.Drawing.Point(444, 222);
             this.txtCaracter.Name = "txtCaracter";
             this.txtCaracter.Size = new System.Drawing.Size(77, 20);
             this.txtCaracter.TabIndex = 23;
@@ -326,7 +327,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(442, 149);
+            this.label4.Location = new System.Drawing.Point(441, 206);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 13);
             this.label4.TabIndex = 22;
@@ -334,7 +335,7 @@
             // 
             // txtEstadoActual
             // 
-            this.txtEstadoActual.Location = new System.Drawing.Point(530, 121);
+            this.txtEstadoActual.Location = new System.Drawing.Point(529, 178);
             this.txtEstadoActual.Name = "txtEstadoActual";
             this.txtEstadoActual.Size = new System.Drawing.Size(65, 20);
             this.txtEstadoActual.TabIndex = 25;
@@ -342,7 +343,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(527, 104);
+            this.label5.Location = new System.Drawing.Point(526, 161);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(73, 13);
             this.label5.TabIndex = 24;
@@ -350,7 +351,7 @@
             // 
             // txtEstadoAnt
             // 
-            this.txtEstadoAnt.Location = new System.Drawing.Point(445, 121);
+            this.txtEstadoAnt.Location = new System.Drawing.Point(444, 178);
             this.txtEstadoAnt.Name = "txtEstadoAnt";
             this.txtEstadoAnt.Size = new System.Drawing.Size(76, 20);
             this.txtEstadoAnt.TabIndex = 27;
@@ -358,17 +359,28 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(442, 104);
+            this.label6.Location = new System.Drawing.Point(441, 161);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 13);
             this.label6.TabIndex = 26;
             this.label6.Text = "Estado Anterior";
+            // 
+            // cmbServidores
+            // 
+            this.cmbServidores.FormattingEnabled = true;
+            this.cmbServidores.Location = new System.Drawing.Point(444, 25);
+            this.cmbServidores.Name = "cmbServidores";
+            this.cmbServidores.Size = new System.Drawing.Size(138, 21);
+            this.cmbServidores.TabIndex = 28;
+            this.cmbServidores.Text = "Servidores";
+            this.cmbServidores.SelectedIndexChanged += new System.EventHandler(this.cmbServidores_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 583);
+            this.Controls.Add(this.cmbServidores);
             this.Controls.Add(this.txtEstadoAnt);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtEstadoActual);
@@ -396,6 +408,7 @@
             this.Controls.Add(this.lblEntrada);
             this.Name = "Form1";
             this.Text = "Analizador Léxico";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvIDE)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConstatesNumericas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConstantesExpo)).EndInit();
@@ -445,6 +458,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtEstadoAnt;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cmbServidores;
     }
 }
 

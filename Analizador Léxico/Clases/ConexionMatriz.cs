@@ -9,15 +9,34 @@ namespace Analizador_Léxico.Clases
 {
     class ConexionMatriz
     {
-        public static SqlConnection ObtenerConexion()
+        public static SqlConnection ObtenerConexion(string serverName)
         {
-           // SqlConnection con = new SqlConnection(@"Data Source=LA-DIVERTIDA; Initial Catalog = LENGUAJE; Server=LA-DIVERTIDA\SQLEXPRESS; Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
-            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-EF1M9DTE; Initial Catalog = LENGUAJE; Server=LAPTOP-EF1M9DTE\KINGBRADLEY; Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
-            //SqlConnection con = new SqlConnection(@"Data Source=localhost; Initial Catalog = LENGUAJE; Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
-            //SqlConnection con = new SqlConnection(@"Data Source=HERNANDEZ109; Initial Catalog = LENGUAJE; Server=HERNANDEZ109\SQLEXPRESS; Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
+            
+           SqlConnection con=new SqlConnection("Data Source=" + System.Environment.MachineName + "; Initial Catalog = LENGUAJE; Server=" + System.Environment.MachineName + "\\"+serverName+" ;Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
             // SqlConnection con = new SqlConnection(@"Data Source=localhost; Initial Catalog = LENGUAJE; Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
             con.Open();
             return (con);
+        }
+        public static bool ProbarConexion(string serverName)
+        {
+            SqlConnection con = new SqlConnection("Data Source=" + System.Environment.MachineName + "; Initial Catalog = LENGUAJE; Server=" + System.Environment.MachineName + "\\" + serverName + " ;Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
+            try
+            {
+                con.Open();
+                if(con.State==System.Data.ConnectionState.Open)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                   
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
