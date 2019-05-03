@@ -179,18 +179,23 @@ namespace Analizador_Léxico
 
         public void EstablecerConexion()
         {
-            
-            SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
-            DataTable instancias = instance.GetDataSources();
-            
-            for (int i = 0; i <instancias.Rows.Count ; i++)
-            {
-                cmbServidores.Items.Add(instancias.Rows[i][1].ToString());
-            }
+            do
+                CargarConexiones();
+            while (cmbServidores.Items.Count == 0);
             MessageBox.Show("Seleccione un servidor para la conexion");
             btnCaracterxCarter.Enabled = false;
             btnleertodo.Enabled = false;
             cmbServidores.Focus();
+        }
+
+        public void CargarConexiones()
+        {
+            SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
+            DataTable instancias = instance.GetDataSources();
+            for (int i = 0; i < instancias.Rows.Count; i++)
+            {
+                cmbServidores.Items.Add(instancias.Rows[i][1].ToString());
+            }
         }
 
         private void cmbServidores_SelectedIndexChanged(object sender, EventArgs e)
