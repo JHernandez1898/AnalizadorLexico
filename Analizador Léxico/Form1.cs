@@ -190,11 +190,19 @@ namespace Analizador_Léxico
 
         public void CargarConexiones()
         {
-            SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
-            DataTable instancias = instance.GetDataSources();
-            for (int i = 0; i < instancias.Rows.Count; i++)
+            try
             {
-                cmbServidores.Items.Add(instancias.Rows[i][1].ToString());
+                SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
+                DataTable instancias = instance.GetDataSources();
+                for (int i = 0; i < instancias.Rows.Count; i++)
+                {
+
+                    cmbServidores.Items.Add(instancias.Rows[i][1].ToString());
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Verifique el servicio SQL Browser \nEn SQL Server Configuration Manager");
             }
         }
 
