@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analizador Léxico", "Analizador Léxico\Analizador Léxico.csproj", "{D7E34C1D-FCC8-46F3-B62D-DB2988050AA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lenguaje-Automatas.cs", "Lenguaje-Automatas.cs\Lenguaje-Automatas.cs.csproj", "{44E3A8E4-8FFB-4ADC-8A4B-B43ACFD3EB88}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analizador Sintáctico", "Analizador Sintáctico\Analizador Sintáctico.csproj", "{49E9EDD7-A1D3-49CE-9E08-DEAF9FA9B03F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{D7E34C1D-FCC8-46F3-B62D-DB2988050AA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7E34C1D-FCC8-46F3-B62D-DB2988050AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7E34C1D-FCC8-46F3-B62D-DB2988050AA8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{44E3A8E4-8FFB-4ADC-8A4B-B43ACFD3EB88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{44E3A8E4-8FFB-4ADC-8A4B-B43ACFD3EB88}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{44E3A8E4-8FFB-4ADC-8A4B-B43ACFD3EB88}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{44E3A8E4-8FFB-4ADC-8A4B-B43ACFD3EB88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49E9EDD7-A1D3-49CE-9E08-DEAF9FA9B03F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49E9EDD7-A1D3-49CE-9E08-DEAF9FA9B03F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49E9EDD7-A1D3-49CE-9E08-DEAF9FA9B03F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49E9EDD7-A1D3-49CE-9E08-DEAF9FA9B03F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

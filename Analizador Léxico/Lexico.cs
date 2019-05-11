@@ -14,9 +14,9 @@ using System.Data.Sql;
 
 namespace Analizador_Léxico
 {
-    public partial class Form1 : Form
+    public partial class Lexico : Form
     {
-        public Form1()
+        public Lexico()
         {
             InitializeComponent();
         }

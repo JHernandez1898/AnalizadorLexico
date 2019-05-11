@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D7E34C1D-FCC8-46F3-B62D-DB2988050AA8}</ProjectGuid>
+    <ProjectGuid>{49E9EDD7-A1D3-49CE-9E08-DEAF9FA9B03F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Analizador_Léxico</RootNamespace>
-    <AssemblyName>Analizador Léxico</AssemblyName>
+    <RootNamespace>Analizador_Sintáctico</RootNamespace>
+    <AssemblyName>Analizador Sintáctico</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -26,20 +26,13 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bunifu_UI_v1.5.3">
-      <HintPath>..\..\..\..\..\..\Source\ClubCampestre-master\ClubCampestre-master\Bunifu_UI_v1.5.3.dll</HintPath>
-    </Reference>
-    <Reference Include="Lenguaje, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lenguaje\bin\Release\Lenguaje.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,17 +54,16 @@
     <Compile Include="Clases\NumericoExponencial.cs" />
     <Compile Include="Clases\NumericoExpReal.cs" />
     <Compile Include="Clases\NumericoReal.cs" />
-    <Compile Include="Lexico.cs">
+    <Compile Include="Clases\Sintaxis.cs" />
+    <Compile Include="Clases\SintaxLibre.cs" />
+    <Compile Include="Sintaxis.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Lexico.Designer.cs">
-      <DependentUpon>Lexico.cs</DependentUpon>
+    <Compile Include="Sintaxis.Designer.cs">
+      <DependentUpon>Sintaxis.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Lexico.resx">
-      <DependentUpon>Lexico.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -81,6 +73,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Sintaxis.resx">
+      <DependentUpon>Sintaxis.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
