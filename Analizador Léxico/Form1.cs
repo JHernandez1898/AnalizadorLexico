@@ -179,19 +179,20 @@ namespace Analizador_Léxico
 
         public void EstablecerConexion()
         {
-            do
-                CargarConexiones();
-            while (cmbServidores.Items.Count == 0);
-            MessageBox.Show("Seleccione un servidor para la conexion");
+           
+            MessageBox.Show("Capture una instancia para la conexion", "Analizador lexico", MessageBoxButtons.OK, MessageBoxIcon.Information);
             btnCaracterxCarter.Enabled = false;
             btnleertodo.Enabled = false;
-            cmbServidores.Focus();
+            lblServidor.Text = "Servidor: " + System.Environment.MachineName;
+            lblconexion.BackColor = Color.Red;
+            txtServer.Focus();
         }
 
         public void CargarConexiones()
         {
             try
             {
+
                 SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
                 DataTable instancias = instance.GetDataSources();
                 for (int i = 0; i < instancias.Rows.Count; i++)
@@ -202,7 +203,7 @@ namespace Analizador_Léxico
             }
             catch
             {
-                MessageBox.Show("Verifique el servicio SQL Browser \nEn SQL Server Configuration Manager");
+                MessageBox.Show("Verifique el servicio SQL Browser \nEn SQL Server Configuration Manager", "Error de conexion", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -219,12 +220,43 @@ namespace Analizador_Léxico
                 }
                else
                 {
-                    MessageBox.Show("Conexion fallida");
+                    MessageBox.Show("Conexion fallida", "Error de conexion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     btnCaracterxCarter.Enabled = false;
                     btnleertodo.Enabled = false;
                 }
             }
             catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void txtServer_TextChanged(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void btnConectar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ConexionMatriz.ProbarConexion(txtServer.Text))
+                {
+                    MessageBox.Show("Conectado al servidor");
+                    btnCaracterxCarter.Enabled = true;
+                    btnleertodo.Enabled = true;
+                    MetodosAL.Servidor = txtServer.Text;
+                    lblconexion.BackColor = Color.Green;
+                }
+                else
+                {
+                    MessageBox.Show("Conexion fallida", "Error de conexion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    btnCaracterxCarter.Enabled = false;
+                    btnleertodo.Enabled = false;
+                    lblconexion.BackColor = Color.Red;
+                }
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
