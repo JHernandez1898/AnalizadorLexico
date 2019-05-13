@@ -22,12 +22,12 @@ namespace Analizador_Sintáctico.Clases
         {
             foreach (string Sintax in lstSintaxDerecha)
             {
-                if (Sintax.Equals(other))
+                if (Sintax.Equals(other.Trim()))
                 {
                     return SintaxIzquierda;
                 }
             }
-            throw new Exception("El elemento no coinside con la sintaxis.");
+            return other;
         }
     }
 }

@@ -6,13 +6,53 @@ using System.Threading.Tasks;
 
 namespace Analizador_Sintáctico.Clases
 {
-    class Sintaxis
+    class SintaxisL
     {
-        List<SintaxLibre> Sintax = new List<SintaxLibre>();
+        public List<SintaxLibre> Sintax = new List<SintaxLibre>();
+
+        public SintaxisL()
+        {
+            IniciarSintaxis();
+        }
 
         private void IniciarSintaxis()
         {
+            SintaxLibre S = new SintaxLibre();
+            S.SintaxIzquierda = "S";
+            S.lstSintaxDerecha.Add("PROD");
+            S.lstSintaxDerecha.Add("PROI");
+            S.lstSintaxDerecha.Add("FNCD");
+            S.lstSintaxDerecha.Add("FNCI");
+            S.lstSintaxDerecha.Add("PASA");
+            Sintax.Add(S);
+
             //♥♥ SINTAXIS LIBRE DE CONTEXTO EQUIPO #8 ♥♥
+            SintaxLibre PROD = new SintaxLibre();
+            PROD.SintaxIzquierda = "PROD";
+            PROD.lstSintaxDerecha.Add("PR20 ACCE IDEN FIRD");
+            PROD.lstSintaxDerecha.Add("PR20 ACCE IDEN SINP");
+            Sintax.Add(PROD);
+            SintaxLibre PROI = new SintaxLibre();
+            PROI.SintaxIzquierda = "PROI";
+            PROI.lstSintaxDerecha.Add("IDEN FIRI");
+            PROI.lstSintaxDerecha.Add("IDEN SINP");
+            Sintax.Add(PROI);
+            SintaxLibre FNCD = new SintaxLibre();
+            FNCD.SintaxIzquierda = "FNCD";
+            FNCD.lstSintaxDerecha.Add("PR09 TIPO ACCE IDEN FIRD");
+            FNCD.lstSintaxDerecha.Add("PR09 TIPO ACCE IDEN SINP");
+            Sintax.Add(FNCD);
+            SintaxLibre FNCI = new SintaxLibre();
+            FNCI.SintaxIzquierda = "FNCI";
+            FNCI.lstSintaxDerecha.Add("IDEN OPA6 IDEN FIRI");
+            FNCI.lstSintaxDerecha.Add("TIPO IDEN OPA6 IDEN FIRI");
+            FNCI.lstSintaxDerecha.Add("IDEN OPA6 IDEN SINP");
+            FNCI.lstSintaxDerecha.Add("TIPO IDEN OPA6 IDEN SINP");
+            Sintax.Add(FNCI);
+            SintaxLibre PASA = new SintaxLibre();
+            PASA.SintaxIzquierda = "PASA";
+            PASA.lstSintaxDerecha.Add("PR17 FIRP");
+            Sintax.Add(PASA);
             SintaxLibre ACCE = new SintaxLibre();
             ACCE.SintaxIzquierda = "ACCE";
             ACCE.lstSintaxDerecha.Add("PR19");
@@ -76,6 +116,10 @@ namespace Analizador_Sintáctico.Clases
             VARI.lstSintaxDerecha.Add("OPEA");
             VARI.lstSintaxDerecha.Add("CADE");
             Sintax.Add(VARI);
+            SintaxLibre IDEN = new SintaxLibre();
+            IDEN.SintaxIzquierda = "IDEN";
+            IDEN.lstSintaxDerecha.Add("ID");
+            Sintax.Add(IDEN);
             //SINTAXIS LIBRE DE CONTEXTO OTROS EQUIPOS :)
         }
     }

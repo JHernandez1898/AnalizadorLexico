@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,7 +48,7 @@ namespace Analizador_Léxico.Clases
             }
             catch (Exception ex)
             {
-                LineasLexico.Add(ex.Message + linea + ".\nVerifique el uso apropiado del léxico.");
+                MessageBox.Show(ex.Message + linea + ".\nVerifique el uso apropiado del léxico.", "Error de analizador léxico", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 linea = 1;
             }
             return LineasLexico;
