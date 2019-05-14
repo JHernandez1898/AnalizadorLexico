@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Analizador_Sintáctico.Clases
 {
-    class Lexico
+    public class Lexico
     {
         public static List<string> AnalizadorLexico(string CadenaEntrada)
         {
