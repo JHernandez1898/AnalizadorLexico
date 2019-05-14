@@ -25,10 +25,6 @@ namespace Analizador_Léxico
         {
             try
             {
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
-
-                //Anlizador Lexico
                 rtxtcodigointermedio.Text = "";
                 string strEntrada = rtxtentrada.Text;
                 linea = 0;
@@ -50,8 +46,7 @@ namespace Analizador_Léxico
                 MostrarIdentificadoresConstantes();
                 Depurar();
                 linea = 1;
-                stopwatch.Stop();
-                MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador léxico", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               
             }
             catch (Exception ex)
             {
@@ -262,60 +257,6 @@ namespace Analizador_Léxico
             }
         }
 
-        //private void btnleersiguiente_Click(object sender, EventArgs e)
-        //{
-        //    if (intContadorPalabras <= intCantidadPalabras)
-        //    {
-        //        if (intContadorPalabras == 0)
-        //        {
-        //            rtxtcodigointermedio.Text = "";
-        //            string strEntrada = rtxtentrada.Text;
-        //            strPalabras = strEntrada.Split(' ');
-        //            intCantidadPalabras = strPalabras.Length - 1;
-        //        }
-
-        //        List<string> tokens = new List<string>();
-        //        string strPalabra = strPalabras[intContadorPalabras];
-        //        if (!strPalabras[intContadorPalabras].Contains("\n"))
-        //        {                    
-        //            MetodosAL.ObtenerToken(strPalabras[intContadorPalabras], ref tokens);
-        //            foreach (string token in tokens)
-        //            {
-        //                rtxtcodigointermedio.Text += token + " ";
-        //                txttoken.Text = token;
-        //            }
-        //            rtxtcodigointermedio.Text += " ";
-        //            MostrarIdentificadoresConstantes();
-        //        }
-        //        else
-        //        {
-        //            string strPalabraEspaciada = strPalabras[intContadorPalabras];
-        //            if (strPalabras[intContadorPalabras] != "\n")
-        //            {                        
-        //                strPalabraEspaciada = strPalabraEspaciada.Replace("\n","");
-        //            }
-        //            MetodosAL.ObtenerToken(strPalabraEspaciada, ref tokens);
-        //            foreach (string token in tokens)
-        //            {
-        //                rtxtcodigointermedio.Text += token + " ";
-        //                txttoken.Text = token;
-        //            }
-        //            rtxtcodigointermedio.Text += " ";
-        //            rtxtcodigointermedio.Text += " \n";
-        //            MostrarIdentificadoresConstantes();
-        //            intLinea++;                    
-        //        }
-        //        txtnumrenglon.Text = intLinea.ToString();
-        //        intContadorPalabras++;
-        //    }
-        //    else
-        //    {
-        //        intContadorPalabras = 0;
-        //        intCantidadPalabras = 0;
-        //        intLinea = 1;
-        //        Depurar();
-        //    }
-        //}
     }
 
 }
