@@ -19,12 +19,14 @@ namespace Analizador_Sintáctico.Clases
         {
             SintaxLibre S = new SintaxLibre();
             S.SintaxIzquierda = "S";
+            ///
             S.lstSintaxDerecha.Add("PROD");
             S.lstSintaxDerecha.Add("PROI");
             S.lstSintaxDerecha.Add("FNCD");
             S.lstSintaxDerecha.Add("FNCI");
             S.lstSintaxDerecha.Add("PASA");
             S.lstSintaxDerecha.Add("ASIG OPEA");
+            S.lstSintaxDerecha.Add("ASIG PROI");
             Sintax.Add(S);
 
             //♥♥ GRAMATICA LIBRE DE CONTEXTO EQUIPO #8 ♥♥
@@ -46,6 +48,7 @@ namespace Analizador_Sintáctico.Clases
             SintaxLibre FNCI = new SintaxLibre();
             FNCI.SintaxIzquierda = "FNCI";
             FNCI.lstSintaxDerecha.Add("ASIG IDEN FIRI");
+            FNCI.lstSintaxDerecha.Add("ASIG IDEN FIRD");
             FNCI.lstSintaxDerecha.Add("TIPO ASIG IDEN FIRI");
             FNCI.lstSintaxDerecha.Add("ASIG IDEN SINP");
             FNCI.lstSintaxDerecha.Add("TIPO ASIG IDEN SINP");
@@ -69,7 +72,9 @@ namespace Analizador_Sintáctico.Clases
             PARD.SintaxIzquierda = "PARD";
             PARD.lstSintaxDerecha.Add("TIPO VARI");
             PARD.lstSintaxDerecha.Add("TIPO IDEN");
-            PARD.lstSintaxDerecha.Add("PR22 TIPO VARI"); PARD.lstSintaxDerecha.Add("PR22 TIPO VARI");
+            PARD.lstSintaxDerecha.Add("PARD PARD");
+            PARD.lstSintaxDerecha.Add("PR22 TIPO VARI");
+            PARD.lstSintaxDerecha.Add("PR22 TIPO VARI");
             PARD.lstSintaxDerecha.Add("PR22 TIPO IDEN");
             Sintax.Add(PARD);
             SintaxLibre TIPO = new SintaxLibre();
@@ -121,6 +126,7 @@ namespace Analizador_Sintáctico.Clases
             SintaxLibre IDEN = new SintaxLibre();
             IDEN.SintaxIzquierda = "IDEN";
             IDEN.lstSintaxDerecha.Add("ID");
+            IDEN.lstSintaxDerecha.Add("IDEN IDEN");
             Sintax.Add(IDEN);
             //SINTAXIS LIBRE DE CONTEXTO OTROS EQUIPOS :)
             //EQUIPO 2
@@ -140,6 +146,7 @@ namespace Analizador_Sintáctico.Clases
             SintaxLibre ASIG = new SintaxLibre();
             ASIG.SintaxIzquierda = "ASIG";
             ASIG.lstSintaxDerecha.Add("IDEN OPA6");
+            ASIG.lstSintaxDerecha.Add("FIRD OPA6");
             Sintax.Add(ASIG);
             //EQUIPO 3
             SintaxLibre OPER = new SintaxLibre();
