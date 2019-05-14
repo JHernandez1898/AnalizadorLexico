@@ -49,7 +49,7 @@
             // 
             // lblconexion
             // 
-            this.lblconexion.Location = new System.Drawing.Point(739, 60);
+            this.lblconexion.Location = new System.Drawing.Point(751, 64);
             this.lblconexion.Name = "lblconexion";
             this.lblconexion.Size = new System.Drawing.Size(23, 23);
             this.lblconexion.TabIndex = 58;
@@ -135,7 +135,7 @@
             // 
             // txtTemporal
             // 
-            this.txtTemporal.Location = new System.Drawing.Point(460, 118);
+            this.txtTemporal.Location = new System.Drawing.Point(458, 118);
             this.txtTemporal.Name = "txtTemporal";
             this.txtTemporal.Size = new System.Drawing.Size(75, 20);
             this.txtTemporal.TabIndex = 42;
@@ -143,7 +143,7 @@
             // lbltoken
             // 
             this.lbltoken.AutoSize = true;
-            this.lbltoken.Location = new System.Drawing.Point(406, 121);
+            this.lbltoken.Location = new System.Drawing.Point(401, 121);
             this.lbltoken.Name = "lbltoken";
             this.lbltoken.Size = new System.Drawing.Size(51, 13);
             this.lbltoken.TabIndex = 41;
@@ -151,7 +151,7 @@
             // 
             // txtcadenatokens
             // 
-            this.txtcadenatokens.Location = new System.Drawing.Point(12, 118);
+            this.txtcadenatokens.Location = new System.Drawing.Point(12, 121);
             this.txtcadenatokens.Name = "txtcadenatokens";
             this.txtcadenatokens.Size = new System.Drawing.Size(386, 20);
             this.txtcadenatokens.TabIndex = 38;
@@ -159,7 +159,7 @@
             // lblcadenatokens
             // 
             this.lblcadenatokens.AutoSize = true;
-            this.lblcadenatokens.Location = new System.Drawing.Point(9, 102);
+            this.lblcadenatokens.Location = new System.Drawing.Point(12, 102);
             this.lblcadenatokens.Name = "lblcadenatokens";
             this.lblcadenatokens.Size = new System.Drawing.Size(102, 13);
             this.lblcadenatokens.TabIndex = 37;
@@ -177,7 +177,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(406, 154);
+            this.label1.Location = new System.Drawing.Point(401, 154);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(110, 13);
             this.label1.TabIndex = 60;
@@ -185,7 +185,7 @@
             // 
             // rtxSintaxLineaxLinea
             // 
-            this.rtxSintaxLineaxLinea.Location = new System.Drawing.Point(409, 170);
+            this.rtxSintaxLineaxLinea.Location = new System.Drawing.Point(404, 170);
             this.rtxSintaxLineaxLinea.Name = "rtxSintaxLineaxLinea";
             this.rtxSintaxLineaxLinea.Size = new System.Drawing.Size(386, 163);
             this.rtxSintaxLineaxLinea.TabIndex = 59;

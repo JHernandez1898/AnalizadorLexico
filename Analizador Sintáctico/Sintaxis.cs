@@ -23,18 +23,23 @@ namespace Analizador_Sintáctico
         private void btnleertodo_Click(object sender, EventArgs e)
         {
             int temporal = 0;
-            int InicioSub = 0;
-            bool banderaRepite = false;
-            bool banderaSub = false;
+            int InicioSub = 1;
+            int FinSub = 0;
+            int varControl = 0;
+            int control = 0;
+            int LineaActual = 0;
+            bool banderaRepite = true;
+            bool banderaCambio = false;
+            string LineaMod = "";
             string SubCadena = "";
             string ExistS = "";
             string SintaxRes = "";
             string[] SplitLinea;
             rtxtcodigointermedio.Text = "";
+            rtxSintaxLineaxLinea.Text = "";
             try
             {
                 //IMPLEMENTACION ANALISIS LEXICO
-                //ESTA LISTA TIENE LINEA POR LINEA LOS TOKENS CORRESPONDIENTES
                 List<string> LineasLexico = new List<string>();
                 LineasLexico = Lexico.AnalizadorLexico(rtxtentrada.Text);
 
@@ -42,40 +47,100 @@ namespace Analizador_Sintáctico
                 foreach (string Linea in LineasLexico)
                 {
                     //SEPARAR LINEA EN TOKENS
-                    SplitLinea = Linea.Split(' ');
-                    temporal = SplitLinea.Length;
+                    banderaRepite = true;
+                    LineaMod = Linea;
+                    SplitLinea = Linea.Trim().Split(' ');
+                    // ID# TO ID
+                    for (int i = 0; i < SplitLinea.Length; i++)
+                    {
+                        if (SplitLinea[i].Substring(0, 2) == "ID" && SplitLinea[i] != "IDEN")
+                        {
+                            string IdVal = SplitLinea[i];
+                            for (int k = 0; k < SplitLinea[i].Length; k++)
+                            {
+                                if (char.IsNumber(SplitLinea[i][k])) { IdVal = SplitLinea[i].Replace(SplitLinea[i][k], ' ').Trim(); }
+                            }
+                            LineaMod = LineaMod.Replace(SplitLinea[i], IdVal);
+                        }
+                    }
+                    SplitLinea = LineaMod.Trim().Split(' ');
+                    FinSub = temporal = SplitLinea.Length;
 
                     do
                     {
-                        for (int i = InicioSub; i < temporal; i++) { SubCadena += SplitLinea[i] + " "; }
-                        txtTemporal.Text = temporal.ToString();
+                        SubCadena = "";
+                        //VARIABLE PARA SABER CUANTOS GRUPOS DEBEMOS FORMAR EN SUB CADENA
+                        varControl = (SplitLinea.Length + 1) - temporal;
+                        //CREACION DE SUB CADENA
+                        for (int i = InicioSub - 1; i < FinSub; i++) { SubCadena += SplitLinea[i] + " "; }
                         foreach (SintaxLibre S in miSintaxis.Sintax)
                         {
+                            //BUSCA CONINCIDENCIA DE SUB CADENA CON GRAMATICA
                             ExistS = S.Exist(SubCadena);
                             if (ExistS != SubCadena)
                             {
-                                SintaxRes = Linea.Replace(SubCadena.Trim(), ExistS);
+                                /*LineaMod = "";
+                                for (int k = 0; k < SplitLinea.Length; k++)
+                                {
+                                    if (SplitLinea[k] == SubCadena.Trim())
+                                    {
+                                        SplitLinea[k] = ExistS;
+                                        break;
+                                    }
+                                }
+                                for (int j = 0; j < SplitLinea.Length; j++)
+                                {
+                                    LineaMod += SplitLinea[j] + " ";
+                                }*/
+                                LineaMod = SintaxRes = LineaMod.Replace(SubCadena.Trim(), ExistS);
+                                SplitLinea = LineaMod.Trim().Split(' ');
+                                banderaCambio = true;
                                 rtxtcodigointermedio.Text += SintaxRes + "\n";
-                                banderaRepite = true;
-                                InicioSub = 0;
-                                temporal = SplitLinea.Length;
+                                if (ExistS == "S")
+                                {
+                                    rtxSintaxLineaxLinea.Text += "Linea " + (LineaActual + 1) + ": " + ExistS + "\n";
+                                    rtxtcodigointermedio.Text += "\n";
+                                }
+                                InicioSub = 1;
+                                FinSub = temporal = SplitLinea.Length;
                                 SubCadena = "";
+                                control = 0;
                                 break;
                             }
-                            else { banderaRepite = false; }
+                            else { banderaCambio = false; }
                         }
-                        if (temporal != SplitLinea.Length)
+                        if (!banderaCambio)
                         {
-                            if (banderaRepite) { temporal--; }
-                            InicioSub++;
+                            if (InicioSub != varControl)
+                            {
+                                InicioSub++;
+                                control++;
+                                FinSub = temporal + control;
+                            }
+                            else
+                            {
+                                temporal--;
+                                InicioSub = 1;
+                                control = 0;
+                                FinSub = temporal;
+                            }
                         }
-                        if (temporal == 0  && !banderaRepite) { throw new Exception("Sintaxis invalida."); }
+                        if (temporal == 0  && banderaRepite)
+                        {
+                            banderaRepite = false;
+                            if (LineaMod.Trim() != "S")
+                            {
+                                rtxSintaxLineaxLinea.Text += "Linea " + (LineaActual + 1).ToString() + ": Error\n";
+                                throw new Exception("Error sintactico en linea " + (LineaActual + 1).ToString() + ".\nVerifique el uso apropiado la sintaxis.");
+                            }
+                        }
                     } while (banderaRepite);
+                    LineaActual++;
                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+               MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
