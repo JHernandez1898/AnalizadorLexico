@@ -62,7 +62,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtEstadoAnt = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.cmbServidores = new System.Windows.Forms.ComboBox();
             this.txtServer = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnConectar = new System.Windows.Forms.Button();
@@ -370,24 +369,12 @@
             this.label6.TabIndex = 26;
             this.label6.Text = "Estado Anterior";
             // 
-            // cmbServidores
-            // 
-            this.cmbServidores.FormattingEnabled = true;
-            this.cmbServidores.Location = new System.Drawing.Point(100, -2);
-            this.cmbServidores.Name = "cmbServidores";
-            this.cmbServidores.Size = new System.Drawing.Size(138, 21);
-            this.cmbServidores.TabIndex = 28;
-            this.cmbServidores.Text = "Servidores";
-            this.cmbServidores.Visible = false;
-            this.cmbServidores.SelectedIndexChanged += new System.EventHandler(this.cmbServidores_SelectedIndexChanged);
-            // 
             // txtServer
             // 
             this.txtServer.Location = new System.Drawing.Point(460, 39);
             this.txtServer.Name = "txtServer";
             this.txtServer.Size = new System.Drawing.Size(152, 20);
             this.txtServer.TabIndex = 29;
-            this.txtServer.TextChanged += new System.EventHandler(this.txtServer_TextChanged);
             // 
             // label7
             // 
@@ -434,7 +421,6 @@
             this.Controls.Add(this.btnConectar);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtServer);
-            this.Controls.Add(this.cmbServidores);
             this.Controls.Add(this.txtEstadoAnt);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtEstadoActual);
@@ -512,7 +498,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtEstadoAnt;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox cmbServidores;
         private System.Windows.Forms.TextBox txtServer;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnConectar;

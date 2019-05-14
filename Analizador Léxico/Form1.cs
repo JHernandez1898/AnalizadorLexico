@@ -29,7 +29,7 @@ namespace Analizador_Léxico
                 string strEntrada = rtxtentrada.Text;
                 linea = 0;
                 txtnumrenglon.Text = linea.ToString();
-                string[] strLineas = strEntrada.Split('\n');                             
+                string[] strLineas = strEntrada.Split('\n');
                 foreach (string Linea in strLineas)
                 {
                     linea++;
@@ -39,7 +39,7 @@ namespace Analizador_Léxico
                     if (Linea != "")
                     {
                         foreach (string token in tokens) rtxtcodigointermedio.Text += token + " ";
-                        rtxtcodigointermedio.Text += "\n";                        
+                        rtxtcodigointermedio.Text += "\n";
                     }
                     txtnumrenglon.Text = linea.ToString();
                 }
@@ -70,7 +70,7 @@ namespace Analizador_Léxico
             dgvConstatesNumericas.Rows.Clear();
             dgvConstantesExpo.Rows.Clear();
             foreach (Identificador IDE in MetodosAL.Identificadores)
-                dgvIDE.Rows.Add("ID"+IDE.Index, IDE.Nombre, "", "");
+                dgvIDE.Rows.Add("ID" + IDE.Index, IDE.Nombre, "", "");
             foreach (NumericoEntero Num in MetodosAL.ConstantesNumericasEnteras)
                 dgvConstatesNumericas.Rows.Add("CNE" + Num.Index, Num.Contenido);
             foreach (NumericoReal Real in MetodosAL.ConstantesNumericasReales)
@@ -80,11 +80,13 @@ namespace Analizador_Léxico
             foreach (NumericoExpReal exporeal in MetodosAL.ConstantesNumericasExpReales)
                 dgvConstantesExpo.Rows.Add("CNRE" + exporeal.Index, exporeal.Contenido, exporeal.Exponencial);
         }
+
         static int indx = 0;
         static int palabra = 0;
         static int intEstadoActual = 0;
         static int linea = 1;
         static List<char> caracteres = new List<char>();
+
         private void btnCaracterXCaracter_Click(object sender, EventArgs e)
         {
             try {                            
@@ -181,54 +183,6 @@ namespace Analizador_Léxico
             lblServidor.Text = "Servidor: " + System.Environment.MachineName;
             lblconexion.BackColor = Color.Red;
             txtServer.Focus();
-        }
-
-        public void CargarConexiones()
-        {
-            try
-            {
-
-                SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
-                DataTable instancias = instance.GetDataSources();
-                for (int i = 0; i < instancias.Rows.Count; i++)
-                {
-
-                    cmbServidores.Items.Add(instancias.Rows[i][1].ToString());
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Verifique el servicio SQL Browser \nEn SQL Server Configuration Manager", "Error de conexion", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void cmbServidores_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-               if(ConexionMatriz.ProbarConexion(cmbServidores.SelectedItem.ToString()))
-                {
-                    MessageBox.Show("Conectado al servidor");
-                    btnCaracterxCarter.Enabled = true;
-                    btnleertodo.Enabled =true;
-                    MetodosAL.Servidor = cmbServidores.SelectedItem.ToString();
-                }
-               else
-                {
-                    MessageBox.Show("Conexion fallida", "Error de conexion", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    btnCaracterxCarter.Enabled = false;
-                    btnleertodo.Enabled = false;
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void txtServer_TextChanged(object sender, EventArgs e)
-        {
-          
         }
 
         private void btnConectar_Click(object sender, EventArgs e)
