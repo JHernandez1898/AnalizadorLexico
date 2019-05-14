@@ -56,7 +56,7 @@ namespace Analizador_Sintáctico
                     // ID# TO ID
                     for (int i = 0; i < SplitLinea.Length; i++)
                     {
-                        if (SplitLinea[i].Substring(0, 2) == "ID" && SplitLinea[i] != "IDEN")
+                        if (SplitLinea[i].Substring(0, 2) == "ID" || SplitLinea[i].Substring(0,3)=="CNE" || SplitLinea[i].Substring(0, 3) == "CNR" || SplitLinea[i].Substring(0, 4) == "CNEE" || SplitLinea[i].Substring(0, 4) == "CNRE")
                         {
                             string IdVal = SplitLinea[i];
                             for (int k = 0; k < SplitLinea[i].Length; k++)
