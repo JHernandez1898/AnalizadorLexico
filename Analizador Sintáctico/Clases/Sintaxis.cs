@@ -124,6 +124,7 @@ namespace Analizador_Sintáctico.Clases
             IDEN.lstSintaxDerecha.Add("ID");
             Sintax.Add(IDEN);
             //SINTAXIS LIBRE DE CONTEXTO OTROS EQUIPOS :)
+            
             SintaxLibre OPEA = new SintaxLibre();
             OPEA.SintaxIzquierda = "OPEA";
             OPEA.lstSintaxDerecha.Add("IDEN OPAR IDEN");
