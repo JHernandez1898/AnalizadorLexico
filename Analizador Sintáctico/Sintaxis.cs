@@ -225,7 +225,6 @@ namespace Analizador_Sintáctico
             return NuevaLinea;
         }
         static bool principio = true;
-        static bool transformo = false;
         private void btnCaracterxCarter_Click(object sender, EventArgs e)
         {
             LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
@@ -234,9 +233,7 @@ namespace Analizador_Sintáctico
             {
                 principio = false;
                 strActual = RellenarArreglo()[nLinea];
-                rtxtcodigointermedio.Clear();
-               
-                rtxtcodigointermedio.Text = ArregloLineas[nLinea] + "\n";
+                rtxtcodigointermedio.Text += ArregloLineas[nLinea] + "\n";
                 txtcadenatokens.Text = ArregloLineas[nLinea];
                 strActual = strActual.Substring(0, strActual.Length - 1);
                 temp = strActual.Split(' ').Length;
@@ -271,6 +268,7 @@ namespace Analizador_Sintáctico
                                 strActual = strActual.Replace(str, Existe);
                                 rtxtcodigointermedio.Text += strActual + "\n";
                                 temp = strActual.Split(' ').Length;
+
                             
                                 break;
                             }
@@ -279,8 +277,9 @@ namespace Analizador_Sintáctico
 
                 }
 
-                if (strActual == "S") { nLinea++; principio = true; }
+                if (strActual == "S") { nLinea++; principio = true; rtxSintaxLineaxLinea.Text += "LINEA " + nLinea.ToString() + ":S" + "\n";  }
             }
+            txtcadenatokens.Text = strActual;
            
             if (nLinea == ArregloLineas.Length) nLinea = 0;
 

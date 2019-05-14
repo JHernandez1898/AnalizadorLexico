@@ -69,7 +69,8 @@ namespace Analizador_Sintáctico.Clases
             PARD.SintaxIzquierda = "PARD";
             PARD.lstSintaxDerecha.Add("TIPO VARI");
             PARD.lstSintaxDerecha.Add("TIPO IDEN");
-            PARD.lstSintaxDerecha.Add("PR22 TIPO VARI"); PARD.lstSintaxDerecha.Add("PR22 TIPO VARI");
+            PARD.lstSintaxDerecha.Add("PR22 TIPO VARI");
+            PARD.lstSintaxDerecha.Add("PR22 TIPO VARI");
             PARD.lstSintaxDerecha.Add("PR22 TIPO IDEN");
             Sintax.Add(PARD);
             SintaxLibre TIPO = new SintaxLibre();
@@ -122,7 +123,7 @@ namespace Analizador_Sintáctico.Clases
             IDEN.SintaxIzquierda = "IDEN";
             IDEN.lstSintaxDerecha.Add("ID");
             Sintax.Add(IDEN);
-            /*SINTAXIS LIBRE DE CONTEXTO OTROS EQUIPOS :)
+            //SINTAXIS LIBRE DE CONTEXTO OTROS EQUIPOS :)
             SintaxLibre OPEA = new SintaxLibre();
             OPEA.SintaxIzquierda = "OPEA";
             OPEA.lstSintaxDerecha.Add("IDEN OPAR IDEN");
@@ -174,7 +175,7 @@ namespace Analizador_Sintáctico.Clases
             OPRE.lstSintaxDerecha.Add("OPR4");
             OPRE.lstSintaxDerecha.Add("OPR5");
             OPRE.lstSintaxDerecha.Add("OPR6");
-            Sintax.Add(OPRE);*/
+            Sintax.Add(OPRE);
         }
     }
 }
