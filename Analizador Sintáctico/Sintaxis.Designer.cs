@@ -95,8 +95,9 @@
             this.btnCaracterxCarter.Name = "btnCaracterxCarter";
             this.btnCaracterxCarter.Size = new System.Drawing.Size(126, 26);
             this.btnCaracterxCarter.TabIndex = 47;
-            this.btnCaracterxCarter.Text = "Caracter por Caracter";
+            this.btnCaracterxCarter.Text = "Linea por Linea";
             this.btnCaracterxCarter.UseVisualStyleBackColor = true;
+            this.btnCaracterxCarter.Click += new System.EventHandler(this.btnCaracterxCarter_Click);
             // 
             // lblcodigointermedio
             // 

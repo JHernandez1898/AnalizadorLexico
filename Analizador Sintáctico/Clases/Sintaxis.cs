@@ -24,6 +24,7 @@ namespace Analizador_Sintáctico.Clases
             S.lstSintaxDerecha.Add("FNCD");
             S.lstSintaxDerecha.Add("FNCI");
             S.lstSintaxDerecha.Add("PASA");
+            
             Sintax.Add(S);
 
             //♥♥ SINTAXIS LIBRE DE CONTEXTO EQUIPO #8 ♥♥
@@ -52,6 +53,7 @@ namespace Analizador_Sintáctico.Clases
             SintaxLibre PASA = new SintaxLibre();
             PASA.SintaxIzquierda = "PASA";
             PASA.lstSintaxDerecha.Add("PR17 FIRP");
+            PASA.lstSintaxDerecha.Add("PR17 FIRI");
             Sintax.Add(PASA);
             SintaxLibre ACCE = new SintaxLibre();
             ACCE.SintaxIzquierda = "ACCE";
@@ -77,7 +79,7 @@ namespace Analizador_Sintáctico.Clases
             Sintax.Add(TIPO);
             SintaxLibre FIRI = new SintaxLibre();
             FIRI.SintaxIzquierda = "FIRI";
-            FIRI.lstSintaxDerecha.Add("PAR2 VARI PAR1");
+            FIRI.lstSintaxDerecha.Add("PAR2 IDEN PAR1");
             FIRI.lstSintaxDerecha.Add("PAR2 VARR PAR1");
             FIRI.lstSintaxDerecha.Add("PAR2 VARI FIRI PAR1");
             FIRI.lstSintaxDerecha.Add("PAR2 VARR FIRI PAR1");
@@ -111,7 +113,6 @@ namespace Analizador_Sintáctico.Clases
             Sintax.Add(VARR);
             SintaxLibre VARI = new SintaxLibre();
             VARI.SintaxIzquierda = "VARI";
-            VARI.lstSintaxDerecha.Add("IDEN");
             VARI.lstSintaxDerecha.Add("CONU");
             VARI.lstSintaxDerecha.Add("OPEA");
             VARI.lstSintaxDerecha.Add("CADE");
@@ -121,6 +122,8 @@ namespace Analizador_Sintáctico.Clases
             IDEN.lstSintaxDerecha.Add("ID");
             Sintax.Add(IDEN);
             //SINTAXIS LIBRE DE CONTEXTO OTROS EQUIPOS :)
+
+            
         }
     }
 }
