@@ -246,49 +246,48 @@ namespace Analizador_Sintáctico
                 temp = strActual.Split(' ').Length;
             }
             txtTemporal.Text = temp.ToString();
-            
-           
+
+
             string Existe = "";
             string Remplazable = strActual;
             txtTemporal.Text = temp.ToString();
-            string[] strSubcadenas = CrearCombinaciones(temp, strActual);
-            if (!Revisar(CrearCombinaciones(temp, strActual)))
-            {
-                
-           
-                if(temp == 0 ) { MessageBox.Show("Error de sintaxis"); }
-                else { temp--; txtTemporal.Text = temp.ToString(); }
-            }
+            if (temp == 0) { MessageBox.Show("Error de sintaxis en línea " + (nLinea + 1)); nLinea = 0; principio = true; rtxtcodigointermedio.Text = " "; }
             else
             {
-                foreach (string str in strSubcadenas)
-                {
-                    if (str != "")
-                    {
-                        string strCambio = str;
-                        foreach (SintaxLibre S in miSintaxis.Sintax)
-                        { 
-                            if (str.Substring(0, 2) == "ID" && str.Length <= 3) { strCambio = "ID"; }
-                            Existe = S.Exist(strCambio);
-                            if (Existe != strCambio)
-                            {
-                                strActual = strActual.Replace(str, Existe);
-                                rtxtcodigointermedio.Text += strActual + "\n";
-                                temp = strActual.Split(' ').Length;
+                string[] strSubcadenas = CrearCombinaciones(temp, strActual);
+                if (!Revisar(CrearCombinaciones(temp, strActual))) { temp--; txtTemporal.Text = temp.ToString(); }
 
-                            
-                                break;
+                else
+                {
+                    foreach (string str in strSubcadenas)
+                    {
+                        if (str != "")
+                        {
+                            string strCambio = str;
+                            foreach (SintaxLibre S in miSintaxis.Sintax)
+                            {
+                                if (str.Substring(0, 2) == "ID" && str.Length <= 3) { strCambio = "ID"; }
+                                Existe = S.Exist(strCambio);
+                                if (Existe != strCambio)
+                                {
+                                    strActual = strActual.Replace(str, Existe);
+                                    rtxtcodigointermedio.Text += strActual + "\n";
+                                    temp = strActual.Split(' ').Length;
+
+
+                                    break;
+                                }
                             }
                         }
+
                     }
 
+                    if (strActual == "S") { nLinea++; principio = true; rtxSintaxLineaxLinea.Text += "LINEA " + nLinea.ToString() + ":S" + "\n"; }
                 }
+                txtcadenatokens.Text = strActual;
 
                 if (strActual == "S") { nLinea++; principio = true; rtxSintaxLineaxLinea.Text += "Línea " + nLinea.ToString() + ":S" + "\n";  }
             }
-            txtcadenatokens.Text = strActual;
-           
-            if (nLinea == ArregloLineas.Length) nLinea = 0;
 
         }
         public bool Revisar(string[] strSubcadenas)

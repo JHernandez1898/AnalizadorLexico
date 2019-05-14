@@ -26,7 +26,13 @@ namespace Analizador_Sintáctico.Clases
             S.lstSintaxDerecha.Add("FNCI");
             S.lstSintaxDerecha.Add("PASA");
             S.lstSintaxDerecha.Add("ASIG OPEA");
-            S.lstSintaxDerecha.Add("ASIG PROI");
+            S.lstSintaxDerecha.Add("IMPR");
+            S.lstSintaxDerecha.Add("CAPT");
+            S.lstSintaxDerecha.Add("PR23 OPER");
+            S.lstSintaxDerecha.Add("PR23 OPEL");
+            S.lstSintaxDerecha.Add("PR04");
+            S.lstSintaxDerecha.Add("ARGU ARGM ARGN");
+            S.lstSintaxDerecha.Add("PR08");
             Sintax.Add(S);
 
             //♥♥ GRAMATICA LIBRE DE CONTEXTO EQUIPO #8 ♥♥
@@ -129,7 +135,30 @@ namespace Analizador_Sintáctico.Clases
             IDEN.lstSintaxDerecha.Add("IDEN IDEN");
             Sintax.Add(IDEN);
             //SINTAXIS LIBRE DE CONTEXTO OTROS EQUIPOS :)
-            //EQUIPO 2
+            SintaxLibre ARGU = new SintaxLibre();
+            ARGU.SintaxIzquierda = "ARGU";
+            ARGU.lstSintaxDerecha.Add("PR16 ASIG IDEN");
+            ARGU.lstSintaxDerecha.Add("PR16 ASIG VARI");
+            Sintax.Add(ARGU);
+            SintaxLibre ARGN = new SintaxLibre();
+            ARGN.SintaxIzquierda = "ARGN";
+            ARGN.lstSintaxDerecha.Add("PR24 ASIG IDEN");
+            ARGN.lstSintaxDerecha.Add("PR24 ASIG VARI");
+            Sintax.Add(ARGN);
+            SintaxLibre ARGM = new SintaxLibre();
+            ARGM.SintaxIzquierda = "ARGM";
+            ARGM.lstSintaxDerecha.Add("PR10 OPER");
+            Sintax.Add(ARGM);
+            SintaxLibre IMPR = new SintaxLibre();
+            IMPR.SintaxIzquierda = "IMPR";
+            IMPR.lstSintaxDerecha.Add("PR12 VARI");
+            IMPR.lstSintaxDerecha.Add("PR12 IDEN");
+            Sintax.Add(IMPR);
+            SintaxLibre CAPT = new SintaxLibre();
+            CAPT.SintaxIzquierda = "CAPT";
+            CAPT.lstSintaxDerecha.Add("PR01 IDEN");
+            CAPT.lstSintaxDerecha.Add("PR01 IDEN");
+            Sintax.Add(CAPT);
             SintaxLibre OPEA = new SintaxLibre();
             OPEA.SintaxIzquierda = "OPEA";
             OPEA.lstSintaxDerecha.Add("IDEN OPAR IDEN");
