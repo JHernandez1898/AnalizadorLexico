@@ -122,7 +122,8 @@ namespace Analizador_Sintáctico.Clases
             IDEN.SintaxIzquierda = "IDEN";
             IDEN.lstSintaxDerecha.Add("ID");
             Sintax.Add(IDEN);
-            /*SINTAXIS LIBRE DE CONTEXTO OTROS EQUIPOS :)
+            //SINTAXIS LIBRE DE CONTEXTO OTROS EQUIPOS :)
+            //EQUIPO 2
             SintaxLibre OPEA = new SintaxLibre();
             OPEA.SintaxIzquierda = "OPEA";
             OPEA.lstSintaxDerecha.Add("IDEN OPAR IDEN");
@@ -140,15 +141,18 @@ namespace Analizador_Sintáctico.Clases
             ASIG.SintaxIzquierda = "ASIG";
             ASIG.lstSintaxDerecha.Add("IDEN OPA6");
             Sintax.Add(ASIG);
+            //EQUIPO 3
             SintaxLibre OPER = new SintaxLibre();
             OPER.SintaxIzquierda = "OPER";
             OPER.lstSintaxDerecha.Add("IDEN OPRE IDEN");
+            OPER.lstSintaxDerecha.Add("CONU OPRE CONU");
             OPER.lstSintaxDerecha.Add("CONU OPRE IDEN");
             OPER.lstSintaxDerecha.Add("IDEN OPRE CONU");
             OPER.lstSintaxDerecha.Add("OPRE OPRE IDEN");
             OPER.lstSintaxDerecha.Add("IDEN OPRE OPEA");
             OPER.lstSintaxDerecha.Add("OPEA OPRE OPEA");
             OPER.lstSintaxDerecha.Add("CONU OPRE OPEA");
+            OPER.lstSintaxDerecha.Add("OPEA OPRE CONU");
             OPER.lstSintaxDerecha.Add("PAR2 OPRE PAR1");
             OPER.lstSintaxDerecha.Add("PAR2 OPER PAR1");
             Sintax.Add(OPER);
@@ -166,6 +170,7 @@ namespace Analizador_Sintáctico.Clases
             OPEL.lstSintaxDerecha.Add("OPEL OL01 OPEL");
             OPEL.lstSintaxDerecha.Add("PAR2 OPEL PAR1");
             Sintax.Add(OPEL);
+            //EQUIPO 7
             SintaxLibre OPRE = new SintaxLibre();
             OPRE.SintaxIzquierda = "OPRE";
             OPRE.lstSintaxDerecha.Add("OPR1");
@@ -174,7 +179,7 @@ namespace Analizador_Sintáctico.Clases
             OPRE.lstSintaxDerecha.Add("OPR4");
             OPRE.lstSintaxDerecha.Add("OPR5");
             OPRE.lstSintaxDerecha.Add("OPR6");
-            Sintax.Add(OPRE);*/
+            Sintax.Add(OPRE);
         }
     }
 }
