@@ -133,8 +133,8 @@ namespace Analizador_Sintáctico
                             banderaRepite = false;
                             if (LineaMod.Trim() != "S")
                             {
-                                rtxSintaxLineaxLinea.Text += "Linea " + (LineaActual + 1).ToString() + ": Error\n";
-                                throw new Exception("Error sintactico en linea " + (LineaActual + 1).ToString() + ".\nVerifique el uso apropiado la sintaxis.");
+                                rtxSintaxLineaxLinea.Text += "Línea " + (LineaActual + 1).ToString() + ": Error\n";
+                                throw new Exception("Error sintactico en línea " + (LineaActual + 1).ToString() + ".\nVerifique el uso apropiado la sintaxis.");
                             }
                         }
                     } while (banderaRepite);
@@ -237,6 +237,8 @@ namespace Analizador_Sintáctico
             if (principio)
             {
                 principio = false;
+                rtxtcodigointermedio.Text = "";
+                rtxSintaxLineaxLinea.Text = "";
                 strActual = RellenarArreglo()[nLinea];
                 rtxtcodigointermedio.Text += ArregloLineas[nLinea] + "\n";
                 txtcadenatokens.Text = ArregloLineas[nLinea];
@@ -282,7 +284,7 @@ namespace Analizador_Sintáctico
 
                 }
 
-                if (strActual == "S") { nLinea++; principio = true; rtxSintaxLineaxLinea.Text += "LINEA " + nLinea.ToString() + ":S" + "\n";  }
+                if (strActual == "S") { nLinea++; principio = true; rtxSintaxLineaxLinea.Text += "Línea " + nLinea.ToString() + ":S" + "\n";  }
             }
             txtcadenatokens.Text = strActual;
            
