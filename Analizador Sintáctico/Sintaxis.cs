@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,8 @@ namespace Analizador_Sintáctico
             string[] SplitLinea;
             rtxtcodigointermedio.Text = "";
             rtxSintaxLineaxLinea.Text = "";
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             try
             {
                 //IMPLEMENTACION ANALISIS LEXICO
@@ -142,6 +145,8 @@ namespace Analizador_Sintáctico
             {
                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            stopwatch.Stop();
+            MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador léxico", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         //CONEXION A MATRIZ - LEXICO//
