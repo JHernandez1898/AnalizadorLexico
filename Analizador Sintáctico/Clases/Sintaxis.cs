@@ -25,8 +25,10 @@ namespace Analizador_Sintáctico.Clases
             S.lstSintaxDerecha.Add("FNCD");
             S.lstSintaxDerecha.Add("FNCI");
             S.lstSintaxDerecha.Add("PASA");
+            S.lstSintaxDerecha.Add("ASIG");
             S.lstSintaxDerecha.Add("ASIG OPEA");
             S.lstSintaxDerecha.Add("IMPR");
+            
             S.lstSintaxDerecha.Add("CAPT");
             S.lstSintaxDerecha.Add("PR23 OPER");
             S.lstSintaxDerecha.Add("PR23 OPEL");
@@ -132,7 +134,7 @@ namespace Analizador_Sintáctico.Clases
             SintaxLibre IDEN = new SintaxLibre();
             IDEN.SintaxIzquierda = "IDEN";
             IDEN.lstSintaxDerecha.Add("ID");
-            IDEN.lstSintaxDerecha.Add("IDEN IDEN");
+            //IDEN.lstSintaxDerecha.Add("IDEN IDEN");
             Sintax.Add(IDEN);
             //SINTAXIS LIBRE DE CONTEXTO OTROS EQUIPOS :)
             SintaxLibre ARGU = new SintaxLibre();
@@ -174,8 +176,10 @@ namespace Analizador_Sintáctico.Clases
             Sintax.Add(OPEA);
             SintaxLibre ASIG = new SintaxLibre();
             ASIG.SintaxIzquierda = "ASIG";
-            ASIG.lstSintaxDerecha.Add("IDEN OPA6");
+            ASIG.lstSintaxDerecha.Add("IDEN OPA6 IDEN");
             ASIG.lstSintaxDerecha.Add("FIRD OPA6");
+            ASIG.lstSintaxDerecha.Add("ASIG OPAR IDEN");
+            ASIG.lstSintaxDerecha.Add("ASIG FIRI");
             Sintax.Add(ASIG);
             //EQUIPO 3
             SintaxLibre OPER = new SintaxLibre();

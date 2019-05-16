@@ -266,7 +266,11 @@ namespace Analizador_Sintáctico
                             string strCambio = str;
                             foreach (SintaxLibre S in miSintaxis.Sintax)
                             {
-                                if (str.Substring(0, 2) == "ID" && str.Length <= 3) { strCambio = "ID"; }
+                                if (str.Substring(0, 2) == "ID" && str.Length <=5) { strCambio = "ID"; }
+                                if ((strCambio + "  ").Substring(0, 3) == "CNE") { strCambio = "CNE"; }
+                                if ((strCambio + "  ").Substring(0, 3) == "CNR") { strCambio = "CNR"; }
+                                if ((strCambio + "  ").Substring(0, 4) == "CNEE" ) { strCambio = "CNEE"; }
+                                if ((strCambio + "  ").Substring(0, 4) == "CNRE" ) { strCambio = "CNRE"; }
                                 Existe = S.Exist(strCambio);
                                 if (Existe != strCambio)
                                 {
@@ -282,7 +286,6 @@ namespace Analizador_Sintáctico
 
                     }
 
-                    if (strActual == "S") { nLinea++; principio = true; rtxSintaxLineaxLinea.Text += "LINEA " + nLinea.ToString() + ":S" + "\n"; }
                 }
                 txtcadenatokens.Text = strActual;
 
