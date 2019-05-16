@@ -26,15 +26,14 @@ namespace Analizador_Sintáctico.Clases
             S.lstSintaxDerecha.Add("FNCI");
             S.lstSintaxDerecha.Add("PASA");
             S.lstSintaxDerecha.Add("ASIG");
-            S.lstSintaxDerecha.Add("ASIG OPEA");
             S.lstSintaxDerecha.Add("IMPR");
-            
             S.lstSintaxDerecha.Add("CAPT");
             S.lstSintaxDerecha.Add("PR23 OPER");
             S.lstSintaxDerecha.Add("PR23 OPEL");
             S.lstSintaxDerecha.Add("PR04");
-            S.lstSintaxDerecha.Add("ARGU ARGM ARGN");
+          //  S.lstSintaxDerecha.Add("ARGU ARGM ARGN");
             S.lstSintaxDerecha.Add("PR08");
+            S.lstSintaxDerecha.Add("PARA");
             Sintax.Add(S);
 
             //♥♥ GRAMATICA LIBRE DE CONTEXTO EQUIPO #8 ♥♥
@@ -42,6 +41,7 @@ namespace Analizador_Sintáctico.Clases
             PROD.SintaxIzquierda = "PROD";
             PROD.lstSintaxDerecha.Add("PR20 ACCE IDEN FIRD");
             PROD.lstSintaxDerecha.Add("PR20 ACCE IDEN SINP");
+           
             Sintax.Add(PROD);
             SintaxLibre PROI = new SintaxLibre();
             PROI.SintaxIzquierda = "PROI";
@@ -60,6 +60,7 @@ namespace Analizador_Sintáctico.Clases
             FNCI.lstSintaxDerecha.Add("TIPO ASIG IDEN FIRI");
             FNCI.lstSintaxDerecha.Add("ASIG IDEN SINP");
             FNCI.lstSintaxDerecha.Add("TIPO ASIG IDEN SINP");
+            FNCI.lstSintaxDerecha.Add("IDEN PAR2 IDEN PAR1");
             Sintax.Add(FNCI);
             SintaxLibre PASA = new SintaxLibre();
             PASA.SintaxIzquierda = "PASA";
@@ -92,6 +93,11 @@ namespace Analizador_Sintáctico.Clases
             TIPO.lstSintaxDerecha.Add("TDD3");
             TIPO.lstSintaxDerecha.Add("TDD4");
             Sintax.Add(TIPO);
+        
+            SintaxLibre PARA = new SintaxLibre();
+            PARA.SintaxIzquierda = "PARA";
+            PARA.lstSintaxDerecha.Add("PR16 ASIG PR10 OPER PR24 ASIG");
+            Sintax.Add(PARA);
             SintaxLibre FIRI = new SintaxLibre();
             FIRI.SintaxIzquierda = "FIRI";
             FIRI.lstSintaxDerecha.Add("PAR2 VARI PAR1");
@@ -100,6 +106,7 @@ namespace Analizador_Sintáctico.Clases
             FIRI.lstSintaxDerecha.Add("PAR2 VARI FIRI PAR1");
             FIRI.lstSintaxDerecha.Add("PAR2 IDEN FIRI PAR1");
             FIRI.lstSintaxDerecha.Add("PAR2 VARR FIRI PAR1");
+
             Sintax.Add(FIRI);
             SintaxLibre SINP = new SintaxLibre();
             SINP.SintaxIzquierda = "SINP";
@@ -134,23 +141,23 @@ namespace Analizador_Sintáctico.Clases
             SintaxLibre IDEN = new SintaxLibre();
             IDEN.SintaxIzquierda = "IDEN";
             IDEN.lstSintaxDerecha.Add("ID");
-            //IDEN.lstSintaxDerecha.Add("IDEN IDEN");
+            IDEN.lstSintaxDerecha.Add("IDEN IDEN");
             Sintax.Add(IDEN);
             //SINTAXIS LIBRE DE CONTEXTO OTROS EQUIPOS :)
-            SintaxLibre ARGU = new SintaxLibre();
+         /*   SintaxLibre ARGU = new SintaxLibre();
             ARGU.SintaxIzquierda = "ARGU";
             ARGU.lstSintaxDerecha.Add("PR16 ASIG IDEN");
-            ARGU.lstSintaxDerecha.Add("PR16 ASIG VARI");
-            Sintax.Add(ARGU);
+            ARGU.lstSintaxDerecha.Add("PR16 ASIG VARI");*/
+          /*  Sintax.Add(ARGU);
             SintaxLibre ARGN = new SintaxLibre();
             ARGN.SintaxIzquierda = "ARGN";
             ARGN.lstSintaxDerecha.Add("PR24 ASIG IDEN");
             ARGN.lstSintaxDerecha.Add("PR24 ASIG VARI");
-            Sintax.Add(ARGN);
-            SintaxLibre ARGM = new SintaxLibre();
+            Sintax.Add(ARGN);*7
+           /* SintaxLibre ARGM = new SintaxLibre();
             ARGM.SintaxIzquierda = "ARGM";
             ARGM.lstSintaxDerecha.Add("PR10 OPER");
-            Sintax.Add(ARGM);
+            Sintax.Add(ARGM);*/
             SintaxLibre IMPR = new SintaxLibre();
             IMPR.SintaxIzquierda = "IMPR";
             IMPR.lstSintaxDerecha.Add("PR12 VARI");
@@ -173,13 +180,17 @@ namespace Analizador_Sintáctico.Clases
             OPEA.lstSintaxDerecha.Add("CONU OPAR OPEA");
             OPEA.lstSintaxDerecha.Add("OPEA OPAR CONU");
             OPEA.lstSintaxDerecha.Add("PAR2 OPEA PAR1");
+            OPEA.lstSintaxDerecha.Add("FNCI OPAR CONU");
+            OPEA.lstSintaxDerecha.Add("FNCI OPAR OPEA");
             Sintax.Add(OPEA);
             SintaxLibre ASIG = new SintaxLibre();
             ASIG.SintaxIzquierda = "ASIG";
-            ASIG.lstSintaxDerecha.Add("IDEN OPA6 IDEN");
-            ASIG.lstSintaxDerecha.Add("FIRD OPA6");
-            ASIG.lstSintaxDerecha.Add("ASIG OPAR IDEN");
-            ASIG.lstSintaxDerecha.Add("ASIG FIRI");
+            ASIG.lstSintaxDerecha.Add("ASIG IDEN");
+            ASIG.lstSintaxDerecha.Add("ASIG OPEA");
+            ASIG.lstSintaxDerecha.Add("ASIG FNCI");
+            ASIG.lstSintaxDerecha.Add("ASIG OPEA");
+            ASIG.lstSintaxDerecha.Add("ASIG VARI");
+            ASIG.lstSintaxDerecha.Add("IDEN OPA6");
             Sintax.Add(ASIG);
             //EQUIPO 3
             SintaxLibre OPER = new SintaxLibre();

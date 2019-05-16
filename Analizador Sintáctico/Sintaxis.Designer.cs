@@ -45,6 +45,7 @@
             this.lblEntrada = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.rtxSintaxLineaxLinea = new System.Windows.Forms.RichTextBox();
+            this.LeerTodo2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblconexion
@@ -192,11 +193,22 @@
             this.rtxSintaxLineaxLinea.TabIndex = 59;
             this.rtxSintaxLineaxLinea.Text = "";
             // 
+            // LeerTodo2
+            // 
+            this.LeerTodo2.Location = new System.Drawing.Point(607, 114);
+            this.LeerTodo2.Name = "LeerTodo2";
+            this.LeerTodo2.Size = new System.Drawing.Size(126, 26);
+            this.LeerTodo2.TabIndex = 61;
+            this.LeerTodo2.Text = "Leer Todo";
+            this.LeerTodo2.UseVisualStyleBackColor = true;
+            this.LeerTodo2.Click += new System.EventHandler(this.LeerTodo2_Click);
+            // 
             // Sintaxis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(806, 347);
+            this.Controls.Add(this.LeerTodo2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rtxSintaxLineaxLinea);
             this.Controls.Add(this.lblconexion);
@@ -241,6 +253,7 @@
         private System.Windows.Forms.Label lblEntrada;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox rtxSintaxLineaxLinea;
+        private System.Windows.Forms.Button LeerTodo2;
     }
 }
 
