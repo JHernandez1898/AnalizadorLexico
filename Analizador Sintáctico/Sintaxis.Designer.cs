@@ -131,7 +131,7 @@
             // 
             this.rtxtcodigointermedio.Location = new System.Drawing.Point(12, 170);
             this.rtxtcodigointermedio.Name = "rtxtcodigointermedio";
-            this.rtxtcodigointermedio.Size = new System.Drawing.Size(386, 163);
+            this.rtxtcodigointermedio.Size = new System.Drawing.Size(617, 163);
             this.rtxtcodigointermedio.TabIndex = 43;
             this.rtxtcodigointermedio.Text = "";
             // 
@@ -179,7 +179,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(401, 154);
+            this.label1.Location = new System.Drawing.Point(655, 154);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(110, 13);
             this.label1.TabIndex = 60;
@@ -187,9 +187,9 @@
             // 
             // rtxSintaxLineaxLinea
             // 
-            this.rtxSintaxLineaxLinea.Location = new System.Drawing.Point(404, 170);
+            this.rtxSintaxLineaxLinea.Location = new System.Drawing.Point(658, 170);
             this.rtxSintaxLineaxLinea.Name = "rtxSintaxLineaxLinea";
-            this.rtxSintaxLineaxLinea.Size = new System.Drawing.Size(386, 163);
+            this.rtxSintaxLineaxLinea.Size = new System.Drawing.Size(132, 163);
             this.rtxSintaxLineaxLinea.TabIndex = 59;
             this.rtxSintaxLineaxLinea.Text = "";
             // 

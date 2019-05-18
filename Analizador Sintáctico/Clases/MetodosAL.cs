@@ -21,6 +21,13 @@ namespace Analizador_Sintáctico.Clases
         public MetodosAL(string server)
         {
             Servidor = server;
+            //Obtener Matriz
+            using (SqlConnection con = ConexionMatriz.ObtenerConexion(Servidor))
+            {
+                SqlCommand comm = new SqlCommand("SELECT * FROM TRANSICION;");
+                SqlDataReader red = comm.ExecuteReader();
+                Matriz.Load(red);
+            }
         }
 
         public static List<Identificador> Identificadores = new List<Identificador>();
@@ -28,8 +35,8 @@ namespace Analizador_Sintáctico.Clases
         public static List<NumericoExponencial> ConstantesNumericasExponenciales = new List<NumericoExponencial>();
         public static List<NumericoReal> ConstantesNumericasReales = new List<NumericoReal>();
         public static List<NumericoExpReal> ConstantesNumericasExpReales = new List<NumericoExpReal>();
-        
-        
+        public static DataTable Matriz = new DataTable();
+
 
         public static void ObtenerToken(string Palabra, ref List<string> tokens)
         {
@@ -56,15 +63,27 @@ namespace Analizador_Sintáctico.Clases
         public static int NuevoEstado(char c, int intEstadoActual, ref bool bandera)
         {
             int Estado = 0;
-            using (SqlConnection con = ConexionMatriz.ObtenerConexion(Servidor))
+            DataRow[] Resultado = new DataRow();
+            if (c <= 'Z')
             {
-                SqlCommand comando = new SqlCommand("EXEC NUEVOESTADO '" + c + "'," + intEstadoActual + "",con);                
-                SqlDataReader estado = comando.ExecuteReader();
-                if (estado.Read()) { if (!estado.IsDBNull(0)) Estado = estado.GetInt32(0); else throw new Exception("Se encontró un error en la línea "); }
-                comando = new SqlCommand("SELECT TOKEN FROM TRANSICION WHERE ESTADO = " + Estado, con);
-                estado = comando.ExecuteReader();
-                if (estado.Read())  if (!estado.IsDBNull(0)) bandera = true;   
+                Matriz.Select("SELECT [" + c + "] WHERE ESTADO = " + intEstadoActual);
             }
+            else if (c >= 'a' && c <= 'z')
+            {
+                Matriz.Select("SELECT [" + c + "m] WHERE ESTADO = " + intEstadoActual);
+            }
+            else if ( c == ']')
+            {
+                Matriz.Select("SELECT []]] WHERE ESTADO = " + intEstadoActual);
+            }
+            //SqlCommand comando2 = new SqlCommand("EXEC IDENTIFICADORES", unaConexion);
+            //comando2.ExecuteNonQuery();
+            //SqlCommand comando = new SqlCommand("EXEC NUEVOESTADO '" + c + "'," + intEstadoActual + "",con);                
+            //SqlDataReader estado = comando.ExecuteReader();
+            //if (estado.Read()) { if (!estado.IsDBNull(0)) Estado = estado.GetInt32(0); else throw new Exception("Se encontró un error en la línea "); }
+            //comando = new SqlCommand("SELECT TOKEN FROM TRANSICION WHERE ESTADO = " + Estado, con);
+            //estado = comando.ExecuteReader();
+            //if (estado.Read())  if (!estado.IsDBNull(0)) bandera = true;   
             return Estado;
         }
         public static string ObtenerToken(int intEstadoActual)
@@ -158,8 +177,6 @@ namespace Analizador_Sintáctico.Clases
                     break;
             }
         }
-        
-        
-        
+                
     }
 }

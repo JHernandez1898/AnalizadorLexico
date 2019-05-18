@@ -15,19 +15,12 @@ namespace Analizador_Sintáctico.Clases
 
             try
             {
-                //Stopwatch stopwatch = new Stopwatch();
-                //stopwatch.Start();
-
                 //Anlizador Lexico
                 string LineaLexico = "";
-                //rtxtcodigointermedio.Text = "";
-                //string strEntrada = rtxtentrada.Text;
-                //txtnumrenglon.Text = linea.ToString();
                 string[] strLineas = CadenaEntrada.Split('\n');
                 foreach (string Linea in strLineas)
                 {
                     linea++;
-                    //txtnumrenglon.Text = linea.ToString();
                     List<string> tokens = new List<string>();
                     MetodosAL.ObtenerToken(Linea, ref tokens);
                     if (Linea != "")
@@ -35,15 +28,10 @@ namespace Analizador_Sintáctico.Clases
                         foreach (string token in tokens) LineaLexico += token + " ";
                         LineasLexico.Add(LineaLexico);
                         LineaLexico = "";
-                        //rtxtcodigointermedio.Text += "\n";
                     }
-                    //txtnumrenglon.Text = linea.ToString();
                 }
-                //MostrarIdentificadoresConstantes();
                 Depurar();
                 linea = 1;
-                //stopwatch.Stop();
-                //MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador léxico", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
