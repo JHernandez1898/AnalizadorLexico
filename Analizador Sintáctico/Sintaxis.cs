@@ -334,8 +334,10 @@ namespace Analizador_Sintáctico
             rtxSintaxLineaxLinea.Text = "";
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
+
             List<string> LineasTokens = new List<string>();
             LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+
             int linea = 1;
             string Existe = "";
             string strActual = "";
