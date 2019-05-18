@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,8 @@ namespace Analizador_Sintáctico.Clases
         public static List<NumericoExponencial> ConstantesNumericasExponenciales = new List<NumericoExponencial>();
         public static List<NumericoReal> ConstantesNumericasReales = new List<NumericoReal>();
         public static List<NumericoExpReal> ConstantesNumericasExpReales = new List<NumericoExpReal>();
-
+        
+        
 
         public static void ObtenerToken(string Palabra, ref List<string> tokens)
         {
@@ -36,6 +38,7 @@ namespace Analizador_Sintáctico.Clases
             List<char> caracteres = new List<char>();
             foreach (char c in Palabra)
             {
+               
                 caracteres.Add(c);
                 intEstadoActual = NuevoEstado(c, intEstadoActual, ref bandera);
                 if (bandera)
