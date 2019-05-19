@@ -17,6 +17,25 @@ namespace Analizador_Sintáctico.Clases
 
         private void IniciarSintaxis()
         {
+            SintaxLibre S = new SintaxLibre();
+            S.SintaxIzquierda = "S";
+            ///
+            S.lstSintaxDerecha.Add("PARA");
+            S.lstSintaxDerecha.Add("PROD");
+            S.lstSintaxDerecha.Add("PROI");
+            S.lstSintaxDerecha.Add("FNCD");
+            S.lstSintaxDerecha.Add("FNCI");
+            S.lstSintaxDerecha.Add("PASA");
+            S.lstSintaxDerecha.Add("ASIG");
+            S.lstSintaxDerecha.Add("IMPR");
+            S.lstSintaxDerecha.Add("CAPT");
+            S.lstSintaxDerecha.Add("PR04");
+            S.lstSintaxDerecha.Add("COND");
+            S.lstSintaxDerecha.Add("SWTC");
+            //  S.lstSintaxDerecha.Add("ARGU ARGM ARGN");
+            S.lstSintaxDerecha.Add("PR08");
+
+            Sintax.Add(S);
             SintaxLibre PARA = new SintaxLibre();
             PARA.SintaxIzquierda = "PARA";
             PARA.lstSintaxDerecha.Add("PR16 ASIG PR10 OPER PR24 ASIG");
@@ -48,25 +67,7 @@ namespace Analizador_Sintáctico.Clases
             OPER.lstSintaxDerecha.Add("PAR2 OPRE PAR1");
             OPER.lstSintaxDerecha.Add("PAR2 OPER PAR1");
             Sintax.Add(OPER);
-            SintaxLibre S = new SintaxLibre();
-            S.SintaxIzquierda = "S";
-            ///
-            S.lstSintaxDerecha.Add("PARA");
-            S.lstSintaxDerecha.Add("PROD");
-            S.lstSintaxDerecha.Add("PROI");
-            S.lstSintaxDerecha.Add("FNCD");
-            S.lstSintaxDerecha.Add("FNCI");
-            S.lstSintaxDerecha.Add("PASA");
-            S.lstSintaxDerecha.Add("ASIG");
-            S.lstSintaxDerecha.Add("IMPR");
-            S.lstSintaxDerecha.Add("CAPT");
-            S.lstSintaxDerecha.Add("PR04");
-            S.lstSintaxDerecha.Add("COND");
-            S.lstSintaxDerecha.Add("SWTC");
-            //  S.lstSintaxDerecha.Add("ARGU ARGM ARGN");
-            S.lstSintaxDerecha.Add("PR08");
-          
-            Sintax.Add(S);
+    
 
             SintaxLibre FNCD = new SintaxLibre();
             FNCD.SintaxIzquierda = "FNCD";

@@ -328,14 +328,29 @@ namespace Analizador_Sintáctico
 
 
         }
+
+        /*    tokens.Add("PR01 ID1 ");
+            tokens.Add("ID2 OPA6 ID3 ");
+            tokens.Add("PR12 ID2 ");
+            tokens.Add("PR09 TDD2 PR21 ID3 PAR2 PAR1 ");
+            tokens.Add("PR23 ID4 OPR6 CNE1 ");
+            tokens.Add("PR17 PAR2 CNE2 PAR1 ");
+            tokens.Add("PR04 ");
+            tokens.Add("PR16 ID5 OPA6 ID4 PR10 ID4 OPR1 CNE2 PR24 ID5 OPA6 ID5 OPA5 CNE2 ");
+            tokens.Add("ID6 OPA6 ID6 OPA1 ID5 ");
+            tokens.Add("PR08 ");
+            tokens.Add("PR17 PAR2 ID6 PAR1 ");
+            LineasTokens = tokens;*/
         private void LeerTodo2_Click(object sender, EventArgs e)
         {
             rtxtcodigointermedio.Text = "";
             rtxSintaxLineaxLinea.Text = "";
+
+            List<string> LineasTokens = new List<string>();
+            List<string> tokens = new List<string>();
+            LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            List<string> LineasTokens = new List<string>();
-            LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
             int linea = 1;
             string Existe = "";
             string strActual = "";
