@@ -160,7 +160,7 @@ namespace Analizador_Sintáctico
         {
             MessageBox.Show("Capture una instancia para la conexion", "Analizador Sintactico", MessageBoxButtons.OK, MessageBoxIcon.Information);
             btnCaracterxCarter.Enabled = false;
-            btnleertodo.Enabled = false;
+            //btnleertodo.Enabled = false;
             lblServidor.Text = "Servidor: " + System.Environment.MachineName;
             lblconexion.BackColor = Color.Red;
             txtServer.Focus();
@@ -174,7 +174,7 @@ namespace Analizador_Sintáctico
                 {
                     MessageBox.Show("Conectado al servidor", "Lexico", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btnCaracterxCarter.Enabled = true;
-                    btnleertodo.Enabled = true;
+                    //btnleertodo.Enabled = true;
                     MetodosAL.Servidor = txtServer.Text;
                     lblconexion.BackColor = Color.Green;
                 }
@@ -182,7 +182,7 @@ namespace Analizador_Sintáctico
                 {
                     MessageBox.Show("Conexion fallida", "Error de conexion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     btnCaracterxCarter.Enabled = false;
-                    btnleertodo.Enabled = false;
+                    //btnleertodo.Enabled = false;
                     lblconexion.BackColor = Color.Red;
                 }
             }
@@ -351,6 +351,10 @@ namespace Analizador_Sintáctico
             LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
+
+            List<string> LineasTokens = new List<string>();
+            LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+
             int linea = 1;
             string Existe = "";
             string strActual = "";
@@ -395,7 +399,7 @@ namespace Analizador_Sintáctico
                 }
                 stopwatch.Stop();
                
-                MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador léxico", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador sintáctico", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }catch(Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
     }
