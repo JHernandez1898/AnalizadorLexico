@@ -12,11 +12,13 @@ namespace Analizador_Sintáctico.Clases
         {
             List<string> LineasLexico = new List<string>();
             int linea = 0;
-
+            MetodosAL.CrearMatriz();
             try
             {
                 //Anlizador Lexico
                 string LineaLexico = "";
+                CadenaEntrada = CadenaEntrada.Replace("\n", " \n");
+                CadenaEntrada = CadenaEntrada.Insert(CadenaEntrada.Length, " ");
                 string[] strLineas = CadenaEntrada.Split('\n');
                 foreach (string Linea in strLineas)
                 {
@@ -25,9 +27,10 @@ namespace Analizador_Sintáctico.Clases
                     MetodosAL.ObtenerToken(Linea, ref tokens);
                     if (Linea != "")
                     {
-                        foreach (string token in tokens) LineaLexico += token + " ";
+                        foreach (string token in tokens) LineaLexico += token +" ";
                         LineasLexico.Add(LineaLexico);
                         LineaLexico = "";
+                        
                     }
                 }
                 Depurar();

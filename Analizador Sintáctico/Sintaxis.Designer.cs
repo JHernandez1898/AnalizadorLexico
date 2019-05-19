@@ -36,7 +36,6 @@
             this.btnCaracterxCarter = new System.Windows.Forms.Button();
             this.lblcodigointermedio = new System.Windows.Forms.Label();
             this.rtxtentrada = new System.Windows.Forms.RichTextBox();
-            this.btnleertodo = new System.Windows.Forms.Button();
             this.rtxtcodigointermedio = new System.Windows.Forms.RichTextBox();
             this.txtTemporal = new System.Windows.Forms.TextBox();
             this.lbltoken = new System.Windows.Forms.Label();
@@ -117,16 +116,6 @@
             this.rtxtentrada.TabIndex = 45;
             this.rtxtentrada.Text = "";
             // 
-            // btnleertodo
-            // 
-            this.btnleertodo.Location = new System.Drawing.Point(409, 60);
-            this.btnleertodo.Name = "btnleertodo";
-            this.btnleertodo.Size = new System.Drawing.Size(126, 26);
-            this.btnleertodo.TabIndex = 44;
-            this.btnleertodo.Text = "Leer Todo";
-            this.btnleertodo.UseVisualStyleBackColor = true;
-            this.btnleertodo.Click += new System.EventHandler(this.btnleertodo_Click);
-            // 
             // rtxtcodigointermedio
             // 
             this.rtxtcodigointermedio.Location = new System.Drawing.Point(12, 170);
@@ -195,7 +184,7 @@
             // 
             // LeerTodo2
             // 
-            this.LeerTodo2.Location = new System.Drawing.Point(607, 114);
+            this.LeerTodo2.Location = new System.Drawing.Point(409, 57);
             this.LeerTodo2.Name = "LeerTodo2";
             this.LeerTodo2.Size = new System.Drawing.Size(126, 26);
             this.LeerTodo2.TabIndex = 61;
@@ -219,7 +208,6 @@
             this.Controls.Add(this.btnCaracterxCarter);
             this.Controls.Add(this.lblcodigointermedio);
             this.Controls.Add(this.rtxtentrada);
-            this.Controls.Add(this.btnleertodo);
             this.Controls.Add(this.rtxtcodigointermedio);
             this.Controls.Add(this.txtTemporal);
             this.Controls.Add(this.lbltoken);
@@ -244,7 +232,6 @@
         private System.Windows.Forms.Button btnCaracterxCarter;
         private System.Windows.Forms.Label lblcodigointermedio;
         private System.Windows.Forms.RichTextBox rtxtentrada;
-        private System.Windows.Forms.Button btnleertodo;
         private System.Windows.Forms.RichTextBox rtxtcodigointermedio;
         private System.Windows.Forms.TextBox txtTemporal;
         private System.Windows.Forms.Label lbltoken;
