@@ -22,7 +22,7 @@ namespace Analizador_Sintáctico
             InitializeComponent();
         }
 
-        private void btnleertodo_Click(object sender, EventArgs e)
+   /*     private void btnleertodo_Click(object sender, EventArgs e)
         {
             nLinea = 0;
             int temporal = 0;
@@ -97,6 +97,7 @@ namespace Analizador_Sintáctico
                                 {
                                     LineaMod += SplitLinea[j] + " ";
                                 }*/
+                                /*
                                 LineaMod = SintaxRes = LineaMod.Replace(SubCadena.Trim(), ExistS);
                                 SplitLinea = LineaMod.Trim().Split(' ');
                                 banderaCambio = true;
@@ -150,7 +151,7 @@ namespace Analizador_Sintáctico
             stopwatch.Stop();
             MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador léxico", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
+    */
         //CONEXION A MATRIZ - LEXICO//
         private void Sintaxis_Load(object sender, EventArgs e)
         {
@@ -182,6 +183,9 @@ namespace Analizador_Sintáctico
                     MetodosAL.Servidor = txtServer.Text;
                     lblconexion.BackColor = Color.Green;
                     MetodosAS.CrearMatriz();
+                    LeerTodo2.Enabled = true;
+                    
+                    
                 }
                 else
                 {
@@ -230,6 +234,7 @@ namespace Analizador_Sintáctico
             return NuevaLinea;
         }
         static bool principio = true;
+        static bool linea = true;
         static List<string> LineasTokens = new List<string>();
         static int nLinea = 0;
         static string strActual = "";
@@ -243,6 +248,11 @@ namespace Analizador_Sintáctico
             {
                 principio = false;
                 rtxtcodigointermedio.Text = "";
+                rtxSintaxLineaxLinea.Text = "";
+            }
+            if (linea)
+            {
+                linea=false;
                 strActual = RellenarArreglo()[nLinea];
                 strActual = strActual.Substring(0, strActual.Length - 1);
                 rtxtcodigointermedio.Text += ArregloLineas[nLinea] + "\n";
@@ -259,28 +269,17 @@ namespace Analizador_Sintáctico
             else
             {
                 string[] strSubcadenas = CrearCombinaciones(temp, strActual);
-                if (!Revisar(strSubcadenas, temp)) { temp--; txtTemporal.Text = temp.ToString(); }
+                if (MetodosAS.DisminuirTemp(strSubcadenas, temp)) { txtTemporal.Text = temp.ToString(); temp--;  }
 
                 else
                 {
                     foreach (string str in strSubcadenas)
                     {
-                        if (str != "")
-                        {
-                            string strCambio = str;
-                     
-                             foreach (SintaxLibre S in miSintaxis.Sintax)
-                             {
-                                 strCambio = NormalizarCadena(str, temp);
-                                 Existe = S.Exist(strCambio);
-                                 if (Existe != strCambio)
-                                 {
+                        string strCambio = "";
 
-                                     strActual = strActual.Replace(str, Existe);
-                                     break;
-                                 }
-                             }
-                        }
+                        strCambio = NormalizarCadena(str, temp);
+                        strActual = strActual.Replace(str, MetodosAS.ObtenerConversion(strCambio));
+
                     }
                     rtxtcodigointermedio.Text += strActual + "\n";
                     temp = strActual.Split(' ').Length;
@@ -288,9 +287,9 @@ namespace Analizador_Sintáctico
                 }
                 txtcadenatokens.Text = strActual;
 
-                if (strActual == "S") { nLinea++; principio = true; rtxSintaxLineaxLinea.Text += "Línea " + nLinea.ToString() + ":S" + "\n"; }
+                if (strActual == "S") { nLinea++; linea = true; rtxSintaxLineaxLinea.Text += "Línea " + nLinea.ToString() + ":S" + "\n"; }
             }
-            if (LineasTokens.Count <= nLinea) nLinea = 0;
+            if (LineasTokens.Count <= nLinea) { nLinea = 0; principio = true; }
 
         }
         public bool Revisar(string[] strSubcadenas, int temp)
@@ -319,14 +318,17 @@ namespace Analizador_Sintáctico
             string strCambio = subcadena;
             if (tempo == 1)
             {
-                switch (d[0].Substring(0, 2))
+                if (d[0] != "IDEN")
                 {
-                    case "ID":
-                        strCambio = "ID";
-                        break;
-                    case "CN":
-                        strCambio = "CNE";
-                        break;
+                    switch (d[0].Substring(0, 2))
+                    {
+                        case "ID":
+                            strCambio = "ID";
+                            break;
+                        case "CN":
+                            strCambio = "CNE";
+                            break;
+                    }
                 }
                 /*if (d[0].Substring(0, 2) == "ID" && d[0] != "IDEN") { strCambio = "ID"; }
                 else if ((d[0] + "  ").Substring(0, 3) == "CNE") { strCambio = "CNE"; }
@@ -359,47 +361,44 @@ namespace Analizador_Sintáctico
                     strActual = strActual.Substring(0, strActual.Length - 1);
                     rtxtcodigointermedio.Text += cadena + "\n";
                     temp = strActual.Split(' ').Length;
-                  
+
                     while (temp > 0)
                     {
                         string[] strSubcadenas = CrearCombinaciones(temp, strActual);
                         //if (!Revisar(strSubcadenas, temp)) temp--;
-                         if (MetodosAS.DisminuirTemp(strSubcadenas, temp)) { temp--; }
+                        if (MetodosAS.DisminuirTemp(strSubcadenas, temp)) { temp--; }
                         else
                         {
                             foreach (string str in strSubcadenas)
                             {
-                                 strCambio = NormalizarCadena(str, temp);
-                                 strActual = strActual.Replace(str, MetodosAS.ObtenerConversion(strCambio));
-                              /*  strCambio = str;
-                                foreach (SintaxLibre S in miSintaxis.Sintax)
-                                {
-                                    strCambio = NormalizarCadena(str, temp);
-                                    Existe = S.Exist(strCambio);
-                                    if (Existe != strCambio)
-                                    {
-
-                                        strActual = strActual.Replace(str, Existe);
-                                        break;
-                                    }
-                                }*/
+                                strCambio = NormalizarCadena(str, temp);
+                                strActual = strActual.Replace(str, MetodosAS.ObtenerConversion(strCambio));
                             }
                             rtxtcodigointermedio.Text += strActual + "\n";
-
                             temp = strActual.Split(' ').Length;
                         }
-                        if (strActual == "S") { rtxSintaxLineaxLinea.Text += "Línea " + linea.ToString() + ":S" + "\n"; temp = 0; linea++;  }
+                        if (strActual == "S") { rtxSintaxLineaxLinea.Text += "Línea " + linea.ToString() + ":S" + "\n"; temp = 0; linea++; }
                     }
-                    if (strActual != "S") { rtxSintaxLineaxLinea.Text += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Sintaxis incorrecta en la línea: " + linea); linea++; }                }
-
-
+                    if (strActual != "S") { rtxSintaxLineaxLinea.Text += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Sintaxis incorrecta en la línea: " + linea); linea++; }
+                }
                 stopwatch.Stop();
                 MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador sintáctico", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
             catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
     }
 
 }
+/*  strCambio = str;
+                                 foreach (SintaxLibre S in miSintaxis.Sintax)
+                                 {
+                                     strCambio = NormalizarCadena(str, temp);
+                                     Existe = S.Exist(strCambio);
+                                     if (Existe != strCambio)
+                                     {
+
+                                         strActual = strActual.Replace(str, Existe);
+                                         break;
+                                     }
+                                 }*/
 

@@ -184,6 +184,7 @@
             // 
             // LeerTodo2
             // 
+            this.LeerTodo2.Enabled = false;
             this.LeerTodo2.Location = new System.Drawing.Point(409, 57);
             this.LeerTodo2.Name = "LeerTodo2";
             this.LeerTodo2.Size = new System.Drawing.Size(126, 26);

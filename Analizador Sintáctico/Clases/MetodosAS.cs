@@ -36,18 +36,22 @@ namespace Analizador_Sintáctico.Clases
         }
         public static string NormalizarCadena(string subcadena, int tempo)
         {
+
             string[] d = subcadena.Split(' ');
             string strCambio = subcadena;
             if (tempo == 1)
             {
-                switch (d[0].Substring(0,2))
+                if (d[0] != "IDEN")
                 {
-                    case "ID":
-                        strCambio = "ID";
-                        break;
-                    case "CN":
-                        strCambio = "CNE";
-                        break;
+                    switch (d[0].Substring(0, 2))
+                    {
+                        case "ID":
+                            strCambio = "ID";
+                            break;
+                        case "CN":
+                            strCambio = "CNE";
+                            break;
+                    }
                 }
             /*    if (d[0].Substring(0, 2) == "ID" && d[0] != "IDEN") { strCambio = "ID"; }
                 else if ((d[0] + "  ").Substring(0, 3) == "CNE") { strCambio = "CNE"; }
