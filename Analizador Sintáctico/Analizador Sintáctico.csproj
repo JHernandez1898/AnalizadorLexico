@@ -50,6 +50,7 @@
     <Compile Include="Clases\Identificador.cs" />
     <Compile Include="Clases\Lexico.cs" />
     <Compile Include="Clases\MetodosAL.cs" />
+    <Compile Include="Clases\MetodosAS.cs" />
     <Compile Include="Clases\NumericoEntero.cs" />
     <Compile Include="Clases\NumericoExponencial.cs" />
     <Compile Include="Clases\NumericoExpReal.cs" />

@@ -97,7 +97,7 @@ namespace Analizador_Sintáctico.Clases
             FNCI.lstSintaxDerecha.Add("ASIG IDEN FIRI");
             FNCI.lstSintaxDerecha.Add("ASIG IDEN FIRD");
             FNCI.lstSintaxDerecha.Add("ASIG IDEN SINP");
-            FNCI.lstSintaxDerecha.Add("ASIG IDEN SINP");
+          //  FNCI.lstSintaxDerecha.Add("ASIG IDEN SINP");
             Sintax.Add(FNCI);
 
           
@@ -119,7 +119,7 @@ namespace Analizador_Sintáctico.Clases
 
             SintaxLibre PARD = new SintaxLibre();
             PARD.SintaxIzquierda = "PARD";
-            PARD.lstSintaxDerecha.Add("PR22 TIPO VARI");
+           // PARD.lstSintaxDerecha.Add("PR22 TIPO VARI");
             PARD.lstSintaxDerecha.Add("PR22 TIPO VARI");
             PARD.lstSintaxDerecha.Add("PR22 TIPO IDEN");
             PARD.lstSintaxDerecha.Add("TIPO VARI");

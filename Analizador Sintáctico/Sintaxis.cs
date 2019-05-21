@@ -15,6 +15,7 @@ namespace Analizador_Sintáctico
     public partial class Sintaxis : Form
     {
         SintaxisL miSintaxis = new SintaxisL();
+        
 
         public Sintaxis()
         {
@@ -154,6 +155,7 @@ namespace Analizador_Sintáctico
         private void Sintaxis_Load(object sender, EventArgs e)
         {
             EstablecerConexion();
+         
         }
 
         public void EstablecerConexion()
@@ -164,6 +166,8 @@ namespace Analizador_Sintáctico
             lblServidor.Text = "Servidor: " + System.Environment.MachineName;
             lblconexion.BackColor = Color.Red;
             txtServer.Focus();
+            
+
         }
 
         private void btnConectar_Click(object sender, EventArgs e)
@@ -177,6 +181,7 @@ namespace Analizador_Sintáctico
                     //btnleertodo.Enabled = true;
                     MetodosAL.Servidor = txtServer.Text;
                     lblconexion.BackColor = Color.Green;
+                    MetodosAS.CrearMatriz();
                 }
                 else
                 {
@@ -192,10 +197,7 @@ namespace Analizador_Sintáctico
             }
         }
 
-        static List<string> LineasTokens = new List<string>();
-        static int nLinea = 0;
-        static string strActual = "";
-        static int temp = 1;
+        
 
 
         public string[] RellenarArreglo()
@@ -219,18 +221,19 @@ namespace Analizador_Sintáctico
                 string Elemento = "";
                 for (int i = 0; i < temp; i++)
                 {
-                    if (temp != 1)
-                        Elemento += arreglo[j + i] + " ";
+                    if (temp != 1) Elemento += arreglo[j + i] + " ";
                     else Elemento += arreglo[j + i];
-                    //if((j+i) == arreglo.Length - 1) { j = arreglo.Length + 1; }
                 }
-                if (temp == 1)
-                    NuevaLinea[j] = Elemento;
+                if (temp == 1) NuevaLinea[j] = Elemento;
                 else NuevaLinea[j] = Elemento.Substring(0, Elemento.Length - 1);
             }
             return NuevaLinea;
         }
         static bool principio = true;
+        static List<string> LineasTokens = new List<string>();
+        static int nLinea = 0;
+        static string strActual = "";
+        static int temp = 1;
         private void btnCaracterxCarter_Click(object sender, EventArgs e)
         {
 
@@ -256,7 +259,7 @@ namespace Analizador_Sintáctico
             else
             {
                 string[] strSubcadenas = CrearCombinaciones(temp, strActual);
-                if (!Revisar(CrearCombinaciones(temp, strActual), temp)) { temp--; txtTemporal.Text = temp.ToString(); }
+                if (!Revisar(strSubcadenas, temp)) { temp--; txtTemporal.Text = temp.ToString(); }
 
                 else
                 {
@@ -265,17 +268,18 @@ namespace Analizador_Sintáctico
                         if (str != "")
                         {
                             string strCambio = str;
-                            foreach (SintaxLibre S in miSintaxis.Sintax)
-                            {
-                                strCambio = NormalizarCadena(str, temp);
-                                Existe = S.Exist(strCambio);
-                                if (Existe != strCambio)
-                                {
+                     
+                             foreach (SintaxLibre S in miSintaxis.Sintax)
+                             {
+                                 strCambio = NormalizarCadena(str, temp);
+                                 Existe = S.Exist(strCambio);
+                                 if (Existe != strCambio)
+                                 {
 
-                                    strActual = strActual.Replace(str, Existe);
-                                    break;
-                                }
-                            }
+                                     strActual = strActual.Replace(str, Existe);
+                                     break;
+                                 }
+                             }
                         }
                     }
                     rtxtcodigointermedio.Text += strActual + "\n";
@@ -296,8 +300,6 @@ namespace Analizador_Sintáctico
             bool evento = false;
             foreach (string str in strSubcadenas)
             {
-                if (str != "")
-                {
                     foreach (SintaxLibre S in miSintaxis.Sintax)
                     {
                         strCambio = NormalizarCadena(str, temp);
@@ -305,10 +307,9 @@ namespace Analizador_Sintáctico
                         if (Existe != strCambio)
                         {
                             evento = true;
-                            break;
+                            return evento;
                         }
                     }
-                }
             }
             return evento;
         }
@@ -318,29 +319,25 @@ namespace Analizador_Sintáctico
             string strCambio = subcadena;
             if (tempo == 1)
             {
-                if (d[0].Substring(0, 2) == "ID" && d[0] != "IDEN") { strCambio = "ID"; }
-                if ((d[0] + "  ").Substring(0, 3) == "CNE") { strCambio = "CNE"; }
-                if ((d[0] + " ").Substring(0, 3) == "CNR") { strCambio = "CNR"; }
-                if ((d[0] + " ").Substring(0, 4) == "CNEE") { strCambio = "CNEE"; }
-                if ((d[0] + " ").Substring(0, 4) == "CNRE") { strCambio = "CNRE"; }
+                switch (d[0].Substring(0, 2))
+                {
+                    case "ID":
+                        strCambio = "ID";
+                        break;
+                    case "CN":
+                        strCambio = "CNE";
+                        break;
+                }
+                /*if (d[0].Substring(0, 2) == "ID" && d[0] != "IDEN") { strCambio = "ID"; }
+                else if ((d[0] + "  ").Substring(0, 3) == "CNE") { strCambio = "CNE"; }
+                else if ((d[0] + " ").Substring(0, 3) == "CNR") { strCambio = "CNR"; }
+                else if ((d[0] + " ").Substring(0, 4) == "CNEE") { strCambio = "CNEE"; }
+                else if ((d[0] + " ").Substring(0, 4) == "CNRE") { strCambio = "CNRE"; }*/
             }
             return strCambio;
 
 
         }
-
-        /*    tokens.Add("PR01 ID1 ");
-            tokens.Add("ID2 OPA6 ID3 ");
-            tokens.Add("PR12 ID2 ");
-            tokens.Add("PR09 TDD2 PR21 ID3 PAR2 PAR1 ");
-            tokens.Add("PR23 ID4 OPR6 CNE1 ");
-            tokens.Add("PR17 PAR2 CNE2 PAR1 ");
-            tokens.Add("PR04 ");
-            tokens.Add("PR16 ID5 OPA6 ID4 PR10 ID4 OPR1 CNE2 PR24 ID5 OPA6 ID5 OPA5 CNE2 ");
-            tokens.Add("ID6 OPA6 ID6 OPA1 ID5 ");
-            tokens.Add("PR08 ");
-            tokens.Add("PR17 PAR2 ID6 PAR1 ");
-            LineasTokens = tokens;*/
         private void LeerTodo2_Click(object sender, EventArgs e)
         {
             rtxtcodigointermedio.Text = "";
@@ -349,8 +346,10 @@ namespace Analizador_Sintáctico
             stopwatch.Start();
             List<string> LineasTokens = new List<string>();
             LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+            stopwatch.Stop();
+           // string Existe = "";
             int linea = 1;
-            string Existe = "";
+            string strCambio = "";
             string strActual = "";
             int temp = 0;
             try
@@ -361,40 +360,47 @@ namespace Analizador_Sintáctico
                     strActual = strActual.Substring(0, strActual.Length - 1);
                     rtxtcodigointermedio.Text += cadena + "\n";
                     temp = strActual.Split(' ').Length;
+                  
                     while (temp > 0)
                     {
                         string[] strSubcadenas = CrearCombinaciones(temp, strActual);
-                        if (!Revisar(CrearCombinaciones(temp, strActual), temp)) { temp--; }
+                        //if (!Revisar(strSubcadenas, temp)) temp--;
+                         if (MetodosAS.DisminuirTemp(strSubcadenas, temp)) { temp--; }
                         else
                         {
                             foreach (string str in strSubcadenas)
                             {
-                                string strCambio = str;
+                                 strCambio = NormalizarCadena(str, temp);
+                                 strActual = strActual.Replace(str, MetodosAS.ObtenerConversion(strCambio));
+                              /*  strCambio = str;
                                 foreach (SintaxLibre S in miSintaxis.Sintax)
                                 {
                                     strCambio = NormalizarCadena(str, temp);
                                     Existe = S.Exist(strCambio);
                                     if (Existe != strCambio)
                                     {
+
                                         strActual = strActual.Replace(str, Existe);
                                         break;
                                     }
-                                }
+                                }*/
                             }
                             rtxtcodigointermedio.Text += strActual + "\n";
+
                             temp = strActual.Split(' ').Length;
                         }
-                        txtcadenatokens.Text = strActual;
-                        if (strActual == "S") { rtxSintaxLineaxLinea.Text += "Línea " + linea.ToString() + ":S" + "\n"; temp = 0; linea++; }
+                        if (strActual == "S") { rtxSintaxLineaxLinea.Text += "Línea " + linea.ToString() + ":S" + "\n"; temp = 0; linea++;  }
                     }
-                    if (strActual != "S") { rtxSintaxLineaxLinea.Text += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Sintaxis incorrecta en la línea: " + linea); linea++; }
+                    if (strActual != "S") { rtxSintaxLineaxLinea.Text += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Sintaxis incorrecta en la línea: " + linea); linea++; }                }
 
-                }
+
                 stopwatch.Stop();
-               
                 MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador sintáctico", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
             catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
     }
+
 }
+
