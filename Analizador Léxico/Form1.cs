@@ -25,15 +25,11 @@ namespace Analizador_Léxico
         {
             try
             {
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
-
-                //Anlizador Lexico
                 rtxtcodigointermedio.Text = "";
                 string strEntrada = rtxtentrada.Text;
                 linea = 0;
                 txtnumrenglon.Text = linea.ToString();
-                string[] strLineas = strEntrada.Split('\n');                             
+                string[] strLineas = strEntrada.Split('\n');
                 foreach (string Linea in strLineas)
                 {
                     linea++;
@@ -43,15 +39,14 @@ namespace Analizador_Léxico
                     if (Linea != "")
                     {
                         foreach (string token in tokens) rtxtcodigointermedio.Text += token + " ";
-                        rtxtcodigointermedio.Text += "\n";                        
+                        rtxtcodigointermedio.Text += "\n";
                     }
                     txtnumrenglon.Text = linea.ToString();
                 }
                 MostrarIdentificadoresConstantes();
                 Depurar();
                 linea = 1;
-                stopwatch.Stop();
-                MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador léxico", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               
             }
             catch (Exception ex)
             {
@@ -75,7 +70,7 @@ namespace Analizador_Léxico
             dgvConstatesNumericas.Rows.Clear();
             dgvConstantesExpo.Rows.Clear();
             foreach (Identificador IDE in MetodosAL.Identificadores)
-                dgvIDE.Rows.Add("ID"+IDE.Index, IDE.Nombre, "", "");
+                dgvIDE.Rows.Add("ID" + IDE.Index, IDE.Nombre, "", "");
             foreach (NumericoEntero Num in MetodosAL.ConstantesNumericasEnteras)
                 dgvConstatesNumericas.Rows.Add("CNE" + Num.Index, Num.Contenido);
             foreach (NumericoReal Real in MetodosAL.ConstantesNumericasReales)
@@ -85,11 +80,13 @@ namespace Analizador_Léxico
             foreach (NumericoExpReal exporeal in MetodosAL.ConstantesNumericasExpReales)
                 dgvConstantesExpo.Rows.Add("CNRE" + exporeal.Index, exporeal.Contenido, exporeal.Exponencial);
         }
+
         static int indx = 0;
         static int palabra = 0;
         static int intEstadoActual = 0;
         static int linea = 1;
         static List<char> caracteres = new List<char>();
+
         private void btnCaracterXCaracter_Click(object sender, EventArgs e)
         {
             try {                            
@@ -179,98 +176,41 @@ namespace Analizador_Léxico
 
         public void EstablecerConexion()
         {
-            
-            SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
-            DataTable instancias = instance.GetDataSources();
-            
-            for (int i = 0; i <instancias.Rows.Count ; i++)
-            {
-                cmbServidores.Items.Add(instancias.Rows[i][1].ToString());
-            }
-            MessageBox.Show("Seleccione un servidor para la conexion");
+           
+            MessageBox.Show("Capture una instancia para la conexion", "Analizador lexico", MessageBoxButtons.OK, MessageBoxIcon.Information);
             btnCaracterxCarter.Enabled = false;
             btnleertodo.Enabled = false;
-            cmbServidores.Focus();
+            lblServidor.Text = "Servidor: " + System.Environment.MachineName;
+            lblconexion.BackColor = Color.Red;
+            txtServer.Focus();
         }
 
-        private void cmbServidores_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnConectar_Click(object sender, EventArgs e)
         {
             try
             {
-               if(ConexionMatriz.ProbarConexion(cmbServidores.SelectedItem.ToString()))
+                if (ConexionMatriz.ProbarConexion(txtServer.Text))
                 {
                     MessageBox.Show("Conectado al servidor");
                     btnCaracterxCarter.Enabled = true;
-                    btnleertodo.Enabled =true;
-                    MetodosAL.Servidor = cmbServidores.SelectedItem.ToString();
+                    btnleertodo.Enabled = true;
+                    MetodosAL.Servidor = txtServer.Text;
+                    lblconexion.BackColor = Color.Green;
                 }
-               else
+                else
                 {
-                    MessageBox.Show("Conexion fallida");
+                    MessageBox.Show("Conexion fallida", "Error de conexion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     btnCaracterxCarter.Enabled = false;
                     btnleertodo.Enabled = false;
+                    lblconexion.BackColor = Color.Red;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        //private void btnleersiguiente_Click(object sender, EventArgs e)
-        //{
-        //    if (intContadorPalabras <= intCantidadPalabras)
-        //    {
-        //        if (intContadorPalabras == 0)
-        //        {
-        //            rtxtcodigointermedio.Text = "";
-        //            string strEntrada = rtxtentrada.Text;
-        //            strPalabras = strEntrada.Split(' ');
-        //            intCantidadPalabras = strPalabras.Length - 1;
-        //        }
-
-        //        List<string> tokens = new List<string>();
-        //        string strPalabra = strPalabras[intContadorPalabras];
-        //        if (!strPalabras[intContadorPalabras].Contains("\n"))
-        //        {                    
-        //            MetodosAL.ObtenerToken(strPalabras[intContadorPalabras], ref tokens);
-        //            foreach (string token in tokens)
-        //            {
-        //                rtxtcodigointermedio.Text += token + " ";
-        //                txttoken.Text = token;
-        //            }
-        //            rtxtcodigointermedio.Text += " ";
-        //            MostrarIdentificadoresConstantes();
-        //        }
-        //        else
-        //        {
-        //            string strPalabraEspaciada = strPalabras[intContadorPalabras];
-        //            if (strPalabras[intContadorPalabras] != "\n")
-        //            {                        
-        //                strPalabraEspaciada = strPalabraEspaciada.Replace("\n","");
-        //            }
-        //            MetodosAL.ObtenerToken(strPalabraEspaciada, ref tokens);
-        //            foreach (string token in tokens)
-        //            {
-        //                rtxtcodigointermedio.Text += token + " ";
-        //                txttoken.Text = token;
-        //            }
-        //            rtxtcodigointermedio.Text += " ";
-        //            rtxtcodigointermedio.Text += " \n";
-        //            MostrarIdentificadoresConstantes();
-        //            intLinea++;                    
-        //        }
-        //        txtnumrenglon.Text = intLinea.ToString();
-        //        intContadorPalabras++;
-        //    }
-        //    else
-        //    {
-        //        intContadorPalabras = 0;
-        //        intCantidadPalabras = 0;
-        //        intLinea = 1;
-        //        Depurar();
-        //    }
-        //}
     }
 
 }
