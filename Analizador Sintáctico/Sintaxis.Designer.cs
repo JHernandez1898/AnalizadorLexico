@@ -36,7 +36,6 @@
             this.btnCaracterxCarter = new System.Windows.Forms.Button();
             this.lblcodigointermedio = new System.Windows.Forms.Label();
             this.rtxtentrada = new System.Windows.Forms.RichTextBox();
-            this.btnleertodo = new System.Windows.Forms.Button();
             this.rtxtcodigointermedio = new System.Windows.Forms.RichTextBox();
             this.txtTemporal = new System.Windows.Forms.TextBox();
             this.lbltoken = new System.Windows.Forms.Label();
@@ -45,6 +44,7 @@
             this.lblEntrada = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.rtxSintaxLineaxLinea = new System.Windows.Forms.RichTextBox();
+            this.LeerTodo2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblconexion
@@ -116,21 +116,11 @@
             this.rtxtentrada.TabIndex = 45;
             this.rtxtentrada.Text = "";
             // 
-            // btnleertodo
-            // 
-            this.btnleertodo.Location = new System.Drawing.Point(409, 60);
-            this.btnleertodo.Name = "btnleertodo";
-            this.btnleertodo.Size = new System.Drawing.Size(126, 26);
-            this.btnleertodo.TabIndex = 44;
-            this.btnleertodo.Text = "Leer Todo";
-            this.btnleertodo.UseVisualStyleBackColor = true;
-            this.btnleertodo.Click += new System.EventHandler(this.btnleertodo_Click);
-            // 
             // rtxtcodigointermedio
             // 
             this.rtxtcodigointermedio.Location = new System.Drawing.Point(12, 170);
             this.rtxtcodigointermedio.Name = "rtxtcodigointermedio";
-            this.rtxtcodigointermedio.Size = new System.Drawing.Size(386, 163);
+            this.rtxtcodigointermedio.Size = new System.Drawing.Size(617, 163);
             this.rtxtcodigointermedio.TabIndex = 43;
             this.rtxtcodigointermedio.Text = "";
             // 
@@ -178,7 +168,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(401, 154);
+            this.label1.Location = new System.Drawing.Point(655, 154);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(110, 13);
             this.label1.TabIndex = 60;
@@ -186,17 +176,29 @@
             // 
             // rtxSintaxLineaxLinea
             // 
-            this.rtxSintaxLineaxLinea.Location = new System.Drawing.Point(404, 170);
+            this.rtxSintaxLineaxLinea.Location = new System.Drawing.Point(658, 170);
             this.rtxSintaxLineaxLinea.Name = "rtxSintaxLineaxLinea";
-            this.rtxSintaxLineaxLinea.Size = new System.Drawing.Size(386, 163);
+            this.rtxSintaxLineaxLinea.Size = new System.Drawing.Size(132, 163);
             this.rtxSintaxLineaxLinea.TabIndex = 59;
             this.rtxSintaxLineaxLinea.Text = "";
+            // 
+            // LeerTodo2
+            // 
+            this.LeerTodo2.Enabled = false;
+            this.LeerTodo2.Location = new System.Drawing.Point(409, 57);
+            this.LeerTodo2.Name = "LeerTodo2";
+            this.LeerTodo2.Size = new System.Drawing.Size(126, 26);
+            this.LeerTodo2.TabIndex = 61;
+            this.LeerTodo2.Text = "Leer Todo";
+            this.LeerTodo2.UseVisualStyleBackColor = true;
+            this.LeerTodo2.Click += new System.EventHandler(this.LeerTodo2_Click);
             // 
             // Sintaxis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(806, 347);
+            this.Controls.Add(this.LeerTodo2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rtxSintaxLineaxLinea);
             this.Controls.Add(this.lblconexion);
@@ -207,7 +209,6 @@
             this.Controls.Add(this.btnCaracterxCarter);
             this.Controls.Add(this.lblcodigointermedio);
             this.Controls.Add(this.rtxtentrada);
-            this.Controls.Add(this.btnleertodo);
             this.Controls.Add(this.rtxtcodigointermedio);
             this.Controls.Add(this.txtTemporal);
             this.Controls.Add(this.lbltoken);
@@ -232,7 +233,6 @@
         private System.Windows.Forms.Button btnCaracterxCarter;
         private System.Windows.Forms.Label lblcodigointermedio;
         private System.Windows.Forms.RichTextBox rtxtentrada;
-        private System.Windows.Forms.Button btnleertodo;
         private System.Windows.Forms.RichTextBox rtxtcodigointermedio;
         private System.Windows.Forms.TextBox txtTemporal;
         private System.Windows.Forms.Label lbltoken;
@@ -241,6 +241,7 @@
         private System.Windows.Forms.Label lblEntrada;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox rtxSintaxLineaxLinea;
+        private System.Windows.Forms.Button LeerTodo2;
     }
 }
 
