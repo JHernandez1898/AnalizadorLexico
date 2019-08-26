@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,8 @@ namespace Analizador_Sintáctico
             string[] SplitLinea;
             rtxtcodigointermedio.Text = "";
             rtxSintaxLineaxLinea.Text = "";
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             try
             {
                 //IMPLEMENTACION ANALISIS LEXICO
@@ -53,7 +56,7 @@ namespace Analizador_Sintáctico
                     // ID# TO ID
                     for (int i = 0; i < SplitLinea.Length; i++)
                     {
-                        if (SplitLinea[i].Substring(0, 2) == "ID" && SplitLinea[i] != "IDEN")
+                        if (SplitLinea[i].Substring(0, 2) == "ID" || SplitLinea[i].Substring(0,3)=="CNE" || SplitLinea[i].Substring(0, 3) == "CNR" || SplitLinea[i].Substring(0, 4) == "CNEE" || SplitLinea[i].Substring(0, 4) == "CNRE")
                         {
                             string IdVal = SplitLinea[i];
                             for (int k = 0; k < SplitLinea[i].Length; k++)
@@ -130,8 +133,8 @@ namespace Analizador_Sintáctico
                             banderaRepite = false;
                             if (LineaMod.Trim() != "S")
                             {
-                                rtxSintaxLineaxLinea.Text += "Linea " + (LineaActual + 1).ToString() + ": Error\n";
-                                throw new Exception("Error sintactico en linea " + (LineaActual + 1).ToString() + ".\nVerifique el uso apropiado la sintaxis.");
+                                rtxSintaxLineaxLinea.Text += "Línea " + (LineaActual + 1).ToString() + ": Error\n";
+                                throw new Exception("Error sintactico en línea " + (LineaActual + 1).ToString() + ".\nVerifique el uso apropiado la sintaxis.");
                             }
                         }
                     } while (banderaRepite);
@@ -142,6 +145,8 @@ namespace Analizador_Sintáctico
             {
                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            stopwatch.Stop();
+            MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador léxico", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         //CONEXION A MATRIZ - LEXICO//
@@ -232,6 +237,8 @@ namespace Analizador_Sintáctico
             if (principio)
             {
                 principio = false;
+                rtxtcodigointermedio.Text = "";
+                rtxSintaxLineaxLinea.Text = "";
                 strActual = RellenarArreglo()[nLinea];
                 rtxtcodigointermedio.Text += ArregloLineas[nLinea] + "\n";
                 txtcadenatokens.Text = ArregloLineas[nLinea];
@@ -279,7 +286,7 @@ namespace Analizador_Sintáctico
                 }
                 txtcadenatokens.Text = strActual;
 
-                if (nLinea == ArregloLineas.Length) nLinea = 0;
+                if (strActual == "S") { nLinea++; principio = true; rtxSintaxLineaxLinea.Text += "Línea " + nLinea.ToString() + ":S" + "\n";  }
             }
 
         }
