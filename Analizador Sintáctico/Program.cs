@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Analizador_Léxico
+namespace Analizador_Sintáctico
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace Analizador_Léxico
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Lexico());
+            Application.Run(new Sintaxis());
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Analizador_Léxico.Clases
+namespace Analizador_Sintáctico.Clases
 {
     class ConexionMatriz
     {
@@ -19,7 +19,7 @@ namespace Analizador_Léxico.Clases
         }
         public static bool ProbarConexion(string serverName)
         {
-            SqlConnection con = new SqlConnection("Data Source=" + System.Environment.MachineName + "\\ "+ serverName+"; Initial Catalog = LENGUAJE; ;Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
+            SqlConnection con = new SqlConnection("Data Source=" + System.Environment.MachineName + "; Initial Catalog = LENGUAJE; Server=" + System.Environment.MachineName + "\\" + serverName + " ;Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
             try
             {
                 con.Open();

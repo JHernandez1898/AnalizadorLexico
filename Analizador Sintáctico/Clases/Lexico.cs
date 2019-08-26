@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Analizador_Léxico.Clases
+namespace Analizador_Sintáctico.Clases
 {
-    class Lexico
+    public class Lexico
     {
         public static List<string> AnalizadorLexico(string CadenaEntrada)
         {
@@ -48,7 +47,7 @@ namespace Analizador_Léxico.Clases
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + linea + ".\nVerifique el uso apropiado del léxico.", "Error de analizador léxico", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LineasLexico.Add(ex.Message + linea + ".\nVerifique el uso apropiado del léxico.");
                 linea = 1;
             }
             return LineasLexico;

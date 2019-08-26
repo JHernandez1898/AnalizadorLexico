@@ -1,6 +1,6 @@
 ﻿namespace Analizador_Léxico
 {
-    partial class Form1
+    partial class Lexico
     {
         /// <summary>
         /// Required designer variable.
