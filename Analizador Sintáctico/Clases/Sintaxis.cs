@@ -33,7 +33,7 @@ namespace Analizador_Sintáctico.Clases
             S.lstSintaxDerecha.Add("COND"); //COND
             S.lstSintaxDerecha.Add("SWTC"); //SWTC
             //  S.lstSintaxDerecha.Add("ARGU ARGM ARGN");
-            S.lstSintaxDerecha.Add("PR08");  //PR08
+            S.lstSintaxDerecha.Add("PR21");  //PR08
 
             Sintax.Add(S);
             SintaxLibre PARA = new SintaxLibre();
