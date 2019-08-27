@@ -1,0 +1,11 @@
+CAPTURAR num
+Res = Calcfact ( num )
+IMPRIMIR Res
+FUNCION DBL PUBLICO Calcfact ( ENT num )
+SI n == 0
+PASAR ( 1 )
+ENCAMBIO
+PARA X = n HASTA n > 1 SUMA X = X - 1
+R = R * X
+FINPARA
+PASAR ( R )
