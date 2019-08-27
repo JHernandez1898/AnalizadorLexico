@@ -200,7 +200,13 @@ namespace Analizador_Sintáctico.Clases
             COND.lstSintaxDerecha.Add("PR23 OPER"); //PR23 OPER
             COND.lstSintaxDerecha.Add("PR23 OPEL"); //PR23 OPEL
             Sintax.Add(COND);
-        
+
+            SintaxLibre SWTC = new SintaxLibre();
+            SWTC.SintaxIzquierda = "SWTC";
+            SWTC.lstSintaxDerecha.Add("PR18 PAR2 IDEN PAR1");
+            Sintax.Add(SWTC);
+
+
             SintaxLibre OPEA = new SintaxLibre();
             OPEA.SintaxIzquierda = "OPEA"; //OPEA
             OPEA.lstSintaxDerecha.Add("IDEN OPAR IDEN"); //IDEN OPAR IDEN
