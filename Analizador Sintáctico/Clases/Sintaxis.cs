@@ -105,142 +105,141 @@ namespace Analizador_Sintáctico.Clases
             Sintax.Add(PROD);
 
             SintaxLibre FIRD = new SintaxLibre();
-            FIRD.SintaxIzquierda = "FIRD"; 
-            FIRD.lstSintaxDerecha.Add("PAR2 PARD FIRD PAR1");
-            FIRD.lstSintaxDerecha.Add("PAR2 PARD PAR1");
-            FIRD.lstSintaxDerecha.Add("PARD");
+            FIRD.SintaxIzquierda = "FIRD";  //FIRD
+            FIRD.lstSintaxDerecha.Add("PAR2 PARD FIRD PAR1"); //PAR2 PARD FIRD PAR1
+            FIRD.lstSintaxDerecha.Add("PAR2 PARD PAR1"); //PAR2 PARD PAR1
+            FIRD.lstSintaxDerecha.Add("PARD"); //PARD
             Sintax.Add(FIRD);
 
            
 
             SintaxLibre PARD = new SintaxLibre();
-            PARD.SintaxIzquierda = "PARD";           
-            PARD.lstSintaxDerecha.Add("PR22 TIPO VARI");
-            PARD.lstSintaxDerecha.Add("PR22 TIPO IDEN");
-            PARD.lstSintaxDerecha.Add("TIPO VARI");
-            PARD.lstSintaxDerecha.Add("TIPO IDEN");
-            PARD.lstSintaxDerecha.Add("PARD PARD");
- 
+            PARD.SintaxIzquierda = "PARD"; //PARD
+            PARD.lstSintaxDerecha.Add("PR22 TIPO VARI"); //PR22 TIPO VARI
+            PARD.lstSintaxDerecha.Add("PR22 TIPO IDEN"); //PR22 TIPO IDEN
+            PARD.lstSintaxDerecha.Add("TIPO VARI"); //TIPO VARI
+            PARD.lstSintaxDerecha.Add("TIPO IDEN"); //TIPO IDEN
+            PARD.lstSintaxDerecha.Add("PARD PARD"); //PARD PARD 
             Sintax.Add(PARD);
           
            
             //♥♥ GRAMATICA LIBRE DE CONTEXTO EQUIPO #8 ♥♥
 
             SintaxLibre PROI = new SintaxLibre();
-            PROI.SintaxIzquierda = "PROI";
-            PROI.lstSintaxDerecha.Add("IDEN FIRI");
-            PROI.lstSintaxDerecha.Add("IDEN SINP");
+            PROI.SintaxIzquierda = "PROI"; //PROI
+            PROI.lstSintaxDerecha.Add("IDEN FIRI"); //IDEN FIRI
+            PROI.lstSintaxDerecha.Add("IDEN SINP"); //IDEN SINP
             Sintax.Add(PROI);
            
             SintaxLibre PASA = new SintaxLibre();
-            PASA.SintaxIzquierda = "PASA";
-            PASA.lstSintaxDerecha.Add("PR17 FIRI");
+            PASA.SintaxIzquierda = "PASA"; //PASA
+            PASA.lstSintaxDerecha.Add("PR17 FIRI"); //PR17 FIRI
             Sintax.Add(PASA);
             SintaxLibre ACCE = new SintaxLibre();
-            ACCE.SintaxIzquierda = "ACCE";
-            ACCE.lstSintaxDerecha.Add("PR19");
-            ACCE.lstSintaxDerecha.Add("PR21");
+            ACCE.SintaxIzquierda = "ACCE"; //ACCE
+            ACCE.lstSintaxDerecha.Add("PR19"); //PR19
+            ACCE.lstSintaxDerecha.Add("PR21"); //PR21
             Sintax.Add(ACCE);
  
         
             SintaxLibre TIPO = new SintaxLibre();
-            TIPO.SintaxIzquierda = "TIPO";
-            TIPO.lstSintaxDerecha.Add("TDD1");
-            TIPO.lstSintaxDerecha.Add("TDD2");
-            TIPO.lstSintaxDerecha.Add("TDD3");
-            TIPO.lstSintaxDerecha.Add("TDD4");
+            TIPO.SintaxIzquierda = "TIPO"; //TIPO 
+            TIPO.lstSintaxDerecha.Add("TDD1"); //TDD1
+            TIPO.lstSintaxDerecha.Add("TDD2"); //TDD2
+            TIPO.lstSintaxDerecha.Add("TDD3"); //TDD3
+            TIPO.lstSintaxDerecha.Add("TDD4"); //TDD4
             Sintax.Add(TIPO);
         
         
             SintaxLibre FIRI = new SintaxLibre();
-            FIRI.SintaxIzquierda = "FIRI";
-            FIRI.lstSintaxDerecha.Add("PAR2 VARI PAR1");
-            FIRI.lstSintaxDerecha.Add("PAR2 IDEN PAR1");
-            FIRI.lstSintaxDerecha.Add("PAR2 VARR PAR1");
-            FIRI.lstSintaxDerecha.Add("PAR2 VARI FIRI PAR1");
-            FIRI.lstSintaxDerecha.Add("PAR2 IDEN FIRI PAR1");
-            FIRI.lstSintaxDerecha.Add("PAR2 VARR FIRI PAR1");
+            FIRI.SintaxIzquierda = "FIRI"; //FIRI
+            FIRI.lstSintaxDerecha.Add("PAR2 VARI PAR1"); //PAR2 VARI PAR1
+            FIRI.lstSintaxDerecha.Add("PAR2 IDEN PAR1"); //PAR2 IDEN PAR1
+            FIRI.lstSintaxDerecha.Add("PAR2 VARR PAR1"); //PAR2 VARR PAR1
+            FIRI.lstSintaxDerecha.Add("PAR2 VARI FIRI PAR1"); //PAR2 VARI FIRI PAR1
+            FIRI.lstSintaxDerecha.Add("PAR2 IDEN FIRI PAR1"); //PAR2 IDEN FIRI PAR1
+            FIRI.lstSintaxDerecha.Add("PAR2 VARR FIRI PAR1"); //PAR2 VARR FIRI PAR1
 
             Sintax.Add(FIRI);
             SintaxLibre SINP = new SintaxLibre();
-            SINP.SintaxIzquierda = "SINP";
-            SINP.lstSintaxDerecha.Add("PAR2 PAR1");
+            SINP.SintaxIzquierda = "SINP"; //SINP
+            SINP.lstSintaxDerecha.Add("PAR2 PAR1"); //PAR2 PAR1
             Sintax.Add(SINP);
             SintaxLibre CONU = new SintaxLibre();
-            CONU.SintaxIzquierda = "CONU";
-            CONU.lstSintaxDerecha.Add("CNE");
-            CONU.lstSintaxDerecha.Add("CNEE");
-            CONU.lstSintaxDerecha.Add("CNR");
-            CONU.lstSintaxDerecha.Add("CNRE");
+            CONU.SintaxIzquierda = "CONU"; //CONU
+            CONU.lstSintaxDerecha.Add("CNE"); //CNE
+            CONU.lstSintaxDerecha.Add("CNEE"); //CNEE
+            CONU.lstSintaxDerecha.Add("CNR"); //CNR
+            CONU.lstSintaxDerecha.Add("CNRE"); //CNRE
        
             Sintax.Add(CONU);
             SintaxLibre OPAR = new SintaxLibre();
-            OPAR.SintaxIzquierda = "OPAR";
-            OPAR.lstSintaxDerecha.Add("OPA1");
-            OPAR.lstSintaxDerecha.Add("OPA2");
-            OPAR.lstSintaxDerecha.Add("OPA3");
-            OPAR.lstSintaxDerecha.Add("OPA4");
-            OPAR.lstSintaxDerecha.Add("OPA5");
+            OPAR.SintaxIzquierda = "OPAR"; //OPAR
+            OPAR.lstSintaxDerecha.Add("OPA1"); //OPA1
+            OPAR.lstSintaxDerecha.Add("OPA2"); //OPA2
+            OPAR.lstSintaxDerecha.Add("OPA3"); //OPA3
+            OPAR.lstSintaxDerecha.Add("OPA4"); //OPA4
+            OPAR.lstSintaxDerecha.Add("OPA5"); //OPA5
             Sintax.Add(OPAR);
             SintaxLibre VARR = new SintaxLibre();
-            VARR.SintaxIzquierda = "VARR";
-            VARR.lstSintaxDerecha.Add("PR22 IDEN");
+            VARR.SintaxIzquierda = "VARR"; //VARR
+            VARR.lstSintaxDerecha.Add("PR22 IDEN"); //PR22 IDEN
             Sintax.Add(VARR);
             SintaxLibre VARI = new SintaxLibre();
-            VARI.SintaxIzquierda = "VARI";            
-            VARI.lstSintaxDerecha.Add("CONU");
-            VARI.lstSintaxDerecha.Add("OPEA");
-            VARI.lstSintaxDerecha.Add("CADE");
+            VARI.SintaxIzquierda = "VARI";  //VARI
+            VARI.lstSintaxDerecha.Add("CONU"); //CONU
+            VARI.lstSintaxDerecha.Add("OPEA"); //OPEA
+            VARI.lstSintaxDerecha.Add("CADE"); //CADE
             Sintax.Add(VARI);
             SintaxLibre IDEN = new SintaxLibre();
-            IDEN.SintaxIzquierda = "IDEN";
-            IDEN.lstSintaxDerecha.Add("ID");            
+            IDEN.SintaxIzquierda = "IDEN"; //IDEN
+            IDEN.lstSintaxDerecha.Add("ID"); //ID
             Sintax.Add(IDEN);            
             SintaxLibre COND = new SintaxLibre();
-           COND.SintaxIzquierda = "COND";
-            COND.lstSintaxDerecha.Add("PR23 OPER");
-            COND.lstSintaxDerecha.Add("PR23 OPEL");
+           COND.SintaxIzquierda = "COND"; //COND
+            COND.lstSintaxDerecha.Add("PR23 OPER"); //PR23 OPER
+            COND.lstSintaxDerecha.Add("PR23 OPEL"); //PR23 OPEL
             Sintax.Add(COND);
         
             SintaxLibre OPEA = new SintaxLibre();
-            OPEA.SintaxIzquierda = "OPEA";
-            OPEA.lstSintaxDerecha.Add("IDEN OPAR IDEN");
-            OPEA.lstSintaxDerecha.Add("CONU OPAR CONU");
-            OPEA.lstSintaxDerecha.Add("CONU OPAR IDEN");
-            OPEA.lstSintaxDerecha.Add("IDEN OPAR CONU");
-            OPEA.lstSintaxDerecha.Add("OPEA OPAR IDEN");
-            OPEA.lstSintaxDerecha.Add("IDEN OPAR OPEA");
-            OPEA.lstSintaxDerecha.Add("OPEA OPAR OPEA");
-            OPEA.lstSintaxDerecha.Add("CONU OPAR OPEA");
-            OPEA.lstSintaxDerecha.Add("OPEA OPAR CONU");
-            OPEA.lstSintaxDerecha.Add("PAR2 OPEA PAR1");
-            OPEA.lstSintaxDerecha.Add("FNCI OPAR CONU");
-            OPEA.lstSintaxDerecha.Add("FNCI OPAR OPEA");
+            OPEA.SintaxIzquierda = "OPEA"; //OPEA
+            OPEA.lstSintaxDerecha.Add("IDEN OPAR IDEN"); //IDEN OPAR IDEN
+            OPEA.lstSintaxDerecha.Add("CONU OPAR CONU"); //CONU OPAR CONU
+            OPEA.lstSintaxDerecha.Add("CONU OPAR IDEN"); //CONU OPAR IDEN
+            OPEA.lstSintaxDerecha.Add("IDEN OPAR CONU"); //IDEN OPAR CONU
+            OPEA.lstSintaxDerecha.Add("OPEA OPAR IDEN");//OPEA OPAR IDEN
+            OPEA.lstSintaxDerecha.Add("IDEN OPAR OPEA"); //IDEN OPAR OPEA
+            OPEA.lstSintaxDerecha.Add("OPEA OPAR OPEA"); //OPEA OPAR OPEA
+            OPEA.lstSintaxDerecha.Add("CONU OPAR OPEA"); //CONU OPAR OPEA
+            OPEA.lstSintaxDerecha.Add("OPEA OPAR CONU"); //OPEA OPAR CONU
+            OPEA.lstSintaxDerecha.Add("PAR2 OPEA PAR1"); //PAR2 OPEA PAR1
+            OPEA.lstSintaxDerecha.Add("FNCI OPAR CONU"); //FNCI OPAR CONU
+            OPEA.lstSintaxDerecha.Add("FNCI OPAR OPEA"); //FNCI OPAR OPEA
             Sintax.Add(OPEA);
 
             SintaxLibre OPEL = new SintaxLibre();
-            OPEL.SintaxIzquierda = "OPEL";
-            OPEL.lstSintaxDerecha.Add("OL03 OPER");
-            OPEL.lstSintaxDerecha.Add("OL03 OPEL");
-            OPEL.lstSintaxDerecha.Add("OPER OL02 OPER");
-            OPEL.lstSintaxDerecha.Add("OPER OL01 OPER");
-            OPEL.lstSintaxDerecha.Add("OPEL OL02 OPER");
-            OPEL.lstSintaxDerecha.Add("OPEL OL01 OPER");
-            OPEL.lstSintaxDerecha.Add("OPER OL02 OPEL");
-            OPEL.lstSintaxDerecha.Add("OPER OL01 OPEL");
-            OPEL.lstSintaxDerecha.Add("OPEL OL02 OPEL");
-            OPEL.lstSintaxDerecha.Add("OPEL OL01 OPEL");
-            OPEL.lstSintaxDerecha.Add("PAR2 OPEL PAR1");
+            OPEL.SintaxIzquierda = "OPEL"; //OPEL
+            OPEL.lstSintaxDerecha.Add("OL03 OPER"); //OL03 OPER
+            OPEL.lstSintaxDerecha.Add("OL03 OPEL"); //OL03 OPEL
+            OPEL.lstSintaxDerecha.Add("OPER OL02 OPER"); //OPER OL02 OPER
+            OPEL.lstSintaxDerecha.Add("OPER OL01 OPER"); //OPER OL01 OPER
+            OPEL.lstSintaxDerecha.Add("OPEL OL02 OPER"); //OPEL OL02 OPER
+            OPEL.lstSintaxDerecha.Add("OPEL OL01 OPER"); //OPEL OL01 OPER
+            OPEL.lstSintaxDerecha.Add("OPER OL02 OPEL"); //OPER OL02 OPEL
+            OPEL.lstSintaxDerecha.Add("OPER OL01 OPEL"); //OPER OL01 OPEL
+            OPEL.lstSintaxDerecha.Add("OPEL OL02 OPEL"); //OPEL OL02 OPEL
+            OPEL.lstSintaxDerecha.Add("OPEL OL01 OPEL"); //OPEL OL01 OPEL
+            OPEL.lstSintaxDerecha.Add("PAR2 OPEL PAR1"); //PAR2 OPEL PAR1
             Sintax.Add(OPEL);
             
             SintaxLibre OPRE = new SintaxLibre();
-            OPRE.SintaxIzquierda = "OPRE";
-            OPRE.lstSintaxDerecha.Add("OPR1");
-            OPRE.lstSintaxDerecha.Add("OPR2");
-            OPRE.lstSintaxDerecha.Add("OPR3");
-            OPRE.lstSintaxDerecha.Add("OPR4");
-            OPRE.lstSintaxDerecha.Add("OPR5");
-            OPRE.lstSintaxDerecha.Add("OPR6");
+            OPRE.SintaxIzquierda = "OPRE"; //OPRE
+            OPRE.lstSintaxDerecha.Add("OPR1"); //OPR1
+            OPRE.lstSintaxDerecha.Add("OPR2"); //OPR2
+            OPRE.lstSintaxDerecha.Add("OPR3"); //OPR3
+            OPRE.lstSintaxDerecha.Add("OPR4"); //OPR4
+            OPRE.lstSintaxDerecha.Add("OPR5"); //OPR5
+            OPRE.lstSintaxDerecha.Add("OPR6"); //OPR6
             Sintax.Add(OPRE);
         }
     }
