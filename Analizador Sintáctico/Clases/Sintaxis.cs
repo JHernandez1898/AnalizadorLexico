@@ -20,96 +20,92 @@ namespace Analizador_Sintáctico.Clases
             SintaxLibre S = new SintaxLibre();
             S.SintaxIzquierda = "S";
             ///
-            S.lstSintaxDerecha.Add("PARA");
-            S.lstSintaxDerecha.Add("PROD");
-            S.lstSintaxDerecha.Add("PROI");
-            S.lstSintaxDerecha.Add("FNCD");
-            S.lstSintaxDerecha.Add("FNCI");
-            S.lstSintaxDerecha.Add("PASA");
-            S.lstSintaxDerecha.Add("ASIG");
-            S.lstSintaxDerecha.Add("IMPR");
-            S.lstSintaxDerecha.Add("CAPT");
-            S.lstSintaxDerecha.Add("PR04");
-            S.lstSintaxDerecha.Add("COND");
-            S.lstSintaxDerecha.Add("SWTC");
+            S.lstSintaxDerecha.Add("PARA"); //PARA
+            S.lstSintaxDerecha.Add("PROD"); //PROD
+            S.lstSintaxDerecha.Add("PROI"); //PROI
+            S.lstSintaxDerecha.Add("FNCD"); //FNCD
+            S.lstSintaxDerecha.Add("FNCI"); //FNCI
+            S.lstSintaxDerecha.Add("PASA"); //PASA
+            S.lstSintaxDerecha.Add("ASIG"); //ASIG
+            S.lstSintaxDerecha.Add("IMPR"); //IMPR
+            S.lstSintaxDerecha.Add("CAPT"); //CAPT
+            S.lstSintaxDerecha.Add("PR04"); //PR08
+            S.lstSintaxDerecha.Add("COND"); //COND
+            S.lstSintaxDerecha.Add("SWTC"); //SWTC
             //  S.lstSintaxDerecha.Add("ARGU ARGM ARGN");
-            S.lstSintaxDerecha.Add("PR08");
+            S.lstSintaxDerecha.Add("PR08");  //PR08
 
             Sintax.Add(S);
             SintaxLibre PARA = new SintaxLibre();
-            PARA.SintaxIzquierda = "PARA";
-            PARA.lstSintaxDerecha.Add("PR16 ASIG PR10 OPER PR24 ASIG");
+            PARA.SintaxIzquierda = "PARA"; //PARA
+            PARA.lstSintaxDerecha.Add("PR16 ASIG PR10 OPER PR24 ASIG"); //PR16 ASIG PR10 OPER PR24 ASIG
             Sintax.Add(PARA);
 
             SintaxLibre ASIG = new SintaxLibre();
-            ASIG.SintaxIzquierda = "ASIG";
-            ASIG.lstSintaxDerecha.Add("IDEN OPA6");
-            ASIG.lstSintaxDerecha.Add("ASIG IDEN");
-            ASIG.lstSintaxDerecha.Add("ASIG OPEA");
-            ASIG.lstSintaxDerecha.Add("ASIG OPEA");
-            ASIG.lstSintaxDerecha.Add("ASIG FNCI");
-            ASIG.lstSintaxDerecha.Add("ASIG VARI");
-            ASIG.lstSintaxDerecha.Add("ASIG FIRI");
-            ASIG.lstSintaxDerecha.Add("TIPO IDEN OPA6");
+            ASIG.SintaxIzquierda = "ASIG"; //ASIG
+            ASIG.lstSintaxDerecha.Add("IDEN OPA6"); // IDEN OPA6
+            ASIG.lstSintaxDerecha.Add("ASIG IDEN"); // ASIG IDEN
+            ASIG.lstSintaxDerecha.Add("ASIG OPEA"); // ASIG OPEA            
+            ASIG.lstSintaxDerecha.Add("ASIG FNCI"); // ASIG FNCI
+            ASIG.lstSintaxDerecha.Add("ASIG VARI"); // ASIG VARI
+            ASIG.lstSintaxDerecha.Add("ASIG FIRI"); // ASIG FIRI
+            ASIG.lstSintaxDerecha.Add("TIPO IDEN OPA6"); //TIPO IDEN OPA6
             Sintax.Add(ASIG);
 
             SintaxLibre OPER = new SintaxLibre();
-            OPER.SintaxIzquierda = "OPER";
-            OPER.lstSintaxDerecha.Add("IDEN OPRE CONU");
-            OPER.lstSintaxDerecha.Add("IDEN OPRE IDEN");
-            OPER.lstSintaxDerecha.Add("CONU OPRE CONU");
-            OPER.lstSintaxDerecha.Add("CONU OPRE IDEN");          
-            OPER.lstSintaxDerecha.Add("OPRE OPRE IDEN");
-            OPER.lstSintaxDerecha.Add("IDEN OPRE OPEA");
-            OPER.lstSintaxDerecha.Add("OPEA OPRE OPEA");
-            OPER.lstSintaxDerecha.Add("CONU OPRE OPEA");
-            OPER.lstSintaxDerecha.Add("OPEA OPRE CONU");
-            OPER.lstSintaxDerecha.Add("PAR2 OPRE PAR1");
-            OPER.lstSintaxDerecha.Add("PAR2 OPER PAR1");
+            OPER.SintaxIzquierda = "OPER"; //OPER
+            OPER.lstSintaxDerecha.Add("IDEN OPRE CONU"); //IDEN OPRE CONU
+            OPER.lstSintaxDerecha.Add("IDEN OPRE IDEN"); //IDEN OPRE IDEN
+            OPER.lstSintaxDerecha.Add("CONU OPRE CONU"); //CONU OPRE CONU
+            OPER.lstSintaxDerecha.Add("CONU OPRE IDEN"); //CONU OPRE IDEN
+             OPER.lstSintaxDerecha.Add("OPRE OPRE IDEN"); //OPRE OPRE IDEN
+            OPER.lstSintaxDerecha.Add("IDEN OPRE OPEA"); //IDEN OPRE OPEA
+            OPER.lstSintaxDerecha.Add("OPEA OPRE OPEA"); //OPEA OPRE OPEA
+            OPER.lstSintaxDerecha.Add("CONU OPRE OPEA"); //CONU OPRE OPEA
+            OPER.lstSintaxDerecha.Add("OPEA OPRE CONU"); //OPEA OPRE CONU
+            OPER.lstSintaxDerecha.Add("PAR2 OPRE PAR1"); //PAR2 OPRE PAR1
+            OPER.lstSintaxDerecha.Add("PAR2 OPER PAR1"); //PAR2 OPER PAR1
             Sintax.Add(OPER);
     
 
             SintaxLibre FNCD = new SintaxLibre();
-            FNCD.SintaxIzquierda = "FNCD";
-            FNCD.lstSintaxDerecha.Add("PR09 TIPO ACCE IDEN FIRD");
-            FNCD.lstSintaxDerecha.Add("PR09 TIPO ACCE IDEN SINP");
+            FNCD.SintaxIzquierda = "FNCD"; //FNCD
+            FNCD.lstSintaxDerecha.Add("PR09 TIPO ACCE IDEN FIRD"); //PR09 TIPO ACCE IDEN FIRD
+            FNCD.lstSintaxDerecha.Add("PR09 TIPO ACCE IDEN SINP"); //PR09 TIPO ACCE IDEN SINP
             Sintax.Add(FNCD);
             SintaxLibre CAPT = new SintaxLibre();
-            CAPT.SintaxIzquierda = "CAPT";
-            CAPT.lstSintaxDerecha.Add("PR01 IDEN");
-            CAPT.lstSintaxDerecha.Add("PR01 IDEN");
+            CAPT.SintaxIzquierda = "CAPT"; //CAPT
+            CAPT.lstSintaxDerecha.Add("PR01 IDEN");//PR01 IDEN            
             Sintax.Add(CAPT);
             SintaxLibre IMPR = new SintaxLibre();
-            IMPR.SintaxIzquierda = "IMPR";
-            IMPR.lstSintaxDerecha.Add("PR12 VARI");
-            IMPR.lstSintaxDerecha.Add("PR12 IDEN");
-            IMPR.lstSintaxDerecha.Add("IMPR IDEN");
-            IMPR.lstSintaxDerecha.Add("IMPR VARI");
-            IMPR.lstSintaxDerecha.Add("IMPR CONU");
+            IMPR.SintaxIzquierda = "IMPR"; //IMPR
+            IMPR.lstSintaxDerecha.Add("PR12 VARI"); //PR12 VARI
+            IMPR.lstSintaxDerecha.Add("PR12 IDEN"); //PR12 IDEN
+            IMPR.lstSintaxDerecha.Add("IMPR IDEN"); //IMPR IDEN
+            IMPR.lstSintaxDerecha.Add("IMPR VARI"); //IMPR VARI
+            IMPR.lstSintaxDerecha.Add("IMPR CONU"); //IMPR CONU
             Sintax.Add(IMPR);
        
 
             SintaxLibre FNCI = new SintaxLibre();
-            FNCI.SintaxIzquierda = "FNCI";
-            FNCI.lstSintaxDerecha.Add("TIPO ASIG IDEN FIRI");
-            FNCI.lstSintaxDerecha.Add("IDEN PAR2 IDEN PAR1");
-            FNCI.lstSintaxDerecha.Add("IDEN PAR2 VARI PAR1");
-            FNCI.lstSintaxDerecha.Add("ASIG IDEN FIRI");
-            FNCI.lstSintaxDerecha.Add("ASIG IDEN FIRD");
-            FNCI.lstSintaxDerecha.Add("ASIG IDEN SINP");
-          //  FNCI.lstSintaxDerecha.Add("ASIG IDEN SINP");
+            FNCI.SintaxIzquierda = "FNCI"; //FNCI
+            FNCI.lstSintaxDerecha.Add("TIPO ASIG IDEN FIRI"); //TIPO ASIG IDEN FIRI
+            FNCI.lstSintaxDerecha.Add("IDEN PAR2 IDEN PAR1"); // IDEN PAR2 IDEN PAR1
+            FNCI.lstSintaxDerecha.Add("IDEN PAR2 VARI PAR1"); // IDEN PAR2 VARI PAR1
+            FNCI.lstSintaxDerecha.Add("ASIG IDEN FIRI"); //ASIG IDEN FIRI
+            FNCI.lstSintaxDerecha.Add("ASIG IDEN FIRD"); //ASIG IDEN FIRD
+            FNCI.lstSintaxDerecha.Add("ASIG IDEN SINP"); //ASIG IDEN SINP          
             Sintax.Add(FNCI);
-
-          
+                     
 
             SintaxLibre PROD = new SintaxLibre();
-            PROD.SintaxIzquierda = "PROD";
-            PROD.lstSintaxDerecha.Add("PR20 ACCE IDEN FIRD");
-            PROD.lstSintaxDerecha.Add("PR20 ACCE IDEN SINP");
+            PROD.SintaxIzquierda = "PROD"; //PROD 
+            PROD.lstSintaxDerecha.Add("PR20 ACCE IDEN FIRD"); //PR20 ACCE IDEN FIRD
+            PROD.lstSintaxDerecha.Add("PR20 ACCE IDEN SINP"); //PR20 ACCE IDEN SINP
             Sintax.Add(PROD);
 
             SintaxLibre FIRD = new SintaxLibre();
-            FIRD.SintaxIzquierda = "FIRD";
+            FIRD.SintaxIzquierda = "FIRD"; 
             FIRD.lstSintaxDerecha.Add("PAR2 PARD FIRD PAR1");
             FIRD.lstSintaxDerecha.Add("PAR2 PARD PAR1");
             FIRD.lstSintaxDerecha.Add("PARD");
@@ -118,8 +114,7 @@ namespace Analizador_Sintáctico.Clases
            
 
             SintaxLibre PARD = new SintaxLibre();
-            PARD.SintaxIzquierda = "PARD";
-           // PARD.lstSintaxDerecha.Add("PR22 TIPO VARI");
+            PARD.SintaxIzquierda = "PARD";           
             PARD.lstSintaxDerecha.Add("PR22 TIPO VARI");
             PARD.lstSintaxDerecha.Add("PR22 TIPO IDEN");
             PARD.lstSintaxDerecha.Add("TIPO VARI");
@@ -165,8 +160,6 @@ namespace Analizador_Sintáctico.Clases
             FIRI.lstSintaxDerecha.Add("PAR2 VARI FIRI PAR1");
             FIRI.lstSintaxDerecha.Add("PAR2 IDEN FIRI PAR1");
             FIRI.lstSintaxDerecha.Add("PAR2 VARR FIRI PAR1");
-//            FIRI.lstSintaxDerecha.Add("PAR2 IDEN CONU PAR1");
-  //          FIRI.lstSintaxDerecha.Add("PAR2 CONU IDEN PAR1");
 
             Sintax.Add(FIRI);
             SintaxLibre SINP = new SintaxLibre();
@@ -179,7 +172,7 @@ namespace Analizador_Sintáctico.Clases
             CONU.lstSintaxDerecha.Add("CNEE");
             CONU.lstSintaxDerecha.Add("CNR");
             CONU.lstSintaxDerecha.Add("CNRE");
-       //     CONU.lstSintaxDerecha.Add("CONU CONU");
+       
             Sintax.Add(CONU);
             SintaxLibre OPAR = new SintaxLibre();
             OPAR.SintaxIzquierda = "OPAR";
@@ -194,44 +187,20 @@ namespace Analizador_Sintáctico.Clases
             VARR.lstSintaxDerecha.Add("PR22 IDEN");
             Sintax.Add(VARR);
             SintaxLibre VARI = new SintaxLibre();
-            VARI.SintaxIzquierda = "VARI";
-            //VARI.lstSintaxDerecha.Add("IDEN");
+            VARI.SintaxIzquierda = "VARI";            
             VARI.lstSintaxDerecha.Add("CONU");
             VARI.lstSintaxDerecha.Add("OPEA");
             VARI.lstSintaxDerecha.Add("CADE");
             Sintax.Add(VARI);
             SintaxLibre IDEN = new SintaxLibre();
             IDEN.SintaxIzquierda = "IDEN";
-            IDEN.lstSintaxDerecha.Add("ID");
-            //IDEN.lstSintaxDerecha.Add("IDEN IDEN");
-            //    IDEN.lstSintaxDerecha.Add("IDEN CONU");
-            Sintax.Add(IDEN);
-            //SINTAXIS LIBRE DE CONTEXTO OTROS EQUIPOS :)
-            /*   SintaxLibre ARGU = new SintaxLibre();
-               ARGU.SintaxIzquierda = "ARGU";
-               ARGU.lstSintaxDerecha.Add("PR16 ASIG IDEN");
-               ARGU.lstSintaxDerecha.Add("PR16 ASIG VARI");*/
-            /*  Sintax.Add(ARGU);
-              SintaxLibre ARGN = new SintaxLibre();
-              ARGN.SintaxIzquierda = "ARGN";
-              ARGN.lstSintaxDerecha.Add("PR24 ASIG IDEN");
-              ARGN.lstSintaxDerecha.Add("PR24 ASIG VARI");
-              Sintax.Add(ARGN);*7
-             /* SintaxLibre ARGM = new SintaxLibre();
-              ARGM.SintaxIzquierda = "ARGM";
-              ARGM.lstSintaxDerecha.Add("PR10 OPER");
-              Sintax.Add(ARGM);*/
+            IDEN.lstSintaxDerecha.Add("ID");            
+            Sintax.Add(IDEN);            
             SintaxLibre COND = new SintaxLibre();
            COND.SintaxIzquierda = "COND";
             COND.lstSintaxDerecha.Add("PR23 OPER");
             COND.lstSintaxDerecha.Add("PR23 OPEL");
             Sintax.Add(COND);
-
-           
-         //   SintaxLibre SWTC = new SintaxLibre();
-           // SWTC.SintaxIzquierda = "SWTC";
-            //SWTC.lstSintaxDerecha.Add("PR25 PAR2 IDEN PAR1");
-           // Sintax.Add(SWTC);
         
             SintaxLibre OPEA = new SintaxLibre();
             OPEA.SintaxIzquierda = "OPEA";
@@ -248,9 +217,7 @@ namespace Analizador_Sintáctico.Clases
             OPEA.lstSintaxDerecha.Add("FNCI OPAR CONU");
             OPEA.lstSintaxDerecha.Add("FNCI OPAR OPEA");
             Sintax.Add(OPEA);
-           
-            //EQUIPO 3
-           
+
             SintaxLibre OPEL = new SintaxLibre();
             OPEL.SintaxIzquierda = "OPEL";
             OPEL.lstSintaxDerecha.Add("OL03 OPER");
@@ -265,7 +232,7 @@ namespace Analizador_Sintáctico.Clases
             OPEL.lstSintaxDerecha.Add("OPEL OL01 OPEL");
             OPEL.lstSintaxDerecha.Add("PAR2 OPEL PAR1");
             Sintax.Add(OPEL);
-            //EQUIPO 7
+            
             SintaxLibre OPRE = new SintaxLibre();
             OPRE.SintaxIzquierda = "OPRE";
             OPRE.lstSintaxDerecha.Add("OPR1");
