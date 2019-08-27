@@ -80,7 +80,7 @@ namespace Analizador_Sintáctico.Clases
             SintaxLibre IMPR = new SintaxLibre();
             IMPR.SintaxIzquierda = "IMPR"; //IMPR
             IMPR.lstSintaxDerecha.Add("PR09 VARI"); //Antes era PR12 VARI
-            IMPR.lstSintaxDerecha.Add("PR09 IDEN"); //Antes eraPR12 IDEN
+            IMPR.lstSintaxDerecha.Add("PR09 IDEN"); //Antes era PR12 IDEN
             IMPR.lstSintaxDerecha.Add("IMPR IDEN"); //IMPR IDEN
             IMPR.lstSintaxDerecha.Add("IMPR VARI"); //IMPR VARI
             IMPR.lstSintaxDerecha.Add("IMPR CONU"); //IMPR CONU
@@ -115,8 +115,8 @@ namespace Analizador_Sintáctico.Clases
 
             SintaxLibre PARD = new SintaxLibre();
             PARD.SintaxIzquierda = "PARD"; //PARD
-            PARD.lstSintaxDerecha.Add("PR22 TIPO VARI"); //PR22 TIPO VARI
-            PARD.lstSintaxDerecha.Add("PR22 TIPO IDEN"); //PR22 TIPO IDEN
+            PARD.lstSintaxDerecha.Add("PR14 TIPO VARI"); //Antes era PR22 TIPO VARI
+            PARD.lstSintaxDerecha.Add("PR14 TIPO IDEN"); //Antes eraPR22 TIPO IDEN
             PARD.lstSintaxDerecha.Add("TIPO VARI"); //TIPO VARI
             PARD.lstSintaxDerecha.Add("TIPO IDEN"); //TIPO IDEN
             PARD.lstSintaxDerecha.Add("PARD PARD"); //PARD PARD 
@@ -133,7 +133,7 @@ namespace Analizador_Sintáctico.Clases
            
             SintaxLibre PASA = new SintaxLibre();
             PASA.SintaxIzquierda = "PASA"; //PASA
-            PASA.lstSintaxDerecha.Add("PR17 FIRI"); //PR17 FIRI
+            PASA.lstSintaxDerecha.Add("PR15 FIRI"); //Antes era PR17 FIRI
             Sintax.Add(PASA);
             SintaxLibre ACCE = new SintaxLibre();
             ACCE.SintaxIzquierda = "ACCE"; //ACCE
@@ -183,7 +183,7 @@ namespace Analizador_Sintáctico.Clases
             Sintax.Add(OPAR);
             SintaxLibre VARR = new SintaxLibre();
             VARR.SintaxIzquierda = "VARR"; //VARR
-            VARR.lstSintaxDerecha.Add("PR22 IDEN"); //PR22 IDEN
+            VARR.lstSintaxDerecha.Add("PR14 IDEN"); //Antes era PR22 IDEN
             Sintax.Add(VARR);
             SintaxLibre VARI = new SintaxLibre();
             VARI.SintaxIzquierda = "VARI";  //VARI
