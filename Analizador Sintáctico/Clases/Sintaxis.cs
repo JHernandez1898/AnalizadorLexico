@@ -79,8 +79,8 @@ namespace Analizador_Sintáctico.Clases
             Sintax.Add(CAPT);
             SintaxLibre IMPR = new SintaxLibre();
             IMPR.SintaxIzquierda = "IMPR"; //IMPR
-            IMPR.lstSintaxDerecha.Add("PR12 VARI"); //PR12 VARI
-            IMPR.lstSintaxDerecha.Add("PR12 IDEN"); //PR12 IDEN
+            IMPR.lstSintaxDerecha.Add("PR09 VARI"); //Antes era PR12 VARI
+            IMPR.lstSintaxDerecha.Add("PR09 IDEN"); //Antes eraPR12 IDEN
             IMPR.lstSintaxDerecha.Add("IMPR IDEN"); //IMPR IDEN
             IMPR.lstSintaxDerecha.Add("IMPR VARI"); //IMPR VARI
             IMPR.lstSintaxDerecha.Add("IMPR CONU"); //IMPR CONU
@@ -137,7 +137,7 @@ namespace Analizador_Sintáctico.Clases
             Sintax.Add(PASA);
             SintaxLibre ACCE = new SintaxLibre();
             ACCE.SintaxIzquierda = "ACCE"; //ACCE
-            ACCE.lstSintaxDerecha.Add("PR19"); //PR19
+            ACCE.lstSintaxDerecha.Add("PR10"); //Antes era PR19
             ACCE.lstSintaxDerecha.Add("PR21"); //PR21
             Sintax.Add(ACCE);
  
