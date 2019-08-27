@@ -29,7 +29,7 @@ namespace Analizador_Sintáctico.Clases
             S.lstSintaxDerecha.Add("ASIG"); //ASIG
             S.lstSintaxDerecha.Add("IMPR"); //IMPR
             S.lstSintaxDerecha.Add("CAPT"); //CAPT
-            S.lstSintaxDerecha.Add("PR04"); //PR08
+            S.lstSintaxDerecha.Add("PR05"); //PR04
             S.lstSintaxDerecha.Add("COND"); //COND
             S.lstSintaxDerecha.Add("SWTC"); //SWTC
             //  S.lstSintaxDerecha.Add("ARGU ARGM ARGN");
@@ -38,7 +38,7 @@ namespace Analizador_Sintáctico.Clases
             Sintax.Add(S);
             SintaxLibre PARA = new SintaxLibre();
             PARA.SintaxIzquierda = "PARA"; //PARA
-            PARA.lstSintaxDerecha.Add("PR16 ASIG PR10 OPER PR24 ASIG"); //PR16 ASIG PR10 OPER PR24 ASIG
+            PARA.lstSintaxDerecha.Add("PR06 ASIG PR19 OPER PR17 ASIG"); //PR16 ASIG PR10 OPER PR24 ASIG
             Sintax.Add(PARA);
 
             SintaxLibre ASIG = new SintaxLibre();
@@ -70,8 +70,8 @@ namespace Analizador_Sintáctico.Clases
 
             SintaxLibre FNCD = new SintaxLibre();
             FNCD.SintaxIzquierda = "FNCD"; //FNCD
-            FNCD.lstSintaxDerecha.Add("PR09 TIPO ACCE IDEN FIRD"); //PR09 TIPO ACCE IDEN FIRD
-            FNCD.lstSintaxDerecha.Add("PR09 TIPO ACCE IDEN SINP"); //PR09 TIPO ACCE IDEN SINP
+            FNCD.lstSintaxDerecha.Add("PR07 TIPO ACCE IDEN FIRD"); //PR09 TIPO ACCE IDEN FIRD
+            FNCD.lstSintaxDerecha.Add("PR07 TIPO ACCE IDEN SINP"); //PR09 TIPO ACCE IDEN SINP
             Sintax.Add(FNCD);
             SintaxLibre CAPT = new SintaxLibre();
             CAPT.SintaxIzquierda = "CAPT"; //CAPT
@@ -196,9 +196,9 @@ namespace Analizador_Sintáctico.Clases
             IDEN.lstSintaxDerecha.Add("ID"); //ID
             Sintax.Add(IDEN);            
             SintaxLibre COND = new SintaxLibre();
-           COND.SintaxIzquierda = "COND"; //COND
-            COND.lstSintaxDerecha.Add("PR23 OPER"); //PR23 OPER
-            COND.lstSintaxDerecha.Add("PR23 OPEL"); //PR23 OPEL
+           COND.SintaxIzquierda = "COND"; //COND 
+            COND.lstSintaxDerecha.Add("PR08 OPER"); //PR23 OPER SI -> IF
+            COND.lstSintaxDerecha.Add("PR08 OPEL"); //PR23 OPEL
             Sintax.Add(COND);
         
             SintaxLibre OPEA = new SintaxLibre();
