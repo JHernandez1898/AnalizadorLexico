@@ -75,7 +75,7 @@ namespace Analizador_Sintáctico.Clases
             Sintax.Add(FNCD);
             SintaxLibre CAPT = new SintaxLibre();
             CAPT.SintaxIzquierda = "CAPT"; //CAPT
-            CAPT.lstSintaxDerecha.Add("PR01 IDEN");//PR01 IDEN            
+            CAPT.lstSintaxDerecha.Add("PR13 IDEN");//Antes era PR01 IDEN            
             Sintax.Add(CAPT);
             SintaxLibre IMPR = new SintaxLibre();
             IMPR.SintaxIzquierda = "IMPR"; //IMPR
@@ -100,8 +100,8 @@ namespace Analizador_Sintáctico.Clases
 
             SintaxLibre PROD = new SintaxLibre();
             PROD.SintaxIzquierda = "PROD"; //PROD 
-            PROD.lstSintaxDerecha.Add("PR20 ACCE IDEN FIRD"); //PR20 ACCE IDEN FIRD
-            PROD.lstSintaxDerecha.Add("PR20 ACCE IDEN SINP"); //PR20 ACCE IDEN SINP
+            PROD.lstSintaxDerecha.Add("PR11 ACCE IDEN FIRD"); //Antes era PR20 ACCE IDEN FIRD
+            PROD.lstSintaxDerecha.Add("PR11 ACCE IDEN SINP"); //Antes era PR20 ACCE IDEN SINP
             Sintax.Add(PROD);
 
             SintaxLibre FIRD = new SintaxLibre();
@@ -138,7 +138,7 @@ namespace Analizador_Sintáctico.Clases
             SintaxLibre ACCE = new SintaxLibre();
             ACCE.SintaxIzquierda = "ACCE"; //ACCE
             ACCE.lstSintaxDerecha.Add("PR10"); //Antes era PR19
-            ACCE.lstSintaxDerecha.Add("PR21"); //PR21
+            ACCE.lstSintaxDerecha.Add("PR12"); //Antes era PR21
             Sintax.Add(ACCE);
  
         
