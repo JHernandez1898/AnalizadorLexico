@@ -75,12 +75,12 @@ namespace Analizador_Sintáctico.Clases
             Sintax.Add(FNCD);
             SintaxLibre CAPT = new SintaxLibre();
             CAPT.SintaxIzquierda = "CAPT"; //CAPT
-            CAPT.lstSintaxDerecha.Add("PR01 IDEN");//PR01 IDEN            
+            CAPT.lstSintaxDerecha.Add("PR13 IDEN");//Antes era PR01 IDEN            
             Sintax.Add(CAPT);
             SintaxLibre IMPR = new SintaxLibre();
             IMPR.SintaxIzquierda = "IMPR"; //IMPR
             IMPR.lstSintaxDerecha.Add("PR09 VARI"); //Antes era PR12 VARI
-            IMPR.lstSintaxDerecha.Add("PR09 IDEN"); //Antes eraPR12 IDEN
+            IMPR.lstSintaxDerecha.Add("PR09 IDEN"); //Antes era PR12 IDEN
             IMPR.lstSintaxDerecha.Add("IMPR IDEN"); //IMPR IDEN
             IMPR.lstSintaxDerecha.Add("IMPR VARI"); //IMPR VARI
             IMPR.lstSintaxDerecha.Add("IMPR CONU"); //IMPR CONU
@@ -100,8 +100,8 @@ namespace Analizador_Sintáctico.Clases
 
             SintaxLibre PROD = new SintaxLibre();
             PROD.SintaxIzquierda = "PROD"; //PROD 
-            PROD.lstSintaxDerecha.Add("PR20 ACCE IDEN FIRD"); //PR20 ACCE IDEN FIRD
-            PROD.lstSintaxDerecha.Add("PR20 ACCE IDEN SINP"); //PR20 ACCE IDEN SINP
+            PROD.lstSintaxDerecha.Add("PR11 ACCE IDEN FIRD"); //Antes era PR20 ACCE IDEN FIRD
+            PROD.lstSintaxDerecha.Add("PR11 ACCE IDEN SINP"); //Antes era PR20 ACCE IDEN SINP
             Sintax.Add(PROD);
 
             SintaxLibre FIRD = new SintaxLibre();
@@ -115,8 +115,8 @@ namespace Analizador_Sintáctico.Clases
 
             SintaxLibre PARD = new SintaxLibre();
             PARD.SintaxIzquierda = "PARD"; //PARD
-            PARD.lstSintaxDerecha.Add("PR22 TIPO VARI"); //PR22 TIPO VARI
-            PARD.lstSintaxDerecha.Add("PR22 TIPO IDEN"); //PR22 TIPO IDEN
+            PARD.lstSintaxDerecha.Add("PR14 TIPO VARI"); //Antes era PR22 TIPO VARI
+            PARD.lstSintaxDerecha.Add("PR14 TIPO IDEN"); //Antes eraPR22 TIPO IDEN
             PARD.lstSintaxDerecha.Add("TIPO VARI"); //TIPO VARI
             PARD.lstSintaxDerecha.Add("TIPO IDEN"); //TIPO IDEN
             PARD.lstSintaxDerecha.Add("PARD PARD"); //PARD PARD 
@@ -133,12 +133,12 @@ namespace Analizador_Sintáctico.Clases
            
             SintaxLibre PASA = new SintaxLibre();
             PASA.SintaxIzquierda = "PASA"; //PASA
-            PASA.lstSintaxDerecha.Add("PR17 FIRI"); //PR17 FIRI
+            PASA.lstSintaxDerecha.Add("PR15 FIRI"); //Antes era PR17 FIRI
             Sintax.Add(PASA);
             SintaxLibre ACCE = new SintaxLibre();
             ACCE.SintaxIzquierda = "ACCE"; //ACCE
             ACCE.lstSintaxDerecha.Add("PR10"); //Antes era PR19
-            ACCE.lstSintaxDerecha.Add("PR21"); //PR21
+            ACCE.lstSintaxDerecha.Add("PR12"); //Antes era PR21
             Sintax.Add(ACCE);
  
         
@@ -183,7 +183,7 @@ namespace Analizador_Sintáctico.Clases
             Sintax.Add(OPAR);
             SintaxLibre VARR = new SintaxLibre();
             VARR.SintaxIzquierda = "VARR"; //VARR
-            VARR.lstSintaxDerecha.Add("PR22 IDEN"); //PR22 IDEN
+            VARR.lstSintaxDerecha.Add("PR14 IDEN"); //Antes era PR22 IDEN
             Sintax.Add(VARR);
             SintaxLibre VARI = new SintaxLibre();
             VARI.SintaxIzquierda = "VARI";  //VARI
@@ -200,7 +200,13 @@ namespace Analizador_Sintáctico.Clases
             COND.lstSintaxDerecha.Add("PR08 OPER"); //PR23 OPER SI -> IF
             COND.lstSintaxDerecha.Add("PR08 OPEL"); //PR23 OPEL
             Sintax.Add(COND);
-        
+
+            SintaxLibre SWTC = new SintaxLibre();
+            SWTC.SintaxIzquierda = "SWTC";
+            SWTC.lstSintaxDerecha.Add("PR18 PAR2 IDEN PAR1");
+            Sintax.Add(SWTC);
+
+
             SintaxLibre OPEA = new SintaxLibre();
             OPEA.SintaxIzquierda = "OPEA"; //OPEA
             OPEA.lstSintaxDerecha.Add("IDEN OPAR IDEN"); //IDEN OPAR IDEN
