@@ -25,9 +25,10 @@ namespace Analizador_Léxico
         {
             try
             {
-                rtxtcodigointermedio.Text = "";
+                
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
+                rtxtcodigointermedio.Text = "";
                 string strEntrada = rtxtentrada.Text;
                 linea = 0;
                 txtnumrenglon.Text = linea.ToString();

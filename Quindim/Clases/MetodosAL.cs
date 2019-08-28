@@ -18,15 +18,16 @@ namespace Quindim.Clases
             get { return _strServidor; }
             set { _strServidor = value; }
         }
+        public static DataTable Matriz = new DataTable();
         public static void CrearMatriz()
         {
-           
             //Obtener Matriz
             using (SqlConnection con = ConexionMatriz.ObtenerConexion(Servidor))
             {
-                SqlCommand comm = new SqlCommand("SELECT * FROM TRANSICION order by estado",con);
+                SqlCommand comm = new SqlCommand("SELECT * FROM TRANSICION order by estado", con);
                 SqlDataReader red = comm.ExecuteReader();
                 Matriz.Load(red);
+                
             }
         }
 
@@ -35,7 +36,7 @@ namespace Quindim.Clases
         public static List<NumericoExponencial> ConstantesNumericasExponenciales = new List<NumericoExponencial>();
         public static List<NumericoReal> ConstantesNumericasReales = new List<NumericoReal>();
         public static List<NumericoExpReal> ConstantesNumericasExpReales = new List<NumericoExpReal>();
-        public static DataTable Matriz = new DataTable();
+       
         public static string token ="";
 
         
@@ -94,15 +95,15 @@ namespace Quindim.Clases
         {
             int Estado = 0;
            
-            if(c==' ' && intEstadoActual!=191)
+            if(c==' ' && intEstadoActual!=119)
             {
                 
                 int columna = Matriz.Columns.IndexOf(c.ToString());
                 Estado = Convert.ToInt32((Matriz.Rows[intEstadoActual][columna]).ToString());
-                token = (Matriz.Rows[Estado][93]).ToString();
+                token = (Matriz.Rows[Estado][94]).ToString();
                 token = token.Trim();
                 bandera = false;
-                if(Estado==201||Estado==211||Estado==210||Estado==212||Estado==216)
+                if(Estado==118||Estado==169||Estado==170||Estado==171||Estado==175)
                 {
                     IdentificarToken(strPalabra, ref token, Estado);
                 }
