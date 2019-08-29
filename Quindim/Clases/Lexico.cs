@@ -34,7 +34,7 @@ namespace Quindim.Clases
                         
                     }
                 }
-                Depurar();
+                //Depurar();
                 linea = 1;
             }
             catch (Exception ex)
