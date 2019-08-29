@@ -23,9 +23,10 @@ namespace Quindim.Clases
                 foreach (string Linea in strLineas)
                 {
                     linea++;
+                    
                     List<string> tokens = new List<string>();
                     MetodosAL.ObtenerToken(Linea, ref tokens);
-                    if (Linea != "")
+                    if (Linea.Trim() != "")
                     {
                         foreach (string token in tokens) LineaLexico += token +" ";
                         LineasLexico.Add(LineaLexico);
@@ -33,7 +34,7 @@ namespace Quindim.Clases
                         
                     }
                 }
-                //Depurar();
+                Depurar();
                 linea = 1;
             }
             catch (Exception ex)
