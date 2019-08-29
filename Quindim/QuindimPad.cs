@@ -282,6 +282,10 @@ namespace Quindim
                 dgvConstantesExpo.Rows.Add("CNEE" + expo.Index, expo.Contenido, expo.Exponencial);
             foreach (NumericoExpReal exporeal in MetodosAL.ConstantesNumericasExpReales)
                 dgvConstantesExpo.Rows.Add("CNRE" + exporeal.Index, exporeal.Contenido, exporeal.Exponencial);
+            dgvIDE.CurrentCell = null;
+            dgvConstatesNumericasEnteras.CurrentCell = null;
+            dgvConstatesNumericasReales.CurrentCell = null;
+            dgvConstantesExpo.CurrentCell = null;
         }
 
         static int indx = 0;
