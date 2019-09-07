@@ -226,11 +226,12 @@ namespace Quindim
                 rtxtcodigointermediolexico.Text += token + " ";
                 rtxtcodigointermediolexico.Text += "\n";
             }
-            MostrarIdentificadoresConstantes();
-            Lexico.Depurar();
             int linea = 1;
             string strCambio = "";
             string strActual = "";
+            int intIndex = 0;
+            string strDeclaracion = "";
+            
             int temp = 0;
             try
             {
@@ -243,6 +244,56 @@ namespace Quindim
 
                     while (temp > 0)
                     {
+                        if(temp==2)
+                        {
+                            strDeclaracion = cadena;
+                            string[] arreglo = strDeclaracion.Split(' ');
+                            string strIndex = arreglo[1];
+                            int index = int.Parse(strIndex.Replace("ID", ""));
+
+                            if (arreglo[0] == "TDD1")
+                            {
+                                foreach(Identificador Iden in MetodosAL.Identificadores)
+                                {
+                                    if(Iden.Index==index)
+                                    {
+                                        Iden.Tipo = "int";
+                                    }
+                                }
+                            }
+                            if (arreglo[0] == "TDD2")
+                            {
+                                foreach (Identificador Iden in MetodosAL.Identificadores)
+                                {
+                                    if (Iden.Index == index)
+                                    {
+                                        Iden.Tipo = "dbl";
+                                    }
+                                }
+                            }
+                            if (arreglo[0] == "TDD3")
+                            {
+                                foreach (Identificador Iden in MetodosAL.Identificadores)
+                                {
+                                    if (Iden.Index == index)
+                                    {
+                                        Iden.Tipo = "str";
+                                    }
+                                }
+                            }
+                            if (arreglo[0] == "TDD4")
+                            {
+                                foreach (Identificador Iden in MetodosAL.Identificadores)
+                                {
+                                    if (Iden.Index == index)
+                                    {
+                                        Iden.Tipo = "chr";
+                                    }
+                                }
+                            }
+
+
+                        }
                         string[] strSubcadenas = CrearCombinaciones(temp, strActual);
                         //if (!Revisar(strSubcadenas, temp)) temp--;
                         if (MetodosAS.DisminuirTemp(strSubcadenas, temp)) { temp--; }
@@ -264,6 +315,8 @@ namespace Quindim
                 MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador sintáctico", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+
+            MostrarIdentificadoresConstantes();
         }
 
         private void MostrarIdentificadoresConstantes()
@@ -273,7 +326,7 @@ namespace Quindim
             dgvConstatesNumericasReales.Rows.Clear();
             dgvConstantesExpo.Rows.Clear();
             foreach (Identificador IDE in MetodosAL.Identificadores)
-                dgvIDE.Rows.Add("ID" + IDE.Index, IDE.Nombre, "", "");
+                dgvIDE.Rows.Add("ID" + IDE.Index, IDE.Nombre, IDE.Tipo, "");
             foreach (NumericoEntero Num in MetodosAL.ConstantesNumericasEnteras)
                 dgvConstatesNumericasEnteras.Rows.Add("CNE" + Num.Index, Num.Contenido);
             foreach (NumericoReal Real in MetodosAL.ConstantesNumericasReales)
