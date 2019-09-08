@@ -213,7 +213,7 @@ namespace Quindim
 
         private void Btnleertodo_Click(object sender, EventArgs e)
         {
-
+            MetodosAL.Identificadores = new List<Identificador>();
             rtxtcodigointermediolexico.Text = "";
             rtxtcodigointermediosintax.Text = "";
             rtxSintaxLineaxLinea.Text = "";
@@ -261,7 +261,12 @@ namespace Quindim
                     if (strActual != "S") { rtxSintaxLineaxLinea.Text += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Sintaxis incorrecta en la línea: " + linea); linea++; }
                 }
 
-                MetodosSe.PrimeraPasada(LineasTokens);
+                List<string> LineasSemantica  =  MetodosSe.PrimeraPasada(LineasTokens);
+                rchSemantica.Text = "";
+                foreach(string Linea in LineasSemantica)
+                {
+                    rchSemantica.Text += Linea + "\n";
+                }
                 stopwatch.Stop();
                 MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador sintáctico", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

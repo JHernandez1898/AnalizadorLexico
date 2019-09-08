@@ -26,11 +26,22 @@ namespace Quindim.Clases
             }
             return NuevaLinea;
         }
-        public static void PrimeraPasada(List<string> LineasTokens)
+        public static string ObtenerArchivoTemporal(string Linea) 
         {
+           foreach(Identificador elemento in MetodosAL.Identificadores)
+            {
+                string id = "ID" + elemento.Index;
+                Linea = Linea.Replace(id, elemento.Tipo);
+            }
+            return Linea;
+        }
+        public static List<string> PrimeraPasada(List<string> LineasTokens)
+        {
+            List<string> LineasSemantica = new List<string>();
             string strActual = "";
             try
             {
+               
                 foreach (string cadena in LineasTokens)
                 {
                     strActual = cadena;
@@ -50,28 +61,29 @@ namespace Quindim.Clases
                             switch (arreglo1[0])
                             {
                                 case "TDD1":
-                                    elemento.Tipo = "int";
+                                    elemento.Tipo = "INTE";
                                     break;
                                 case "TDD2":
-                                    elemento.Tipo = "dbl";
+                                    elemento.Tipo = "DBLE";
                                     break;
                                 case "TDD3":
-                                    elemento.Tipo = "str";
+                                    elemento.Tipo = "STRG";
                                     break;
                                 default:
-                                    elemento.Tipo = "chr";
+                                    elemento.Tipo = "CHAR";
                                     break;
                             }
                             MetodosAL.Identificadores.Add(elemento);
                         }
                     }
+                    LineasSemantica.Add(ObtenerArchivoTemporal(cadena));
                 }
-               
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+            return LineasSemantica;
         }
     }
 }
