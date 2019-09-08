@@ -220,7 +220,7 @@ namespace Quindim
             rtxSintaxLineaxLinea.Text = "";
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            List<string> LineasTokens = new List<string>();
+            List<string> LineasTokens;
             LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
             foreach (String token in LineasTokens)
             {
@@ -228,10 +228,9 @@ namespace Quindim
                 rtxtcodigointermediolexico.Text += "\n";
             }
             int linea = 1;
-            string strCambio = "";
-            string strActual = "";
-
-            int temp = 0;
+            string strCambio;
+            string strActual;
+            int temp;
             try
             {
                 foreach (string cadena in LineasTokens)
@@ -261,7 +260,7 @@ namespace Quindim
                     if (strActual != "S") { rtxSintaxLineaxLinea.Text += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Sintaxis incorrecta en la línea: " + linea); linea++; }
                 }
 
-                List<string> LineasSemantica  =  MetodosSe.PrimeraPasada(LineasTokens);
+                List<string> LineasSemantica = MetodosSe.PrimeraPasada(LineasTokens);
                 rchSemantica.Text = "";
                 foreach(string Linea in LineasSemantica)
                 {
@@ -441,6 +440,7 @@ namespace Quindim
 
         private void btnPrimeraPasada_Click(object sender, EventArgs e)
         {
+            rchSemantica.Text = "";
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
@@ -465,21 +465,27 @@ namespace Quindim
                             switch (arreglo1[0])
                             {
                                 case "TDD1":
-                                    elemento.Tipo = "int";
+                                    elemento.Tipo = "INTE";
                                     break;
                                 case "TDD2":
-                                    elemento.Tipo = "dbl";
+                                    elemento.Tipo = "DBLE";
                                     break;
                                 case "TDD3":
-                                    elemento.Tipo = "str";
+                                    elemento.Tipo = "STRG";
                                     break;
                                 default:
-                                    elemento.Tipo = "chr";
+                                    elemento.Tipo = "CHAR";
                                     break;
                             }
                             MetodosAL.Identificadores.Add(elemento);
+                            
                         }
+                        
                     }
+                }
+                foreach (string d in LineasTokens)
+                {
+                    rchSemantica.Text += MetodosSe.ObtenerArchivoTemporal(d)+"\n";
                 }
                 MostrarIdentificadoresConstantes();
                 stopwatch.Stop();

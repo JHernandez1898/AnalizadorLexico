@@ -60,7 +60,7 @@ namespace Quindim.Clases
             }
         }
 
-                public static string ObtenerToken(int intEstadoActual, List<char> Palabra)
+       public static string ObtenerToken(int intEstadoActual, List<char> Palabra)
         {
             string token = "";
             using (SqlConnection con = ConexionMatriz.ObtenerConexion(Servidor))

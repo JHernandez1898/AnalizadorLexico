@@ -33,6 +33,26 @@ namespace Quindim.Clases
                 string id = "ID" + elemento.Index;
                 Linea = Linea.Replace(id, elemento.Tipo);
             }
+           foreach(NumericoEntero x in MetodosAL.ConstantesNumericasEnteras)
+            {
+                string id = "CNE" + x.Index;
+                Linea = Linea.Replace(id,"INTE");
+            }
+            foreach (NumericoExponencial x in MetodosAL.ConstantesNumericasExponenciales)
+            {
+                string id = "CNEE" + x.Index;
+                Linea = Linea.Replace(id, "INTE");
+            }
+            foreach (NumericoReal x in MetodosAL.ConstantesNumericasReales)
+            {
+                string id = "CNR" + x.Index;
+                Linea = Linea.Replace(id, "DBLE");
+            }
+            foreach (NumericoExpReal x in MetodosAL.ConstantesNumericasExpReales)
+            {
+                string id = "CNRE" + x.Index;
+                Linea = Linea.Replace(id, "INTE");
+            }
             return Linea;
         }
         public static List<string> PrimeraPasada(List<string> LineasTokens)
@@ -41,7 +61,6 @@ namespace Quindim.Clases
             string strActual = "";
             try
             {
-               
                 foreach (string cadena in LineasTokens)
                 {
                     strActual = cadena;
@@ -76,7 +95,10 @@ namespace Quindim.Clases
                             MetodosAL.Identificadores.Add(elemento);
                         }
                     }
-                    LineasSemantica.Add(ObtenerArchivoTemporal(cadena));
+                }
+                foreach(string d in LineasTokens)
+                {
+                    LineasSemantica.Add(ObtenerArchivoTemporal(d));
                 }
             }
             catch (Exception ex)
