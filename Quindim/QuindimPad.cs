@@ -213,6 +213,7 @@ namespace Quindim
 
         private void Btnleertodo_Click(object sender, EventArgs e)
         {
+
             rtxtcodigointermediolexico.Text = "";
             rtxtcodigointermediosintax.Text = "";
             rtxSintaxLineaxLinea.Text = "";
@@ -229,7 +230,7 @@ namespace Quindim
             int linea = 1;
             string strCambio = "";
             string strActual = "";
-            
+
             int temp = 0;
             try
             {
@@ -259,6 +260,8 @@ namespace Quindim
                     }
                     if (strActual != "S") { rtxSintaxLineaxLinea.Text += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Sintaxis incorrecta en la línea: " + linea); linea++; }
                 }
+
+                MetodosSe.PrimeraPasada(LineasTokens);
                 stopwatch.Stop();
                 MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador sintáctico", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -433,122 +436,54 @@ namespace Quindim
 
         private void btnPrimeraPasada_Click(object sender, EventArgs e)
         {
-            rtxtcodigointermediolexico.Text = "";
-            rtxtcodigointermediosintax.Text = "";
-            rtxSintaxLineaxLinea.Text = "";
-            rtxSintaxLineaxLinea.Text = "";
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            List<string> LineasTokens = new List<string>();
-            LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
-            foreach (String token in LineasTokens)
-            {
-                rtxtcodigointermediolexico.Text += token + " ";
-                rtxtcodigointermediolexico.Text += "\n";
-            }
-            int linea = 1;
-            string strCambio = "";
-            string strActual = "";
-            string strDeclaracion = "";
-
-            int temp = 0;
+            List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
             try
             {
                 foreach (string cadena in LineasTokens)
                 {
                     strActual = cadena;
                     strActual = strActual.Substring(0, strActual.Length - 1);
-                    rtxtcodigointermediosintax.Text += cadena + "\n";
-                    temp = strActual.Split(' ').Length;
-                    while(temp > 0)
+                    string[] combinacionesde2 = CrearCombinaciones(2, strActual);
+                    foreach (string str in combinacionesde2)
                     {
-                        if (temp == 2)
+                        string[] arreglo1 = str.Split(' ');
+                        string aver = arreglo1[0].Substring(0, 2);
+                        string aver2 = arreglo1[1].Substring(0, 1);
+                        if (arreglo1[0].Substring(0, 3) == "TDD" && arreglo1[1].Substring(0, 2) == "ID")
                         {
-
-                            string[] combinacionesde2 = CrearCombinaciones(temp, strActual);
-
-                            foreach(string str in combinacionesde2)
+                            string strIndex1 = arreglo1[1];
+                            int index = int.Parse(strIndex1.Replace("ID", ""));
+                            Identificador elemento = MetodosAL.Identificadores.Find(x => x.Index == index);
+                            MetodosAL.Identificadores.Remove(elemento);
+                            switch (arreglo1[0])
                             {
-                            
-                                string[] arreglo1 = str.Split(' ');
-                                string aver = arreglo1[0].Substring(0, 2);
-                                string aver2 = arreglo1[1].Substring(0, 1);
-                                if (arreglo1[0].Substring(0,3) == "TDD" && arreglo1[1].Substring(0, 2) == "ID")
-                                {
-                                    string strIndex1 = arreglo1[1];
-                                    int index = int.Parse(strIndex1.Replace("ID", ""));
-
-                                    if (arreglo1[0] == "TDD1")
-                                    {
-                                        foreach (Identificador Iden in MetodosAL.Identificadores)
-                                        {
-                                            if (Iden.Index == index)
-                                            {
-                                                Iden.Tipo = "int";
-                                            }
-                                        }
-                                    }
-                                    if (arreglo1[0] == "TDD2")
-                                    {
-                                        foreach (Identificador Iden in MetodosAL.Identificadores)
-                                        {
-                                            if (Iden.Index == index)
-                                            {
-                                                Iden.Tipo = "dbl";
-                                            }
-                                        }
-                                    }
-                                    if (arreglo1[0] == "TDD3")
-                                    {
-                                        foreach (Identificador Iden in MetodosAL.Identificadores)
-                                        {
-                                            if (Iden.Index == index)
-                                            {
-                                                Iden.Tipo = "str";
-                                            }
-                                        }
-                                    }
-                                    if (arreglo1[0] == "TDD4")
-                                    {
-                                        foreach (Identificador Iden in MetodosAL.Identificadores)
-                                        {
-                                            if (Iden.Index == index)
-                                            {
-                                                Iden.Tipo = "chr";
-                                            }
-                                        }
-                                    }
-                                }
-                                
+                                case "TDD1":
+                                    elemento.Tipo = "int";
+                                    break;
+                                case "TDD2":
+                                    elemento.Tipo = "dbl";
+                                    break;
+                                case "TDD3":
+                                    elemento.Tipo = "str";
+                                    break;
+                                default:
+                                    elemento.Tipo = "chr";
+                                    break;
                             }
-                            //strDeclaracion = cadena;
-                            //string[] arreglo = strDeclaracion.Split(' ');
-                            //string strIndex = arreglo[1];
-                            //int index = int.Parse(strIndex.Replace("ID", ""));
+                            MetodosAL.Identificadores.Add(elemento);
                         }
-                        string[] strSubcadenas = CrearCombinaciones(temp, strActual);
-                        //if (!Revisar(strSubcadenas, temp)) temp--;
-                        if (MetodosAS.DisminuirTemp(strSubcadenas, temp)) { temp--; }
-                        else
-                        {
-                            foreach (string str in strSubcadenas)
-                            {
-                                strCambio = NormalizarCadena(str, temp);
-                                strActual = strActual.Replace(str, MetodosAS.ObtenerConversion(strCambio));
-                            }
-                            rtxtcodigointermediosintax.Text += strActual + "\n";
-                            temp = strActual.Split(' ').Length;
-                        }
-                        if (strActual == "S") { rtxSintaxLineaxLinea.Text += "Línea " + linea.ToString() + ":S" + "\n"; temp = 0; linea++; }
                     }
-                    if (strActual != "S") { rtxSintaxLineaxLinea.Text += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Sintaxis incorrecta en la línea: " + linea); linea++; }
                 }
+                MostrarIdentificadoresConstantes();
                 stopwatch.Stop();
-                MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador sintáctico", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Primera Pasada", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-
-            MostrarIdentificadoresConstantes();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
