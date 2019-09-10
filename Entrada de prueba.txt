@@ -1,11 +1,12 @@
+int num
 read num
-res = Calcfact ( num )
-print res
-public function dbl Calcfact ( int num )
-if ( n == 0 )
+int res = Calcfact ( num )
+print ( res )
+function dbl Calcfact ( int num )
+if ( num == 0 )
 return ( 1 )
 else
-for ( x = n to n > 1 step x = x - 1 )
-R = R * x
+for ( int x = num to num > 1 step x = x - 1 )
+int R = R * x
 end
 return ( R )
