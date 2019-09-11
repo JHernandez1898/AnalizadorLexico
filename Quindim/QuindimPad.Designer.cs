@@ -104,10 +104,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.SegundaPasada = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.rchtxtSemantic = new System.Windows.Forms.RichTextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.rchSemantica = new System.Windows.Forms.RichTextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -940,11 +940,11 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.SegundaPasada);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.btnPrimeraPasada);
             this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.richTextBox1);
+            this.groupBox1.Controls.Add(this.rchtxtSemantic);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.rchSemantica);
             this.groupBox1.Controls.Add(this.textBox1);
@@ -961,7 +961,7 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Analizador Semantico";
             // 
-            // button2
+            // SegundaPasada
             // 
             this.button2.BackColor = System.Drawing.Color.DimGray;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -997,7 +997,7 @@
             this.label14.TabIndex = 81;
             this.label14.Text = "Validación";
             // 
-            // richTextBox1
+            // rchtxtSemantic
             // 
             this.richTextBox1.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1190,14 +1190,14 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox rchtxtSemantic;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.RichTextBox rchSemantica;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button SegundaPasada;
     }
 }
 
