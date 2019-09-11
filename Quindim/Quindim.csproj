@@ -59,7 +59,6 @@
     <Compile Include="Clases\NumericoExponencial.cs" />
     <Compile Include="Clases\NumericoExpReal.cs" />
     <Compile Include="Clases\NumericoReal.cs" />
-    <Compile Include="Clases\Sintaxis.cs" />
     <Compile Include="Clases\SintaxLibre.cs" />
     <Compile Include="QuindimPad.cs">
       <SubType>Form</SubType>
@@ -69,6 +68,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sintaxis.cs" />
     <EmbeddedResource Include="QuindimPad.resx">
       <DependentUpon>QuindimPad.cs</DependentUpon>
     </EmbeddedResource>

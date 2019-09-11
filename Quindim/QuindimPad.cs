@@ -15,7 +15,6 @@ namespace Quindim
     public partial class QuindimPad : Form
     {
 
-        SintaxisL miSintaxis = new SintaxisL();
 
         public QuindimPad()
         {
@@ -25,7 +24,6 @@ namespace Quindim
         private void QuindimPad_Load(object sender, EventArgs e)
         {
             EstablecerConexion();
-
         }
 
         public void EstablecerConexion()
@@ -83,24 +81,7 @@ namespace Quindim
             return ArregloLineas;
         }
 
-        public string[] CrearCombinaciones(int temp, string linea)
-        {
-            string[] arreglo = linea.Split(' ');
 
-            string[] NuevaLinea = new string[(arreglo.Length + 1) - temp];
-            for (int j = 0; j < NuevaLinea.Length; j++)
-            {
-                string Elemento = "";
-                for (int i = 0; i < temp; i++)
-                {
-                    if (temp != 1) Elemento += arreglo[j + i] + " ";
-                    else Elemento += arreglo[j + i];
-                }
-                if (temp == 1) NuevaLinea[j] = Elemento;
-                else NuevaLinea[j] = Elemento.Substring(0, Elemento.Length - 1);
-            }
-            return NuevaLinea;
-        }
 
         static bool principio = true;
         static bool linea = true;
@@ -131,14 +112,10 @@ namespace Quindim
                 temp = strActual.Split(' ').Length;
             }
             txtTemporal.Text = temp.ToString();
-
-
-            string Existe = "";
-            txtTemporal.Text = temp.ToString();
             if (temp == 0) { MessageBox.Show("Error de sintaxis en línea " + (nLinea + 1)); nLinea = 0; principio = true; rtxtcodigointermediolexico.Text = " "; }
             else
             {
-                string[] strSubcadenas = CrearCombinaciones(temp, strActual);
+                string[] strSubcadenas = Sintaxis.CrearCombinaciones(temp, strActual);
                 if (MetodosAS.DisminuirTemp(strSubcadenas, temp)) { txtTemporal.Text = temp.ToString(); temp--; }
 
                 else
@@ -147,7 +124,7 @@ namespace Quindim
                     {
                         string strCambio = "";
 
-                        strCambio = NormalizarCadena(str, temp);
+                        strCambio = Sintaxis.NormalizarCadena(str, temp);
                         strActual = strActual.Replace(str, MetodosAS.ObtenerConversion(strCambio));
 
                     }
@@ -163,63 +140,19 @@ namespace Quindim
 
         }
 
-        public bool Revisar(string[] strSubcadenas, int temp)
-        {
-            string Existe = "";
-            string strCambio = "";
-            bool evento = false;
-            foreach (string str in strSubcadenas)
-            {
-                foreach (SintaxLibre S in miSintaxis.Sintax)
-                {
-                    strCambio = NormalizarCadena(str, temp);
-                    Existe = S.Exist(strCambio);
-                    if (Existe != strCambio)
-                    {
-                        evento = true;
-                        return evento;
-                    }
-                }
-            }
-            return evento;
-        }
 
-        public string NormalizarCadena(string subcadena, int tempo)
-        {
-            string[] d = subcadena.Split(' ');
-            string strCambio = subcadena;
-            if (tempo == 1)
-            {
-                if (d[0] != "IDEN")
-                {
-                    switch (d[0].Substring(0, 2))
-                    {
-                        case "ID":
-                            strCambio = "ID";
-                            break;
-                        case "CN":
-                            strCambio = "CNE";
-                            break;
-                    }
-                }
-                /*if (d[0].Substring(0, 2) == "ID" && d[0] != "IDEN") { strCambio = "ID"; }
-                else if ((d[0] + "  ").Substring(0, 3) == "CNE") { strCambio = "CNE"; }
-                else if ((d[0] + " ").Substring(0, 3) == "CNR") { strCambio = "CNR"; }
-                else if ((d[0] + " ").Substring(0, 4) == "CNEE") { strCambio = "CNEE"; }
-                else if ((d[0] + " ").Substring(0, 4) == "CNRE") { strCambio = "CNRE"; }*/
-            }
-            return strCambio;
-        }
 
         private void Btnleertodo_Click(object sender, EventArgs e)
         {
-            MetodosAL.Identificadores = new List<Identificador>();
+            MetodosAL.Depurar();
             rtxtcodigointermediolexico.Text = "";
             rtxtcodigointermediosintax.Text = "";
             rtxSintaxLineaxLinea.Text = "";
-            rtxSintaxLineaxLinea.Text = "";
+
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
+
+            //LEXICO
             List<string> LineasTokens;
             LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
             foreach (String token in LineasTokens)
@@ -227,49 +160,21 @@ namespace Quindim
                 rtxtcodigointermediolexico.Text += token + " ";
                 rtxtcodigointermediolexico.Text += "\n";
             }
-            int linea = 1;
-            string strCambio;
-            string strActual;
-            int temp;
-            try
+
+            //SINTAXIS
+            rtxtcodigointermediosintax.Text = Sintaxis.AnalisisSintactico(LineasTokens);
+        
+
+            //SEMANTICA
+            List<string> LineasSemantica = MetodosSe.PrimeraPasada(LineasTokens);
+            rchSemantica.Text = "";
+            foreach (string Linea in LineasSemantica)
             {
-                foreach (string cadena in LineasTokens)
-                {
-                    strActual = cadena;
-                    strActual = strActual.Substring(0, strActual.Length - 1);
-                    rtxtcodigointermediosintax.Text += cadena + "\n";
-                    temp = strActual.Split(' ').Length;
-
-                    while (temp > 0)
-                    {
-                        string[] strSubcadenas = CrearCombinaciones(temp, strActual);
-                        //if (!Revisar(strSubcadenas, temp)) temp--;
-                        if (MetodosAS.DisminuirTemp(strSubcadenas, temp)) { temp--; }
-                        else
-                        {
-                            foreach (string str in strSubcadenas)
-                            {
-                                strCambio = NormalizarCadena(str, temp);
-                                strActual = strActual.Replace(str, MetodosAS.ObtenerConversion(strCambio));
-                            }
-                            rtxtcodigointermediosintax.Text += strActual + "\n";
-                            temp = strActual.Split(' ').Length;
-                        }
-                        if (strActual == "S") { rtxSintaxLineaxLinea.Text += "Línea " + linea.ToString() + ":S" + "\n"; temp = 0; linea++; }
-                    }
-                    if (strActual != "S") { rtxSintaxLineaxLinea.Text += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Sintaxis incorrecta en la línea: " + linea); linea++; }
-                }
-
-                List<string> LineasSemantica = MetodosSe.PrimeraPasada(LineasTokens);
-                rchSemantica.Text = "";
-                foreach(string Linea in LineasSemantica)
-                {
-                    rchSemantica.Text += Linea + "\n";
-                }
-                stopwatch.Stop();
-                MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador sintáctico", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                rchSemantica.Text += Linea + "\n";
             }
-            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+
+            stopwatch.Stop();
+            MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", " Compilacion ", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             MostrarIdentificadoresConstantes();
         }
@@ -407,14 +312,10 @@ namespace Quindim
                 temp = strActual.Split(' ').Length;
             }
             txtTemporal.Text = temp.ToString();
-
-
-            string Existe = "";
-            txtTemporal.Text = temp.ToString();
             if (temp == 0) { MessageBox.Show("Error de sintaxis en línea " + (nLinea + 1)); nLinea = 0; principio = true; rtxtcodigointermediosintax.Text = " "; }
             else
             {
-                string[] strSubcadenas = CrearCombinaciones(temp, strActual);
+                string[] strSubcadenas = Sintaxis.CrearCombinaciones(temp, strActual);
                 if (MetodosAS.DisminuirTemp(strSubcadenas, temp)) { txtTemporal.Text = temp.ToString(); temp--; }
 
                 else
@@ -423,7 +324,7 @@ namespace Quindim
                     {
                         string strCambio = "";
 
-                        strCambio = NormalizarCadena(str, temp);
+                        strCambio = Sintaxis.NormalizarCadena(str, temp);
                         strActual = strActual.Replace(str, MetodosAS.ObtenerConversion(strCambio));
 
                     }
@@ -450,7 +351,7 @@ namespace Quindim
                 {
                     strActual = cadena;
                     strActual = strActual.Substring(0, strActual.Length - 1);
-                    string[] combinacionesde2 = CrearCombinaciones(2, strActual);
+                    string[] combinacionesde2 = Sintaxis.CrearCombinaciones(2, strActual);
                     foreach (string str in combinacionesde2)
                     {
                         string[] arreglo1 = str.Split(' ');

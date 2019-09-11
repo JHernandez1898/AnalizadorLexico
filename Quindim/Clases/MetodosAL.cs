@@ -39,6 +39,16 @@ namespace Quindim.Clases
        
         public static string token ="";
 
+
+        public static void Depurar()
+        {
+            Identificadores.Clear();
+            ConstantesNumericasEnteras.Clear();
+            ConstantesNumericasExponenciales.Clear();
+            ConstantesNumericasReales.Clear();
+            ConstantesNumericasExpReales.Clear();
+        }
+
         
         public static void ObtenerToken(string Palabra, ref List<string> tokens)
         {
@@ -228,7 +238,6 @@ namespace Quindim.Clases
                     ConstantesNumericasExpReales.Add(unNumericoExpReal);
                     break;
             }
-        }
-                
+        }                
     }
 }
