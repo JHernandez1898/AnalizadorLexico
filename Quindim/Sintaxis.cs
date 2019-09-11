@@ -12,13 +12,15 @@ namespace Quindim
     {
 
 
-        public static string AnalisisSintactico(List<string> LineasTokens)
+        public static List<string> AnalisisSintactico(List<string> LineasTokens)
         {
             // SINTAXIS
             int linea = 1;
             string strCambio;
             string strActual;
             string salida = "";
+            string validacion = "";
+            List<string> salidas = new List<string>();
             int temp;
             try
             {
@@ -44,13 +46,15 @@ namespace Quindim
                             salida += strActual + "\n";
                             temp = strActual.Split(' ').Length;
                         }
-                        if (strActual == "S") { salida += "Línea " + linea.ToString() + ":S" + "\n"; temp = 0; linea++; }
+                        if (strActual == "S") { validacion += "Línea " + linea.ToString() + ":S" + "\n"; temp = 0; linea++; }
                     }
-                    if (strActual != "S") { salida += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Sintaxis incorrecta en la línea: " + linea); linea++; }
+                    if (strActual != "S") { validacion += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Sintaxis incorrecta en la línea: " + linea); linea++; }
                 }
-                return salida;
+                salidas.Add(salida);
+                salidas.Add(validacion);
+                return salidas;
             }
-            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return salida; }
+            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return salidas; }
         }
 
 

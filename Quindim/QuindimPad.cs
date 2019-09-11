@@ -162,16 +162,13 @@ namespace Quindim
             }
 
             //SINTAXIS
-            rtxtcodigointermediosintax.Text = Sintaxis.AnalisisSintactico(LineasTokens);
-        
+            List<string> SintaxResult = Sintaxis.AnalisisSintactico(LineasTokens);
+            rtxtcodigointermediosintax.Text = SintaxResult[0];
+            rtxSintaxLineaxLinea.Text = SintaxResult[1];
+
 
             //SEMANTICA
-            List<string> LineasSemantica = MetodosSe.PrimeraPasada(LineasTokens);
-            rchSemantica.Text = "";
-            foreach (string Linea in LineasSemantica)
-            {
-                rchSemantica.Text += Linea + "\n";
-            }
+            
 
             stopwatch.Stop();
             MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", " Compilacion ", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -424,14 +421,14 @@ namespace Quindim
 
                     while (temp > 0)
                     {
-                        string[] strSubcadenas = CrearCombinaciones(temp, strActual);
+                        string[] strSubcadenas = Sintaxis.CrearCombinaciones(temp, strActual);
                         //if (!Revisar(strSubcadenas, temp)) temp--;
                         if (MetodosSe.DisminuirTemp(strSubcadenas, temp)) { temp--; }
                         else
                         {
                             foreach (string str in strSubcadenas)
                             {
-                                strCambio = NormalizarCadena(str, temp);
+                                strCambio = Sintaxis.NormalizarCadena(str, temp);
                                 strActual = strActual.Replace(str, MetodosSe.ObtenerConversion(strCambio));
                             }
                             rchSemantica.Text += strActual + "\n";

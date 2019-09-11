@@ -149,7 +149,7 @@
             this.btnConectar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnConectar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnConectar.Location = new System.Drawing.Point(440, 114);
-            this.btnConectar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnConectar.Margin = new System.Windows.Forms.Padding(4);
             this.btnConectar.Name = "btnConectar";
             this.btnConectar.Size = new System.Drawing.Size(100, 28);
             this.btnConectar.TabIndex = 61;
@@ -174,7 +174,7 @@
             this.txtServer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtServer.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtServer.Location = new System.Drawing.Point(231, 117);
-            this.txtServer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtServer.Margin = new System.Windows.Forms.Padding(4);
             this.txtServer.Name = "txtServer";
             this.txtServer.Size = new System.Drawing.Size(201, 22);
             this.txtServer.TabIndex = 59;
@@ -221,7 +221,7 @@
             this.dgvConstantesExpo.EnableHeadersVisualStyles = false;
             this.dgvConstantesExpo.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgvConstantesExpo.Location = new System.Drawing.Point(1240, 626);
-            this.dgvConstantesExpo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvConstantesExpo.Margin = new System.Windows.Forms.Padding(4);
             this.dgvConstantesExpo.Name = "dgvConstantesExpo";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.Gainsboro;
@@ -238,8 +238,7 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Gold;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvConstantesExpo.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvConstantesExpo.Size = new System.Drawing.Size(357, 201);
-            this.dgvConstantesExpo.Size = new System.Drawing.Size(268, 163);
+            this.dgvConstantesExpo.Size = new System.Drawing.Size(364, 163);
             this.dgvConstantesExpo.TabIndex = 50;
             // 
             // dataGridViewTextBoxColumn5
@@ -307,7 +306,7 @@
             this.dgvConstatesNumericasEnteras.EnableHeadersVisualStyles = false;
             this.dgvConstatesNumericasEnteras.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgvConstatesNumericasEnteras.Location = new System.Drawing.Point(545, 626);
-            this.dgvConstatesNumericasEnteras.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvConstatesNumericasEnteras.Margin = new System.Windows.Forms.Padding(4);
             this.dgvConstatesNumericasEnteras.Name = "dgvConstatesNumericasEnteras";
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.Gainsboro;
@@ -324,7 +323,7 @@
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Gold;
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvConstatesNumericasEnteras.RowsDefaultCellStyle = dataGridViewCellStyle8;
-            this.dgvConstatesNumericasEnteras.Size = new System.Drawing.Size(248, 163);
+            this.dgvConstatesNumericasEnteras.Size = new System.Drawing.Size(331, 163);
             this.dgvConstatesNumericasEnteras.TabIndex = 48;
             // 
             // dataGridViewTextBoxColumn1
@@ -375,7 +374,7 @@
             this.dgvIDE.EnableHeadersVisualStyles = false;
             this.dgvIDE.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgvIDE.Location = new System.Drawing.Point(13, 626);
-            this.dgvIDE.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvIDE.Margin = new System.Windows.Forms.Padding(4);
             this.dgvIDE.Name = "dgvIDE";
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle11.BackColor = System.Drawing.Color.Gainsboro;
@@ -392,7 +391,7 @@
             dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.Gold;
             dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvIDE.RowsDefaultCellStyle = dataGridViewCellStyle12;
-            this.dgvIDE.Size = new System.Drawing.Size(393, 163);
+            this.dgvIDE.Size = new System.Drawing.Size(524, 163);
             this.dgvIDE.TabIndex = 47;
             // 
             // Column1
@@ -435,7 +434,7 @@
             this.rtxtentrada.DetectUrls = false;
             this.rtxtentrada.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.rtxtentrada.Location = new System.Drawing.Point(732, 43);
-            this.rtxtentrada.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rtxtentrada.Margin = new System.Windows.Forms.Padding(4);
             this.rtxtentrada.Name = "rtxtentrada";
             this.rtxtentrada.Size = new System.Drawing.Size(572, 150);
             this.rtxtentrada.TabIndex = 45;
@@ -447,7 +446,7 @@
             this.btnleertodo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnleertodo.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnleertodo.Location = new System.Drawing.Point(1379, 80);
-            this.btnleertodo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnleertodo.Margin = new System.Windows.Forms.Padding(4);
             this.btnleertodo.Name = "btnleertodo";
             this.btnleertodo.Size = new System.Drawing.Size(193, 42);
             this.btnleertodo.TabIndex = 44;
@@ -507,7 +506,7 @@
             this.dgvConstatesNumericasReales.EnableHeadersVisualStyles = false;
             this.dgvConstatesNumericasReales.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgvConstatesNumericasReales.Location = new System.Drawing.Point(884, 626);
-            this.dgvConstatesNumericasReales.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvConstatesNumericasReales.Margin = new System.Windows.Forms.Padding(4);
             this.dgvConstatesNumericasReales.Name = "dgvConstatesNumericasReales";
             dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle15.BackColor = System.Drawing.Color.Gainsboro;
@@ -524,7 +523,7 @@
             dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.Gold;
             dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvConstatesNumericasReales.RowsDefaultCellStyle = dataGridViewCellStyle16;
-            this.dgvConstatesNumericasReales.Size = new System.Drawing.Size(261, 163);
+            this.dgvConstatesNumericasReales.Size = new System.Drawing.Size(348, 163);
             this.dgvConstatesNumericasReales.TabIndex = 64;
             // 
             // dataGridViewTextBoxColumn2
@@ -589,7 +588,7 @@
             this.btnCaracterxCarter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCaracterxCarter.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnCaracterxCarter.Location = new System.Drawing.Point(405, 54);
-            this.btnCaracterxCarter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCaracterxCarter.Margin = new System.Windows.Forms.Padding(4);
             this.btnCaracterxCarter.Name = "btnCaracterxCarter";
             this.btnCaracterxCarter.Size = new System.Drawing.Size(87, 64);
             this.btnCaracterxCarter.TabIndex = 70;
@@ -603,7 +602,7 @@
             this.txtEstadoAnt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtEstadoAnt.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtEstadoAnt.Location = new System.Drawing.Point(405, 299);
-            this.txtEstadoAnt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEstadoAnt.Margin = new System.Windows.Forms.Padding(4);
             this.txtEstadoAnt.Name = "txtEstadoAnt";
             this.txtEstadoAnt.Size = new System.Drawing.Size(83, 22);
             this.txtEstadoAnt.TabIndex = 69;
@@ -625,7 +624,7 @@
             this.txtEstadoActual.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtEstadoActual.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtEstadoActual.Location = new System.Drawing.Point(404, 348);
-            this.txtEstadoActual.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEstadoActual.Margin = new System.Windows.Forms.Padding(4);
             this.txtEstadoActual.Name = "txtEstadoActual";
             this.txtEstadoActual.Size = new System.Drawing.Size(87, 22);
             this.txtEstadoActual.TabIndex = 67;
@@ -647,7 +646,7 @@
             this.txtCaracter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCaracter.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtCaracter.Location = new System.Drawing.Point(407, 203);
-            this.txtCaracter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCaracter.Margin = new System.Windows.Forms.Padding(4);
             this.txtCaracter.Name = "txtCaracter";
             this.txtCaracter.Size = new System.Drawing.Size(85, 22);
             this.txtCaracter.TabIndex = 65;
@@ -669,7 +668,7 @@
             this.txttoken.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txttoken.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.txttoken.Location = new System.Drawing.Point(407, 251);
-            this.txttoken.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txttoken.Margin = new System.Windows.Forms.Padding(4);
             this.txttoken.Name = "txttoken";
             this.txttoken.Size = new System.Drawing.Size(85, 22);
             this.txttoken.TabIndex = 62;
@@ -691,7 +690,7 @@
             this.txtnumrenglon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtnumrenglon.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtnumrenglon.Location = new System.Drawing.Point(407, 149);
-            this.txtnumrenglon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtnumrenglon.Margin = new System.Windows.Forms.Padding(4);
             this.txtnumrenglon.Name = "txtnumrenglon";
             this.txtnumrenglon.Size = new System.Drawing.Size(85, 22);
             this.txtnumrenglon.TabIndex = 60;
@@ -724,7 +723,7 @@
             this.rtxtcodigointermediolexico.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.rtxtcodigointermediolexico.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.rtxtcodigointermediolexico.Location = new System.Drawing.Point(16, 172);
-            this.rtxtcodigointermediolexico.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rtxtcodigointermediolexico.Margin = new System.Windows.Forms.Padding(4);
             this.rtxtcodigointermediolexico.Name = "rtxtcodigointermediolexico";
             this.rtxtcodigointermediolexico.Size = new System.Drawing.Size(376, 200);
             this.rtxtcodigointermediolexico.TabIndex = 51;
@@ -736,7 +735,7 @@
             this.txtcadenatokens.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtcadenatokens.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtcadenatokens.Location = new System.Drawing.Point(16, 107);
-            this.txtcadenatokens.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtcadenatokens.Margin = new System.Windows.Forms.Padding(4);
             this.txtcadenatokens.Name = "txtcadenatokens";
             this.txtcadenatokens.Size = new System.Drawing.Size(377, 22);
             this.txtcadenatokens.TabIndex = 50;
@@ -758,7 +757,7 @@
             this.txtSubcadena.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSubcadena.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtSubcadena.Location = new System.Drawing.Point(16, 53);
-            this.txtSubcadena.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSubcadena.Margin = new System.Windows.Forms.Padding(4);
             this.txtSubcadena.Name = "txtSubcadena";
             this.txtSubcadena.Size = new System.Drawing.Size(377, 22);
             this.txtSubcadena.TabIndex = 48;
@@ -779,7 +778,7 @@
             this.btnPrimeraPasada.BackColor = System.Drawing.Color.DimGray;
             this.btnPrimeraPasada.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPrimeraPasada.Location = new System.Drawing.Point(423, 139);
-            this.btnPrimeraPasada.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrimeraPasada.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrimeraPasada.Name = "btnPrimeraPasada";
             this.btnPrimeraPasada.Size = new System.Drawing.Size(131, 28);
             this.btnPrimeraPasada.TabIndex = 71;
@@ -814,7 +813,7 @@
             this.btnLineaxLinea.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLineaxLinea.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnLineaxLinea.Location = new System.Drawing.Point(385, 30);
-            this.btnLineaxLinea.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLineaxLinea.Margin = new System.Windows.Forms.Padding(4);
             this.btnLineaxLinea.Name = "btnLineaxLinea";
             this.btnLineaxLinea.Size = new System.Drawing.Size(92, 50);
             this.btnLineaxLinea.TabIndex = 82;
@@ -839,7 +838,7 @@
             this.rtxSintaxLineaxLinea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.rtxSintaxLineaxLinea.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.rtxSintaxLineaxLinea.Location = new System.Drawing.Point(301, 107);
-            this.rtxSintaxLineaxLinea.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rtxSintaxLineaxLinea.Margin = new System.Windows.Forms.Padding(4);
             this.rtxSintaxLineaxLinea.Name = "rtxSintaxLineaxLinea";
             this.rtxSintaxLineaxLinea.Size = new System.Drawing.Size(175, 265);
             this.rtxSintaxLineaxLinea.TabIndex = 80;
@@ -862,7 +861,7 @@
             this.rtxtcodigointermediosintax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.rtxtcodigointermediosintax.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.rtxtcodigointermediosintax.Location = new System.Drawing.Point(7, 107);
-            this.rtxtcodigointermediosintax.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rtxtcodigointermediosintax.Margin = new System.Windows.Forms.Padding(4);
             this.rtxtcodigointermediosintax.Name = "rtxtcodigointermediosintax";
             this.rtxtcodigointermediosintax.Size = new System.Drawing.Size(285, 265);
             this.rtxtcodigointermediosintax.TabIndex = 78;
@@ -874,7 +873,7 @@
             this.txtTemporal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTemporal.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtTemporal.Location = new System.Drawing.Point(229, 52);
-            this.txtTemporal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTemporal.Margin = new System.Windows.Forms.Padding(4);
             this.txtTemporal.Name = "txtTemporal";
             this.txtTemporal.Size = new System.Drawing.Size(99, 22);
             this.txtTemporal.TabIndex = 77;
@@ -896,7 +895,7 @@
             this.tokenSintax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tokenSintax.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.tokenSintax.Location = new System.Drawing.Point(7, 53);
-            this.tokenSintax.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tokenSintax.Margin = new System.Windows.Forms.Padding(4);
             this.tokenSintax.Name = "tokenSintax";
             this.tokenSintax.Size = new System.Drawing.Size(202, 22);
             this.tokenSintax.TabIndex = 75;
@@ -966,9 +965,9 @@
             // 
             this.SegundaPasada.BackColor = System.Drawing.Color.DimGray;
             this.SegundaPasada.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.SegundaPasada.Location = new System.Drawing.Point(317, 139);
+            this.SegundaPasada.Location = new System.Drawing.Point(423, 181);
             this.SegundaPasada.Name = "SegundaPasada";
-            this.SegundaPasada.Size = new System.Drawing.Size(98, 23);
+            this.SegundaPasada.Size = new System.Drawing.Size(131, 29);
             this.SegundaPasada.TabIndex = 83;
             this.SegundaPasada.Text = "Segunda Pasada";
             this.SegundaPasada.UseVisualStyleBackColor = false;
@@ -980,7 +979,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.button1.Location = new System.Drawing.Point(423, 107);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(131, 25);
             this.button1.TabIndex = 82;
@@ -1003,9 +1002,9 @@
             this.rchtxtSemantic.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.rchtxtSemantic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.rchtxtSemantic.ForeColor = System.Drawing.SystemColors.InactiveBorder;
-            this.rchtxtSemantic.Location = new System.Drawing.Point(226, 87);
+            this.rchtxtSemantic.Location = new System.Drawing.Point(301, 107);
             this.rchtxtSemantic.Name = "rchtxtSemantic";
-            this.rchtxtSemantic.Size = new System.Drawing.Size(85, 216);
+            this.rchtxtSemantic.Size = new System.Drawing.Size(99, 265);
             this.rchtxtSemantic.TabIndex = 80;
             this.rchtxtSemantic.Text = "";
             // 
@@ -1026,7 +1025,7 @@
             this.rchSemantica.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.rchSemantica.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.rchSemantica.Location = new System.Drawing.Point(7, 107);
-            this.rchSemantica.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rchSemantica.Margin = new System.Windows.Forms.Padding(4);
             this.rchSemantica.Name = "rchSemantica";
             this.rchSemantica.Size = new System.Drawing.Size(285, 265);
             this.rchSemantica.TabIndex = 78;
@@ -1038,7 +1037,7 @@
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox1.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox1.Location = new System.Drawing.Point(301, 55);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(99, 22);
             this.textBox1.TabIndex = 77;
@@ -1060,7 +1059,7 @@
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox2.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox2.Location = new System.Drawing.Point(7, 53);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(286, 22);
             this.textBox2.TabIndex = 75;
