@@ -169,7 +169,6 @@ namespace Quindim
 
 
             //SEMANTICA
-            //PrimerPasada
             List<string> LineasSemantica = MetodosSe.PrimeraPasada(LineasTokens);
             string status = "";
             string bottomupSemantica =  MetodosSe.SegundaPasada(LineasSemantica,ref status);
