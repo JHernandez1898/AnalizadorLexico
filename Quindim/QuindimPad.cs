@@ -51,6 +51,7 @@ namespace Quindim
                     MetodosAL.Servidor = txtServer.Text;
                     lblconexion.BackColor = Color.Green;
                     MetodosAS.CrearMatriz();
+                    MetodosSe.CrearMatriz();
                     btnleertodo.Enabled = true;
 
 
@@ -166,12 +167,13 @@ namespace Quindim
         
 
             //SEMANTICA
+            //PrimerPasada
             List<string> LineasSemantica = MetodosSe.PrimeraPasada(LineasTokens);
+            string status = "";
+            string bottomupSemantica =  MetodosSe.SegundaPasada(LineasSemantica,ref status);
             rchSemantica.Text = "";
-            foreach (string Linea in LineasSemantica)
-            {
-                rchSemantica.Text += Linea + "\n";
-            }
+            rchSemantica.Text = bottomupSemantica;
+            rchtxtSemantic.Text = status;
 
             stopwatch.Stop();
             MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", " Compilacion ", MessageBoxButtons.OK, MessageBoxIcon.Information);

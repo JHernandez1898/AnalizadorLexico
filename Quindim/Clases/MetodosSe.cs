@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using System.Windows.Forms;
 
 namespace Quindim.Clases
 {
@@ -179,6 +180,47 @@ namespace Quindim.Clases
                 }
             }
             return true;
+        }
+        public static string SegundaPasada(List<string> LineasSemantica,ref string status)
+        {
+            string salida="";
+            int linea = 1;
+            string strCambio;
+            string strActual;
+            int temp;
+           
+            try
+            {
+                foreach (string cadena in LineasSemantica)
+                {
+                    strActual = cadena;
+                    strActual = strActual.Substring(0, strActual.Length - 1);
+                    salida += cadena + "\n";
+                    temp = strActual.Split(' ').Length;
+
+                    while (temp > 0)
+                    {
+                        string[] strSubcadenas = MetodosSe.CrearCombinaciones(temp, strActual);
+                        //if (!Revisar(strSubcadenas, temp)) temp--;
+                        if (MetodosSe.DisminuirTemp(strSubcadenas, temp)) { temp--; }
+                        else
+                        {
+                            foreach (string str in strSubcadenas)
+                            {
+                                strCambio = MetodosSe.NormalizarCadena(str, temp);
+                                strActual = strActual.Replace(str, MetodosSe.ObtenerConversion(strCambio));
+                            }
+                            salida += strActual + "\n";
+                            temp = strActual.Split(' ').Length;
+                        }
+                        if (strActual == "S") { status+= "Línea " + linea.ToString() + ":S" + "\n"; temp = 0; linea++; }
+                    }
+                    if (strActual != "S") { status += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Semantica incorrecta en la línea: " + linea); linea++; }
+                }
+
+            }
+            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return salida; }
+            return salida;
         }
     }
 }
