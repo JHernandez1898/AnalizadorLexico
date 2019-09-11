@@ -104,10 +104,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.SegundaPasada = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.rchtxtSemantic = new System.Windows.Forms.RichTextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.rchSemantica = new System.Windows.Forms.RichTextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -238,7 +238,7 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Gold;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvConstantesExpo.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvConstantesExpo.Size = new System.Drawing.Size(357, 201);
+            this.dgvConstantesExpo.Size = new System.Drawing.Size(268, 163);
             this.dgvConstantesExpo.TabIndex = 50;
             // 
             // dataGridViewTextBoxColumn5
@@ -323,7 +323,7 @@
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Gold;
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvConstatesNumericasEnteras.RowsDefaultCellStyle = dataGridViewCellStyle8;
-            this.dgvConstatesNumericasEnteras.Size = new System.Drawing.Size(331, 201);
+            this.dgvConstatesNumericasEnteras.Size = new System.Drawing.Size(248, 163);
             this.dgvConstatesNumericasEnteras.TabIndex = 48;
             // 
             // dataGridViewTextBoxColumn1
@@ -391,7 +391,7 @@
             dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.Gold;
             dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvIDE.RowsDefaultCellStyle = dataGridViewCellStyle12;
-            this.dgvIDE.Size = new System.Drawing.Size(524, 201);
+            this.dgvIDE.Size = new System.Drawing.Size(393, 163);
             this.dgvIDE.TabIndex = 47;
             // 
             // Column1
@@ -523,7 +523,7 @@
             dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.Gold;
             dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvConstatesNumericasReales.RowsDefaultCellStyle = dataGridViewCellStyle16;
-            this.dgvConstatesNumericasReales.Size = new System.Drawing.Size(348, 201);
+            this.dgvConstatesNumericasReales.Size = new System.Drawing.Size(261, 163);
             this.dgvConstatesNumericasReales.TabIndex = 64;
             // 
             // dataGridViewTextBoxColumn2
@@ -940,11 +940,11 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.SegundaPasada);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.btnPrimeraPasada);
             this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.richTextBox1);
+            this.groupBox1.Controls.Add(this.rchtxtSemantic);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.rchSemantica);
             this.groupBox1.Controls.Add(this.textBox1);
@@ -961,17 +961,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Analizador Semantico";
             // 
-            // button2
+            // SegundaPasada
             // 
-            this.button2.BackColor = System.Drawing.Color.DimGray;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Location = new System.Drawing.Point(423, 171);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(131, 28);
-            this.button2.TabIndex = 83;
-            this.button2.Text = "Segunda Pasada";
-            this.button2.UseVisualStyleBackColor = false;
+            this.SegundaPasada.BackColor = System.Drawing.Color.DimGray;
+            this.SegundaPasada.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.SegundaPasada.Location = new System.Drawing.Point(317, 139);
+            this.SegundaPasada.Name = "SegundaPasada";
+            this.SegundaPasada.Size = new System.Drawing.Size(98, 23);
+            this.SegundaPasada.TabIndex = 83;
+            this.SegundaPasada.Text = "Segunda Pasada";
+            this.SegundaPasada.UseVisualStyleBackColor = false;
+            this.SegundaPasada.Click += new System.EventHandler(this.SegundaPasada_Click);
             // 
             // button1
             // 
@@ -997,17 +997,16 @@
             this.label14.TabIndex = 81;
             this.label14.Text = "Validación";
             // 
-            // richTextBox1
+            // rchtxtSemantic
             // 
-            this.richTextBox1.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBox1.ForeColor = System.Drawing.SystemColors.InactiveBorder;
-            this.richTextBox1.Location = new System.Drawing.Point(301, 107);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(112, 265);
-            this.richTextBox1.TabIndex = 80;
-            this.richTextBox1.Text = "";
+            this.rchtxtSemantic.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.rchtxtSemantic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rchtxtSemantic.ForeColor = System.Drawing.SystemColors.InactiveBorder;
+            this.rchtxtSemantic.Location = new System.Drawing.Point(226, 87);
+            this.rchtxtSemantic.Name = "rchtxtSemantic";
+            this.rchtxtSemantic.Size = new System.Drawing.Size(85, 216);
+            this.rchtxtSemantic.TabIndex = 80;
+            this.rchtxtSemantic.Text = "";
             // 
             // label15
             // 
@@ -1190,14 +1189,14 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox rchtxtSemantic;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.RichTextBox rchSemantica;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button SegundaPasada;
     }
 }
 
