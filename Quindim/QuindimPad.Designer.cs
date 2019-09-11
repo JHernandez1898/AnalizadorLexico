@@ -238,6 +238,7 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Gold;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvConstantesExpo.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvConstantesExpo.Size = new System.Drawing.Size(357, 201);
             this.dgvConstantesExpo.Size = new System.Drawing.Size(268, 163);
             this.dgvConstantesExpo.TabIndex = 50;
             // 
