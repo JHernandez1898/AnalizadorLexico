@@ -424,14 +424,14 @@ namespace Quindim
 
                     while (temp > 0)
                     {
-                        string[] strSubcadenas = CrearCombinaciones(temp, strActual);
+                        string[] strSubcadenas = MetodosSe.CrearCombinaciones(temp, strActual);
                         //if (!Revisar(strSubcadenas, temp)) temp--;
                         if (MetodosSe.DisminuirTemp(strSubcadenas, temp)) { temp--; }
                         else
                         {
                             foreach (string str in strSubcadenas)
                             {
-                                strCambio = NormalizarCadena(str, temp);
+                                strCambio = MetodosSe.NormalizarCadena(str, temp);
                                 strActual = strActual.Replace(str, MetodosSe.ObtenerConversion(strCambio));
                             }
                             rchSemantica.Text += strActual + "\n";

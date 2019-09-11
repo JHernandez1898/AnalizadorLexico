@@ -107,7 +107,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.rchtxtSemantic = new System.Windows.Forms.RichTextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.rchSemantica = new System.Windows.Forms.RichTextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -558,9 +558,9 @@
             this.gbLexico.Controls.Add(this.lblSubcadenaEvaluar);
             this.gbLexico.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.gbLexico.Location = new System.Drawing.Point(9, 162);
-            this.gbLexico.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbLexico.Margin = new System.Windows.Forms.Padding(2);
             this.gbLexico.Name = "gbLexico";
-            this.gbLexico.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbLexico.Padding = new System.Windows.Forms.Padding(2);
             this.gbLexico.Size = new System.Drawing.Size(394, 314);
             this.gbLexico.TabIndex = 75;
             this.gbLexico.TabStop = false;
@@ -765,9 +765,9 @@
             this.gbSintax.Controls.Add(this.label11);
             this.gbSintax.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.gbSintax.Location = new System.Drawing.Point(407, 163);
-            this.gbSintax.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbSintax.Margin = new System.Windows.Forms.Padding(2);
             this.gbSintax.Name = "gbSintax";
-            this.gbSintax.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbSintax.Padding = new System.Windows.Forms.Padding(2);
             this.gbSintax.Size = new System.Drawing.Size(372, 314);
             this.gbSintax.TabIndex = 76;
             this.gbSintax.TabStop = false;
@@ -873,7 +873,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
             this.pictureBox1.Location = new System.Drawing.Point(14, 27);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.MaximumSize = new System.Drawing.Size(95, 95);
             this.pictureBox1.MinimumSize = new System.Drawing.Size(95, 95);
             this.pictureBox1.Name = "pictureBox1";
@@ -900,7 +900,7 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.btnPrimeraPasada);
             this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.richTextBox1);
+            this.groupBox1.Controls.Add(this.rchtxtSemantic);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.rchSemantica);
             this.groupBox1.Controls.Add(this.textBox1);
@@ -909,9 +909,9 @@
             this.groupBox1.Controls.Add(this.label17);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.groupBox1.Location = new System.Drawing.Point(783, 163);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(420, 314);
             this.groupBox1.TabIndex = 79;
             this.groupBox1.TabStop = false;
@@ -951,16 +951,16 @@
             this.label14.TabIndex = 81;
             this.label14.Text = "Validación";
             // 
-            // richTextBox1
+            // rchtxtSemantic
             // 
-            this.richTextBox1.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBox1.ForeColor = System.Drawing.SystemColors.InactiveBorder;
-            this.richTextBox1.Location = new System.Drawing.Point(226, 87);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(85, 216);
-            this.richTextBox1.TabIndex = 80;
-            this.richTextBox1.Text = "";
+            this.rchtxtSemantic.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.rchtxtSemantic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rchtxtSemantic.ForeColor = System.Drawing.SystemColors.InactiveBorder;
+            this.rchtxtSemantic.Location = new System.Drawing.Point(226, 87);
+            this.rchtxtSemantic.Name = "rchtxtSemantic";
+            this.rchtxtSemantic.Size = new System.Drawing.Size(85, 216);
+            this.rchtxtSemantic.TabIndex = 80;
+            this.rchtxtSemantic.Text = "";
             // 
             // label15
             // 
@@ -1051,7 +1051,7 @@
             this.Controls.Add(this.btnleertodo);
             this.Controls.Add(this.lblEntrada);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(1026, 603);
             this.Name = "QuindimPad";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
@@ -1137,7 +1137,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox rchtxtSemantic;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.RichTextBox rchSemantica;
         private System.Windows.Forms.TextBox textBox1;
