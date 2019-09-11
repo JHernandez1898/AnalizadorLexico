@@ -88,9 +88,14 @@ namespace Quindim.Clases
                                 case "TDD3":
                                     elemento.Tipo = "STRG";
                                     break;
-                                default:
+                                case "TDD4":
                                     elemento.Tipo = "CHAR";
                                     break;
+                                case "TDD5":
+                                    elemento.Tipo = "BOOL";
+                                    break;
+                                default:
+                                    throw new Exception("Tipo de dato erroneo");
                             }
                             MetodosAL.Identificadores.Add(elemento);
                         }
