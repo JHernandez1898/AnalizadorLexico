@@ -51,6 +51,7 @@ namespace Quindim
                     MetodosAL.Servidor = txtServer.Text;
                     lblconexion.BackColor = Color.Green;
                     MetodosAS.CrearMatriz();
+                    MetodosSe.CrearMatriz();
                     btnleertodo.Enabled = true;
 
 
@@ -168,7 +169,13 @@ namespace Quindim
 
 
             //SEMANTICA
-            
+            //PrimerPasada
+            List<string> LineasSemantica = MetodosSe.PrimeraPasada(LineasTokens);
+            string status = "";
+            string bottomupSemantica =  MetodosSe.SegundaPasada(LineasSemantica,ref status);
+            rchSemantica.Text = "";
+            rchSemantica.Text = bottomupSemantica;
+            rchtxtSemantic.Text = status;
 
             stopwatch.Stop();
             MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", " Compilacion ", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -421,14 +428,14 @@ namespace Quindim
 
                     while (temp > 0)
                     {
-                        string[] strSubcadenas = Sintaxis.CrearCombinaciones(temp, strActual);
+                        string[] strSubcadenas = MetodosSe.CrearCombinaciones(temp, strActual);
                         //if (!Revisar(strSubcadenas, temp)) temp--;
                         if (MetodosSe.DisminuirTemp(strSubcadenas, temp)) { temp--; }
                         else
                         {
                             foreach (string str in strSubcadenas)
                             {
-                                strCambio = Sintaxis.NormalizarCadena(str, temp);
+                                strCambio = MetodosSe.NormalizarCadena(str, temp);
                                 strActual = strActual.Replace(str, MetodosSe.ObtenerConversion(strCambio));
                             }
                             rchSemantica.Text += strActual + "\n";

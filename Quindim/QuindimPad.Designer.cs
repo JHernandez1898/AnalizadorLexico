@@ -104,7 +104,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.SegundaPasada = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.rchtxtSemantic = new System.Windows.Forms.RichTextBox();
@@ -126,20 +126,18 @@
             // 
             // lblconexion
             // 
-            this.lblconexion.Location = new System.Drawing.Point(560, 114);
-            this.lblconexion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblconexion.Location = new System.Drawing.Point(420, 93);
             this.lblconexion.Name = "lblconexion";
-            this.lblconexion.Size = new System.Drawing.Size(31, 28);
+            this.lblconexion.Size = new System.Drawing.Size(23, 23);
             this.lblconexion.TabIndex = 63;
             // 
             // lblServidor
             // 
             this.lblServidor.AutoSize = true;
             this.lblServidor.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblServidor.Location = new System.Drawing.Point(159, 94);
-            this.lblServidor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblServidor.Location = new System.Drawing.Point(119, 76);
             this.lblServidor.Name = "lblServidor";
-            this.lblServidor.Size = new System.Drawing.Size(18, 17);
+            this.lblServidor.Size = new System.Drawing.Size(17, 13);
             this.lblServidor.TabIndex = 62;
             this.lblServidor.Text = "\"\"";
             // 
@@ -148,10 +146,11 @@
             this.btnConectar.BackColor = System.Drawing.Color.DimGray;
             this.btnConectar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnConectar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnConectar.Location = new System.Drawing.Point(330, 93);
             this.btnConectar.Location = new System.Drawing.Point(440, 114);
             this.btnConectar.Margin = new System.Windows.Forms.Padding(4);
             this.btnConectar.Name = "btnConectar";
-            this.btnConectar.Size = new System.Drawing.Size(100, 28);
+            this.btnConectar.Size = new System.Drawing.Size(75, 23);
             this.btnConectar.TabIndex = 61;
             this.btnConectar.Text = "Conectar";
             this.btnConectar.UseVisualStyleBackColor = false;
@@ -161,10 +160,9 @@
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label7.Location = new System.Drawing.Point(159, 121);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(119, 98);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(64, 17);
+            this.label7.Size = new System.Drawing.Size(50, 13);
             this.label7.TabIndex = 60;
             this.label7.Text = "Instancia";
             // 
@@ -176,17 +174,16 @@
             this.txtServer.Location = new System.Drawing.Point(231, 117);
             this.txtServer.Margin = new System.Windows.Forms.Padding(4);
             this.txtServer.Name = "txtServer";
-            this.txtServer.Size = new System.Drawing.Size(201, 22);
+            this.txtServer.Size = new System.Drawing.Size(151, 20);
             this.txtServer.TabIndex = 59;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label3.Location = new System.Drawing.Point(1237, 603);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(928, 490);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(174, 17);
+            this.label3.Size = new System.Drawing.Size(132, 13);
             this.label3.TabIndex = 51;
             this.label3.Text = "Constantes Exponenciales";
             // 
@@ -269,10 +266,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(541, 603);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(406, 490);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(203, 17);
+            this.label2.Size = new System.Drawing.Size(152, 13);
             this.label2.TabIndex = 49;
             this.label2.Text = "Constantes Numericas Enteras";
             // 
@@ -436,7 +432,7 @@
             this.rtxtentrada.Location = new System.Drawing.Point(732, 43);
             this.rtxtentrada.Margin = new System.Windows.Forms.Padding(4);
             this.rtxtentrada.Name = "rtxtentrada";
-            this.rtxtentrada.Size = new System.Drawing.Size(572, 150);
+            this.rtxtentrada.Size = new System.Drawing.Size(430, 123);
             this.rtxtentrada.TabIndex = 45;
             this.rtxtentrada.Text = "";
             // 
@@ -448,7 +444,7 @@
             this.btnleertodo.Location = new System.Drawing.Point(1379, 80);
             this.btnleertodo.Margin = new System.Windows.Forms.Padding(4);
             this.btnleertodo.Name = "btnleertodo";
-            this.btnleertodo.Size = new System.Drawing.Size(193, 42);
+            this.btnleertodo.Size = new System.Drawing.Size(145, 34);
             this.btnleertodo.TabIndex = 44;
             this.btnleertodo.Text = "Leer Todo";
             this.btnleertodo.UseVisualStyleBackColor = false;
@@ -458,10 +454,9 @@
             // 
             this.lblEntrada.AutoSize = true;
             this.lblEntrada.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblEntrada.Location = new System.Drawing.Point(732, 23);
-            this.lblEntrada.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEntrada.Location = new System.Drawing.Point(549, 19);
             this.lblEntrada.Name = "lblEntrada";
-            this.lblEntrada.Size = new System.Drawing.Size(58, 17);
+            this.lblEntrada.Size = new System.Drawing.Size(44, 13);
             this.lblEntrada.TabIndex = 34;
             this.lblEntrada.Text = "Entrada";
             // 
@@ -469,10 +464,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(881, 603);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(661, 490);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(198, 17);
+            this.label1.Size = new System.Drawing.Size(149, 13);
             this.label1.TabIndex = 65;
             this.label1.Text = "Constantes Numericas Reales";
             // 
@@ -546,10 +540,9 @@
             // 
             this.label12.AutoSize = true;
             this.label12.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label12.Location = new System.Drawing.Point(11, 603);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Location = new System.Drawing.Point(8, 490);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(123, 17);
+            this.label12.Size = new System.Drawing.Size(92, 13);
             this.label12.TabIndex = 74;
             this.label12.Text = "Tabla de simbolos";
             // 
@@ -573,11 +566,11 @@
             this.gbLexico.Controls.Add(this.txtSubcadena);
             this.gbLexico.Controls.Add(this.lblSubcadenaEvaluar);
             this.gbLexico.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gbLexico.Location = new System.Drawing.Point(12, 199);
-            this.gbLexico.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gbLexico.Location = new System.Drawing.Point(9, 162);
+            this.gbLexico.Margin = new System.Windows.Forms.Padding(2);
             this.gbLexico.Name = "gbLexico";
-            this.gbLexico.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbLexico.Size = new System.Drawing.Size(525, 386);
+            this.gbLexico.Padding = new System.Windows.Forms.Padding(2);
+            this.gbLexico.Size = new System.Drawing.Size(394, 314);
             this.gbLexico.TabIndex = 75;
             this.gbLexico.TabStop = false;
             this.gbLexico.Text = "Analizador Léxico";
@@ -590,7 +583,7 @@
             this.btnCaracterxCarter.Location = new System.Drawing.Point(405, 54);
             this.btnCaracterxCarter.Margin = new System.Windows.Forms.Padding(4);
             this.btnCaracterxCarter.Name = "btnCaracterxCarter";
-            this.btnCaracterxCarter.Size = new System.Drawing.Size(87, 64);
+            this.btnCaracterxCarter.Size = new System.Drawing.Size(65, 52);
             this.btnCaracterxCarter.TabIndex = 70;
             this.btnCaracterxCarter.Text = "Caracter por Caracter";
             this.btnCaracterxCarter.UseVisualStyleBackColor = false;
@@ -604,17 +597,16 @@
             this.txtEstadoAnt.Location = new System.Drawing.Point(405, 299);
             this.txtEstadoAnt.Margin = new System.Windows.Forms.Padding(4);
             this.txtEstadoAnt.Name = "txtEstadoAnt";
-            this.txtEstadoAnt.Size = new System.Drawing.Size(83, 22);
+            this.txtEstadoAnt.Size = new System.Drawing.Size(63, 20);
             this.txtEstadoAnt.TabIndex = 69;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label6.Location = new System.Drawing.Point(405, 279);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(304, 227);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(106, 17);
+            this.label6.Size = new System.Drawing.Size(79, 13);
             this.label6.TabIndex = 68;
             this.label6.Text = "Estado Anterior";
             // 
@@ -626,17 +618,16 @@
             this.txtEstadoActual.Location = new System.Drawing.Point(404, 348);
             this.txtEstadoActual.Margin = new System.Windows.Forms.Padding(4);
             this.txtEstadoActual.Name = "txtEstadoActual";
-            this.txtEstadoActual.Size = new System.Drawing.Size(87, 22);
+            this.txtEstadoActual.Size = new System.Drawing.Size(66, 20);
             this.txtEstadoActual.TabIndex = 67;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label5.Location = new System.Drawing.Point(401, 327);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(301, 266);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(95, 17);
+            this.label5.Size = new System.Drawing.Size(73, 13);
             this.label5.TabIndex = 66;
             this.label5.Text = "Estado Actual";
             // 
@@ -648,17 +639,16 @@
             this.txtCaracter.Location = new System.Drawing.Point(407, 203);
             this.txtCaracter.Margin = new System.Windows.Forms.Padding(4);
             this.txtCaracter.Name = "txtCaracter";
-            this.txtCaracter.Size = new System.Drawing.Size(85, 22);
+            this.txtCaracter.Size = new System.Drawing.Size(64, 20);
             this.txtCaracter.TabIndex = 65;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label4.Location = new System.Drawing.Point(403, 183);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(302, 149);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(105, 17);
+            this.label4.Size = new System.Drawing.Size(80, 13);
             this.label4.TabIndex = 64;
             this.label4.Text = "Caracter Actual";
             // 
@@ -670,17 +660,16 @@
             this.txttoken.Location = new System.Drawing.Point(407, 251);
             this.txttoken.Margin = new System.Windows.Forms.Padding(4);
             this.txttoken.Name = "txttoken";
-            this.txttoken.Size = new System.Drawing.Size(85, 22);
+            this.txttoken.Size = new System.Drawing.Size(64, 20);
             this.txttoken.TabIndex = 62;
             // 
             // lbltoken
             // 
             this.lbltoken.AutoSize = true;
             this.lbltoken.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbltoken.Location = new System.Drawing.Point(403, 231);
-            this.lbltoken.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbltoken.Location = new System.Drawing.Point(302, 188);
             this.lbltoken.Name = "lbltoken";
-            this.lbltoken.Size = new System.Drawing.Size(48, 17);
+            this.lbltoken.Size = new System.Drawing.Size(38, 13);
             this.lbltoken.TabIndex = 61;
             this.lbltoken.Text = "Token";
             // 
@@ -692,17 +681,16 @@
             this.txtnumrenglon.Location = new System.Drawing.Point(407, 149);
             this.txtnumrenglon.Margin = new System.Windows.Forms.Padding(4);
             this.txtnumrenglon.Name = "txtnumrenglon";
-            this.txtnumrenglon.Size = new System.Drawing.Size(85, 22);
+            this.txtnumrenglon.Size = new System.Drawing.Size(64, 20);
             this.txtnumrenglon.TabIndex = 60;
             // 
             // lblnumrenglon
             // 
             this.lblnumrenglon.AutoSize = true;
             this.lblnumrenglon.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblnumrenglon.Location = new System.Drawing.Point(403, 128);
-            this.lblnumrenglon.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblnumrenglon.Location = new System.Drawing.Point(302, 104);
             this.lblnumrenglon.Name = "lblnumrenglon";
-            this.lblnumrenglon.Size = new System.Drawing.Size(88, 17);
+            this.lblnumrenglon.Size = new System.Drawing.Size(67, 13);
             this.lblnumrenglon.TabIndex = 59;
             this.lblnumrenglon.Text = "# de renglon";
             // 
@@ -710,10 +698,9 @@
             // 
             this.lblcodigointermedio.AutoSize = true;
             this.lblcodigointermedio.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblcodigointermedio.Location = new System.Drawing.Point(12, 153);
-            this.lblcodigointermedio.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblcodigointermedio.Location = new System.Drawing.Point(9, 124);
             this.lblcodigointermedio.Name = "lblcodigointermedio";
-            this.lblcodigointermedio.Size = new System.Drawing.Size(122, 17);
+            this.lblcodigointermedio.Size = new System.Drawing.Size(92, 13);
             this.lblcodigointermedio.TabIndex = 52;
             this.lblcodigointermedio.Text = "Codigo Intermedio";
             // 
@@ -725,7 +712,7 @@
             this.rtxtcodigointermediolexico.Location = new System.Drawing.Point(16, 172);
             this.rtxtcodigointermediolexico.Margin = new System.Windows.Forms.Padding(4);
             this.rtxtcodigointermediolexico.Name = "rtxtcodigointermediolexico";
-            this.rtxtcodigointermediolexico.Size = new System.Drawing.Size(376, 200);
+            this.rtxtcodigointermediolexico.Size = new System.Drawing.Size(283, 163);
             this.rtxtcodigointermediolexico.TabIndex = 51;
             this.rtxtcodigointermediolexico.Text = "";
             // 
@@ -737,17 +724,16 @@
             this.txtcadenatokens.Location = new System.Drawing.Point(16, 107);
             this.txtcadenatokens.Margin = new System.Windows.Forms.Padding(4);
             this.txtcadenatokens.Name = "txtcadenatokens";
-            this.txtcadenatokens.Size = new System.Drawing.Size(377, 22);
+            this.txtcadenatokens.Size = new System.Drawing.Size(283, 20);
             this.txtcadenatokens.TabIndex = 50;
             // 
             // lblcadenatokens
             // 
             this.lblcadenatokens.AutoSize = true;
             this.lblcadenatokens.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblcadenatokens.Location = new System.Drawing.Point(12, 87);
-            this.lblcadenatokens.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblcadenatokens.Location = new System.Drawing.Point(9, 71);
             this.lblcadenatokens.Name = "lblcadenatokens";
-            this.lblcadenatokens.Size = new System.Drawing.Size(108, 17);
+            this.lblcadenatokens.Size = new System.Drawing.Size(83, 13);
             this.lblcadenatokens.TabIndex = 49;
             this.lblcadenatokens.Text = "Cadena Tokens";
             // 
@@ -759,17 +745,16 @@
             this.txtSubcadena.Location = new System.Drawing.Point(16, 53);
             this.txtSubcadena.Margin = new System.Windows.Forms.Padding(4);
             this.txtSubcadena.Name = "txtSubcadena";
-            this.txtSubcadena.Size = new System.Drawing.Size(377, 22);
+            this.txtSubcadena.Size = new System.Drawing.Size(283, 20);
             this.txtSubcadena.TabIndex = 48;
             // 
             // lblSubcadenaEvaluar
             // 
             this.lblSubcadenaEvaluar.AutoSize = true;
             this.lblSubcadenaEvaluar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblSubcadenaEvaluar.Location = new System.Drawing.Point(12, 33);
-            this.lblSubcadenaEvaluar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSubcadenaEvaluar.Location = new System.Drawing.Point(9, 27);
             this.lblSubcadenaEvaluar.Name = "lblSubcadenaEvaluar";
-            this.lblSubcadenaEvaluar.Size = new System.Drawing.Size(143, 17);
+            this.lblSubcadenaEvaluar.Size = new System.Drawing.Size(109, 13);
             this.lblSubcadenaEvaluar.TabIndex = 47;
             this.lblSubcadenaEvaluar.Text = "Subcadena a evaluar";
             // 
@@ -780,7 +765,7 @@
             this.btnPrimeraPasada.Location = new System.Drawing.Point(423, 139);
             this.btnPrimeraPasada.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrimeraPasada.Name = "btnPrimeraPasada";
-            this.btnPrimeraPasada.Size = new System.Drawing.Size(131, 28);
+            this.btnPrimeraPasada.Size = new System.Drawing.Size(98, 23);
             this.btnPrimeraPasada.TabIndex = 71;
             this.btnPrimeraPasada.Text = "Primera pasada";
             this.btnPrimeraPasada.UseVisualStyleBackColor = false;
@@ -798,11 +783,11 @@
             this.gbSintax.Controls.Add(this.tokenSintax);
             this.gbSintax.Controls.Add(this.label11);
             this.gbSintax.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gbSintax.Location = new System.Drawing.Point(543, 201);
-            this.gbSintax.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gbSintax.Location = new System.Drawing.Point(407, 163);
+            this.gbSintax.Margin = new System.Windows.Forms.Padding(2);
             this.gbSintax.Name = "gbSintax";
-            this.gbSintax.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbSintax.Size = new System.Drawing.Size(496, 386);
+            this.gbSintax.Padding = new System.Windows.Forms.Padding(2);
+            this.gbSintax.Size = new System.Drawing.Size(372, 314);
             this.gbSintax.TabIndex = 76;
             this.gbSintax.TabStop = false;
             this.gbSintax.Text = "Analizador Sintáctico";
@@ -815,7 +800,7 @@
             this.btnLineaxLinea.Location = new System.Drawing.Point(385, 30);
             this.btnLineaxLinea.Margin = new System.Windows.Forms.Padding(4);
             this.btnLineaxLinea.Name = "btnLineaxLinea";
-            this.btnLineaxLinea.Size = new System.Drawing.Size(92, 50);
+            this.btnLineaxLinea.Size = new System.Drawing.Size(69, 41);
             this.btnLineaxLinea.TabIndex = 82;
             this.btnLineaxLinea.Text = "Linea por Linea";
             this.btnLineaxLinea.UseVisualStyleBackColor = false;
@@ -825,10 +810,9 @@
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label8.Location = new System.Drawing.Point(297, 89);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(223, 72);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(145, 17);
+            this.label8.Size = new System.Drawing.Size(110, 13);
             this.label8.TabIndex = 81;
             this.label8.Text = "Validacion de Sintaxis";
             // 
@@ -840,7 +824,7 @@
             this.rtxSintaxLineaxLinea.Location = new System.Drawing.Point(301, 107);
             this.rtxSintaxLineaxLinea.Margin = new System.Windows.Forms.Padding(4);
             this.rtxSintaxLineaxLinea.Name = "rtxSintaxLineaxLinea";
-            this.rtxSintaxLineaxLinea.Size = new System.Drawing.Size(175, 265);
+            this.rtxSintaxLineaxLinea.Size = new System.Drawing.Size(132, 216);
             this.rtxSintaxLineaxLinea.TabIndex = 80;
             this.rtxSintaxLineaxLinea.Text = "";
             // 
@@ -848,10 +832,9 @@
             // 
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label9.Location = new System.Drawing.Point(3, 89);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(2, 72);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(145, 17);
+            this.label9.Size = new System.Drawing.Size(110, 13);
             this.label9.TabIndex = 79;
             this.label9.Text = "Validacion de Sintaxis";
             // 
@@ -863,7 +846,7 @@
             this.rtxtcodigointermediosintax.Location = new System.Drawing.Point(7, 107);
             this.rtxtcodigointermediosintax.Margin = new System.Windows.Forms.Padding(4);
             this.rtxtcodigointermediosintax.Name = "rtxtcodigointermediosintax";
-            this.rtxtcodigointermediosintax.Size = new System.Drawing.Size(285, 265);
+            this.rtxtcodigointermediosintax.Size = new System.Drawing.Size(215, 216);
             this.rtxtcodigointermediosintax.TabIndex = 78;
             this.rtxtcodigointermediosintax.Text = "";
             // 
@@ -875,17 +858,16 @@
             this.txtTemporal.Location = new System.Drawing.Point(229, 52);
             this.txtTemporal.Margin = new System.Windows.Forms.Padding(4);
             this.txtTemporal.Name = "txtTemporal";
-            this.txtTemporal.Size = new System.Drawing.Size(99, 22);
+            this.txtTemporal.Size = new System.Drawing.Size(75, 20);
             this.txtTemporal.TabIndex = 77;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label10.Location = new System.Drawing.Point(225, 30);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Location = new System.Drawing.Point(169, 24);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(68, 17);
+            this.label10.Size = new System.Drawing.Size(51, 13);
             this.label10.TabIndex = 76;
             this.label10.Text = "Temporal";
             // 
@@ -897,17 +879,16 @@
             this.tokenSintax.Location = new System.Drawing.Point(7, 53);
             this.tokenSintax.Margin = new System.Windows.Forms.Padding(4);
             this.tokenSintax.Name = "tokenSintax";
-            this.tokenSintax.Size = new System.Drawing.Size(202, 22);
+            this.tokenSintax.Size = new System.Drawing.Size(152, 20);
             this.tokenSintax.TabIndex = 75;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label11.Location = new System.Drawing.Point(7, 30);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Location = new System.Drawing.Point(5, 24);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(135, 17);
+            this.label11.Size = new System.Drawing.Size(102, 13);
             this.label11.TabIndex = 74;
             this.label11.Text = "Segmento a evaluar";
             // 
@@ -915,12 +896,12 @@
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(19, 33);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox1.MaximumSize = new System.Drawing.Size(127, 117);
-            this.pictureBox1.MinimumSize = new System.Drawing.Size(127, 117);
+            this.pictureBox1.Location = new System.Drawing.Point(14, 27);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.MaximumSize = new System.Drawing.Size(95, 95);
+            this.pictureBox1.MinimumSize = new System.Drawing.Size(95, 95);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(127, 117);
+            this.pictureBox1.Size = new System.Drawing.Size(95, 95);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 77;
             this.pictureBox1.TabStop = false;
@@ -931,16 +912,15 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label13.Location = new System.Drawing.Point(145, 33);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Location = new System.Drawing.Point(109, 27);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(206, 38);
+            this.label13.Size = new System.Drawing.Size(172, 31);
             this.label13.TabIndex = 78;
             this.label13.Text = "QuindimPad";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.SegundaPasada);
+            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.btnPrimeraPasada);
             this.groupBox1.Controls.Add(this.label14);
@@ -952,16 +932,16 @@
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.label17);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.groupBox1.Location = new System.Drawing.Point(1044, 201);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Location = new System.Drawing.Point(783, 163);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(560, 386);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(420, 314);
             this.groupBox1.TabIndex = 79;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Analizador Semantico";
             // 
-            // SegundaPasada
+            // button2
             // 
             this.SegundaPasada.BackColor = System.Drawing.Color.DimGray;
             this.SegundaPasada.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -981,7 +961,7 @@
             this.button1.Location = new System.Drawing.Point(423, 107);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(131, 25);
+            this.button1.Size = new System.Drawing.Size(98, 20);
             this.button1.TabIndex = 82;
             this.button1.Text = "Linea por Linea";
             this.button1.UseVisualStyleBackColor = false;
@@ -990,10 +970,9 @@
             // 
             this.label14.AutoSize = true;
             this.label14.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label14.Location = new System.Drawing.Point(297, 89);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Location = new System.Drawing.Point(223, 72);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(73, 17);
+            this.label14.Size = new System.Drawing.Size(56, 13);
             this.label14.TabIndex = 81;
             this.label14.Text = "Validación";
             // 
@@ -1012,10 +991,9 @@
             // 
             this.label15.AutoSize = true;
             this.label15.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label15.Location = new System.Drawing.Point(3, 89);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Location = new System.Drawing.Point(2, 72);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(163, 17);
+            this.label15.Size = new System.Drawing.Size(124, 13);
             this.label15.TabIndex = 79;
             this.label15.Text = "Validación de Semantica";
             // 
@@ -1027,7 +1005,7 @@
             this.rchSemantica.Location = new System.Drawing.Point(7, 107);
             this.rchSemantica.Margin = new System.Windows.Forms.Padding(4);
             this.rchSemantica.Name = "rchSemantica";
-            this.rchSemantica.Size = new System.Drawing.Size(285, 265);
+            this.rchSemantica.Size = new System.Drawing.Size(215, 216);
             this.rchSemantica.TabIndex = 78;
             this.rchSemantica.Text = "";
             // 
@@ -1039,17 +1017,16 @@
             this.textBox1.Location = new System.Drawing.Point(301, 55);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(99, 22);
+            this.textBox1.Size = new System.Drawing.Size(75, 20);
             this.textBox1.TabIndex = 77;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label16.Location = new System.Drawing.Point(297, 32);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Location = new System.Drawing.Point(223, 26);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(68, 17);
+            this.label16.Size = new System.Drawing.Size(51, 13);
             this.label16.TabIndex = 76;
             this.label16.Text = "Temporal";
             // 
@@ -1061,26 +1038,25 @@
             this.textBox2.Location = new System.Drawing.Point(7, 53);
             this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(286, 22);
+            this.textBox2.Size = new System.Drawing.Size(215, 20);
             this.textBox2.TabIndex = 75;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label17.Location = new System.Drawing.Point(7, 30);
-            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label17.Location = new System.Drawing.Point(5, 24);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(135, 17);
+            this.label17.Size = new System.Drawing.Size(102, 13);
             this.label17.TabIndex = 74;
             this.label17.Text = "Segmento a evaluar";
             // 
             // QuindimPad
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1623, 844);
+            this.ClientSize = new System.Drawing.Size(1219, 609);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.pictureBox1);
@@ -1103,8 +1079,8 @@
             this.Controls.Add(this.btnleertodo);
             this.Controls.Add(this.lblEntrada);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MinimumSize = new System.Drawing.Size(1363, 733);
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MinimumSize = new System.Drawing.Size(1026, 603);
             this.Name = "QuindimPad";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1196,7 +1172,7 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Button SegundaPasada;
+        private System.Windows.Forms.Button button2;
     }
 }
 
