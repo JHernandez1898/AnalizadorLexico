@@ -131,7 +131,7 @@ namespace Quindim
                 temp = strActual.Split(' ').Length;
             }
             txtTemporal.Text = temp.ToString();
-            
+
             txtTemporal.Text = temp.ToString();
             if (temp == 0) { MessageBox.Show("Error de sintaxis en línea " + (nLinea + 1)); nLinea = 0; principio = true; rtxtcodigointermediolexico.Text = " "; }
             else
@@ -260,7 +260,7 @@ namespace Quindim
 
                 List<string> LineasSemantica = MetodosSe.PrimeraPasada(LineasTokens);
                 rchSemantica.Text = "";
-                foreach(string Linea in LineasSemantica)
+                foreach (string Linea in LineasSemantica)
                 {
                     rchSemantica.Text += Linea + "\n";
                 }
@@ -403,7 +403,7 @@ namespace Quindim
                 tokenSintax.Text = ArregloLineas[nLinea];
 
                 temp = strActual.Split(' ').Length;
-            }            
+            }
             txtTemporal.Text = temp.ToString();
             if (temp == 0) { MessageBox.Show("Error de sintaxis en línea " + (nLinea + 1)); nLinea = 0; principio = true; rtxtcodigointermediosintax.Text = " "; }
             else
@@ -467,19 +467,22 @@ namespace Quindim
                                 case "TDD3":
                                     elemento.Tipo = "STRG";
                                     break;
-                                default:
+                                case "TDD4":
                                     elemento.Tipo = "CHAR";
+                                    break;
+                                default:
+                                    elemento.Tipo = "BOOL";
                                     break;
                             }
                             MetodosAL.Identificadores.Add(elemento);
-                            
+
                         }
-                        
+
                     }
                 }
                 foreach (string d in LineasTokens)
                 {
-                    rchSemantica.Text += MetodosSe.ObtenerArchivoTemporal(d)+"\n";
+                    rchSemantica.Text += MetodosSe.ObtenerArchivoTemporal(d) + "\n";
                 }
                 MostrarIdentificadoresConstantes();
                 stopwatch.Stop();
@@ -490,5 +493,54 @@ namespace Quindim
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void SegundaPasada_Click(object sender, EventArgs e)
+        {
+            rchSemantica.Text = "";
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+            List<string> LineasSemantica = MetodosSe.PrimeraPasada(LineasTokens);
+            int linea = 1;
+            string strCambio;
+            string strActual;
+            int temp;
+            MetodosSe.CrearMatriz();
+            try
+            {
+                foreach (string cadena in LineasSemantica)
+                {
+                    strActual = cadena;
+                    strActual = strActual.Substring(0, strActual.Length - 1);
+                    rchSemantica.Text += cadena + "\n";
+                    temp = strActual.Split(' ').Length;
+
+                    while (temp > 0)
+                    {
+                        string[] strSubcadenas = CrearCombinaciones(temp, strActual);
+                        //if (!Revisar(strSubcadenas, temp)) temp--;
+                        if (MetodosSe.DisminuirTemp(strSubcadenas, temp)) { temp--; }
+                        else
+                        {
+                            foreach (string str in strSubcadenas)
+                            {
+                                strCambio = NormalizarCadena(str, temp);
+                                strActual = strActual.Replace(str, MetodosSe.ObtenerConversion(strCambio));
+                            }
+                            rchSemantica.Text += strActual + "\n";
+                            temp = strActual.Split(' ').Length;
+                        }
+                        if (strActual == "S") { rchtxtSemantic.Text += "Línea " + linea.ToString() + ":S" + "\n"; temp = 0; linea++; }
+                    }
+                    if (strActual != "S") { rchtxtSemantic.Text += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Semantica incorrecta en la línea: " + linea); linea++; }
+                }
+
+            }
+            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+
+
+        }
+
     }
+
 }
