@@ -105,7 +105,7 @@ namespace Quindim.Clases
         {
             int Estado = 0;
            
-            if(c==' ' && intEstadoActual!=119)
+            if(c==' ' && intEstadoActual!=131)
             {
                 
                 int columna = Matriz.Columns.IndexOf(c.ToString());
@@ -113,7 +113,7 @@ namespace Quindim.Clases
                 token = (Matriz.Rows[Estado][94]).ToString();
                 token = token.Trim();
                 bandera = false;
-                if(Estado==120||Estado==172||Estado==173||Estado==174||Estado==178)
+                if(Estado==129||Estado==181||Estado==182||Estado==183||Estado==187)
                 {
                     IdentificarToken(strPalabra, ref token, Estado);
                 }
@@ -193,7 +193,7 @@ namespace Quindim.Clases
             
             switch (EstadoFinal)
             {
-                case 120:
+                case 129:
                     Identificador unIdentificador = new Identificador();
                     unIdentificador.Nombre = Palabra.Trim();
                     foreach (Identificador otroIdentificador in Identificadores){if(otroIdentificador.Equals(unIdentificador)){token += otroIdentificador.Index.ToString();return;}}
@@ -201,7 +201,7 @@ namespace Quindim.Clases
                     token += unIdentificador.Index.ToString();
                     Identificadores.Add(unIdentificador);
                     break;
-                case 174:
+                case 183:
                     NumericoEntero unNumericoEntero = new NumericoEntero();
                     unNumericoEntero.Contenido = int.Parse(Palabra);
                     foreach(NumericoEntero otroNE in ConstantesNumericasEnteras) { if (otroNE.Equals(unNumericoEntero)) { token += otroNE.Index.ToString();return;}}
@@ -209,7 +209,7 @@ namespace Quindim.Clases
                     token += unNumericoEntero.Index.ToString();
                     ConstantesNumericasEnteras.Add(unNumericoEntero);
                     break;
-                case 173:
+                case 182:
                     NumericoReal unNumericoReal = new NumericoReal();
                     unNumericoReal.Contenido = double.Parse(Palabra);
                     foreach (NumericoReal otroNR in ConstantesNumericasReales) { if (otroNR.Equals(unNumericoReal)) { token += otroNR.Index.ToString(); return; } }
@@ -217,7 +217,7 @@ namespace Quindim.Clases
                     token += unNumericoReal.Index.ToString();                  
                     ConstantesNumericasReales.Add(unNumericoReal);
                     break;
-                case 178:
+                case 187:
                     NumericoExponencial unNumericoExponencial = new NumericoExponencial();
                     string[] partesExponente = Palabra.Split('E');
                     unNumericoExponencial.Contenido = int.Parse(partesExponente[0]);
@@ -227,7 +227,7 @@ namespace Quindim.Clases
                     unNumericoExponencial.Exponencial = int.Parse(partesExponente[1]);
                     ConstantesNumericasExponenciales.Add(unNumericoExponencial);
                     break;
-                case 172:
+                case 181:
                     NumericoExpReal unNumericoExpReal = new NumericoExpReal();
                     string[] partesExponentereal = Palabra.Split('E');
                     unNumericoExpReal.Contenido = double.Parse(partesExponentereal[0]);

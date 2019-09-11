@@ -310,7 +310,7 @@ namespace Quindim
                 tokenSintax.Text = ArregloLineas[nLinea];
 
                 temp = strActual.Split(' ').Length;
-            }
+            }            
             txtTemporal.Text = temp.ToString();
             if (temp == 0) { MessageBox.Show("Error de sintaxis en línea " + (nLinea + 1)); nLinea = 0; principio = true; rtxtcodigointermediosintax.Text = " "; }
             else
