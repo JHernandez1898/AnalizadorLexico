@@ -153,28 +153,36 @@ namespace Quindim
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            //LEXICO
-            List<string> LineasTokens;
-            LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
-            foreach (String token in LineasTokens)
+            try
             {
-                rtxtcodigointermediolexico.Text += token + " ";
-                rtxtcodigointermediolexico.Text += "\n";
+                //LEXICO
+                List<string> LineasTokens;
+                LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+                foreach (String token in LineasTokens)
+                {
+                    rtxtcodigointermediolexico.Text += token + " ";
+                    rtxtcodigointermediolexico.Text += "\n";
+                }
+
+                //SINTAXIS
+                List<string> SintaxResult = Sintaxis.AnalisisSintactico(LineasTokens);
+                rtxtcodigointermediosintax.Text = SintaxResult[0];
+                rtxSintaxLineaxLinea.Text = SintaxResult[1];
+
+
+                //SEMANTICA
+                List<string> LineasSemantica = MetodosSe.PrimeraPasada(LineasTokens);
+                List<string> bottomupSemantica = MetodosSe.SegundaPasada(LineasSemantica);
+                rchSemantica.Text = "";
+                rchtxtSemantic.Text = "";
+                rchSemantica.Text = bottomupSemantica[0];
+                rchtxtSemantic.Text = bottomupSemantica[1];
+
             }
-
-            //SINTAXIS
-            List<string> SintaxResult = Sintaxis.AnalisisSintactico(LineasTokens);
-            rtxtcodigointermediosintax.Text = SintaxResult[0];
-            rtxSintaxLineaxLinea.Text = SintaxResult[1];
-
-
-            //SEMANTICA
-            List<string> LineasSemantica = MetodosSe.PrimeraPasada(LineasTokens);
-            string status = "";
-            string bottomupSemantica =  MetodosSe.SegundaPasada(LineasSemantica,ref status);
-            rchSemantica.Text = "";
-            rchSemantica.Text = bottomupSemantica;
-            rchtxtSemantic.Text = status;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             stopwatch.Stop();
             MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", " Compilacion ", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -345,6 +353,7 @@ namespace Quindim
         private void btnPrimeraPasada_Click(object sender, EventArgs e)
         {
             rchSemantica.Text = "";
+            rchtxtSemantic.Text = "";
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
@@ -407,6 +416,7 @@ namespace Quindim
         private void SegundaPasada_Click(object sender, EventArgs e)
         {
             rchSemantica.Text = "";
+            rchtxtSemantic.Text = "";
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
@@ -428,7 +438,6 @@ namespace Quindim
                     while (temp > 0)
                     {
                         string[] strSubcadenas = MetodosSe.CrearCombinaciones(temp, strActual);
-                        //if (!Revisar(strSubcadenas, temp)) temp--;
                         if (MetodosSe.DisminuirTemp(strSubcadenas, temp)) { temp--; }
                         else
                         {
@@ -451,6 +460,72 @@ namespace Quindim
 
         }
 
+        private void BtnTerceraPasada_Click(object sender, EventArgs e)
+        {
+            rchSemantica.Text = "";
+            rchtxtSemantic.Text = "";
+            List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+            List<string> LineasSemantica = MetodosSe.PrimeraPasada(LineasTokens);
+            int linea = 1;
+            string strCambio;
+            string strActual;
+            int begins = 0;
+            int ends = 0;
+            int temp;
+            MetodosSe.CrearMatriz();
+            try
+            {
+                foreach (string cadena in LineasSemantica)
+                {
+                    strActual = cadena;
+                    strActual = strActual.Substring(0, strActual.Length - 1);
+                    rchSemantica.Text += cadena + "\n";
+                    temp = strActual.Split(' ').Length;
+
+                    while (temp > 0)
+                    {
+                        string[] strSubcadenas = MetodosSe.CrearCombinaciones(temp, strActual);
+                        if (MetodosSe.DisminuirTemp(strSubcadenas, temp)) { temp--; }
+                        else
+                        {
+                            foreach (string str in strSubcadenas)
+                            {
+                                strCambio = MetodosSe.NormalizarCadena(str, temp);
+                                strActual = strActual.Replace(str, MetodosSe.ObtenerConversion(strCambio));
+                            }
+                            rchSemantica.Text += strActual + "\n";
+                            temp = strActual.Split(' ').Length;
+                        }
+                        if (strActual == "S")
+                        {
+                            if (
+                                (cadena.Contains("PR04") && cadena.Contains("PR20")) |
+                                cadena.Contains("PR04") |
+                                cadena.Contains("PR05") |
+                                cadena.Contains("PR06") |
+                                cadena.Contains("PR07") |
+                                cadena.Contains("PR08") |
+                                cadena.Contains("PR11") |
+                                cadena.Contains("PR18") |
+                                cadena.Contains("PR20")
+                            ) begins++;
+                            else
+                            {
+                                if (cadena.Contains("PR21")) ends++;
+                            }
+                            rchtxtSemantic.Text += "Línea " + linea.ToString() + ":S" + "\n";
+                            temp = 0;
+                            linea++;
+                        }
+                    }
+                    if (strActual != "S") { rchtxtSemantic.Text += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Semantica incorrecta en la línea: " + linea); linea++; }
+                }
+                if (begins - ends == 0) rchtxtSemantic.Text += "Bloque valido"; 
+                else rchtxtSemantic.Text += "Bloque invalido";
+
+            }
+            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
     }
 
 }
