@@ -555,11 +555,6 @@ namespace Quindim
         {            
             LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
             LineasTokensSmt = MetodosSe.PrimeraPasada(LineasTokens);
-            foreach (String token in LineasTokensSmt)
-            {
-                rtxtcodigointermediolexico.Text += token + " ";
-                rtxtcodigointermediolexico.Text += "\n";
-            }
             MostrarIdentificadoresConstantes();
             string[] ArregloLineas = RellenarArregloSemantica();
             if (principioSmt)
