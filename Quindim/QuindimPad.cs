@@ -81,6 +81,17 @@ namespace Quindim
             }
             return ArregloLineas;
         }
+        public string[] RellenarArregloSemantica()
+        {
+            string[] ArregloLineas = new string[LineasTokensSmt.Count];
+            int i = 0;
+            foreach (string strLinea in LineasTokensSmt)
+            {
+                ArregloLineas[i] = strLinea;
+                i++;
+            }
+            return ArregloLineas;
+        }
 
 
 
@@ -542,14 +553,15 @@ namespace Quindim
 
         private void LineaLineaSemantico_Click(object sender, EventArgs e)
         {            
-            LineasTokensSmt = Lexico.AnalizadorLexico(rtxtentrada.Text);
+            LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+            LineasTokensSmt = MetodosSe.PrimeraPasada(LineasTokens);
             foreach (String token in LineasTokensSmt)
             {
                 rtxtcodigointermediolexico.Text += token + " ";
                 rtxtcodigointermediolexico.Text += "\n";
             }
             MostrarIdentificadoresConstantes();
-            string[] ArregloLineas = RellenarArreglo();
+            string[] ArregloLineas = RellenarArregloSemantica();
             if (principioSmt)
             {
                 principioSmt = false;
@@ -559,7 +571,7 @@ namespace Quindim
             if (lineaSmt)
             {
                 lineaSmt = false;                
-                strActualSmt = RellenarArreglo()[nLineaSmt];
+                strActualSmt = RellenarArregloSemantica()[nLineaSmt];
                 strActualSmt = strActualSmt.Substring(0, strActualSmt.Length - 1);
                 rchSemantica.Text += ArregloLineas[nLineaSmt] + "\n";
                 tokenSemantica.Text = ArregloLineas[nLineaSmt];
