@@ -147,5 +147,10 @@ INSERT INTO ReglasSemanticas VALUES('PR17 ASGE','STEP');
 /*do while*/
 INSERT INTO ReglasSemanticas VALUES('PR04 PR20 PAR1 BOOL PAR2','S')
 
+/* Process*/
+INSERT INTO ReglasSemanticas VALUES('PR11 IDEN','PR11 VOID')
+INSERT INTO ReglasSemanticas VALUES('PR11 VOID FIRD','S')
+INSERT INTO ReglasSemanticas VALUES('PR11 IDEN','PR11 VOID')
+INSERT INTO ReglasSemanticas VALUES('PR11 VOID FIRD','S')
 
 SELECT * FROM ReglasSemanticas
