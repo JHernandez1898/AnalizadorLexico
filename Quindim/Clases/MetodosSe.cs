@@ -31,7 +31,10 @@ namespace Quindim.Clases
         }
         public static string ObtenerArchivoTemporal(string Linea) 
         {
-           foreach(Identificador elemento in MetodosAL.Identificadores)
+           Linea = Linea.Replace("CADE", "STRG");
+           Linea = Linea.Replace("PR23", "BOOL");
+           Linea = Linea.Replace("PR22", "BOOL");
+            foreach (Identificador elemento in MetodosAL.Identificadores)
             {
                 string id = "ID" + elemento.Index;
                 Linea = Linea.Replace(id, elemento.Tipo);
@@ -72,8 +75,7 @@ namespace Quindim.Clases
                     foreach (string str in combinacionesde2)
                     {
                         string[] arreglo1 = str.Split(' ');
-                        string aver = arreglo1[0].Substring(0, 2);
-                        string aver2 = arreglo1[1].Substring(0, 1);
+                        
                         if (arreglo1[0].Substring(0, 3) == "TDD" && arreglo1[1].Substring(0, 2) == "ID")
                         {
                             string strIndex1 = arreglo1[1];
@@ -247,7 +249,7 @@ namespace Quindim.Clases
                 return salidas;
 
             }
-            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);  return salidas; }
+            catch (Exception ex) { MessageBox.Show("Error: Error de semantica en la linea: " + linea +" Los tipos de dato no concuerdan"+ ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);  return salidas; }
         }
     }
 }
