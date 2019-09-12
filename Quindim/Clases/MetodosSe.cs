@@ -181,14 +181,18 @@ namespace Quindim.Clases
             }
             return true;
         }
-        public static string SegundaPasada(List<string> LineasSemantica,ref string status)
+        public static List<string> SegundaPasada(List<string> LineasSemantica)
         {
             string salida="";
+            string validas = "";
+            List<string> salidas = new List<string>();
             int linea = 1;
             string strCambio;
             string strActual;
+            int begins = 0;
+            int ends = 0;
             int temp;
-           
+            MetodosSe.CrearMatriz();
             try
             {
                 foreach (string cadena in LineasSemantica)
@@ -201,7 +205,6 @@ namespace Quindim.Clases
                     while (temp > 0)
                     {
                         string[] strSubcadenas = MetodosSe.CrearCombinaciones(temp, strActual);
-                        //if (!Revisar(strSubcadenas, temp)) temp--;
                         if (MetodosSe.DisminuirTemp(strSubcadenas, temp)) { temp--; }
                         else
                         {
@@ -213,14 +216,38 @@ namespace Quindim.Clases
                             salida += strActual + "\n";
                             temp = strActual.Split(' ').Length;
                         }
-                        if (strActual == "S") { status+= "Línea " + linea.ToString() + ":S" + "\n"; temp = 0; linea++; }
+                        if (strActual == "S")
+                        {
+                            if (
+                                (cadena.Contains("PR04") && cadena.Contains("PR20")) |
+                                cadena.Contains("PR04") |
+                                cadena.Contains("PR05") |
+                                cadena.Contains("PR06") |
+                                cadena.Contains("PR07") |
+                                cadena.Contains("PR08") |
+                                cadena.Contains("PR11") |
+                                cadena.Contains("PR18") |
+                                cadena.Contains("PR20")
+                            ) begins++;
+                            else
+                            {
+                                if (cadena.Contains("PR21")) ends++;
+                            }
+                            validas += "Línea " + linea.ToString() + ":S" + "\n";
+                            temp = 0;
+                            linea++;
+                        }
                     }
-                    if (strActual != "S") { status += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Semantica incorrecta en la línea: " + linea); linea++; }
+                    if (strActual != "S") { validas += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Semantica incorrecta en la línea: " + linea); linea++; }
                 }
+                if (begins - ends == 0) validas += "Bloque valido";
+                else validas += "Bloque invalido";
+                salidas.Add(salida);
+                salidas.Add(validas);
+                return salidas;
 
             }
-            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return salida; }
-            return salida;
+            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);  return salidas; }
         }
     }
 }
