@@ -241,10 +241,13 @@ namespace Quindim.Clases
                             linea++;
                         }
                     }
-                    if (strActual != "S") { validas += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Semantica incorrecta en la línea: " + linea); linea++; }
+                    if (strActual != "S") { validas += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Semantica incorrecta en la línea: " + linea, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); linea++; }
                 }
                 if (begins - ends == 0) validas += "Bloque valido";
-                else validas += "Bloque invalido";
+                else {
+                    validas += "Bloque invalido";
+                    MessageBox.Show("Bloques invalidos, hay instrucciones compuestas que nunca terminan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 salidas.Add(salida);
                 salidas.Add(validas);
                 return salidas;
