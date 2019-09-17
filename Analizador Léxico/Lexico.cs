@@ -25,6 +25,9 @@ namespace Analizador_Léxico
         {
             try
             {
+                
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
                 rtxtcodigointermedio.Text = "";
                 string strEntrada = rtxtentrada.Text;
                 linea = 0;
@@ -46,7 +49,9 @@ namespace Analizador_Léxico
                 MostrarIdentificadoresConstantes();
                 Depurar();
                 linea = 1;
-               
+                stopwatch.Stop();
+                MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", "Analizador sintáctico", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
             catch (Exception ex)
             {
@@ -81,11 +86,11 @@ namespace Analizador_Léxico
                 dgvConstantesExpo.Rows.Add("CNRE" + exporeal.Index, exporeal.Contenido, exporeal.Exponencial);
         }
 
-        static int indx = 0;
-        static int palabra = 0;
-        static int intEstadoActual = 0;
-        static int linea = 1;
-        static List<char> caracteres = new List<char>();
+        public static int indx = 0;
+        public static int palabra = 0;
+        public static int intEstadoActual = 0;
+        public static int linea = 1;
+        public static List<char> caracteres = new List<char>();
 
         private void btnCaracterXCaracter_Click(object sender, EventArgs e)
         {

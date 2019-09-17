@@ -1,11 +1,12 @@
-CAPTURAR num
-Res = Calcfact ( num )
-IMPRIMIR Res
-FUNCION DBL PUBLICO Calcfact ( ENT num )
-SI n == 0
-PASAR ( 1 )
-ENCAMBIO
-PARA X = n HASTA n > 1 SUMA X = X - 1
-R = R * X
-FINPARA
-PASAR ( R )
+int num
+read num
+int res = Calcfact ( num )
+print ( res )
+function dbl Calcfact ( int num )
+if ( num == 0 )
+return ( 1 )
+else
+for ( int x = num to num > 1 step x = x - 1 )
+int R = R * x
+end
+return ( R )

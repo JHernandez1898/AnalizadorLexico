@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.489
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.62
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analizador Léxico", "Analizador Léxico\Analizador Léxico.csproj", "{D7E34C1D-FCC8-46F3-B62D-DB2988050AA8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analizador Sintáctico", "Analizador Sintáctico\Analizador Sintáctico.csproj", "{49E9EDD7-A1D3-49CE-9E08-DEAF9FA9B03F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quindim", "Quindim\Quindim.csproj", "{C83AFE0D-2DEC-4BB0-9D51-1AF77065523C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{49E9EDD7-A1D3-49CE-9E08-DEAF9FA9B03F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49E9EDD7-A1D3-49CE-9E08-DEAF9FA9B03F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49E9EDD7-A1D3-49CE-9E08-DEAF9FA9B03F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C83AFE0D-2DEC-4BB0-9D51-1AF77065523C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C83AFE0D-2DEC-4BB0-9D51-1AF77065523C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C83AFE0D-2DEC-4BB0-9D51-1AF77065523C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C83AFE0D-2DEC-4BB0-9D51-1AF77065523C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
