@@ -78,5 +78,49 @@ namespace Quindim.Clases
             }
             return true;
         }
+        /*
+        public static List<string> AnalizadorSemantico(string entrada, ref string salida, ref string comprobacion)
+        {
+            MetodosAL.Identificadores = new List<Identificador>();
+            List<string> LineasTokens;
+            LineasTokens = Lexico.AnalizadorLexico(entrada);
+            int linea = 1;
+            string strCambio;
+            string strActual;
+            int temp;
+            try
+            {
+                foreach (string cadena in LineasTokens)
+                {
+                    strActual = cadena;
+                    strActual = strActual.Substring(0, strActual.Length - 1);
+                    salida += cadena + "\n";
+                    temp = strActual.Split(' ').Length;
+
+                    while (temp > 0)
+                    {
+                        string[] strSubcadenas = MetodosSe.CrearCombinaciones(temp, strActual);
+                        //if (!Revisar(strSubcadenas, temp)) temp--;
+                        if (MetodosAS.DisminuirTemp(strSubcadenas, temp)) { temp--; }
+                        else
+                        {
+                            foreach (string str in strSubcadenas)
+                            {
+                                strCambio = NormalizarCadena(str, temp);
+                                strActual = strActual.Replace(str, MetodosSe.ObtenerConversion(strCambio));
+                            }
+                            salida += strActual + "\n";
+                            temp = strActual.Split(' ').Length;
+                        }
+                        if (strActual == "S") { comprobacion += "Línea " + linea.ToString() + ":S" + "\n"; temp = 0; linea++; }
+                    }
+                    if (strActual != "S") { comprobacion += "Línea " + linea.ToString() + ":ERROR" + "\n"; throw new Exception("Sintaxis incorrecta en la línea: " + linea); }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error en sintaxis: " + ex);
+            }
+        }*/
     }
 }

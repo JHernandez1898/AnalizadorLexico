@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>QuindimHD.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,11 +54,11 @@
     <Compile Include="Clases\Lexico.cs" />
     <Compile Include="Clases\MetodosAL.cs" />
     <Compile Include="Clases\MetodosAS.cs" />
+    <Compile Include="Clases\MetodosSe.cs" />
     <Compile Include="Clases\NumericoEntero.cs" />
     <Compile Include="Clases\NumericoExponencial.cs" />
     <Compile Include="Clases\NumericoExpReal.cs" />
     <Compile Include="Clases\NumericoReal.cs" />
-    <Compile Include="Clases\Sintaxis.cs" />
     <Compile Include="Clases\SintaxLibre.cs" />
     <Compile Include="QuindimPad.cs">
       <SubType>Form</SubType>
@@ -65,6 +68,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sintaxis.cs" />
     <EmbeddedResource Include="QuindimPad.resx">
       <DependentUpon>QuindimPad.cs</DependentUpon>
     </EmbeddedResource>
@@ -89,6 +93,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="QuindimHD.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

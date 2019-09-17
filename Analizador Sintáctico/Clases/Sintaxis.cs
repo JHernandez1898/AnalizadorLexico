@@ -90,8 +90,8 @@ namespace Analizador_Sintáctico.Clases
             SintaxLibre FNCI = new SintaxLibre();
             FNCI.SintaxIzquierda = "FNCI"; //FNCI
             FNCI.lstSintaxDerecha.Add("TIPO ASIG IDEN FIRI"); //TIPO ASIG IDEN FIRI
-            FNCI.lstSintaxDerecha.Add("IDEN PAR2 IDEN PAR1"); // IDEN PAR2 IDEN PAR1
-            FNCI.lstSintaxDerecha.Add("IDEN PAR2 VARI PAR1"); // IDEN PAR2 VARI PAR1
+            FNCI.lstSintaxDerecha.Add("IDEN PAR1 IDEN PAR2"); // IDEN PAR2 IDEN PAR1
+            FNCI.lstSintaxDerecha.Add("IDEN PAR1 VARI PAR2"); // IDEN PAR2 VARI PAR1
             FNCI.lstSintaxDerecha.Add("ASIG IDEN FIRI"); //ASIG IDEN FIRI
             FNCI.lstSintaxDerecha.Add("ASIG IDEN FIRD"); //ASIG IDEN FIRD
             FNCI.lstSintaxDerecha.Add("ASIG IDEN SINP"); //ASIG IDEN SINP          
@@ -106,8 +106,8 @@ namespace Analizador_Sintáctico.Clases
 
             SintaxLibre FIRD = new SintaxLibre();
             FIRD.SintaxIzquierda = "FIRD";  //FIRD
-            FIRD.lstSintaxDerecha.Add("PAR2 PARD FIRD PAR1"); //PAR2 PARD FIRD PAR1
-            FIRD.lstSintaxDerecha.Add("PAR2 PARD PAR1"); //PAR2 PARD PAR1
+            FIRD.lstSintaxDerecha.Add("PAR1 PARD FIRD PAR2"); //PAR2 PARD FIRD PAR1
+            FIRD.lstSintaxDerecha.Add("PAR1 PARD PAR2"); //PAR2 PARD PAR1
             FIRD.lstSintaxDerecha.Add("PARD"); //PARD
             Sintax.Add(FIRD);
 
@@ -153,17 +153,17 @@ namespace Analizador_Sintáctico.Clases
         
             SintaxLibre FIRI = new SintaxLibre();
             FIRI.SintaxIzquierda = "FIRI"; //FIRI
-            FIRI.lstSintaxDerecha.Add("PAR2 VARI PAR1"); //PAR2 VARI PAR1
-            FIRI.lstSintaxDerecha.Add("PAR2 IDEN PAR1"); //PAR2 IDEN PAR1
-            FIRI.lstSintaxDerecha.Add("PAR2 VARR PAR1"); //PAR2 VARR PAR1
-            FIRI.lstSintaxDerecha.Add("PAR2 VARI FIRI PAR1"); //PAR2 VARI FIRI PAR1
-            FIRI.lstSintaxDerecha.Add("PAR2 IDEN FIRI PAR1"); //PAR2 IDEN FIRI PAR1
-            FIRI.lstSintaxDerecha.Add("PAR2 VARR FIRI PAR1"); //PAR2 VARR FIRI PAR1
+            FIRI.lstSintaxDerecha.Add("PAR1 VARI PAR2"); //PAR2 VARI PAR1
+            FIRI.lstSintaxDerecha.Add("PAR1 IDEN PAR2"); //PAR2 IDEN PAR1
+            FIRI.lstSintaxDerecha.Add("PAR1 VARR PAR2"); //PAR2 VARR PAR1
+            FIRI.lstSintaxDerecha.Add("PAR1 VARI FIRI PAR2"); //PAR2 VARI FIRI PAR1
+            FIRI.lstSintaxDerecha.Add("PAR1 IDEN FIRI PAR2"); //PAR2 IDEN FIRI PAR1
+            FIRI.lstSintaxDerecha.Add("PAR1 VARR FIRI PAR2"); //PAR2 VARR FIRI PAR1
 
             Sintax.Add(FIRI);
             SintaxLibre SINP = new SintaxLibre();
             SINP.SintaxIzquierda = "SINP"; //SINP
-            SINP.lstSintaxDerecha.Add("PAR2 PAR1"); //PAR2 PAR1
+            SINP.lstSintaxDerecha.Add("PAR1 PAR2"); //PAR2 PAR1
             Sintax.Add(SINP);
             SintaxLibre CONU = new SintaxLibre();
             CONU.SintaxIzquierda = "CONU"; //CONU
