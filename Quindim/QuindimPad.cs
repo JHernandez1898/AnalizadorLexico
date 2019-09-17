@@ -313,6 +313,7 @@ namespace Quindim
 
         private void BtnLineaxLinea_Click(object sender, EventArgs e)
         {
+            rtxtcodigointermediolexico.Text = "";
             LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
             foreach (String token in LineasTokens)
             {
