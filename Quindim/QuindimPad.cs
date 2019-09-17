@@ -81,6 +81,17 @@ namespace Quindim
             }
             return ArregloLineas;
         }
+        public string[] RellenarArregloSemantica()
+        {
+            string[] ArregloLineas = new string[LineasTokensSmt.Count];
+            int i = 0;
+            foreach (string strLinea in LineasTokensSmt)
+            {
+                ArregloLineas[i] = strLinea;
+                i++;
+            }
+            return ArregloLineas;
+        }
 
 
 
@@ -217,6 +228,10 @@ namespace Quindim
         static int intEstadoActual = 0;
         static int lineax = 1;
         static List<char> caracteres = new List<char>();
+
+
+      
+
 
         private void BtnCaracterxCarter_Click_1(object sender, EventArgs e)
         {
@@ -525,6 +540,58 @@ namespace Quindim
 
             }
             catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+
+        static bool principioSmt = true;
+        static bool lineaSmt = true;        
+        static int nLineaSmt = 0;
+        static string strActualSmt = "";
+        static int tempSmt = 1;
+        static List<char> caracteresSmt = new List<char>();
+        List<string> LineasTokensSmt = new List<string>();
+
+        private void LineaLineaSemantico_Click(object sender, EventArgs e)
+        {            
+            LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+            LineasTokensSmt = MetodosSe.PrimeraPasada(LineasTokens);
+            MostrarIdentificadoresConstantes();
+            string[] ArregloLineas = RellenarArregloSemantica();
+            if (principioSmt)
+            {
+                principioSmt = false;
+                rchSemantica.Text = "";
+                rchtxtSemantic.Text = "";
+            }
+            if (lineaSmt)
+            {
+                lineaSmt = false;                
+                strActualSmt = RellenarArregloSemantica()[nLineaSmt];
+                strActualSmt = strActualSmt.Substring(0, strActualSmt.Length - 1);
+                rchSemantica.Text += ArregloLineas[nLineaSmt] + "\n";
+                tokenSemantica.Text = ArregloLineas[nLineaSmt];
+                tempSmt = strActualSmt.Split(' ').Length;
+            }
+            txtTemporalSemantica.Text = tempSmt.ToString();
+            if (tempSmt == 0) { MessageBox.Show("Error de semántica en línea " + (nLineaSmt + 1)); nLineaSmt = 0; principioSmt = true; rchSemantica.Text = " "; }
+            else
+            {
+                string[] strSubcadenas = MetodosSe.CrearCombinaciones(tempSmt, strActualSmt);
+                if (MetodosSe.DisminuirTemp(strSubcadenas, tempSmt)) { txtTemporalSemantica.Text = tempSmt.ToString(); tempSmt--; }
+                else
+                {
+                    foreach (string str in strSubcadenas)
+                    {
+                        string strCambio = "";
+                        strCambio = MetodosSe.NormalizarCadena(str, tempSmt);
+                        strActualSmt = strActualSmt.Replace(str, MetodosSe.ObtenerConversion(strCambio));
+                    }
+                    rchSemantica.Text += strActualSmt + "\n";
+                    tempSmt = strActualSmt.Split(' ').Length;
+                }
+                tokenSemantica.Text = strActualSmt;
+                if (strActualSmt == "S") { nLineaSmt++; lineaSmt = true; rchtxtSemantic.Text += "Línea " + nLineaSmt.ToString() + ":S" + "\n"; }            }
+            if (LineasTokensSmt.Count <= nLineaSmt) { nLineaSmt = 0; principioSmt = true; }
         }
     }
 

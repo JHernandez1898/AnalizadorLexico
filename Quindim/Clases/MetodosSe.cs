@@ -37,7 +37,8 @@ namespace Quindim.Clases
             foreach (Identificador elemento in MetodosAL.Identificadores)
             {
                 string id = "ID" + elemento.Index;
-                Linea = Linea.Replace(id, elemento.Tipo);
+                if (Linea.Contains("PR11") && elemento.Tipo == null) { Linea = Linea.Replace(id, "VOID"); elemento.Tipo = "VOID"; }
+                else Linea = Linea.Replace(id, elemento.Tipo);
             }
            foreach(NumericoEntero x in MetodosAL.ConstantesNumericasEnteras)
             {
