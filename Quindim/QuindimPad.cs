@@ -639,6 +639,34 @@ namespace Quindim
 
             return "s";
         }
+
+        string postFijo(String cadenaAEvaluar)
+        {
+            Stack<string> pilaTokens = new Stack<string>(); 
+        }
+        int jerarquiaOperador(String operador)
+        {
+            switch (operador)
+            {
+                //*
+                case "OPA1":
+                    return 2;
+                // /
+                case "OPA2":
+                    return 2;
+                // ^
+                case "OPA3":
+                    return 3;
+                // +
+                case "OPA4":
+                    return 1;
+                // -
+                case "OPA5":
+                    return 1;
+                default:
+                    return 0;
+            }
+         }
         
         string Reordenar(string strCadenaTokens)
         {
