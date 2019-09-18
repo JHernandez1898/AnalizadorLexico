@@ -639,6 +639,11 @@ namespace Quindim
                         banderaNumero = true;
                         tempLinea += token + ' ';
                     }
+                    else if (token.Contains("ID"))
+                    {
+                        banderaNumero = true;
+                        tempLinea += token + ' ';
+                    }
 
                 }
                 tempLinea.Remove(tempLinea.Length - 1);
