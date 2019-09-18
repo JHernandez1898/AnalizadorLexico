@@ -189,6 +189,8 @@ namespace Quindim
                 rchSemantica.Text = bottomupSemantica[0];
                 rchtxtSemantic.Text = bottomupSemantica[1];
 
+                
+
             }
             catch (Exception ex)
             {
@@ -199,6 +201,8 @@ namespace Quindim
             MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", " Compilacion ", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             MostrarIdentificadoresConstantes();
+            //PostFijo
+            postFijo(rtxtcodigointermediolexico.Text);
         }
 
         private void MostrarIdentificadoresConstantes()
@@ -230,7 +234,42 @@ namespace Quindim
         static List<char> caracteres = new List<char>();
 
 
-      
+      String postFijo(String strTokens)
+        {
+            var lineas = strTokens.Split('\n');
+            String tempLinea2 ="";
+            String tempLinea="";
+           foreach(String linea in lineas)
+            {
+                tempLinea += linea;
+                var Tokens = linea.Split(' ');
+
+                bool bandera=false;
+                foreach(String token in Tokens)
+                {
+                    if (bandera)
+                    {
+                        tempLinea2 += token +' ' ;
+                    }
+                    else if (token.Contains("CNE"))
+                    {
+                        bandera = true;
+                        tempLinea2 += token+' ';
+                    }
+                    else if (token.Contains("CNR"))
+                    {
+                        bandera = true;
+                        tempLinea2 += token + ' ';
+                    }
+
+                }
+                tempLinea2.Remove(tempLinea2.Length - 1);
+                bandera = false;
+            }
+            MessageBox.Show(tempLinea);
+            MessageBox.Show(tempLinea2);
+            return "s";
+        }
 
 
         private void BtnCaracterxCarter_Click_1(object sender, EventArgs e)
