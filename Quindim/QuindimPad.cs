@@ -80,8 +80,7 @@ namespace Quindim
             }
             return ArregloLineas;
         }
-
-        
+                
         private void Btnleertodo_Click(object sender, EventArgs e)
         {
             MetodosAL.Depurar();
@@ -611,23 +610,20 @@ namespace Quindim
             String tempLinea = "";
             foreach (String linea in lineas)
             {
-
                 var Tokens = linea.Split(' ');
                 bool banderaNumero = false;
                 bool bandera = false;
                 foreach (String token in Tokens)
                 {
-                    if (bandera)
-                    {
-                        tempLinea += token + ' ';
-                    }
+                    if (bandera)                    
+                        tempLinea += token + ' ';                    
                     else if (banderaNumero)
                     {
                         if (token.Contains("OPA"))
                         {
                             tempLinea += token + ' ';
                             bandera = true;
-                        }
+                        }                                
                     }
                     else if (token.Contains("CNE"))
                     {
@@ -648,6 +644,7 @@ namespace Quindim
                 }
                 tempLinea.Remove(tempLinea.Length - 1);
                 bandera = false;
+                banderaNumero = false;
             }
             MessageBox.Show(tempLinea);
 
@@ -684,5 +681,4 @@ namespace Quindim
         }
         #endregion
     }
-
 }
