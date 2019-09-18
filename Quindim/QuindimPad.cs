@@ -625,7 +625,7 @@ namespace Quindim
                             bandera = true;
                         }                                
                     }
-                    else if (token.Contains("CNE") || token.Contains("CNR"))
+                    else if (token.Contains("CNE") || token.Contains("CNR") || token.Contains("ID"))
                     {
                         banderaNumero = true;
                         tempLinea += token + ' ';
