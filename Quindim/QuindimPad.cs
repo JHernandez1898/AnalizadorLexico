@@ -608,38 +608,74 @@ namespace Quindim
         String postFijo(String strTokens)
         {
             var lineas = strTokens.Split('\n');
-            String tempLinea2 = "";
             String tempLinea = "";
             foreach (String linea in lineas)
             {
-                tempLinea += linea;
-                var Tokens = linea.Split(' ');
 
+                var Tokens = linea.Split(' ');
+                bool banderaNumero = false;
                 bool bandera = false;
                 foreach (String token in Tokens)
                 {
                     if (bandera)
                     {
-                        tempLinea2 += token + ' ';
+                        tempLinea += token + ' ';
+                    }
+                    else if (banderaNumero)
+                    {
+                        if (token.Contains("OPA"))
+                        {
+                            tempLinea += token + ' ';
+                            bandera = true;
+                        }
                     }
                     else if (token.Contains("CNE"))
                     {
-                        bandera = true;
-                        tempLinea2 += token + ' ';
+                        banderaNumero = true;
+                        tempLinea += token + ' ';
                     }
                     else if (token.Contains("CNR"))
                     {
-                        bandera = true;
-                        tempLinea2 += token + ' ';
+                        banderaNumero = true;
+                        tempLinea += token + ' ';
                     }
 
                 }
-                tempLinea2.Remove(tempLinea2.Length - 1);
+                tempLinea.Remove(tempLinea.Length - 1);
                 bandera = false;
             }
             MessageBox.Show(tempLinea);
-            MessageBox.Show(tempLinea2);
-            return "S";
+
+            return "s";
+        }
+
+        string postFijo(String cadenaAEvaluar)
+        {
+            Stack<string> pilaTokens = new Stack<string>(); 
+        }
+        int jerarquiaOperador(String operador)
+        {
+            switch (operador)
+            {
+                //*
+                case "OPA1":
+                    return 2;
+                // /
+                case "OPA2":
+                    return 2;
+                // ^
+                case "OPA3":
+                    return 3;
+                // +
+                case "OPA4":
+                    return 1;
+                // -
+                case "OPA5":
+                    return 1;
+                default:
+                    return 0;
+            }
+            
         }
         #endregion
     }
