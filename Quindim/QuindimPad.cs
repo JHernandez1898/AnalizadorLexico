@@ -14,8 +14,6 @@ namespace Quindim
 {
     public partial class QuindimPad : Form
     {
-
-
         public QuindimPad()
         {
             InitializeComponent();
@@ -26,6 +24,7 @@ namespace Quindim
             EstablecerConexion();
         }
 
+        #region Conexión
         public void EstablecerConexion()
         {
             MessageBox.Show("Capture una instancia para la conexion", "Analizador Sintactico", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -53,8 +52,6 @@ namespace Quindim
                     MetodosAS.CrearMatriz();
                     MetodosSe.CrearMatriz();
                     btnleertodo.Enabled = true;
-
-
                 }
                 else
                 {
@@ -70,6 +67,8 @@ namespace Quindim
             }
         }
 
+        #endregion  
+
         public string[] RellenarArreglo()
         {
             string[] ArregloLineas = new string[LineasTokens.Count];
@@ -81,79 +80,8 @@ namespace Quindim
             }
             return ArregloLineas;
         }
-        public string[] RellenarArregloSemantica()
-        {
-            string[] ArregloLineas = new string[LineasTokensSmt.Count];
-            int i = 0;
-            foreach (string strLinea in LineasTokensSmt)
-            {
-                ArregloLineas[i] = strLinea;
-                i++;
-            }
-            return ArregloLineas;
-        }
 
-
-
-        static bool principio = true;
-        static bool linea = true;
-        static List<string> LineasTokens = new List<string>();
-        static int nLinea = 0;
-        static string strActual = "";
-        static int temp = 1;
-
-        private void btnCaracterxCarter_Click(object sender, EventArgs e)
-        {
-
-            LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
-            string[] ArregloLineas = RellenarArreglo();
-            if (principio)
-            {
-                principio = false;
-                rtxtcodigointermediolexico.Text = "";
-                rtxSintaxLineaxLinea.Text = "";
-            }
-            if (linea)
-            {
-                linea = false;
-                strActual = RellenarArreglo()[nLinea];
-                strActual = strActual.Substring(0, strActual.Length - 1);
-                rtxtcodigointermediolexico.Text += ArregloLineas[nLinea] + "\n";
-                txtcadenatokens.Text = ArregloLineas[nLinea];
-
-                temp = strActual.Split(' ').Length;
-            }
-            txtTemporal.Text = temp.ToString();
-            if (temp == 0) { MessageBox.Show("Error de sintaxis en línea " + (nLinea + 1)); nLinea = 0; principio = true; rtxtcodigointermediolexico.Text = " "; }
-            else
-            {
-                string[] strSubcadenas = Sintaxis.CrearCombinaciones(temp, strActual);
-                if (MetodosAS.DisminuirTemp(strSubcadenas, temp)) { txtTemporal.Text = temp.ToString(); temp--; }
-
-                else
-                {
-                    foreach (string str in strSubcadenas)
-                    {
-                        string strCambio = "";
-
-                        strCambio = Sintaxis.NormalizarCadena(str, temp);
-                        strActual = strActual.Replace(str, MetodosAS.ObtenerConversion(strCambio));
-
-                    }
-                    rtxtcodigointermediolexico.Text += strActual + "\n";
-                    temp = strActual.Split(' ').Length;
-
-                }
-                txtcadenatokens.Text = strActual;
-
-                if (strActual == "S") { nLinea++; linea = true; rtxSintaxLineaxLinea.Text += "Línea " + nLinea.ToString() + ":S" + "\n"; }
-            }
-            if (LineasTokens.Count <= nLinea) { nLinea = 0; principio = true; }
-
-        }
-
-
-
+        
         private void Btnleertodo_Click(object sender, EventArgs e)
         {
             MetodosAL.Depurar();
@@ -227,49 +155,72 @@ namespace Quindim
             dgvConstantesExpo.CurrentCell = null;
         }
 
+        #region Léxico
+
+        static bool principio = true;
+        static bool linea = true;
+        static List<string> LineasTokens = new List<string>();
+        static int nLinea = 0;
+        static string strActual = "";
+        static int temp = 1;
+
+        private void btnCaracterxCarter_Click(object sender, EventArgs e)
+        {
+
+            LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+            string[] ArregloLineas = RellenarArreglo();
+            if (principio)
+            {
+                principio = false;
+                rtxtcodigointermediolexico.Text = "";
+                rtxSintaxLineaxLinea.Text = "";
+            }
+            if (linea)
+            {
+                linea = false;
+                strActual = RellenarArreglo()[nLinea];
+                strActual = strActual.Substring(0, strActual.Length - 1);
+                rtxtcodigointermediolexico.Text += ArregloLineas[nLinea] + "\n";
+                txtcadenatokens.Text = ArregloLineas[nLinea];
+
+                temp = strActual.Split(' ').Length;
+            }
+            txtTemporal.Text = temp.ToString();
+            if (temp == 0) { MessageBox.Show("Error de sintaxis en línea " + (nLinea + 1)); nLinea = 0; principio = true; rtxtcodigointermediolexico.Text = " "; }
+            else
+            {
+                string[] strSubcadenas = Sintaxis.CrearCombinaciones(temp, strActual);
+                if (MetodosAS.DisminuirTemp(strSubcadenas, temp)) { txtTemporal.Text = temp.ToString(); temp--; }
+
+                else
+                {
+                    foreach (string str in strSubcadenas)
+                    {
+                        string strCambio = "";
+
+                        strCambio = Sintaxis.NormalizarCadena(str, temp);
+                        strActual = strActual.Replace(str, MetodosAS.ObtenerConversion(strCambio));
+
+                    }
+                    rtxtcodigointermediolexico.Text += strActual + "\n";
+                    temp = strActual.Split(' ').Length;
+
+                }
+                txtcadenatokens.Text = strActual;
+
+                if (strActual == "S") { nLinea++; linea = true; rtxSintaxLineaxLinea.Text += "Línea " + nLinea.ToString() + ":S" + "\n"; }
+            }
+            if (LineasTokens.Count <= nLinea) { nLinea = 0; principio = true; }
+
+        }
+
+
+
         static int indx = 0;
         static int palabra = 0;
         static int intEstadoActual = 0;
         static int lineax = 1;
         static List<char> caracteres = new List<char>();
-
-
-      String postFijo(String strTokens)
-        {
-            var lineas = strTokens.Split('\n');
-            String tempLinea2 ="";
-            String tempLinea="";
-           foreach(String linea in lineas)
-            {
-                tempLinea += linea;
-                var Tokens = linea.Split(' ');
-
-                bool bandera=false;
-                foreach(String token in Tokens)
-                {
-                    if (bandera)
-                    {
-                        tempLinea2 += token +' ' ;
-                    }
-                    else if (token.Contains("CNE"))
-                    {
-                        bandera = true;
-                        tempLinea2 += token+' ';
-                    }
-                    else if (token.Contains("CNR"))
-                    {
-                        bandera = true;
-                        tempLinea2 += token + ' ';
-                    }
-
-                }
-                tempLinea2.Remove(tempLinea2.Length - 1);
-                bandera = false;
-            }
-            MessageBox.Show(tempLinea);
-            MessageBox.Show(tempLinea2);
-            return "s";
-        }
 
 
         private void BtnCaracterxCarter_Click_1(object sender, EventArgs e)
@@ -350,6 +301,9 @@ namespace Quindim
             intEstadoActual = 0;
         }
 
+        #endregion
+
+        #region Sintáctico
         private void BtnLineaxLinea_Click(object sender, EventArgs e)
         {
             rtxtcodigointermediolexico.Text = "";
@@ -403,6 +357,21 @@ namespace Quindim
                 if (strActual == "S") { nLinea++; linea = true; rtxSintaxLineaxLinea.Text += "Línea " + nLinea.ToString() + ":S" + "\n"; }
             }
             if (LineasTokens.Count <= nLinea) { nLinea = 0; principio = true; }
+        }
+        #endregion
+
+        #region Semántico
+
+        public string[] RellenarArregloSemantica()
+        {
+            string[] ArregloLineas = new string[LineasTokensSmt.Count];
+            int i = 0;
+            foreach (string strLinea in LineasTokensSmt)
+            {
+                ArregloLineas[i] = strLinea;
+                i++;
+            }
+            return ArregloLineas;
         }
 
         private void btnPrimeraPasada_Click(object sender, EventArgs e)
@@ -582,7 +551,7 @@ namespace Quindim
             catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-
+        
         static bool principioSmt = true;
         static bool lineaSmt = true;        
         static int nLineaSmt = 0;
@@ -633,6 +602,46 @@ namespace Quindim
                 if (strActualSmt == "S") { nLineaSmt++; lineaSmt = true; rchtxtSemantic.Text += "Línea " + nLineaSmt.ToString() + ":S" + "\n"; }            }
             if (LineasTokensSmt.Count <= nLineaSmt) { nLineaSmt = 0; principioSmt = true; }
         }
+        #endregion
+
+        #region Código intermedio
+        String postFijo(String strTokens)
+        {
+            var lineas = strTokens.Split('\n');
+            String tempLinea2 = "";
+            String tempLinea = "";
+            foreach (String linea in lineas)
+            {
+                tempLinea += linea;
+                var Tokens = linea.Split(' ');
+
+                bool bandera = false;
+                foreach (String token in Tokens)
+                {
+                    if (bandera)
+                    {
+                        tempLinea2 += token + ' ';
+                    }
+                    else if (token.Contains("CNE"))
+                    {
+                        bandera = true;
+                        tempLinea2 += token + ' ';
+                    }
+                    else if (token.Contains("CNR"))
+                    {
+                        bandera = true;
+                        tempLinea2 += token + ' ';
+                    }
+
+                }
+                tempLinea2.Remove(tempLinea2.Length - 1);
+                bandera = false;
+            }
+            MessageBox.Show(tempLinea);
+            MessageBox.Show(tempLinea2);
+            return "S";
+        }
+        #endregion
     }
 
 }
