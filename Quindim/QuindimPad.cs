@@ -636,7 +636,8 @@ namespace Quindim
                 banderaNumero = false;
             }
             MessageBox.Show(tempLinea);
-            return "S";
+
+            return "s";
         }
         
         string Reordenar(string strCadenaTokens)
