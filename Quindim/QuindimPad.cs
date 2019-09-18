@@ -604,16 +604,16 @@ namespace Quindim
         #endregion
 
         #region Código intermedio
-        String postFijo(String strTokens)
+        string postFijo(string strTokens)
         {
             var lineas = strTokens.Split('\n');
-            String tempLinea = "";
-            foreach (String linea in lineas)
+            string tempLinea = "";
+            foreach (string linea in lineas)
             {
                 var Tokens = linea.Split(' ');
                 bool banderaNumero = false;
                 bool bandera = false;
-                foreach (String token in Tokens)
+                foreach (string token in Tokens)
                 {
                     if (bandera)                    
                         tempLinea += token + ' ';                    
@@ -625,16 +625,11 @@ namespace Quindim
                             bandera = true;
                         }                                
                     }
-                    else if (token.Contains("CNE"))
+                    else if (token.Contains("CNE") || token.Contains("CNR"))
                     {
                         banderaNumero = true;
                         tempLinea += token + ' ';
-                    }
-                    else if (token.Contains("CNR"))
-                    {
-                        banderaNumero = true;
-                        tempLinea += token + ' ';
-                    }
+                    }                    
                 }
                 tempLinea.Remove(tempLinea.Length - 1);
                 bandera = false;
@@ -643,6 +638,22 @@ namespace Quindim
             MessageBox.Show(tempLinea);
             return "S";
         }
+        
+        string Reordenar(string strCadenaTokens)
+        {
+            string[] cadenaTokens = strCadenaTokens.Split(' ');
+            string strNumeritos = "";
+            string strOperadores = "";
+            foreach (string token in cadenaTokens)
+            {
+                if (token.Contains("CNE") || token.Contains("CNR"))                
+                    strNumeritos += token + " ";
+                if (token.Contains("OPA"))
+                    strOperadores+= token + " ";
+            }
+            return strNumeritos + strOperadores.Remove(strOperadores.Length - 1);
+        }
+
         #endregion
     }
 }
