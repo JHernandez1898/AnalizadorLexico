@@ -80,8 +80,7 @@ namespace Quindim
             }
             return ArregloLineas;
         }
-
-        
+                
         private void Btnleertodo_Click(object sender, EventArgs e)
         {
             MetodosAL.Depurar();
@@ -608,40 +607,42 @@ namespace Quindim
         String postFijo(String strTokens)
         {
             var lineas = strTokens.Split('\n');
-            String tempLinea2 = "";
             String tempLinea = "";
             foreach (String linea in lineas)
             {
-                tempLinea += linea;
                 var Tokens = linea.Split(' ');
-
+                bool banderaNumero = false;
                 bool bandera = false;
                 foreach (String token in Tokens)
                 {
-                    if (bandera)
+                    if (bandera)                    
+                        tempLinea += token + ' ';                    
+                    else if (banderaNumero)
                     {
-                        tempLinea2 += token + ' ';
+                        if (token.Contains("OPA"))
+                        {
+                            tempLinea += token + ' ';
+                            bandera = true;
+                        }                                
                     }
                     else if (token.Contains("CNE"))
                     {
-                        bandera = true;
-                        tempLinea2 += token + ' ';
+                        banderaNumero = true;
+                        tempLinea += token + ' ';
                     }
                     else if (token.Contains("CNR"))
                     {
-                        bandera = true;
-                        tempLinea2 += token + ' ';
+                        banderaNumero = true;
+                        tempLinea += token + ' ';
                     }
-
                 }
-                tempLinea2.Remove(tempLinea2.Length - 1);
+                tempLinea.Remove(tempLinea.Length - 1);
                 bandera = false;
+                banderaNumero = false;
             }
             MessageBox.Show(tempLinea);
-            MessageBox.Show(tempLinea2);
             return "S";
         }
         #endregion
     }
-
 }
