@@ -636,14 +636,15 @@ namespace Quindim
                 banderaNumero = false;
             }
             MessageBox.Show(tempLinea);
-
             return "s";
         }
 
-        string postFijo(String cadenaAEvaluar)
+        string postFijoPila(String cadenaAEvaluar)
         {
-            Stack<string> pilaTokens = new Stack<string>(); 
+            Stack<string> pilaTokens = new Stack<string>();
+            return "";
         }
+
         int jerarquiaOperador(String operador)
         {
             switch (operador)
