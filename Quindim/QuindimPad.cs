@@ -80,7 +80,7 @@ namespace Quindim
             }
             return ArregloLineas;
         }
-                
+
         private void Btnleertodo_Click(object sender, EventArgs e)
         {
             MetodosAL.Depurar();
@@ -116,7 +116,7 @@ namespace Quindim
                 rchSemantica.Text = bottomupSemantica[0];
                 rchtxtSemantic.Text = bottomupSemantica[1];
 
-                
+
 
             }
             catch (Exception ex)
@@ -129,7 +129,8 @@ namespace Quindim
 
             MostrarIdentificadoresConstantes();
             //PostFijo
-            postFijo(rtxtcodigointermediolexico.Text);
+            List<string> cadenasPostFijo = postFijo(rtxtcodigointermediolexico.Text);
+            MostrarPostFijos(cadenasPostFijo);
         }
 
         private void MostrarIdentificadoresConstantes()
@@ -543,16 +544,16 @@ namespace Quindim
                     }
                     if (strActual != "S") { rchtxtSemantic.Text += "Línea " + linea.ToString() + ":ERROR" + "\n"; MessageBox.Show("Semantica incorrecta en la línea: " + linea); linea++; }
                 }
-                if (begins - ends == 0) rchtxtSemantic.Text += "Bloque valido"; 
+                if (begins - ends == 0) rchtxtSemantic.Text += "Bloque valido";
                 else rchtxtSemantic.Text += "Bloque invalido";
 
             }
             catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        
+
         static bool principioSmt = true;
-        static bool lineaSmt = true;        
+        static bool lineaSmt = true;
         static int nLineaSmt = 0;
         static string strActualSmt = "";
         static int tempSmt = 1;
@@ -560,7 +561,7 @@ namespace Quindim
         List<string> LineasTokensSmt = new List<string>();
 
         private void LineaLineaSemantico_Click(object sender, EventArgs e)
-        {            
+        {
             LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
             LineasTokensSmt = MetodosSe.PrimeraPasada(LineasTokens);
             MostrarIdentificadoresConstantes();
@@ -573,7 +574,7 @@ namespace Quindim
             }
             if (lineaSmt)
             {
-                lineaSmt = false;                
+                lineaSmt = false;
                 strActualSmt = RellenarArregloSemantica()[nLineaSmt];
                 strActualSmt = strActualSmt.Substring(0, strActualSmt.Length - 1);
                 rchSemantica.Text += ArregloLineas[nLineaSmt] + "\n";
@@ -598,52 +599,86 @@ namespace Quindim
                     tempSmt = strActualSmt.Split(' ').Length;
                 }
                 tokenSemantica.Text = strActualSmt;
-                if (strActualSmt == "S") { nLineaSmt++; lineaSmt = true; rchtxtSemantic.Text += "Línea " + nLineaSmt.ToString() + ":S" + "\n"; }            }
+                if (strActualSmt == "S") { nLineaSmt++; lineaSmt = true; rchtxtSemantic.Text += "Línea " + nLineaSmt.ToString() + ":S" + "\n"; }
+            }
             if (LineasTokensSmt.Count <= nLineaSmt) { nLineaSmt = 0; principioSmt = true; }
         }
         #endregion
 
         #region Código intermedio
-        string postFijo(string strTokens)
+        List<string> postFijo(string strTokens)
         {
+            List<string> loQueSeRegresa = new List<string>();
             var lineas = strTokens.Split('\n');
             string tempLinea = "";
             foreach (string linea in lineas)
             {
                 var Tokens = linea.Split(' ');
                 bool banderaNumero = false;
+                bool banderaIdentificador = false;
                 bool bandera = false;
+                string tokenIdentificador = "";
                 foreach (string token in Tokens)
                 {
-                    if (bandera)                    
-                        tempLinea += token + ' ';                    
+                    if (bandera)
+                        tempLinea += token + ' ';
+                    else if (banderaIdentificador)
+                    {
+                        if (!token.Contains("OPA6"))
+                        {
+                            if (token.Contains("OPA"))
+                            {
+                                tempLinea += tokenIdentificador + ' ' + token + ' ';
+                                bandera = true;
+                            }
+                            else
+                            {
+                                banderaIdentificador = false;
+                            }
+                        }
+                        else
+                        {
+                            banderaIdentificador = false;
+                        }
+
+                    }
                     else if (banderaNumero)
                     {
+
                         if (token.Contains("OPA"))
                         {
                             tempLinea += token + ' ';
                             bandera = true;
-                        }                                
+                        }
                     }
-                    else if (token.Contains("CNE") || token.Contains("CNR") || token.Contains("ID"))
+                    else if (token.Contains("CNE") || token.Contains("CNR"))
                     {
                         banderaNumero = true;
                         tempLinea += token + ' ';
-                    }                    
+                    }
+                    else if (token.Contains("ID"))
+                    {
+                        banderaIdentificador = true;
+                        tokenIdentificador = token;
+                    }
                 }
-                tempLinea.Remove(tempLinea.Length - 1);
-                bandera = false;
-                banderaNumero = false;
+
+                if (tempLinea != "")
+                {
+                    tempLinea.Remove(tempLinea.Length - 1);
+                    bandera = false;
+                    banderaNumero = false;
+                    banderaIdentificador = false;
+                    loQueSeRegresa.Add(Reordenar(tempLinea));
+                }
+
+                tempLinea = "";
             }
-            MessageBox.Show(tempLinea);
-            return "s";
+
+            return loQueSeRegresa;
         }
 
-        string postFijoPila(String cadenaAEvaluar)
-        {
-            Stack<string> pilaTokens = new Stack<string>();
-            return "";
-        }
+
 
         int jerarquiaOperador(String operador)
         {
@@ -667,23 +702,108 @@ namespace Quindim
                 default:
                     return 0;
             }
-         }
-        
+        }
+
         string Reordenar(string strCadenaTokens)
         {
+            Stack<string> pilaTokens = new Stack<string>();
+
             string[] cadenaTokens = strCadenaTokens.Split(' ');
             string strNumeritos = "";
             string strOperadores = "";
+            int operador1 = 0;
+            int operador2 = 0;
+            int contadorParentesis = 0;
+            string subCadenaParentesis = "";
+            bool banderaParentesis = false;
+
             foreach (string token in cadenaTokens)
             {
-                if (token.Contains("CNE") || token.Contains("CNR"))                
-                    strNumeritos += token + " ";
-                if (token.Contains("OPA"))
-                    strOperadores+= token + " ";
-            }
-            return strNumeritos + strOperadores.Remove(strOperadores.Length - 1);
-        }
+                if (banderaParentesis)
+                {
+                    
+                   
+                        if (token.Contains("PAR2"))
+                        {
+                            contadorParentesis--;
+                        if (contadorParentesis == 0)
+                        {
+                            subCadenaParentesis = subCadenaParentesis.Remove(subCadenaParentesis.Length - 1);
+                            strNumeritos += Reordenar(subCadenaParentesis)+ " ";
+                            subCadenaParentesis = "";
+                            banderaParentesis = false;
+                        }
 
-        #endregion
-    }
+                    }
+                        else if (token.Contains("PAR1"))
+                        {
+                            contadorParentesis++;
+
+                        }
+                        else
+                        {
+                            subCadenaParentesis += token + ' ';
+                        }
+                    }
+                else
+                {
+
+                    if (token.Contains("CNE") || token.Contains("CNR") || token.Contains("ID"))
+                        strNumeritos += token + " ";
+                    if (token.Contains("OPA"))
+                        if (operador1 == 0)
+                        {
+                            operador1 = jerarquiaOperador(token);
+                            pilaTokens.Push(token);
+                        }
+                        else
+                        {
+                            operador2 = jerarquiaOperador(token);
+                            if (operador1 < operador2)
+                            {
+
+                                pilaTokens.Push(token);
+                            }
+                            else if (operador2 < operador1)
+                            {
+                                string tokenDePila = pilaTokens.Pop();
+                                operador1 = operador2;
+                                pilaTokens.Push(token);
+                                strNumeritos += tokenDePila + " ";
+
+                            }
+                            else if (operador2 == operador1)
+                            {
+                                strNumeritos += pilaTokens.Pop() + " ";
+                                pilaTokens.Push(token);
+
+                            }
+                        }
+                    if (token.Contains("PAR1"))
+                    {
+                        contadorParentesis++;
+                        banderaParentesis = true;
+                    }
+                }
+
+                }
+                foreach (string operadorEnPila in pilaTokens)
+                {
+                    strNumeritos += operadorEnPila + ' ';
+
+                }
+                return strNumeritos.Remove(strNumeritos.Length - 1);
+            }
+            void MostrarPostFijos(List<string> lineas)
+            {
+                rtxtPostFijos.Text = "";
+                foreach (string linea in lineas)
+                {
+                    rtxtPostFijos.Text += linea + "\n";
+                }
+            }
+
+            #endregion
+        }
+    
 }
