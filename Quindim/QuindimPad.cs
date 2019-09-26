@@ -627,7 +627,7 @@ namespace Quindim
                     {
                         if (!token.Contains("OPA6"))
                         {
-                            if (token.Contains("OPA"))
+                            if (token.Contains("OPA") || token.Contains("OPR") || token.Contains("OL0"))
                             {
                                 tempLinea += tokenIdentificador + ' ' + token + ' ';
                                 bandera = true;
@@ -640,7 +640,7 @@ namespace Quindim
                     }
                     else if (banderaNumero)
                     {
-                        if (token.Contains("OPA"))
+                        if (token.Contains("OPA") || token.Contains("OPR") || token.Contains("OL0"))
                         {
                             tempLinea += token + ' ';
                             bandera = true;
@@ -736,7 +736,7 @@ namespace Quindim
                 {
                     if (token.Contains("CNE") || token.Contains("CNR") || token.Contains("ID"))
                         strNumeritos += token + " ";
-                    if (token.Contains("OPA"))
+                    if (token.Contains("OPA") || token.Contains("OPR") || token.Contains("OL0"))
                         if (operador1 == 0)
                         {
                             operador1 = jerarquiaOperador(token);
@@ -782,7 +782,7 @@ namespace Quindim
                 rtxtPostFijos.Text += linea + "\n";
             }
         }
-            #endregion
+     #endregion
     }
     
 }
