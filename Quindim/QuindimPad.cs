@@ -606,6 +606,7 @@ namespace Quindim
         #endregion
 
         #region Código intermedio
+
         List<string> postFijo(string strTokens)
         {
             List<string> loQueSeRegresa = new List<string>();
@@ -631,20 +632,14 @@ namespace Quindim
                                 tempLinea += tokenIdentificador + ' ' + token + ' ';
                                 bandera = true;
                             }
-                            else
-                            {
-                                banderaIdentificador = false;
-                            }
+                            else                            
+                                banderaIdentificador = false;                            
                         }
-                        else
-                        {
+                        else                        
                             banderaIdentificador = false;
-                        }
-
                     }
                     else if (banderaNumero)
                     {
-
                         if (token.Contains("OPA"))
                         {
                             tempLinea += token + ' ';
@@ -662,7 +657,6 @@ namespace Quindim
                         tokenIdentificador = token;
                     }
                 }
-
                 if (tempLinea != "")
                 {
                     tempLinea.Remove(tempLinea.Length - 1);
@@ -671,34 +665,36 @@ namespace Quindim
                     banderaIdentificador = false;
                     loQueSeRegresa.Add(Reordenar(tempLinea));
                 }
-
                 tempLinea = "";
             }
-
             return loQueSeRegresa;
         }
-
-
-
+        
         int jerarquiaOperador(String operador)
         {
             switch (operador)
-            {
-                //*
-                case "OPA1":
-                    return 2;
-                // /
-                case "OPA2":
-                    return 2;
-                // ^
-                case "OPA3":
-                    return 3;
-                // +
-                case "OPA4":
-                    return 1;
-                // -
-                case "OPA5":
-                    return 1;
+            {                
+                case "OPA3": // ^
+                    return 8;  
+                case "OPA1": // *                                                  
+                case "OPA2": // /
+                    return 7;                
+                case "OPA4": // +                                              
+                case "OPA5": // -
+                    return 6;
+                case "OPR4": // <=                 
+                case "OPR3": // <                    
+                case "OPR2": // >=                    
+                case "OPR1": // >
+                    return 5;                                
+                case "OL03": // !
+                    return 4;                                
+                case "OL01": // &
+                    return 3;                                
+                case "OL02": // |
+                    return 2;                                
+                case "OPA6": // =
+                    return 1;                
                 default:
                     return 0;
             }
@@ -709,8 +705,7 @@ namespace Quindim
             Stack<string> pilaTokens = new Stack<string>();
 
             string[] cadenaTokens = strCadenaTokens.Split(' ');
-            string strNumeritos = "";
-            string strOperadores = "";
+            string strNumeritos = "";            
             int operador1 = 0;
             int operador2 = 0;
             int contadorParentesis = 0;
@@ -720,12 +715,10 @@ namespace Quindim
             foreach (string token in cadenaTokens)
             {
                 if (banderaParentesis)
-                {
-                    
-                   
-                        if (token.Contains("PAR2"))
-                        {
-                            contadorParentesis--;
+                {  
+                    if (token.Contains("PAR2"))
+                    {
+                        contadorParentesis--;
                         if (contadorParentesis == 0)
                         {
                             subCadenaParentesis = subCadenaParentesis.Remove(subCadenaParentesis.Length - 1);
@@ -733,21 +726,14 @@ namespace Quindim
                             subCadenaParentesis = "";
                             banderaParentesis = false;
                         }
-
                     }
-                        else if (token.Contains("PAR1"))
-                        {
-                            contadorParentesis++;
-
-                        }
-                        else
-                        {
-                            subCadenaParentesis += token + ' ';
-                        }
-                    }
+                    else if (token.Contains("PAR1"))                    
+                        contadorParentesis++;                    
+                    else                    
+                        subCadenaParentesis += token + ' ';                    
+                }
                 else
                 {
-
                     if (token.Contains("CNE") || token.Contains("CNR") || token.Contains("ID"))
                         strNumeritos += token + " ";
                     if (token.Contains("OPA"))
@@ -759,24 +745,19 @@ namespace Quindim
                         else
                         {
                             operador2 = jerarquiaOperador(token);
-                            if (operador1 < operador2)
-                            {
-
-                                pilaTokens.Push(token);
-                            }
+                            if (operador1 < operador2)                            
+                                pilaTokens.Push(token);                            
                             else if (operador2 < operador1)
                             {
                                 string tokenDePila = pilaTokens.Pop();
                                 operador1 = operador2;
                                 pilaTokens.Push(token);
                                 strNumeritos += tokenDePila + " ";
-
                             }
                             else if (operador2 == operador1)
                             {
                                 strNumeritos += pilaTokens.Pop() + " ";
                                 pilaTokens.Push(token);
-
                             }
                         }
                     if (token.Contains("PAR1"))
@@ -785,25 +766,23 @@ namespace Quindim
                         banderaParentesis = true;
                     }
                 }
-
-                }
-                foreach (string operadorEnPila in pilaTokens)
-                {
-                    strNumeritos += operadorEnPila + ' ';
-
-                }
-                return strNumeritos.Remove(strNumeritos.Length - 1);
             }
-            void MostrarPostFijos(List<string> lineas)
+            foreach (string operadorEnPila in pilaTokens)
             {
-                rtxtPostFijos.Text = "";
-                foreach (string linea in lineas)
-                {
-                    rtxtPostFijos.Text += linea + "\n";
-                }
+                strNumeritos += operadorEnPila + ' ';
             }
-
-            #endregion
+            return strNumeritos.Remove(strNumeritos.Length - 1);
         }
+
+        void MostrarPostFijos(List<string> lineas)
+        {
+            rtxtPostFijos.Text = "";
+            foreach (string linea in lineas)
+            {
+                rtxtPostFijos.Text += linea + "\n";
+            }
+        }
+            #endregion
+    }
     
 }
