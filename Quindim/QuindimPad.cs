@@ -625,7 +625,7 @@ namespace Quindim
                         tempLinea += token + ' ';
                     else if (banderaIdentificador)
                     {
-                        if (!token.Contains("OPA6"))
+                        if (token.Contains("OPA6"))
                         {
                             if (token.Contains("OPA") || token.Contains("OPR") || token.Contains("OL0"))
                             {
@@ -676,8 +676,8 @@ namespace Quindim
             {                
                 case "OPA3": // ^
                     return 8;  
-                case "OPA1": // *                                                  
-                case "OPA2": // /
+                case "OPA1":// *                                                  
+                case "OPA2":// /
                     return 7;                
                 case "OPA4": // +                                              
                 case "OPA5": // -
