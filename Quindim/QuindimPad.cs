@@ -625,17 +625,17 @@ namespace Quindim
                         tempLinea += token + ' ';
                     else if (banderaIdentificador)
                     {
-                        if (token.Contains("OPA6"))
+                        if (token.Contains("OP"))
                         {
                             if (token.Contains("OPA") || token.Contains("OPR") || token.Contains("OL0"))
                             {
                                 tempLinea += tokenIdentificador + ' ' + token + ' ';
                                 bandera = true;
                             }
-                            else                            
-                                banderaIdentificador = false;                            
+                            else
+                                banderaIdentificador = false;
                         }
-                        else                        
+                        else
                             banderaIdentificador = false;
                     }
                     else if (banderaNumero)
@@ -651,7 +651,7 @@ namespace Quindim
                         banderaNumero = true;
                         tempLinea += token + ' ';
                     }
-                    else if (token.Contains("ID"))
+                    else if (token.Contains("ID")||token.Contains("CN"))
                     {
                         banderaIdentificador = true;
                         tokenIdentificador = token;
