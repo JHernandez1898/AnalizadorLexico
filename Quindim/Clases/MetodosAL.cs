@@ -22,7 +22,7 @@ namespace Quindim.Clases
         public static void CrearMatriz()
         {
             //Obtener Matriz
-            using (SqlConnection con = ConexionMatriz.ObtenerConexion(Servidor))
+            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
             {
                 SqlCommand comm = new SqlCommand("SELECT * FROM TRANSICION order by estado", con);
                 SqlDataReader red = comm.ExecuteReader();
@@ -73,7 +73,7 @@ namespace Quindim.Clases
        public static string ObtenerToken(int intEstadoActual, List<char> Palabra)
         {
             string token = "";
-            using (SqlConnection con = ConexionMatriz.ObtenerConexion(Servidor))
+            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
             {
                 SqlCommand comando = new SqlCommand("select token from transicion where estado = " + intEstadoActual, con);
                 SqlDataReader tok = comando.ExecuteReader();
@@ -89,7 +89,7 @@ namespace Quindim.Clases
         public static int NuevoEstado(char c, int intEstadoActual, ref bool bandera)
         {
             int Estado = 0;
-            using (SqlConnection con = ConexionMatriz.ObtenerConexion(Servidor))
+            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
             {
                 SqlCommand comando = new SqlCommand("EXEC NUEVOESTADO '" + c + "'," + intEstadoActual + "", con);
                 SqlDataReader estado = comando.ExecuteReader();
@@ -152,7 +152,7 @@ namespace Quindim.Clases
         public static string ObtenerToken(int intEstadoActual)
         {
             string token = "";
-            using (SqlConnection con = ConexionMatriz.ObtenerConexion(Servidor))
+            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
             {
                 SqlCommand comando = new SqlCommand("select token from transicion where estado = " + intEstadoActual, con);
                 SqlDataReader tok = comando.ExecuteReader();
@@ -176,7 +176,7 @@ namespace Quindim.Clases
         {
             int Estado = 0;
             
-            using (SqlConnection con = ConexionMatriz.ObtenerConexion(Servidor))
+            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
             {
                 SqlCommand comando = new SqlCommand("EXEC NUEVOESTADO '" + c + "'," + intEstadoActual + "", con);
                 SqlDataReader estado = comando.ExecuteReader();

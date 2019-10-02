@@ -16,7 +16,7 @@ namespace Quindim.Clases
         {
 
             //Obtener Matriz
-            using (SqlConnection con = ConexionMatriz.ObtenerConexion(MetodosAL.Servidor))
+            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
             {
                 SqlCommand comm = new SqlCommand("SELECT * FROM GramaticaLibre  order by DATALENGTH(Combinacion) ASC", con);
                 SqlDataReader red = comm.ExecuteReader();

@@ -122,7 +122,7 @@ namespace Quindim.Clases
         {
 
             //Obtener Matriz
-            using (SqlConnection con = ConexionMatriz.ObtenerConexion(MetodosAL.Servidor))
+            using (SqlConnection con = ConexionMatriz.ObtenerConexion())
             {
                 SqlCommand comm = new SqlCommand("SELECT * FROM ReglasSemanticas order by DATALENGTH(Combinacion) ASC", con);
                 SqlDataReader red = comm.ExecuteReader();

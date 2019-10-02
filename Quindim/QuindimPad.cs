@@ -27,31 +27,30 @@ namespace Quindim
         #region Conexión
         public void EstablecerConexion()
         {
-            MessageBox.Show("Capture una instancia para la conexion", "Analizador Sintactico", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            btnleertodo.Enabled = false;
-            gbLexico.Enabled = false;
-            gbSintax.Enabled = false;
+            //MessageBox.Show("Capture una instancia para la conexion", "Analizador Sintactico", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //btnleertodo.Enabled = false;
-            lblServidor.Text = "Servidor: " + System.Environment.MachineName;
+            //gbLexico.Enabled = false;
+           //gbSintax.Enabled = false;
+            //btnleertodo.Enabled = false;
+            /*lblServidor.Text = "Servidor: " + System.Environment.MachineName;
             lblconexion.BackColor = Color.Red;
-            txtServer.Focus();
+            txtServer.Focus();*/
         }
 
-        private void BtnConectar_Click(object sender, EventArgs e)
+        /*private void BtnConectar_Click(object sender, EventArgs e)
         {
             try
             {
                 if (ConexionMatriz.ProbarConexion(txtServer.Text))
                 {
                     MessageBox.Show("Conectado al servidor", "Lexico", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    gbLexico.Enabled = true;
-                    gbSintax.Enabled = true;
-                    btnleertodo.Enabled = true;
+                    tabControl1.Enabled = true;
+                    //btnleertodo.Enabled = true;
                     MetodosAL.Servidor = txtServer.Text;
                     lblconexion.BackColor = Color.Green;
                     MetodosAS.CrearMatriz();
                     MetodosSe.CrearMatriz();
-                    btnleertodo.Enabled = true;
+                    //btnleertodo.Enabled = true;
                 }
                 else
                 {
@@ -65,7 +64,7 @@ namespace Quindim
             {
                 MessageBox.Show(ex.Message, "Error de conexion", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }*/
 
         #endregion  
 
@@ -83,54 +82,7 @@ namespace Quindim
 
         private void Btnleertodo_Click(object sender, EventArgs e)
         {
-            MetodosAL.Depurar();
-            rtxtcodigointermediolexico.Text = "";
-            rtxtcodigointermediosintax.Text = "";
-            rtxSintaxLineaxLinea.Text = "";
-
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
-            try
-            {
-                //LEXICO
-                List<string> LineasTokens;
-                LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
-                foreach (String token in LineasTokens)
-                {
-                    rtxtcodigointermediolexico.Text += token + " ";
-                    rtxtcodigointermediolexico.Text += "\n";
-                }
-
-                //SINTAXIS
-                List<string> SintaxResult = Sintaxis.AnalisisSintactico(LineasTokens);
-                rtxtcodigointermediosintax.Text = SintaxResult[0];
-                rtxSintaxLineaxLinea.Text = SintaxResult[1];
-
-
-                //SEMANTICA
-                List<string> LineasSemantica = MetodosSe.PrimeraPasada(LineasTokens);
-                List<string> bottomupSemantica = MetodosSe.SegundaPasada(LineasSemantica);
-                rchSemantica.Text = "";
-                rchtxtSemantic.Text = "";
-                rchSemantica.Text = bottomupSemantica[0];
-                rchtxtSemantic.Text = bottomupSemantica[1];
-
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            stopwatch.Stop();
-            MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", " Compilacion ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            MostrarIdentificadoresConstantes();
-            //PostFijo
-            List<string> cadenasPostFijo = postFijo(rtxtcodigointermediolexico.Text);
-            MostrarPostFijos(cadenasPostFijo);
+            
         }
 
         private void MostrarIdentificadoresConstantes()
@@ -803,7 +755,95 @@ namespace Quindim
                 }
             }
 
-            #endregion
+        #endregion
+
+        private void Rtxtentrada_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+            {
+                LeerTodo();
+            }
         }
+
+        public void LeerTodo() {
+            MetodosAL.Depurar();
+            rtxtcodigointermediolexico.Text = "";
+            rtxtcodigointermediosintax.Text = "";
+            rtxSintaxLineaxLinea.Text = "";
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            try
+            {
+                //LEXICO
+                List<string> LineasTokens;
+                LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+                foreach (String token in LineasTokens)
+                {
+                    rtxtcodigointermediolexico.Text += token + " ";
+                    rtxtcodigointermediolexico.Text += "\n";
+                }
+
+                //SINTAXIS
+                List<string> SintaxResult = Sintaxis.AnalisisSintactico(LineasTokens);
+                rtxtcodigointermediosintax.Text = SintaxResult[0];
+                rtxSintaxLineaxLinea.Text = SintaxResult[1];
+
+
+                //SEMANTICA
+                List<string> LineasSemantica = MetodosSe.PrimeraPasada(LineasTokens);
+                List<string> bottomupSemantica = MetodosSe.SegundaPasada(LineasSemantica);
+                rchSemantica.Text = "";
+                rchtxtSemantic.Text = "";
+                rchSemantica.Text = bottomupSemantica[0];
+                rchtxtSemantic.Text = bottomupSemantica[1];
+
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            stopwatch.Stop();
+            MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", " Compilacion ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            MostrarIdentificadoresConstantes();
+            //PostFijo
+            List<string> cadenasPostFijo = postFijo(rtxtcodigointermediolexico.Text);
+            MostrarPostFijos(cadenasPostFijo);
+        }
+
+        private void LeerTodoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LeerTodo();
+        }
+
+        private void InstanciasSQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings settings = new Settings();
+            this.Hide();
+            settings.ShowDialog();
+            this.Close();
+        }
+
+        private void RUNToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AbriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CargarEntradaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            rtxtentrada.Text = "int num\nread num\nint res = Calcfact ( num )\nprint ( res )\nfunction int Calcfact ( int num )\nif ( num == 0 )\nreturn ( 1 )\nend\nelse\nfor ( int x = num to num > 1 step x = x - 1 )\nint R = R * x\nend\nend\nreturn ( R )\nend";
+        }
+
+    }
     
 }
