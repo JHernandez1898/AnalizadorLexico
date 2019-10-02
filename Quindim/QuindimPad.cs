@@ -823,7 +823,7 @@ namespace Quindim
                 rtxtPostFijos.Text += linea + "\n";
             }
         }
-     #endregion
+     
     }
     
 }

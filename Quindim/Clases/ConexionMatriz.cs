@@ -20,19 +20,11 @@ namespace Quindim.Clases
         public static bool ProbarConexion(string serverName)
         {
            // SqlConnection con = new SqlConnection("Data Source=" + System.Environment.MachineName + "\\" + serverName + "; Initial Catalog = LENGUAJE; Server=" + System.Environment.MachineName + "\\" + serverName + " ;Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
-            SqlConnection con = new SqlConnection("Data Source=" + System.Environment.MachineName +  "\\" + serverName+ "; Initial Catalog = PROTOLENGUAJE; Server=" + System.Environment.MachineName + "\\" + Program.serverInstace + " ;Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
+            SqlConnection con = new SqlConnection("Data Source=" + System.Environment.MachineName+"; Initial Catalog = PROTOLENGUAJE; Server=" + System.Environment.MachineName + "\\" + Program.serverInstace + " ;Integrated Security = SSPI; Trusted_Connection=True; MultipleActiveResultSets=True");
             try
             {
                 con.Open();
-                if(con.State==System.Data.ConnectionState.Open)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-                   
+                return con.State == System.Data.ConnectionState.Open;
             }
             catch
             {
