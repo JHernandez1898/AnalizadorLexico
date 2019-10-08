@@ -781,7 +781,7 @@ namespace Quindim
             stopwatch.Stop();
             MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", " Compilacion ", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            MostrarIdentificadoresConstantes();
+             MostrarIdentificadoresConstantes();
             //PostFijo
             List<string> cadenasPostFijo = postFijo(rtxtcodigointermediolexico.Text);
             MostrarPostFijos(cadenasPostFijo);
@@ -836,29 +836,104 @@ namespace Quindim
                 string LineaPostFijo = "";
                 switch (Tokens[0])
                 {
-                    case string strValue when strValue.Substring(0,3) == "TDD":
-                        if (Tokens.Length == 2) { Tripleta.Rows.Add("T" + T.ToString(), "NULL", "OPR6"); T++; }
+                    case string strValue when strValue.Substring(0, 3) == "TDD":
+                        if (Tokens.Length == 2) { Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPR6"); T++; }
                         else
                         {
-                            postFijo(LineaActual).ForEach(delegate (string pf) {  LineaPostFijo = pf; });
-                            TripletaOperacionesAritmeticas(ref Tripleta, LineaPostFijo,ref T);
+                            postFijo(LineaActual).ForEach(delegate (string pf) { LineaPostFijo = pf; });
+                            TripletaOperacionesAritmeticas(ref Tripleta, LineaPostFijo, ref T);
                         }
                         break;
                     case "PR08":
                         postFijo(LineaActual).ForEach(delegate (string pf) { LineaPostFijo = pf; });
                         TripletaCondicional(ref Tripleta, LineaPostFijo, ref T);
                         break;
+                    case "PR21":
+                        CerrarFalse(ref Tripleta);
+                        break;
+                    case "PR06":
+                        string LineaInicializacion = $"{Tokens[2]} {Tokens[3]} {Tokens[4]} {Tokens[5]}";
+                        string LineaComparacion = $"{Tokens[7]} {Tokens[8]} {Tokens[9]}";
+                        string LineaIncremento = $"{Tokens[11]} {Tokens[12]} {Tokens[13]} {Tokens[14]} {Tokens[15]}";
+                        postFijo(LineaInicializacion).ForEach(delegate (string pf) { LineaPostFijo = pf; });
+                        TripletaOperacionesAritmeticas(ref Tripleta, LineaPostFijo, ref T);
+                        postFijo(LineaComparacion).ForEach(delegate (string pf) { LineaPostFijo = pf; });
+                        TripletaCondicional(ref Tripleta, LineaPostFijo, ref T);
+                        postFijo(LineaIncremento).ForEach(delegate (string pf) { LineaPostFijo = pf; });
+                        TripletaOperacionesAritmeticas(ref Tripleta, LineaPostFijo, ref T);
+
+                        break;
+                    default:
+                        TripletaOtrasPalabras(ref Tripleta,LineaActual);
+                        break;
                 }
             }
+            Tripleta.Rows.Add("FIN", "", "");
             dataGridView1.Rows.Clear();
             foreach (DataRow s in Tripleta.Rows)
             {
                 dataGridView1.Rows.Add(s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]);
             }
         }
-        void TripletaCondicional(ref DataTable Tripleta, string LineaPf , ref int T)
+
+        void TripletaOtrasPalabras(ref DataTable Tripleta, string Linea)
         {
-            
+            Linea = Linea.Replace("PAR1", "");
+            Linea = Linea.Replace("PAR2", "");
+            string[] Tokens = Linea.Split(' ');
+            string temp = "";
+            foreach (DataRow s in Tripleta.Rows) if (s.ItemArray[1].ToString() == Tokens[1]) temp = s.ItemArray[0].ToString();
+            Tripleta.Rows.Add(temp, Tokens[1], Tokens[0]);
+
+        }
+        void CerrarFalse(ref DataTable Tripleta)
+        {
+            DataTable nueva = GenerarTabla();
+            foreach (DataRow s in Tripleta.Rows)
+            {
+                if (s.ItemArray[2].ToString() == "")
+                {
+                    DataRow dataRow = s;
+                    nueva.Rows.Add(dataRow.ItemArray[0],dataRow.ItemArray[1], (Tripleta.Rows.Count) + 1);
+                } else nueva.Rows.Add(s.ItemArray[0],s.ItemArray[1],s.ItemArray[2]); //podria  poner solo la s pero por alguna razon no jala
+            }
+            Tripleta = nueva;
+        }
+        void TripletaCondicional(ref DataTable Tripleta, string postfijo , ref int T)
+        {
+            string[] pf = postfijo.Split(' ');
+            string strPostfijoTemporal = postfijo;
+            while (pf.Length > 3)
+            {
+                int c = 0;
+                string remplazo = "";
+                foreach (string Token in pf)
+                {
+
+                    if (Token.Substring(0, 1) == "O")
+                    {
+                        remplazo = CrearRenglonesCondicional(ref Tripleta, pf, c, ref T);
+                        break;
+                    }
+                    c++;
+                }
+                strPostfijoTemporal = strPostfijoTemporal.Replace(remplazo, "T" + (T - 1));
+                pf = strPostfijoTemporal.Split(' ');
+            }
+            CrearRenglonesCondicional(ref Tripleta, pf, 2, ref T);
+        }
+        string CrearRenglonesCondicional(ref DataTable trip, string[] pf, int c, ref int T)
+        {
+            string temp = "";
+            foreach (DataRow s in trip.Rows) if (s.ItemArray[1].ToString() == pf[c - 2]) temp = s.ItemArray[0].ToString();
+
+            trip.Rows.Add("T" + T, pf[c - 1], "OPA6");
+            trip.Rows.Add(temp, "T"+T, pf[c]);
+            trip.Rows.Add("TR" + T, "TRUE", (trip.Rows.Count) +3 );
+            trip.Rows.Add("TR" + T, "FALSE", "");
+            T++;
+            return (pf[c - 2] + " " + pf[c - 1] + " " + pf[c]);
+
         }
         void TripletaOperacionesAritmeticas(ref DataTable Tripleta, string postfijo,ref int T)
         {
@@ -886,14 +961,7 @@ namespace Quindim
 
         string CrearRenglones(ref DataTable trip ,string[] pf, int c,ref int T)
         {
-            //switch (pf[c])
-            //{
-            //    case "OPA6":
-            //        break;
-            //    default:
-                    
-            //        break;
-            //}
+
             trip.Rows.Add("T" + T, pf[c - 2], "OPA6");
             trip.Rows.Add("T" + T, pf[c - 1], pf[c]);
             T++;

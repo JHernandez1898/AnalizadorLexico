@@ -117,7 +117,7 @@ namespace Quindim.Clases
                 {
                     IdentificarToken(strPalabra, ref token, Estado);
                 }
-                Estado = 0;
+              //  Estado = 0;
 
             }
             else if (c <= 'Z')
