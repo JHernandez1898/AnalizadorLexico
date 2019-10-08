@@ -823,7 +823,116 @@ namespace Quindim
                 rtxtPostFijos.Text += linea + "\n";
             }
         }
-     
+
+        private void GenerarTripleta_Click(object sender, EventArgs e)
+        {
+            DataTable Tripleta = GenerarTabla();
+            List<string> LineasTokens =  Lexico.AnalizadorLexico(rtxtentrada.Text);
+            int T = 0;
+            foreach (string Linea in LineasTokens)
+            {
+                string LineaActual = Linea.Substring(0, Linea.Length - 1);
+                string[] Tokens = MetodosSe.CrearCombinaciones(1, LineaActual);
+                string LineaPostFijo = "";
+                switch (Tokens[0])
+                {
+                    case string strValue when strValue.Substring(0,3) == "TDD":
+                        if (Tokens.Length == 2) { Tripleta.Rows.Add("T" + T.ToString(), "NULL", "OPR6"); T++; }
+                        else
+                        {
+                            postFijo(LineaActual).ForEach(delegate (string pf) {  LineaPostFijo = pf; });
+                            TripletaOperacionesAritmeticas(ref Tripleta, LineaPostFijo,ref T);
+                        }
+                        break;
+                    case "PR08":
+                        postFijo(LineaActual).ForEach(delegate (string pf) { LineaPostFijo = pf; });
+                        TripletaCondicional(ref Tripleta, LineaPostFijo, ref T);
+                        break;
+                }
+            }
+            dataGridView1.Rows.Clear();
+            foreach (DataRow s in Tripleta.Rows)
+            {
+                dataGridView1.Rows.Add(s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]);
+            }
+        }
+        void TripletaCondicional(ref DataTable Tripleta, string LineaPf , ref int T)
+        {
+            
+        }
+        void TripletaOperacionesAritmeticas(ref DataTable Tripleta, string postfijo,ref int T)
+        {
+            string[] pf = postfijo.Split(' ');
+            string strPostfijoTemporal = postfijo;
+            while (pf.Length > 3)
+            {
+                int c = 0;
+                string remplazo = "";
+                foreach(string Token in pf)
+                {
+                    
+                    if (Token.Substring(0, 1) == "O"){
+                        remplazo =  CrearRenglones(ref Tripleta,pf,c,ref T);
+                        break;
+                        }
+                    c++;
+                }
+                strPostfijoTemporal = strPostfijoTemporal.Replace(remplazo, "T" + (T-1));
+                pf = strPostfijoTemporal.Split(' ');
+            }
+            CrearRenglones(ref Tripleta, pf, 2, ref T);
+
+        }
+
+        string CrearRenglones(ref DataTable trip ,string[] pf, int c,ref int T)
+        {
+            //switch (pf[c])
+            //{
+            //    case "OPA6":
+            //        break;
+            //    default:
+                    
+            //        break;
+            //}
+            trip.Rows.Add("T" + T, pf[c - 2], "OPA6");
+            trip.Rows.Add("T" + T, pf[c - 1], pf[c]);
+            T++;
+            return (pf[c - 2] + " " + pf[c - 1] + " " + pf[c]);
+
+        }
+
+
+        DataTable GenerarTabla()
+        {
+            DataTable Tripleta = new DataTable("Tripletas");
+            DataColumn column;
+            DataRow row;
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "DatoObjeto";
+            column.AutoIncrement = false;
+            column.Caption = "DatoObjeto";
+            column.ReadOnly = false;
+            column.Unique = false;
+            Tripleta.Columns.Add(column);
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "DatoFuente";
+            column.AutoIncrement = false;
+            column.Caption = "DatoFuente";
+            column.ReadOnly = false;
+            column.Unique = false;
+            Tripleta.Columns.Add(column);
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "DatoOperador";
+            column.AutoIncrement = false;
+            column.Caption = "DatoOperador";
+            column.ReadOnly = false;
+            column.Unique = false;
+            Tripleta.Columns.Add(column);
+            return Tripleta;
+        }
     }
     
 }
