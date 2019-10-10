@@ -104,20 +104,20 @@ namespace Quindim.Clases
         public static int NuevoEstado(char c, int intEstadoActual, ref bool bandera, string strPalabra)
         {
             int Estado = 0;
-           
-            if(c==' ' && intEstadoActual!=131)
+
+            if (c == ' ' && intEstadoActual != 131)
             {
-                
+
                 int columna = Matriz.Columns.IndexOf(c.ToString());
                 Estado = Convert.ToInt32((Matriz.Rows[intEstadoActual][columna]).ToString());
                 token = (Matriz.Rows[Estado][94]).ToString();
                 token = token.Trim();
                 bandera = false;
-                if(Estado==129||Estado==181||Estado==182||Estado==183||Estado==187)
+                if (Estado == 129 || Estado == 181 || Estado == 182 || Estado == 183 || Estado == 187)
                 {
                     IdentificarToken(strPalabra, ref token, Estado);
                 }
-              Estado = 0;
+                Estado = 0;
 
             }
             else if (c <= 'Z')
@@ -128,15 +128,20 @@ namespace Quindim.Clases
             }
             else if (c >= 'a' && c <= 'z')
             {
-                int columna = Matriz.Columns.IndexOf("" + c+"m");
+                int columna = Matriz.Columns.IndexOf("" + c + "m");
                 Estado = Convert.ToInt32((Matriz.Rows[intEstadoActual][columna]).ToString());
                 // Resultado=Matriz.Select("SELECT [" + c + "m] WHERE ESTADO = " + intEstadoActual);
             }
-            else if ( c == ']')
+            else if (c == ']')
             {
                 int columna = Matriz.Columns.IndexOf("]]");
                 Estado = Convert.ToInt32((Matriz.Rows[intEstadoActual][columna]).ToString());
                 //  Resultado=Matriz.Select("SELECT []]] WHERE ESTADO = " + intEstadoActual);
+            }
+            else if (c == '|')
+            {
+                int columna = Matriz.Columns.IndexOf("|");
+                Estado = Convert.ToInt32((Matriz.Rows[intEstadoActual][columna]).ToString());
             }
            
             //SqlCommand comando2 = new SqlCommand("EXEC IDENTIFICADORES", unaConexion);
