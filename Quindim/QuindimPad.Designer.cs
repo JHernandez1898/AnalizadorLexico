@@ -110,10 +110,8 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.rtxtPostFijos = new System.Windows.Forms.RichTextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.GenerarTripleta = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.DatoObjeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DatoFuente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Operador = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rtxtentrada = new System.Windows.Forms.RichTextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.abriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,7 +121,10 @@
             this.leerTodoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.GenerarTripleta = new System.Windows.Forms.Button();
+            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatoObjeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatoFuente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Operador = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConstantesExpo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConstatesNumericasEnteras)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIDE)).BeginInit();
@@ -1010,38 +1011,32 @@
             this.tabPage5.TabIndex = 0;
             this.tabPage5.Text = "Tripleta";
             // 
+            // GenerarTripleta
+            // 
+            this.GenerarTripleta.Location = new System.Drawing.Point(3, 65);
+            this.GenerarTripleta.Name = "GenerarTripleta";
+            this.GenerarTripleta.Size = new System.Drawing.Size(75, 23);
+            this.GenerarTripleta.TabIndex = 1;
+            this.GenerarTripleta.Text = "Tripletalo";
+            this.GenerarTripleta.UseVisualStyleBackColor = true;
+            this.GenerarTripleta.Click += new System.EventHandler(this.GenerarTripleta_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.num,
             this.DatoObjeto,
             this.DatoFuente,
             this.Operador});
             this.dataGridView1.Location = new System.Drawing.Point(78, 29);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(317, 288);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // DatoObjeto
-            // 
-            this.DatoObjeto.HeaderText = "DatoObjeto";
-            this.DatoObjeto.Name = "DatoObjeto";
-            this.DatoObjeto.ReadOnly = true;
-            // 
-            // DatoFuente
-            // 
-            this.DatoFuente.HeaderText = "DatoFuente";
-            this.DatoFuente.Name = "DatoFuente";
-            this.DatoFuente.ReadOnly = true;
-            // 
-            // Operador
-            // 
-            this.Operador.HeaderText = "Operador";
-            this.Operador.Name = "Operador";
-            this.Operador.ReadOnly = true;
             // 
             // rtxtentrada
             // 
@@ -1143,15 +1138,30 @@
             this.label13.TabIndex = 78;
             this.label13.Text = "uindimPad";
             // 
-            // GenerarTripleta
+            // num
             // 
-            this.GenerarTripleta.Location = new System.Drawing.Point(3, 65);
-            this.GenerarTripleta.Name = "GenerarTripleta";
-            this.GenerarTripleta.Size = new System.Drawing.Size(75, 23);
-            this.GenerarTripleta.TabIndex = 1;
-            this.GenerarTripleta.Text = "Tripletalo";
-            this.GenerarTripleta.UseVisualStyleBackColor = true;
-            this.GenerarTripleta.Click += new System.EventHandler(this.GenerarTripleta_Click);
+            this.num.HeaderText = "numero";
+            this.num.Name = "num";
+            this.num.ReadOnly = true;
+            this.num.Width = 50;
+            // 
+            // DatoObjeto
+            // 
+            this.DatoObjeto.HeaderText = "DatoObjeto";
+            this.DatoObjeto.Name = "DatoObjeto";
+            this.DatoObjeto.ReadOnly = true;
+            // 
+            // DatoFuente
+            // 
+            this.DatoFuente.HeaderText = "DatoFuente";
+            this.DatoFuente.Name = "DatoFuente";
+            this.DatoFuente.ReadOnly = true;
+            // 
+            // Operador
+            // 
+            this.Operador.HeaderText = "Operador";
+            this.Operador.Name = "Operador";
+            this.Operador.ReadOnly = true;
             // 
             // QuindimPad
             // 
@@ -1280,10 +1290,11 @@
         private System.Windows.Forms.ToolStripMenuItem cargarEntradaToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button GenerarTripleta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn num;
         private System.Windows.Forms.DataGridViewTextBoxColumn DatoObjeto;
         private System.Windows.Forms.DataGridViewTextBoxColumn DatoFuente;
         private System.Windows.Forms.DataGridViewTextBoxColumn Operador;
-        private System.Windows.Forms.Button GenerarTripleta;
     }
 }
 

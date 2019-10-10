@@ -829,11 +829,15 @@ namespace Quindim
             DataTable Tripleta = GenerarTabla();
             List<string> LineasTokens =  Lexico.AnalizadorLexico(rtxtentrada.Text);
             int T = 0;
+            string postFijoIncremento = "";
+            bool banderafor = false;
             foreach (string Linea in LineasTokens)
             {
                 string LineaActual = Linea.Substring(0, Linea.Length - 1);
                 string[] Tokens = MetodosSe.CrearCombinaciones(1, LineaActual);
                 string LineaPostFijo = "";
+                
+                
                 switch (Tokens[0])
                 {
                     case string strValue when strValue.Substring(0, 3) == "TDD":
@@ -849,6 +853,11 @@ namespace Quindim
                         TripletaCondicional(ref Tripleta, LineaPostFijo, ref T);
                         break;
                     case "PR21":
+                        if (banderafor)
+                        {
+                            TripletaOperacionesAritmeticas(ref Tripleta, postFijoIncremento, ref T);
+                            banderafor = false;
+                        }
                         CerrarFalse(ref Tripleta);
                         break;
                     case "PR06":
@@ -859,8 +868,9 @@ namespace Quindim
                         TripletaOperacionesAritmeticas(ref Tripleta, LineaPostFijo, ref T);
                         postFijo(LineaComparacion).ForEach(delegate (string pf) { LineaPostFijo = pf; });
                         TripletaCondicional(ref Tripleta, LineaPostFijo, ref T);
-                        postFijo(LineaIncremento).ForEach(delegate (string pf) { LineaPostFijo = pf; });
-                        TripletaOperacionesAritmeticas(ref Tripleta, LineaPostFijo, ref T);
+                        postFijo(LineaIncremento).ForEach(delegate (string pf) { postFijoIncremento = pf; });
+                        banderafor = true;
+                        
 
                         break;
                     default:
@@ -870,9 +880,11 @@ namespace Quindim
             }
             Tripleta.Rows.Add("FIN", "", "");
             dataGridView1.Rows.Clear();
+            int num = 0;
             foreach (DataRow s in Tripleta.Rows)
             {
-                dataGridView1.Rows.Add(s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]);
+                num++;
+                dataGridView1.Rows.Add(num,s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]);
             }
         }
 
