@@ -634,6 +634,7 @@ namespace Quindim
                 case "OPA4": // +                                              
                 case "OPA5": // -
                     return 6;
+                case "OPR5": // <= 
                 case "OPR4": // <=                 
                 case "OPR3": // <                    
                 case "OPR2": // >=                    
@@ -827,6 +828,7 @@ namespace Quindim
         private void GenerarTripleta_Click(object sender, EventArgs e)
         {
             DataTable Tripleta = GenerarTabla();
+            int nLinea = 0;
             List<string> LineasTokens =  Lexico.AnalizadorLexico(rtxtentrada.Text);
             int T = 0;
             string postFijoIncremento = "";
@@ -844,6 +846,8 @@ namespace Quindim
                         if (Tokens.Length == 2) { Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPR6"); T++; }
                         else
                         {
+                            //string[] combinacionesdedos = MetodosSe.CrearCombinaciones(2, LineaActual);
+
                             postFijo(LineaActual).ForEach(delegate (string pf) { LineaPostFijo = pf; });
                             TripletaOperacionesAritmeticas(ref Tripleta, LineaPostFijo, ref T);
                         }
@@ -898,7 +902,7 @@ namespace Quindim
             Tripleta.Rows.Add(temp, Tokens[1], Tokens[0]);
 
         }
-        void CerrarFalse(ref DataTable Tripleta)
+        static void CerrarFalse(ref DataTable Tripleta)
         {
             DataTable nueva = GenerarTabla();
             foreach (DataRow s in Tripleta.Rows)
@@ -913,8 +917,11 @@ namespace Quindim
         }
         void TripletaCondicional(ref DataTable Tripleta, string postfijo , ref int T)
         {
+
             string[] pf = postfijo.Split(' ');
+            Stack<string> OperadoresLogicos = ConseguirOperadores(pf, ref postfijo);
             string strPostfijoTemporal = postfijo;
+            pf = postfijo.Split(' ');
             while (pf.Length > 3)
             {
                 int c = 0;
@@ -924,7 +931,7 @@ namespace Quindim
 
                     if (Token.Substring(0, 1) == "O")
                     {
-                        remplazo = CrearRenglonesCondicional(ref Tripleta, pf, c, ref T);
+                        remplazo = CrearRenglonesCondicional(ref Tripleta, pf, c, ref T,ref OperadoresLogicos);
                         break;
                     }
                     c++;
@@ -932,17 +939,67 @@ namespace Quindim
                 strPostfijoTemporal = strPostfijoTemporal.Replace(remplazo, "T" + (T - 1));
                 pf = strPostfijoTemporal.Split(' ');
             }
-            CrearRenglonesCondicional(ref Tripleta, pf, 2, ref T);
+            //CrearRenglonesCondicional(ref Tripleta, pf, 2, ref T, ref OperadoresLogicos);
         }
-        string CrearRenglonesCondicional(ref DataTable trip, string[] pf, int c, ref int T)
+        Stack<string> ConseguirOperadores(string[] Postfijo, ref string strPostfijo)
+        {
+            int c = 0;
+            Stack<string> OperadoresLogicos = new Stack<string>();
+            foreach(string operador in Postfijo)
+            {
+                if (operador.Substring(0, 3) == "OL0")
+                {
+                    c++;
+                    OperadoresLogicos.Push(operador);
+                    strPostfijo = strPostfijo.Replace(operador, "");
+                   
+                }
+            }
+            strPostfijo = strPostfijo.Substring(0, strPostfijo.Length - c);
+            return OperadoresLogicos;
+        }
+        static string operador = "";
+        static string CrearRenglonesCondicional(ref DataTable trip, string[] pf , int c, ref int T, ref Stack<string> Operadores)
         {
             string temp = "";
             foreach (DataRow s in trip.Rows) if (s.ItemArray[1].ToString() == pf[c - 2]) temp = s.ItemArray[0].ToString();
-
             trip.Rows.Add("T" + T, pf[c - 1], "OPA6");
-            trip.Rows.Add(temp, "T"+T, pf[c]);
-            trip.Rows.Add("TR" + T, "TRUE", (trip.Rows.Count) +3 );
-            trip.Rows.Add("TR" + T, "FALSE", "");
+            trip.Rows.Add(temp, "T" + T, pf[c]);
+            
+            if (Operadores.Count != 0)
+            {
+
+                operador = Operadores.Pop();
+                switch (operador)
+                {
+                    case "OL02":
+                        trip.Rows.Add("TR" + T, "FALSE", (trip.Rows.Count) + 3);
+                        trip.Rows.Add("TR" + T, "TRUE", "");
+                        break;
+                    default:
+                        trip.Rows.Add("TR" + T, "TRUE", (trip.Rows.Count) + 3);
+                        trip.Rows.Add("TR" + T, "FALSE", "");
+                        break;
+                }
+               
+                
+            }
+            else
+            {
+                switch (operador)
+                {
+                    case "OL02":
+                       
+                        trip.Rows.Add("TR" + T, "TRUE", (trip.Rows.Count) + 3);
+                        CerrarFalse(ref trip);
+                        trip.Rows.Add("TR" + T, "FALSE", "");
+                        break;
+                    default:
+                        trip.Rows.Add("TR" + T, "TRUE", (trip.Rows.Count) + 3);
+                        trip.Rows.Add("TR" + T, "FALSE", "");
+                        break;
+                }
+            }
             T++;
             return (pf[c - 2] + " " + pf[c - 1] + " " + pf[c]);
 
@@ -982,7 +1039,7 @@ namespace Quindim
         }
 
 
-        DataTable GenerarTabla()
+        static DataTable GenerarTabla()
         {
             DataTable Tripleta = new DataTable("Tripletas");
             DataColumn column;
