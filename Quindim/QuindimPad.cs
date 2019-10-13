@@ -864,6 +864,8 @@ namespace Quindim
                         }
                         CerrarFalse(ref Tripleta);
                         break;
+                    case "PR05":
+                        break;
                     case "PR06":
                         string LineaInicializacion = $"{Tokens[2]} {Tokens[3]} {Tokens[4]} {Tokens[5]}";
                         string LineaComparacion = $"{Tokens[7]} {Tokens[8]} {Tokens[9]}";
@@ -897,9 +899,20 @@ namespace Quindim
             Linea = Linea.Replace("PAR1", "");
             Linea = Linea.Replace("PAR2", "");
             string[] Tokens = Linea.Split(' ');
+            for (int i = 0; i < Tokens.Length - 1; i++)
+            { 
+                Tokens[i] = Tokens[i].Trim();
+                if (Tokens[i] == "")
+                {
+                    string s = Tokens[i];
+                    Tokens[i] = Tokens[i + 1];
+                    Tokens[i + 1] = s;
+                }
+            }
+            
             string temp = "";
             foreach (DataRow s in Tripleta.Rows) if (s.ItemArray[1].ToString() == Tokens[1]) temp = s.ItemArray[0].ToString();
-            Tripleta.Rows.Add(temp, Tokens[1], Tokens[0]);
+            Tripleta.Rows.Add("", Tokens[1], Tokens[0]);
 
         }
         static void CerrarFalse(ref DataTable Tripleta)
@@ -922,7 +935,7 @@ namespace Quindim
             Stack<string> OperadoresLogicos = ConseguirOperadores(pf, ref postfijo);
             string strPostfijoTemporal = postfijo;
             pf = postfijo.Split(' ');
-            while (pf.Length > 3)
+            while (pf.Length >= 3)
             {
                 int c = 0;
                 string remplazo = "";
