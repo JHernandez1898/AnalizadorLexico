@@ -836,6 +836,7 @@ namespace Quindim
             string postFijoIncremento = "";
             bool banderafor = false;
             bool banderafunc = false;
+            bool condicion = false;
             foreach (string Linea in LineasTokens)
             {
                 string LineaActual = Linea.Substring(0, Linea.Length - 1);
@@ -865,20 +866,25 @@ namespace Quindim
                     case "PR08":
                         postFijo(LineaActual).ForEach(delegate (string pf) { LineaPostFijo = pf; });
                         TripletaCondicional(ref Tripleta, LineaPostFijo, ref T);
+                        condicion = true;
                         break;
                     case "PR21":
-                        if (banderafor)
+                        if (!banderafor && !condicion && banderafunc)
+                        {
+                            Tripleta.Rows.Add("ENDP", "", "");
+                            banderafunc = false;
+                        }
+                        else  if (banderafor)
                         {
                             TripletaOperacionesAritmeticas(ref Tripleta, postFijoIncremento, ref T);
                             banderafor = false;
                         }
-                        else if (banderafunc)
-                        {
-
-                        }
+                        else if (condicion) condicion = false;
+                        
                         CerrarFalse(ref Tripleta);
                         break;
                     case "PR05":
+                        condicion = true;
                         break;
                     case "PR06":
                         string LineaInicializacion = $"{Tokens[2]} {Tokens[3]} {Tokens[4]} {Tokens[5]}";
@@ -893,7 +899,7 @@ namespace Quindim
                         break;
                     case "PR07":
                         Tripleta.Rows.Add("PROC", "TR" + Tokens[2], "num");
-
+                        banderafunc = true;
                         break;
                     default:
                         TripletaOtrasPalabras(ref Tripleta, LineaActual);
