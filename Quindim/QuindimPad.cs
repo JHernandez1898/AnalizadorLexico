@@ -771,6 +771,7 @@ namespace Quindim
                 rchSemantica.Text = bottomupSemantica[0];
                 rchtxtSemantic.Text = bottomupSemantica[1];
 
+                GenerarTripletas();
 
 
             }
@@ -825,31 +826,40 @@ namespace Quindim
             }
         }
 
-        private void GenerarTripleta_Click(object sender, EventArgs e)
+       
+        public void GenerarTripletas()
         {
             DataTable Tripleta = GenerarTabla();
             int nLinea = 0;
-            List<string> LineasTokens =  Lexico.AnalizadorLexico(rtxtentrada.Text);
+            List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
             int T = 0;
             string postFijoIncremento = "";
             bool banderafor = false;
+            bool banderafunc = false;
             foreach (string Linea in LineasTokens)
             {
                 string LineaActual = Linea.Substring(0, Linea.Length - 1);
                 string[] Tokens = MetodosSe.CrearCombinaciones(1, LineaActual);
                 string LineaPostFijo = "";
-                
-                
+
+
                 switch (Tokens[0])
                 {
                     case string strValue when strValue.Substring(0, 3) == "TDD":
                         if (Tokens.Length == 2) { Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPR6"); T++; }
                         else
                         {
-                            //string[] combinacionesdedos = MetodosSe.CrearCombinaciones(2, LineaActual);
-
-                            postFijo(LineaActual).ForEach(delegate (string pf) { LineaPostFijo = pf; });
-                            TripletaOperacionesAritmeticas(ref Tripleta, LineaPostFijo, ref T);
+                            string metodo = "";
+                            bool Metodo = RevisarMetodo(LineaActual, ref metodo);
+                            if (Metodo)
+                            {
+                                Tripleta.Rows.Add(Tokens[1], "TR" + metodo, " ");
+                            }
+                            else
+                            {
+                                postFijo(LineaActual).ForEach(delegate (string pf) { LineaPostFijo = pf; });
+                                TripletaOperacionesAritmeticas(ref Tripleta, LineaPostFijo, ref T);
+                            }
                         }
                         break;
                     case "PR08":
@@ -861,6 +871,10 @@ namespace Quindim
                         {
                             TripletaOperacionesAritmeticas(ref Tripleta, postFijoIncremento, ref T);
                             banderafor = false;
+                        }
+                        else if (banderafunc)
+                        {
+
                         }
                         CerrarFalse(ref Tripleta);
                         break;
@@ -876,11 +890,14 @@ namespace Quindim
                         TripletaCondicional(ref Tripleta, LineaPostFijo, ref T);
                         postFijo(LineaIncremento).ForEach(delegate (string pf) { postFijoIncremento = pf; });
                         banderafor = true;
-                        
+                        break;
+                    case "PR07":
+                        Tripleta.Rows.Add("PROC", "TR" + Tokens[2], "num");
 
                         break;
                     default:
-                        TripletaOtrasPalabras(ref Tripleta,LineaActual);
+                        TripletaOtrasPalabras(ref Tripleta, LineaActual);
+                        banderafunc = true;
                         break;
                 }
             }
@@ -890,8 +907,106 @@ namespace Quindim
             foreach (DataRow s in Tripleta.Rows)
             {
                 num++;
-                dataGridView1.Rows.Add(num,s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]);
+                dataGridView1.Rows.Add(num, s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]);
             }
+        }
+        private void GenerarTripleta_Click(object sender, EventArgs e)
+        {
+            DataTable Tripleta = GenerarTabla();
+            int nLinea = 0;
+            List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+            int T = 0;
+            string postFijoIncremento = "";
+            bool banderafor = false;
+            bool banderafunc = false;
+            foreach (string Linea in LineasTokens)
+            {
+                string LineaActual = Linea.Substring(0, Linea.Length - 1);
+                string[] Tokens = MetodosSe.CrearCombinaciones(1, LineaActual);
+                string LineaPostFijo = "";
+
+
+                switch (Tokens[0])
+                {
+                    case string strValue when strValue.Substring(0, 3) == "TDD":
+                        if (Tokens.Length == 2) { Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPR6"); T++; }
+                        else
+                        {
+                            string metodo = "";
+                            bool Metodo = RevisarMetodo(LineaActual, ref metodo);
+                            if (Metodo)
+                            {
+                                Tripleta.Rows.Add(Tokens[1], "TR" + metodo, " ");
+                            }
+                            else
+                            {
+                                postFijo(LineaActual).ForEach(delegate (string pf) { LineaPostFijo = pf; });
+                                TripletaOperacionesAritmeticas(ref Tripleta, LineaPostFijo, ref T);
+                            }
+                        }
+                        break;
+                    case "PR08":
+                        postFijo(LineaActual).ForEach(delegate (string pf) { LineaPostFijo = pf; });
+                        TripletaCondicional(ref Tripleta, LineaPostFijo, ref T);
+                        break;
+                    case "PR21":
+                        if (banderafor)
+                        {
+                            TripletaOperacionesAritmeticas(ref Tripleta, postFijoIncremento, ref T);
+                            banderafor = false;
+                        }
+                        else if (banderafunc)
+                        {
+                           
+                        }
+                        CerrarFalse(ref Tripleta);
+                        break;
+                    case "PR05":
+                        break;
+                    case "PR06":
+                        string LineaInicializacion = $"{Tokens[2]} {Tokens[3]} {Tokens[4]} {Tokens[5]}";
+                        string LineaComparacion = $"{Tokens[7]} {Tokens[8]} {Tokens[9]}";
+                        string LineaIncremento = $"{Tokens[11]} {Tokens[12]} {Tokens[13]} {Tokens[14]} {Tokens[15]}";
+                        postFijo(LineaInicializacion).ForEach(delegate (string pf) { LineaPostFijo = pf; });
+                        TripletaOperacionesAritmeticas(ref Tripleta, LineaPostFijo, ref T);
+                        postFijo(LineaComparacion).ForEach(delegate (string pf) { LineaPostFijo = pf; });
+                        TripletaCondicional(ref Tripleta, LineaPostFijo, ref T);
+                        postFijo(LineaIncremento).ForEach(delegate (string pf) { postFijoIncremento = pf; });
+                        banderafor = true;
+                        break;
+                    case "PR07":
+                        Tripleta.Rows.Add("PROC", "TR" + Tokens[2], "num");
+
+                        break;
+                    default:
+                        TripletaOtrasPalabras(ref Tripleta, LineaActual);
+                        banderafunc = true;
+                        break;
+                }
+            }
+            Tripleta.Rows.Add("FIN", "", "");
+            dataGridView1.Rows.Clear();
+            int num = 0;
+            foreach (DataRow s in Tripleta.Rows)
+            {
+                num++;
+                dataGridView1.Rows.Add(num, s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]);
+            }
+        }
+        bool RevisarMetodo(string Linea, ref  string Metodo)
+        {
+            bool hayUnMetodo = false;
+            string[] CombinacionesdeDos = MetodosSe.CrearCombinaciones(2, Linea);
+            foreach (string s in CombinacionesdeDos)
+            {
+                string[] idpar = s.Split(' ');
+                if (idpar[0]?.Substring(0, 2) == "ID" && idpar[1] == "PAR1")
+                {
+                    Metodo = idpar[0];
+                    hayUnMetodo = true;
+                }
+            }
+            return hayUnMetodo;
         }
 
         void TripletaOtrasPalabras(ref DataTable Tripleta, string Linea)
@@ -975,7 +1090,7 @@ namespace Quindim
         static string CrearRenglonesCondicional(ref DataTable trip, string[] pf , int c, ref int T, ref Stack<string> Operadores)
         {
             string temp = "";
-            foreach (DataRow s in trip.Rows) if (s.ItemArray[1].ToString() == pf[c - 2]) temp = s.ItemArray[0].ToString();
+            foreach (DataRow s in trip.Rows) if (s.ItemArray[1].ToString() == pf[c - 2] && s.ItemArray[0].ToString() != "") temp = s.ItemArray[0].ToString();
             trip.Rows.Add("T" + T, pf[c - 1], "OPA6");
             trip.Rows.Add(temp, "T" + T, pf[c]);
             

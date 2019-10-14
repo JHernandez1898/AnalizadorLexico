@@ -1,6 +1,6 @@
 int num
 read num
-int res = Calcfact ( num )
+dbl res = Calcfact ( num )
 print ( res )
 function dbl Calcfact ( int num )
 if ( num == 0 )
