@@ -66,8 +66,9 @@ namespace Quindim
             }
         }*/
 
-        #endregion  
+        #endregion
 
+        #region General
         public string[] RellenarArreglo()
         {
             string[] ArregloLineas = new string[LineasTokens.Count];
@@ -80,10 +81,7 @@ namespace Quindim
             return ArregloLineas;
         }
 
-        private void Btnleertodo_Click(object sender, EventArgs e)
-        {
-            
-        }
+        private void Btnleertodo_Click(object sender, EventArgs e){}
 
         private void MostrarIdentificadoresConstantes()
         {
@@ -106,6 +104,91 @@ namespace Quindim
             dgvConstatesNumericasReales.CurrentCell = null;
             dgvConstantesExpo.CurrentCell = null;
         }
+
+
+        private void Rtxtentrada_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+            {
+                LeerTodo();
+            }
+        }
+
+        public void LeerTodo()
+        {
+            MetodosAL.Depurar();
+            rtxtcodigointermediolexico.Text = "";
+            rtxtcodigointermediosintax.Text = "";
+            rtxSintaxLineaxLinea.Text = "";
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            try
+            {
+                //LEXICO
+                List<string> LineasTokens;
+                LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+                foreach (String token in LineasTokens)
+                {
+                    rtxtcodigointermediolexico.Text += token + " ";
+                    rtxtcodigointermediolexico.Text += "\n";
+                }
+
+                //SINTAXIS
+                List<string> SintaxResult = Sintaxis.AnalisisSintactico(LineasTokens);
+                rtxtcodigointermediosintax.Text = SintaxResult[0];
+                rtxSintaxLineaxLinea.Text = SintaxResult[1];
+
+
+                //SEMANTICA
+                List<string> LineasSemantica = MetodosSe.PrimeraPasada(LineasTokens);
+                List<string> bottomupSemantica = MetodosSe.SegundaPasada(LineasSemantica);
+                rchSemantica.Text = "";
+                rchtxtSemantic.Text = "";
+                rchSemantica.Text = bottomupSemantica[0];
+                rchtxtSemantic.Text = bottomupSemantica[1];
+
+                GenerarTripletas();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            stopwatch.Stop();
+            MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", " Compilacion ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            MostrarIdentificadoresConstantes();
+            //PostFijo
+            List<string> cadenasPostFijo = postFijo(rtxtcodigointermediolexico.Text);
+            MostrarPostFijos(cadenasPostFijo);
+        }
+
+        private void LeerTodoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LeerTodo();
+        }
+
+        private void InstanciasSQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings settings = new Settings();
+            this.Hide();
+            settings.ShowDialog();
+            this.Close();
+        }
+
+        private void RUNToolStripMenuItem_Click(object sender, EventArgs e){}
+        private void AbriToolStripMenuItem_Click(object sender, EventArgs e){}
+
+        private void CargarEntradaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            rtxtentrada.Text = "int num\nread num\nint res = Calcfact ( num )\nprint ( res )\nfunction int Calcfact ( int num )\nif ( num == 0 )\nreturn ( 1 )\nend\nelse\nfor ( int x = num to num > 1 step x = x - 1 )\nint R = R * x\nend\nend\nreturn ( R )\nend";
+        }
+
+        #endregion
 
         #region Léxico
 
@@ -559,6 +642,7 @@ namespace Quindim
 
         #region Código intermedio
 
+        #region Postfijo
         List<string> postFijo(string strTokens)
         {
             List<string> loQueSeRegresa = new List<string>();
@@ -727,96 +811,6 @@ namespace Quindim
             return strNumeritos.Remove(strNumeritos.Length - 1);
         }
 
-        #endregion
-
-        private void Rtxtentrada_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F5)
-            {
-                LeerTodo();
-            }
-        }
-
-        public void LeerTodo() {
-            MetodosAL.Depurar();
-            rtxtcodigointermediolexico.Text = "";
-            rtxtcodigointermediosintax.Text = "";
-            rtxSintaxLineaxLinea.Text = "";
-
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
-            try
-            {
-                //LEXICO
-                List<string> LineasTokens;
-                LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
-                foreach (String token in LineasTokens)
-                {
-                    rtxtcodigointermediolexico.Text += token + " ";
-                    rtxtcodigointermediolexico.Text += "\n";
-                }
-
-                //SINTAXIS
-                List<string> SintaxResult = Sintaxis.AnalisisSintactico(LineasTokens);
-                rtxtcodigointermediosintax.Text = SintaxResult[0];
-                rtxSintaxLineaxLinea.Text = SintaxResult[1];
-
-
-                //SEMANTICA
-                List<string> LineasSemantica = MetodosSe.PrimeraPasada(LineasTokens);
-                List<string> bottomupSemantica = MetodosSe.SegundaPasada(LineasSemantica);
-                rchSemantica.Text = "";
-                rchtxtSemantic.Text = "";
-                rchSemantica.Text = bottomupSemantica[0];
-                rchtxtSemantic.Text = bottomupSemantica[1];
-
-                GenerarTripletas();
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            stopwatch.Stop();
-            MessageBox.Show(stopwatch.Elapsed.ToString() + "ms", " Compilacion ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-             MostrarIdentificadoresConstantes();
-            //PostFijo
-            List<string> cadenasPostFijo = postFijo(rtxtcodigointermediolexico.Text);
-            MostrarPostFijos(cadenasPostFijo);
-        }
-
-        private void LeerTodoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LeerTodo();
-        }
-
-        private void InstanciasSQLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Settings settings = new Settings();
-            this.Hide();
-            settings.ShowDialog();
-            this.Close();
-        }
-
-        private void RUNToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AbriToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CargarEntradaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            rtxtentrada.Text = "int num\nread num\nint res = Calcfact ( num )\nprint ( res )\nfunction int Calcfact ( int num )\nif ( num == 0 )\nreturn ( 1 )\nend\nelse\nfor ( int x = num to num > 1 step x = x - 1 )\nint R = R * x\nend\nend\nreturn ( R )\nend";
-        }
-
         void MostrarPostFijos(List<string> lineas)
         {
             rtxtPostFijos.Text = "";
@@ -826,7 +820,9 @@ namespace Quindim
             }
         }
 
-       
+        #endregion
+
+        #region Tripletas
         public void GenerarTripletas()
         {
             DataTable Tripleta = GenerarTabla();
@@ -874,13 +870,13 @@ namespace Quindim
                             Tripleta.Rows.Add("ENDP", "", "");
                             banderafunc = false;
                         }
-                        else  if (banderafor)
+                        else if (banderafor)
                         {
                             TripletaOperacionesAritmeticas(ref Tripleta, postFijoIncremento, ref T);
                             banderafor = false;
                         }
                         else if (condicion) condicion = false;
-                        
+
                         CerrarFalse(ref Tripleta);
                         break;
                     case "PR05":
@@ -963,7 +959,7 @@ namespace Quindim
                         }
                         else if (banderafunc)
                         {
-                           
+
                         }
                         CerrarFalse(ref Tripleta);
                         break;
@@ -999,7 +995,7 @@ namespace Quindim
                 dataGridView1.Rows.Add(num, s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]);
             }
         }
-        bool RevisarMetodo(string Linea, ref  string Metodo)
+        bool RevisarMetodo(string Linea, ref string Metodo)
         {
             bool hayUnMetodo = false;
             string[] CombinacionesdeDos = MetodosSe.CrearCombinaciones(2, Linea);
@@ -1021,7 +1017,7 @@ namespace Quindim
             Linea = Linea.Replace("PAR2", "");
             string[] Tokens = Linea.Split(' ');
             for (int i = 0; i < Tokens.Length - 1; i++)
-            { 
+            {
                 Tokens[i] = Tokens[i].Trim();
                 if (Tokens[i] == "")
                 {
@@ -1030,7 +1026,7 @@ namespace Quindim
                     Tokens[i + 1] = s;
                 }
             }
-            
+
             string temp = "";
             foreach (DataRow s in Tripleta.Rows) if (s.ItemArray[1].ToString() == Tokens[1]) temp = s.ItemArray[0].ToString();
             Tripleta.Rows.Add("", Tokens[1], Tokens[0]);
@@ -1044,12 +1040,13 @@ namespace Quindim
                 if (s.ItemArray[2].ToString() == "")
                 {
                     DataRow dataRow = s;
-                    nueva.Rows.Add(dataRow.ItemArray[0],dataRow.ItemArray[1], (Tripleta.Rows.Count) + 1);
-                } else nueva.Rows.Add(s.ItemArray[0],s.ItemArray[1],s.ItemArray[2]); //podria  poner solo la s pero por alguna razon no jala
+                    nueva.Rows.Add(dataRow.ItemArray[0], dataRow.ItemArray[1], (Tripleta.Rows.Count) + 1);
+                }
+                else nueva.Rows.Add(s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]); //podria  poner solo la s pero por alguna razon no jala
             }
             Tripleta = nueva;
         }
-        void TripletaCondicional(ref DataTable Tripleta, string postfijo , ref int T)
+        void TripletaCondicional(ref DataTable Tripleta, string postfijo, ref int T)
         {
 
             string[] pf = postfijo.Split(' ');
@@ -1065,7 +1062,7 @@ namespace Quindim
 
                     if (Token.Substring(0, 1) == "O")
                     {
-                        remplazo = CrearRenglonesCondicional(ref Tripleta, pf, c, ref T,ref OperadoresLogicos);
+                        remplazo = CrearRenglonesCondicional(ref Tripleta, pf, c, ref T, ref OperadoresLogicos);
                         break;
                     }
                     c++;
@@ -1079,27 +1076,27 @@ namespace Quindim
         {
             int c = 0;
             Stack<string> OperadoresLogicos = new Stack<string>();
-            foreach(string operador in Postfijo)
+            foreach (string operador in Postfijo)
             {
                 if (operador.Substring(0, 3) == "OL0")
                 {
                     c++;
                     OperadoresLogicos.Push(operador);
                     strPostfijo = strPostfijo.Replace(operador, "");
-                   
+
                 }
             }
             strPostfijo = strPostfijo.Substring(0, strPostfijo.Length - c);
             return OperadoresLogicos;
         }
         static string operador = "";
-        static string CrearRenglonesCondicional(ref DataTable trip, string[] pf , int c, ref int T, ref Stack<string> Operadores)
+        static string CrearRenglonesCondicional(ref DataTable trip, string[] pf, int c, ref int T, ref Stack<string> Operadores)
         {
             string temp = "";
             foreach (DataRow s in trip.Rows) if (s.ItemArray[1].ToString() == pf[c - 2] && s.ItemArray[0].ToString() != "") temp = s.ItemArray[0].ToString();
             trip.Rows.Add("T" + T, pf[c - 1], "OPA6");
             trip.Rows.Add(temp, "T" + T, pf[c]);
-            
+
             if (Operadores.Count != 0)
             {
 
@@ -1115,15 +1112,15 @@ namespace Quindim
                         trip.Rows.Add("TR" + T, "FALSE", "");
                         break;
                 }
-               
-                
+
+
             }
             else
             {
                 switch (operador)
                 {
                     case "OL02":
-                       
+
                         trip.Rows.Add("TR" + T, "TRUE", (trip.Rows.Count) + 3);
                         CerrarFalse(ref trip);
                         trip.Rows.Add("TR" + T, "FALSE", "");
@@ -1138,7 +1135,7 @@ namespace Quindim
             return (pf[c - 2] + " " + pf[c - 1] + " " + pf[c]);
 
         }
-        void TripletaOperacionesAritmeticas(ref DataTable Tripleta, string postfijo,ref int T)
+        void TripletaOperacionesAritmeticas(ref DataTable Tripleta, string postfijo, ref int T)
         {
             string[] pf = postfijo.Split(' ');
             string strPostfijoTemporal = postfijo;
@@ -1146,23 +1143,24 @@ namespace Quindim
             {
                 int c = 0;
                 string remplazo = "";
-                foreach(string Token in pf)
+                foreach (string Token in pf)
                 {
-                    
-                    if (Token.Substring(0, 1) == "O"){
-                        remplazo =  CrearRenglones(ref Tripleta,pf,c,ref T);
+
+                    if (Token.Substring(0, 1) == "O")
+                    {
+                        remplazo = CrearRenglones(ref Tripleta, pf, c, ref T);
                         break;
-                        }
+                    }
                     c++;
                 }
-                strPostfijoTemporal = strPostfijoTemporal.Replace(remplazo, "T" + (T-1));
+                strPostfijoTemporal = strPostfijoTemporal.Replace(remplazo, "T" + (T - 1));
                 pf = strPostfijoTemporal.Split(' ');
             }
             CrearRenglones(ref Tripleta, pf, 2, ref T);
 
         }
 
-        string CrearRenglones(ref DataTable trip ,string[] pf, int c,ref int T)
+        string CrearRenglones(ref DataTable trip, string[] pf, int c, ref int T)
         {
 
             trip.Rows.Add("T" + T, pf[c - 2], "OPA6");
@@ -1171,7 +1169,6 @@ namespace Quindim
             return (pf[c - 2] + " " + pf[c - 1] + " " + pf[c]);
 
         }
-
 
         static DataTable GenerarTabla()
         {
@@ -1204,6 +1201,11 @@ namespace Quindim
             Tripleta.Columns.Add(column);
             return Tripleta;
         }
+        #endregion
+
+        #endregion
+
+                
     }
     
 }
