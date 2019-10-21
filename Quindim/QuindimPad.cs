@@ -185,7 +185,8 @@ namespace Quindim
 
         private void CargarEntradaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            rtxtentrada.Text = "int num\nread num\nint res = Calcfact ( num )\nprint ( res )\nfunction int Calcfact ( int num )\nif ( num == 0 )\nreturn ( 1 )\nend\nelse\nfor ( int x = num to num > 1 step x = x - 1 )\nint R = R * x\nend\nend\nreturn ( R )\nend";
+            //rtxtentrada.Text = "int num\nread num\nint res = Calcfact ( num )\nprint ( res )\nfunction int Calcfact ( int num )\nif ( num == 0 )\nreturn ( 1 )\nend\nelse\nfor ( int x = num to num > 1 step x = x - 1 )\nint R = R * x\nend\nend\nreturn ( R )\nend";
+            rtxtentrada.Text = "int num\n\nint res\nif ( ( num > res & res > 0 ) | ( res > 5 ) )\nend";
         }
 
         #endregion
@@ -718,8 +719,9 @@ namespace Quindim
                 case "OPA4": // +                                              
                 case "OPA5": // -
                     return 6;
-                case "OPR5": // <= 
+                case "OPR5": // == 
                 case "OPR4": // <=                 
+                case "OPR6": // !=  
                 case "OPR3": // <                    
                 case "OPR2": // >=                    
                 case "OPR1": // >
@@ -737,14 +739,15 @@ namespace Quindim
             }
         }
 
+        Stack<string> pilaTokensLogicos = new Stack<string>();
         string Reordenar(string strCadenaTokens)
         {
             Stack<string> pilaTokens = new Stack<string>();
-
             string[] cadenaTokens = strCadenaTokens.Split(' ');
             string strNumeritos = "";            
             int operador1 = 0;
             int operador2 = 0;
+            int contadorRelacional = 0;
             int contadorParentesis = 0;
             string subCadenaParentesis = "";
             bool banderaParentesis = false;
@@ -774,6 +777,9 @@ namespace Quindim
                     if (token.Contains("CNE") || token.Contains("CNR") || token.Contains("ID"))
                         strNumeritos += token + " ";
                     if (token.Contains("OPA") || token.Contains("OPR") || token.Contains("OL0"))
+                    {
+                        if (token.Contains("OPR"))
+                            contadorRelacional++;
                         if (operador1 == 0)
                         {
                             operador1 = jerarquiaOperador(token);
@@ -782,8 +788,18 @@ namespace Quindim
                         else
                         {
                             operador2 = jerarquiaOperador(token);
-                            if (operador1 < operador2)                            
-                                pilaTokens.Push(token);                            
+                            if (operador1 < operador2)
+                            {                                
+                                if (operador1 < 4 && contadorRelacional >1)
+                                {
+                                    string tokenDePila = pilaTokens.Pop();
+                                    pilaTokens.Push(token + " "+ tokenDePila);
+                                    operador1 = operador2;                                                                        
+                                }
+                                else
+                                    pilaTokens.Push(token);
+
+                            }                                
                             else if (operador2 < operador1)
                             {
                                 string tokenDePila = pilaTokens.Pop();
@@ -797,6 +813,8 @@ namespace Quindim
                                 pilaTokens.Push(token);
                             }
                         }
+                    }
+                        
                     if (token.Contains("PAR1"))
                     {
                         contadorParentesis++;
@@ -825,8 +843,7 @@ namespace Quindim
         #region Tripletas
         public void GenerarTripletas()
         {
-            DataTable Tripleta = GenerarTabla();
-            int nLinea = 0;
+            DataTable Tripleta = GenerarTabla();            
             List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
             int T = 0;
             string postFijoIncremento = "";
@@ -914,8 +931,7 @@ namespace Quindim
         }
         private void GenerarTripleta_Click(object sender, EventArgs e)
         {
-            DataTable Tripleta = GenerarTabla();
-            int nLinea = 0;
+            DataTable Tripleta = GenerarTabla();            
             List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
             int T = 0;
             string postFijoIncremento = "";
@@ -1189,8 +1205,7 @@ namespace Quindim
         static DataTable GenerarTabla()
         {
             DataTable Tripleta = new DataTable("Tripletas");
-            DataColumn column;
-            DataRow row;
+            DataColumn column;            
             column = new DataColumn();
             column.DataType = System.Type.GetType("System.String");
             column.ColumnName = "DatoObjeto";
