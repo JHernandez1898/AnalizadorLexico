@@ -798,7 +798,7 @@ namespace Quindim
                                 }
                                 else
                                     pilaTokens.Push(token);
-
+                                operador1 = operador2;
                             }                                
                             else if (operador2 < operador1)
                             {
@@ -808,7 +808,7 @@ namespace Quindim
                                 strNumeritos += tokenDePila + " ";
                             }
                             else if (operador2 == operador1)
-                            {
+                            {                                
                                 strNumeritos += pilaTokens.Pop() + " ";
                                 pilaTokens.Push(token);
                             }
