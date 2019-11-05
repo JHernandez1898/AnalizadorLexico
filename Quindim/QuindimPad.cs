@@ -729,9 +729,9 @@ namespace Quindim
                 case "OL03": // !
                     return 4;                                
                 case "OL01": // &
-                    return 3;                                
-                case "OL02": // |
                     return 2;                                
+                case "OL02": // |
+                    return 3;                                
                 case "OPA6": // =
                     return 1;                
                 default:
@@ -845,7 +845,7 @@ namespace Quindim
         {
             DataTable Tripleta = GenerarTabla();            
             List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
-            int T = 0;
+            int T = 1;
             string postFijoIncremento = "";
             bool banderafor = false;
             bool banderafunc = false;
@@ -859,15 +859,21 @@ namespace Quindim
 
                 switch (Tokens[0])
                 {
-                    case string strValue when strValue.Substring(0, 3) == "TDD":
-                        if (Tokens.Length == 2) { Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPR6"); T++; }
+                    case string strValue when strValue.Substring(0, 3) == "TDD" || strValue.Substring(0, 2) == "ID":
+                        if (Tokens.Length == 2)
+                        {
+                            Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPA6");
+                            T++;
+                        }
                         else
                         {
                             string metodo = "";
                             bool Metodo = RevisarMetodo(LineaActual, ref metodo);
                             if (Metodo)
                             {
-                                Tripleta.Rows.Add(Tokens[1], "TR" + metodo, " ");
+                                Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPA6");
+                                Tripleta.Rows.Add("T" + T.ToString(), "TR" + metodo, "OPA6");
+                                T++;
                             }
                             else
                             {
@@ -884,7 +890,7 @@ namespace Quindim
                     case "PR21":
                         if (!banderafor && !condicion && banderafunc)
                         {
-                            Tripleta.Rows.Add("ENDP", "", "");
+                            Tripleta.Rows.Add("ENDP", "", "-");
                             banderafunc = false;
                         }
                         else if (banderafor)
@@ -893,11 +899,11 @@ namespace Quindim
                             banderafor = false;
                         }
                         else if (condicion) condicion = false;
-
-                        CerrarFalse(ref Tripleta);
+                        
+                        CerrarFalse(ref Tripleta,"");
                         break;
                     case "PR05":
-                        condicion = true;
+                        condicion = true; 
                         break;
                     case "PR06":
                         string LineaInicializacion = $"{Tokens[2]} {Tokens[3]} {Tokens[4]} {Tokens[5]}";
@@ -911,7 +917,13 @@ namespace Quindim
                         banderafor = true;
                         break;
                     case "PR07":
-                        Tripleta.Rows.Add("PROC", "TR" + Tokens[2], "num");
+                        Tripleta.Rows.Add("FUNC", "TR" + Tokens[2], "-");
+                        inicializarParametros(ref Tripleta , Tokens, ref T);
+                        banderafunc = true;
+                        break;
+                    case "PR11":
+                        Tripleta.Rows.Add("PROC", "TR" + Tokens[2], "-");
+                        inicializarParametros(ref Tripleta, Tokens, ref T);
                         banderafunc = true;
                         break;
                     default:
@@ -929,6 +941,10 @@ namespace Quindim
                 dataGridView1.Rows.Add(num, s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]);
             }
         }
+
+
+
+
         private void GenerarTripleta_Click(object sender, EventArgs e)
         {
             DataTable Tripleta = GenerarTabla();            
@@ -943,18 +959,23 @@ namespace Quindim
                 string[] Tokens = MetodosSe.CrearCombinaciones(1, LineaActual);
                 string LineaPostFijo = "";
 
-
+                //TOKEN[0]  PALABRA RESERVADA,  IDENTIFICADOR, TIPO DE DATO
                 switch (Tokens[0])
                 {
-                    case string strValue when strValue.Substring(0, 3) == "TDD":
+                    case string strValue when strValue.Substring(0, 3) == "TDD" || strValue.Substring(0,2) == "ID":
+                        //SI HAY 2 TOKENS ES UNA DECLARACION DE UN IDENTIFICADOR
                         if (Tokens.Length == 2) { Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPR6"); T++; }
+                        //SI NO ES UNA ASIGNACION
                         else
                         {
                             string metodo = "";
+                            //ASIGNACION DE METODOS ?
                             bool Metodo = RevisarMetodo(LineaActual, ref metodo);
                             if (Metodo)
                             {
-                                Tripleta.Rows.Add(Tokens[1], "TR" + metodo, " ");
+                                Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPR6"); 
+T++;
+                                Tripleta.Rows.Add(Tokens[1], "TR" + metodo, "OPR6");
                             }
                             else
                             {
@@ -977,7 +998,7 @@ namespace Quindim
                         {
 
                         }
-                        CerrarFalse(ref Tripleta);
+                        CerrarFalse(ref Tripleta,"");
                         break;
                     case "PR05":
                         break;
@@ -1011,6 +1032,7 @@ namespace Quindim
                 dataGridView1.Rows.Add(num, s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]);
             }
         }
+
         bool RevisarMetodo(string Linea, ref string Metodo)
         {
             bool hayUnMetodo = false;
@@ -1025,6 +1047,38 @@ namespace Quindim
                 }
             }
             return hayUnMetodo;
+        }
+
+        void inicializarParametros(ref DataTable Tripleta, string[] tokens, ref int t)
+        {
+            int control = 0;
+            List<string> paramestros = new List<string>();
+            for (int i = 0; i <= tokens.Length; i++)
+            {
+                if (tokens[i] == "PAR1")
+                {
+                    control = i + 1;
+                    for (int j = 0; j <= tokens.Length - i; j++)
+                    {
+                        if (tokens[control] != "PAR2")
+                        {
+                            paramestros.Add(tokens[control]);
+                            control++;
+                        } 
+                        else break;
+                    }
+                    break;
+                }
+            }
+            for (int h = 0; h < paramestros.Count; h++)
+            {
+                if (paramestros[h].Substring(0, 3) != "TDD")
+                {
+                    Tripleta.Rows.Add("T" + t.ToString(), paramestros[h], "OPA6");
+                    t++;
+                }
+            }
+
         }
 
         void TripletaOtrasPalabras(ref DataTable Tripleta, string Linea)
@@ -1048,7 +1102,7 @@ namespace Quindim
             Tripleta.Rows.Add("", Tokens[1], Tokens[0]);
 
         }
-        static void CerrarFalse(ref DataTable Tripleta)
+        static void CerrarFalse(ref DataTable Tripleta, string OpLog)
         {
             DataTable nueva = GenerarTabla();
             foreach (DataRow s in Tripleta.Rows)
@@ -1056,9 +1110,20 @@ namespace Quindim
                 if (s.ItemArray[2].ToString() == "")
                 {
                     DataRow dataRow = s;
-                    nueva.Rows.Add(dataRow.ItemArray[0], dataRow.ItemArray[1], (Tripleta.Rows.Count) + 1);
-                }
-                else nueva.Rows.Add(s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]); //podria  poner solo la s pero por alguna razon no jala
+                    switch (OpLog)
+                    {
+                        case "OL01":
+                            nueva.Rows.Add(dataRow.ItemArray[0], dataRow.ItemArray[1], (Tripleta.Rows.Count) + 2);
+                            break;
+                        case "OL02": 
+                            nueva.Rows.Add(dataRow.ItemArray[0], dataRow.ItemArray[1], (Tripleta.Rows.Count));
+                            break;
+                        default:
+                            nueva.Rows.Add(dataRow.ItemArray[0], dataRow.ItemArray[1], (Tripleta.Rows.Count) + 1 );
+                            break;
+                    }
+                     
+                } else nueva.Rows.Add(s.ItemArray[0],s.ItemArray[1],s.ItemArray[2]); //podria  poner solo la s pero por alguna razon no jala
             }
             Tripleta = nueva;
         }
@@ -1083,7 +1148,8 @@ namespace Quindim
                     }
                     c++;
                 }
-                strPostfijoTemporal = strPostfijoTemporal.Replace(remplazo, "T" + (T - 1));
+                if (remplazo != "") strPostfijoTemporal = strPostfijoTemporal.Replace(remplazo, "T" + (T - 1));
+                else strPostfijoTemporal = "T0";
                 pf = strPostfijoTemporal.Split(' ');
             }
             //CrearRenglonesCondicional(ref Tripleta, pf, 2, ref T, ref OperadoresLogicos);
@@ -1112,7 +1178,7 @@ namespace Quindim
             foreach (DataRow s in trip.Rows) if (s.ItemArray[1].ToString() == pf[c - 2] && s.ItemArray[0].ToString() != "") temp = s.ItemArray[0].ToString();
             trip.Rows.Add("T" + T, pf[c - 1], "OPA6");
             trip.Rows.Add(temp, "T" + T, pf[c]);
-
+           
             if (Operadores.Count != 0)
             {
 
@@ -1120,30 +1186,34 @@ namespace Quindim
                 switch (operador)
                 {
                     case "OL02":
+
                         trip.Rows.Add("TR" + T, "FALSE", (trip.Rows.Count) + 3);
                         trip.Rows.Add("TR" + T, "TRUE", "");
+                        
                         break;
                     default:
                         trip.Rows.Add("TR" + T, "TRUE", (trip.Rows.Count) + 3);
+                        CerrarFalse(ref trip, "OL01");
                         trip.Rows.Add("TR" + T, "FALSE", "");
                         break;
-                }
-
-
+                }  
             }
             else
-            {
+            { 
                 switch (operador)
                 {
                     case "OL02":
 
                         trip.Rows.Add("TR" + T, "TRUE", (trip.Rows.Count) + 3);
-                        CerrarFalse(ref trip);
+                        CerrarFalse(ref trip,operador);
                         trip.Rows.Add("TR" + T, "FALSE", "");
                         break;
                     default:
-                        trip.Rows.Add("TR" + T, "TRUE", (trip.Rows.Count) + 3);
+                        CerrarFalse(ref trip, operador);
                         trip.Rows.Add("TR" + T, "FALSE", "");
+                        trip.Rows.Add("TR" + T, "TRUE", (trip.Rows.Count) + 2);
+                        
+                       
                         break;
                 }
             }
@@ -1171,12 +1241,12 @@ namespace Quindim
                 }
                 strPostfijoTemporal = strPostfijoTemporal.Replace(remplazo, "T" + (T - 1));
                 pf = strPostfijoTemporal.Split(' ');
-            }
+            } 
             CrearRenglones(ref Tripleta, pf, 2, ref T);
 
         }
 
-        string CrearRenglones(ref DataTable trip, string[] pf, int c, ref int T)
+        string CrearRenglones(ref DataTable trip ,string[] pf, int c,ref int T)
         {
 
             trip.Rows.Add("T" + T, pf[c - 2], "OPA6");

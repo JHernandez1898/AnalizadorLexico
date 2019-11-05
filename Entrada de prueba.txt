@@ -13,3 +13,13 @@ end
 end
 return ( R )
 end
+int x
+int y
+int z
+if ( ( x > 12 | y == 12 ) & ( z < 23 ) )
+int d = x * y * z
+end
+
+
+
+
