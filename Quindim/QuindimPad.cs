@@ -845,7 +845,7 @@ namespace Quindim
         {
             DataTable Tripleta = GenerarTabla();            
             List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
-            int T = 0;
+            int T = 1;
             string postFijoIncremento = "";
             bool banderafor = false;
             bool banderafunc = false;
@@ -859,15 +859,21 @@ namespace Quindim
 
                 switch (Tokens[0])
                 {
-                    case string strValue when strValue.Substring(0, 3) == "TDD":
-                        if (Tokens.Length == 2) { Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPA6"); T++; }
+                    case string strValue when strValue.Substring(0, 3) == "TDD" || strValue.Substring(0, 2) == "ID":
+                        if (Tokens.Length == 2)
+                        {
+                            Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPA6");
+                            T++;
+                        }
                         else
                         {
                             string metodo = "";
                             bool Metodo = RevisarMetodo(LineaActual, ref metodo);
                             if (Metodo)
                             {
-                                Tripleta.Rows.Add(Tokens[1], "TR" + metodo, " ");
+                                Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPA6");
+                                Tripleta.Rows.Add("T" + T.ToString(), "TR" + metodo, "OPA6");
+                                T++;
                             }
                             else
                             {
@@ -884,7 +890,7 @@ namespace Quindim
                     case "PR21":
                         if (!banderafor && !condicion && banderafunc)
                         {
-                            Tripleta.Rows.Add("ENDP", "", "");
+                            Tripleta.Rows.Add("ENDP", "", "-");
                             banderafunc = false;
                         }
                         else if (banderafor)
@@ -911,7 +917,13 @@ namespace Quindim
                         banderafor = true;
                         break;
                     case "PR07":
-                        Tripleta.Rows.Add("PROC", "TR" + Tokens[2], "num");
+                        Tripleta.Rows.Add("FUNC", "TR" + Tokens[2], "-");
+                        inicializarParametros(ref Tripleta , Tokens, ref T);
+                        banderafunc = true;
+                        break;
+                    case "PR11":
+                        Tripleta.Rows.Add("PROC", "TR" + Tokens[2], "-");
+                        inicializarParametros(ref Tripleta, Tokens, ref T);
                         banderafunc = true;
                         break;
                     default:
@@ -929,6 +941,10 @@ namespace Quindim
                 dataGridView1.Rows.Add(num, s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]);
             }
         }
+
+
+
+
         private void GenerarTripleta_Click(object sender, EventArgs e)
         {
             DataTable Tripleta = GenerarTabla();            
@@ -943,18 +959,23 @@ namespace Quindim
                 string[] Tokens = MetodosSe.CrearCombinaciones(1, LineaActual);
                 string LineaPostFijo = "";
 
-
+                //TOKEN[0]  PALABRA RESERVADA,  IDENTIFICADOR, TIPO DE DATO
                 switch (Tokens[0])
                 {
-                    case string strValue when strValue.Substring(0, 3) == "TDD":
+                    case string strValue when strValue.Substring(0, 3) == "TDD" || strValue.Substring(0,2) == "ID":
+                        //SI HAY 2 TOKENS ES UNA DECLARACION DE UN IDENTIFICADOR
                         if (Tokens.Length == 2) { Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPR6"); T++; }
+                        //SI NO ES UNA ASIGNACION
                         else
                         {
                             string metodo = "";
+                            //ASIGNACION DE METODOS ?
                             bool Metodo = RevisarMetodo(LineaActual, ref metodo);
                             if (Metodo)
                             {
-                                Tripleta.Rows.Add(Tokens[1], "TR" + metodo, " ");
+                                Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPR6"); 
+T++;
+                                Tripleta.Rows.Add(Tokens[1], "TR" + metodo, "OPR6");
                             }
                             else
                             {
@@ -1011,6 +1032,7 @@ namespace Quindim
                 dataGridView1.Rows.Add(num, s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]);
             }
         }
+
         bool RevisarMetodo(string Linea, ref string Metodo)
         {
             bool hayUnMetodo = false;
@@ -1025,6 +1047,38 @@ namespace Quindim
                 }
             }
             return hayUnMetodo;
+        }
+
+        void inicializarParametros(ref DataTable Tripleta, string[] tokens, ref int t)
+        {
+            int control = 0;
+            List<string> paramestros = new List<string>();
+            for (int i = 0; i <= tokens.Length; i++)
+            {
+                if (tokens[i] == "PAR1")
+                {
+                    control = i + 1;
+                    for (int j = 0; j <= tokens.Length - i; j++)
+                    {
+                        if (tokens[control] != "PAR2")
+                        {
+                            paramestros.Add(tokens[control]);
+                            control++;
+                        } 
+                        else break;
+                    }
+                    break;
+                }
+            }
+            for (int h = 0; h < paramestros.Count; h++)
+            {
+                if (paramestros[h].Substring(0, 3) != "TDD")
+                {
+                    Tripleta.Rows.Add("T" + t.ToString(), paramestros[h], "OPA6");
+                    t++;
+                }
+            }
+
         }
 
         void TripletaOtrasPalabras(ref DataTable Tripleta, string Linea)
