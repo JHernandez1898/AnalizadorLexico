@@ -150,6 +150,8 @@ namespace Quindim
                 rchtxtSemantic.Text = bottomupSemantica[1];
 
                 GenerarTripletas();
+              Optimizacion();
+
 
 
             }
@@ -841,6 +843,97 @@ namespace Quindim
         #endregion
 
         #region Tripletas
+        public void Optimizacion()
+        {
+            string Tripleta = "";
+            int renglon = 0;
+            int renglonesEnTripleta = 0;
+            int valordeT = 0;
+            int valordeTRemplazador = 0;
+            bool coincidencia = false;
+            
+            List<int> listaReemplazables = new List<int>();
+            foreach (DataGridViewRow dr in dataGridView1.Rows)
+            {
+                if (!coincidencia)
+                {
+                    string nuevaLinea;
+                    if (dr.Cells[1].Value.ToString().Substring(0, 1) == "T")
+                    {
+                        valordeT = int.Parse(dr.Cells[1].Value.ToString().Split('T')[1]);
+                    }
+                    nuevaLinea = renglon.ToString() + ':' + dr.Cells[1].Value.ToString() + 'x' + dr.Cells[2].Value.ToString() + 'x' + dr.Cells[3].Value.ToString() + '\n';
+                    string lineaoperacion = dr.Cells[2].Value.ToString() + 'x' + dr.Cells[3].Value.ToString();
+                    if (Tripleta.Contains(lineaoperacion))
+                    {
+                        if (renglon + 1 < dataGridView1.Rows.Count)
+                        {
+                            DataGridViewRow dr2 = dataGridView1.Rows[renglon + 1];
+                            string linea2 = dr2.Cells[2].Value.ToString() + 'x' + dr2.Cells[3].Value.ToString();
+                            if (Tripleta.Contains(linea2))
+                            {
+                                for (int x = 0; x < renglonesEnTripleta; x++)
+                                {
+                                    if (x + 1 < renglonesEnTripleta)
+                                    {
+                                        if (Tripleta.Split('\n')[x].Contains(lineaoperacion) && Tripleta.Split('\n')[x + 1].Contains(linea2))
+                                        {
+
+
+                                            valordeTRemplazador = int.Parse(Tripleta.Split('\n')[x].Split(':')[1].Split('x')[0].Replace("T", string.Empty).Trim());
+                                            listaReemplazables.Add(valordeTRemplazador);
+                                            listaReemplazables.Add(valordeT);
+                                            coincidencia = true;
+
+
+                                        }
+                                    }
+                                }
+                                if (!coincidencia)
+                                {
+                                    Tripleta += nuevaLinea;
+                                    renglonesEnTripleta++;
+                                }
+
+                            }
+                            else
+                            {
+                                Tripleta += nuevaLinea;
+                                renglonesEnTripleta++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Tripleta += nuevaLinea;
+                        renglonesEnTripleta++;
+                    }
+                    renglon++;
+
+                }
+                else { coincidencia = false; renglon++; }
+            }
+            
+            dataGridView1.Rows.Clear();
+            for(int x = 0; x < listaReemplazables.Count; x+=2)
+            {
+                string Remplazador = 'T'+listaReemplazables[x].ToString();
+                string Remplazado = 'T'+listaReemplazables[x + 1].ToString();
+                Tripleta=Tripleta.Replace(Remplazado, Remplazador);
+            }
+            for(int x =0; x < renglonesEnTripleta; x++)
+            {
+                string dobjeto = Tripleta.Split('\n')[x].Split(':')[1].Split('x')[0];
+                string dfuente = Tripleta.Split('\n')[x].Split(':')[1].Split('x')[1];
+                string operador = Tripleta.Split('\n')[x].Split(':')[1].Split('x')[2];
+                
+                dataGridView1.Rows.Add(x+1,dobjeto , dfuente, operador);
+            }
+            dataGridView1.Rows.Add(renglonesEnTripleta+1, "FIN");
+            
+        
+         
+        }
         public void GenerarTripletas()
         {
             DataTable Tripleta = GenerarTabla();            
