@@ -845,12 +845,10 @@ namespace Quindim
         #region Tripletas
         public void GenerarTripletas()
         {
-            
             /////////
             DataTable Tripleta = GenerarTabla();
             //List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
             List<string> LineasTokens = OptimizarExpresionesAlgebraicas(Optimizar2());
-
             int T = 1;
             string postFijoIncremento = "";
             bool banderafor = false;
@@ -1378,6 +1376,8 @@ T++;
             //            break;
             //    }
             //}
+
+          
             return (LineasTokens);
         }
 
@@ -1411,11 +1411,31 @@ T++;
                         break;
                 }
             }
+            string strLinea = "";
+            List<string> ListaDeLineas = new List<string>();
             foreach(string token in tokens1)
             {
-                MessageBox.Show(token);
+                if(token != "")
+                {
+                    strLinea += token.ToString()+ " ";
+                }
+                else
+                {
+                  
+                    ListaDeLineas.Add(strLinea);
+                    strLinea = "";
+                }
             }
-            return (tokens1);
+             
+
+            
+           
+            //foreach(string token in tokens1)
+            //{
+            //    MessageBox.Show(token);
+            //}
+
+            return (ListaDeLineas);
             
         }
 
@@ -1556,6 +1576,7 @@ T++;
             //        i--;
             //    }
             //}
+
 
         }
 
