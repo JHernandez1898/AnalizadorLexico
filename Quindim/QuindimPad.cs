@@ -926,10 +926,69 @@ namespace Quindim
                 string dobjeto = Tripleta.Split('\n')[x].Split(':')[1].Split('x')[0];
                 string dfuente = Tripleta.Split('\n')[x].Split(':')[1].Split('x')[1];
                 string operador = Tripleta.Split('\n')[x].Split(':')[1].Split('x')[2];
-                
+               
                 dataGridView1.Rows.Add(x+1,dobjeto , dfuente, operador);
             }
             dataGridView1.Rows.Add(renglonesEnTripleta+1, "FIN");
+            //RASTREO 3 OPTIMIZACION
+            foreach(DataGridViewRow dr in dataGridView1.Rows)
+            {
+                if (!coincidencia)
+                {
+                    string nuevaLinea;
+                    if (dr.Cells[1].Value.ToString().Substring(0, 1) == "T")
+                    {
+                        valordeT = int.Parse(dr.Cells[1].Value.ToString().Split('T')[1]);
+                    }
+                    nuevaLinea = dr.Cells[1].Value.ToString() + 'x' + dr.Cells[2].Value.ToString() + 'x' + dr.Cells[3].Value.ToString() + '\n';
+                    string datofuente = dr.Cells[2].Value.ToString() + 'x';
+                    if (Tripleta.Contains(datofuente))
+                    {
+                        if (renglon + 1 < dataGridView1.Rows.Count)
+                        {
+                            DataGridViewRow dr2 = dataGridView1.Rows[renglon + 1];
+                            string linea2 = dr2.Cells[2].Value.ToString() + 'x' + dr2.Cells[3].Value.ToString();
+                            if (Tripleta.Contains(linea2))
+                            {
+                                for (int x = 0; x < renglonesEnTripleta; x++)
+                                {
+                                    if (x + 1 < renglonesEnTripleta)
+                                    {
+                                        string compdatofuente= (Tripleta.Split('\n')[x].Split('x')[1]);
+
+                                        string compoperacio = Tripleta.Split('\n')[x + 1].Split('x')[1] +'x'+ Tripleta.Split('\n')[x + 1].Split('x')[2];
+                                        if (compdatofuente.Contains(datofuente) && compoperacio.Contains(linea2))
+                                        {
+                                            valordeTRemplazador = int.Parse(Tripleta.Split('\n')[x].Split(':')[1].Split('x')[0].Replace("T", string.Empty).Trim());
+                                            listaReemplazables.Add(valordeTRemplazador);
+                                            listaReemplazables.Add(valordeT);
+                                            coincidencia = true;
+                                        }
+                                    }
+                                }
+                                if (!coincidencia)
+                                {
+                                    Tripleta += nuevaLinea;
+                                    renglonesEnTripleta++;
+                                }
+                            }
+                            else
+                            {
+                                Tripleta += nuevaLinea;
+                                renglonesEnTripleta++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Tripleta += nuevaLinea;
+                        renglonesEnTripleta++;
+                    }
+                    renglon++;
+
+                }
+                else { coincidencia = false; renglon++; }
+            }
             
         
          
