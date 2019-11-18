@@ -52,7 +52,7 @@ namespace Quindim
 
                     MetodosAS.CrearMatriz();
                     MetodosSe.CrearMatriz();
-                    QuindimPad iloveQuindim = new QuindimPad();
+                    btnOpt4 iloveQuindim = new btnOpt4();
                     this.Hide();
                     iloveQuindim.ShowDialog();
                     this.Close();

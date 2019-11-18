@@ -9,12 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace Quindim
 {
-    public partial class QuindimPad : Form
+    public partial class btnOpt4 : Form
     {
-        public QuindimPad()
+        public btnOpt4()
         {
             InitializeComponent();
         }
@@ -103,6 +104,7 @@ namespace Quindim
             dgvConstatesNumericasEnteras.CurrentCell = null;
             dgvConstatesNumericasReales.CurrentCell = null;
             dgvConstantesExpo.CurrentCell = null;
+            
         }
 
 
@@ -843,8 +845,12 @@ namespace Quindim
         #region Tripletas
         public void GenerarTripletas()
         {
-            DataTable Tripleta = GenerarTabla();            
-            List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+            
+            /////////
+            DataTable Tripleta = GenerarTabla();
+            //List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+            List<string> LineasTokens = OptimizarExpresionesAlgebraicas(Optimizar2());
+
             int T = 1;
             string postFijoIncremento = "";
             bool banderafor = false;
@@ -940,6 +946,8 @@ namespace Quindim
                 num++;
                 dataGridView1.Rows.Add(num, s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]);
             }
+            
+
         }
 
 
@@ -1286,11 +1294,283 @@ T++;
             Tripleta.Columns.Add(column);
             return Tripleta;
         }
-        #endregion
 
         #endregion
 
-                
+        #endregion
+
+        public List<string> Optimizar2()
+        {
+            List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+
+            List<string> tokens = new List<string>();
+            List<string> tokens1 = new List<string>();
+
+            string tipodato = "";
+            string iden = "";
+            int contadorIden = 0;
+            int lineaActual = 0;
+            List<string> tokensProcesados = new List<string>();
+            foreach (string linea in LineasTokens)
+            {
+                foreach (string token in linea.Split(' '))
+                {
+                    tokens.Add(token);
+                }
+            }
+
+            for (int i = 0; i <= tokens.Count - 1; i++)
+            {
+                if (tokens[i] == "") { lineaActual++; }
+                if (tokens[i].Contains("ID")) //aqui estaba ID
+                {
+                    tipodato = tokens[i + 1].ToString();
+                    if (tokensProcesados.Contains(tokens[i])) { continue; }
+                    tokensProcesados.Add(tokens[i]);
+
+                    iden = tokens[i];
+
+                    for (int j = 0; j <= tokens.Count - 1; j++)
+                    {
+                        if (tokens[j].ToString() == iden)
+                        {
+                            contadorIden++;
+                        }
+                    }
+
+                    if (contadorIden <= 1)
+                    {
+                        MessageBox.Show("Se elimino una linea." + LineasTokens[lineaActual].ToString());
+                        LineasTokens.RemoveAt(lineaActual);
+                        lineaActual--;
+                        contadorIden = 0;
+                    }
+                    else { contadorIden = 0; }
+                }
+            }
+
+            foreach (string linea in LineasTokens)
+            {
+                foreach (string token in linea.Split(' '))
+                {
+                    tokens1.Add(token);
+                }
+            }
+
+            //int valor;
+            //for (int i = 0; i <= tokens1.Count - 1; i++)
+            //{
+            //    switch (tokens1[i].ToString().Substring(0,3))
+            //    {
+            //        case "CNE":
+            //            {
+            //                valor = TomarValorAlmacenado(tokens1[i].ToString());
+            //                if (valor == 0 && tokens1[i - 1].ToString() == "OPA4")
+            //                {
+            //                    tokens1.RemoveAt(i);
+            //                    tokens1.RemoveAt(i - 1);
+            //                    i = i - 2;
+            //                }
+            //            }
+            //            break;
+
+            //        default:
+            //            break;
+            //    }
+            //}
+            return (LineasTokens);
+        }
+
+        public List<string> OptimizarExpresionesAlgebraicas(List<string> listaOptimizada)
+        {
+            List<string> tokens1 = new List<string>();
+            foreach (string linea in listaOptimizada)
+            {
+                foreach (string token in linea.Split(' '))
+                {
+                    tokens1.Add(token);
+                }
+            }
+
+            int valor;
+            for (int i = 0; i <= tokens1.Count - 1; i++)
+            {
+                if (tokens1[i].ToString() == "") { continue; }
+                switch (tokens1[i].ToString().Substring(0, 2))
+                {
+                    case "CN":
+                        {
+                            valor = TomarValorAlmacenado(tokens1[i].ToString());
+                            if ((valor == 0 && tokens1[i - 1].ToString() == "OPA4" || (valor == 0 && tokens1[i + 1].ToString() == "OPA4")) || valor == 0 && tokens1[i - 1].ToString() == "OPA5" || (valor == 1 && tokens1[i - 1].ToString() == "OPA1") || (valor == 1 && tokens1[i + 1].ToString() == "OPA1") || (valor == 1 && tokens1[i - 1].ToString() == "OPA2"))
+                            {
+                                tokens1.RemoveAt(i);
+                                tokens1.RemoveAt(i-1);
+                                //i = i - 1;
+                            }
+                        }
+                        break;
+                }
+            }
+            foreach(string token in tokens1)
+            {
+                MessageBox.Show(token);
+            }
+            return (tokens1);
+            
+        }
+
+        public int TomarValorAlmacenado(string strCNE)
+        {
+            int valor=0;
+            for (int i = 0; i <= dgvConstatesNumericasEnteras.Rows.Count-1; i++)
+            {
+                if (dgvConstatesNumericasEnteras.Rows[i].Cells[0].Value.ToString() == strCNE)
+                {
+                    valor = int.Parse(dgvConstatesNumericasEnteras.Rows[i].Cells[1].Value.ToString());
+                }
+            }
+
+            return (valor);
+        }
+
+
+
+        private void btnOpt2_Click(object sender, EventArgs e)
+        {
+            List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+
+            List<string> tokens = new List<string>();
+            List<string> tokens1 = new List<string>();
+
+            string tipodato = "";
+            bool bandera = false;
+            string iden = "";
+            int contadorIden=0;
+            int lineaActual = 0;
+            List<string> tokensProcesados = new List<string>();
+            foreach (string linea in LineasTokens)
+            {
+                foreach (string token in linea.Split(' '))
+                {
+                    tokens.Add(token);
+                }
+            }
+
+            //foreach (string linea in LineasTokens)
+            //{
+            //    if (linea.Contains("TDD"))
+            //    {
+            //        foreach (string token in linea.Split(' '))
+            //        {
+            //            if (token.Contains("TDD"))
+            //            {
+            //                tipodato = token;
+            //                continue;
+            //                if (token.Contains("ID"))
+            //                {
+            //                    iden = token;
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
+
+            //foreach (string token in tokens)
+            //{
+            //    if (token.Contains("TDD"))
+            //    {
+            //        tipodato = token;
+            //        bandera = true;
+            //    }
+
+            //    if (bandera)
+            //    {
+            //        iden = token;
+            //    }
+            //}
+
+            for (int i=0; i<= tokens.Count-1; i++)
+            {
+                if (tokens[i] == "") { lineaActual++; }
+                if(tokens[i].Contains("ID"))
+                {
+                    tipodato = tokens[i].ToString();
+                    if (tokensProcesados.Contains(tokens[i])) { continue; }
+                    tokensProcesados.Add(tokens[i]);
+
+                    iden = tokens[i];
+                    
+                    for(int j=0; j<=tokens.Count-1; j++)
+                    {
+                        if(tokens[j].ToString()==iden)
+                        {
+                            contadorIden++;
+                        }
+                    }
+
+                    if(contadorIden<=1)
+                    {
+                        MessageBox.Show("Se elimino una linea." +LineasTokens[lineaActual].ToString());
+                        LineasTokens.RemoveAt(lineaActual);
+                        lineaActual--;
+                        contadorIden = 0;
+                    }
+                    else { contadorIden = 0; }
+                }
+            }
+
+            foreach (string linea in LineasTokens)
+            {
+                foreach (string token in linea.Split(' '))
+                {
+                    tokens1.Add(token);
+                }
+            }
+
+
+            //bool bandera = false;
+            //string temporal = "";
+
+            //for (int i = 0; i <= dataGridView1.Rows.Count - 1; i++)
+            //{
+            //    temporal = dataGridView1.Rows[i].Cells[1].Value.ToString();
+
+            //    for (int j = 0; j <= dataGridView1.Rows.Count - 1; j++)
+            //    {
+            //        if (dataGridView1.Rows[j].Cells[2].Value.ToString() == temporal)
+            //        {
+            //            bandera = true;
+            //            break;
+            //        }
+            //        else { bandera = false; };
+            //    }
+
+            //    if (bandera)
+            //    {
+            //    }
+            //    else
+            //    {
+            //        //eliminar ese registro de alguna forma
+            //        dataGridView1.Rows.RemoveAt(dataGridView1.Rows[i].Index);
+            //        dataGridView1.Refresh();
+            //        i--;
+            //    }
+            //}
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            for(int i=0; i <= dataGridView1.Rows.Count; i ++)
+            {
+
+            }
+        }
+
+        private void tabPage5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     
 }

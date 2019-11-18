@@ -1,6 +1,6 @@
 ﻿namespace Quindim
 {
-    partial class QuindimPad
+    partial class btnOpt4
     {
         /// <summary>
         /// Required designer variable.
@@ -44,7 +44,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuindimPad));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(btnOpt4));
             this.label3 = new System.Windows.Forms.Label();
             this.dgvConstantesExpo = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -112,6 +112,10 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.GenerarTripleta = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatoObjeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatoFuente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Operado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rtxtentrada = new System.Windows.Forms.RichTextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.abriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -121,10 +125,6 @@
             this.leerTodoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DatoObjeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DatoFuente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Operado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConstantesExpo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConstatesNumericasEnteras)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIDE)).BeginInit();
@@ -1010,6 +1010,7 @@
             this.tabPage5.Size = new System.Drawing.Size(504, 363);
             this.tabPage5.TabIndex = 0;
             this.tabPage5.Text = "Tripleta";
+            this.tabPage5.Click += new System.EventHandler(this.tabPage5_Click);
             // 
             // GenerarTripleta
             // 
@@ -1039,6 +1040,31 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(364, 355);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // num
+            // 
+            this.num.HeaderText = "N";
+            this.num.Name = "num";
+            this.num.ReadOnly = true;
+            this.num.Width = 50;
+            // 
+            // DatoObjeto
+            // 
+            this.DatoObjeto.HeaderText = "DatoObjeto";
+            this.DatoObjeto.Name = "DatoObjeto";
+            this.DatoObjeto.ReadOnly = true;
+            // 
+            // DatoFuente
+            // 
+            this.DatoFuente.HeaderText = "DatoFuente";
+            this.DatoFuente.Name = "DatoFuente";
+            this.DatoFuente.ReadOnly = true;
+            // 
+            // Operado
+            // 
+            this.Operado.HeaderText = "Operador";
+            this.Operado.Name = "Operado";
+            this.Operado.ReadOnly = true;
             // 
             // rtxtentrada
             // 
@@ -1140,32 +1166,7 @@
             this.label13.TabIndex = 78;
             this.label13.Text = "uindimPad";
             // 
-            // num
-            // 
-            this.num.HeaderText = "N";
-            this.num.Name = "num";
-            this.num.ReadOnly = true;
-            this.num.Width = 50;
-            // 
-            // DatoObjeto
-            // 
-            this.DatoObjeto.HeaderText = "DatoObjeto";
-            this.DatoObjeto.Name = "DatoObjeto";
-            this.DatoObjeto.ReadOnly = true;
-            // 
-            // DatoFuente
-            // 
-            this.DatoFuente.HeaderText = "DatoFuente";
-            this.DatoFuente.Name = "DatoFuente";
-            this.DatoFuente.ReadOnly = true;
-            // 
-            // Operado
-            // 
-            this.Operado.HeaderText = "Operador";
-            this.Operado.Name = "Operado";
-            this.Operado.ReadOnly = true;
-            // 
-            // QuindimPad
+            // btnOpt4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1189,7 +1190,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(1026, 597);
-            this.Name = "QuindimPad";
+            this.Name = "btnOpt4";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "QuindimPad - El primer y único compilador de Quindim";
