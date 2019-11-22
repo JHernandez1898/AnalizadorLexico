@@ -17,7 +17,7 @@ namespace Quindim
             // SINTAXIS
             int linea = 1;
             string strCambio;
-            string strActual;
+            string strActual = "";
             string salida = "";
             string validacion = "";
             List<string> salidas = new List<string>();
@@ -27,7 +27,7 @@ namespace Quindim
                 foreach (string cadena in LineasTokens)
                 {
                     strActual = cadena;
-                    strActual = strActual.Substring(0, strActual.Length - 1);
+                    strActual = strActual.Trim();
                     salida += cadena + "\n";
                     temp = strActual.Split(' ').Length;
 
@@ -54,7 +54,7 @@ namespace Quindim
                 salidas.Add(validacion);
                 return salidas;
             }
-            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return salidas; }
+            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "Error " + strActual, MessageBoxButtons.OK, MessageBoxIcon.Error); return salidas; }
         }
 
 
@@ -72,7 +72,7 @@ namespace Quindim
                     else Elemento += arreglo[j + i];
                 }
                 if (temp == 1) NuevaLinea[j] = Elemento;
-                else NuevaLinea[j] = Elemento.Substring(0, Elemento.Length - 1);
+                else NuevaLinea[j] = Elemento.Trim();
             }
             return NuevaLinea;
         }
