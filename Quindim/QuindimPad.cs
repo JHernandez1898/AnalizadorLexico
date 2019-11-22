@@ -138,6 +138,9 @@ namespace Quindim
                     rtxtcodigointermediolexico.Text += "\n";
                 }
 
+                LineasTokens = SustituirMultiplicaciones(LineasTokens);
+
+
                 //SINTAXIS
                 List<string> SintaxResult = Sintaxis.AnalisisSintactico(LineasTokens);
                 rtxtcodigointermediosintax.Text = SintaxResult[0];
@@ -152,8 +155,8 @@ namespace Quindim
                 rchSemantica.Text = bottomupSemantica[0];
                 rchtxtSemantic.Text = bottomupSemantica[1];
 
-                GenerarTripletas();
-              Optimizacion();
+                GenerarTripletas(LineasTokens);
+                Optimizacion();
 
 
 
@@ -195,8 +198,8 @@ namespace Quindim
 
         private void CargarEntradaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //rtxtentrada.Text = "int num\nread num\nint res = Calcfact ( num )\nprint ( res )\nfunction int Calcfact ( int num )\nif ( num == 0 )\nreturn ( 1 )\nend\nelse\nfor ( int x = num to num > 1 step x = x - 1 )\nint R = R * x\nend\nend\nreturn ( R )\nend";
-            rtxtentrada.Text = "int num\n\nint res\nif ( ( num > res & res > 0 ) | ( res > 5 ) )\nend";
+            rtxtentrada.Text = "int num\nread num\nint res = Calcfact ( num )\nprint ( res )\nfunction int Calcfact ( int num )\nif ( num == 0 )\nreturn ( 1 )\nend\nelse\nfor ( int x = num to num > 1 step x = x - 1 )\nint R = R * x\nend\nend\nreturn ( R )\nend";
+            //rtxtentrada.Text = "int num\n\nint res\nif ( ( num > res & res > 0 ) | ( res > 5 ) )\nend";
         }
 
         #endregion
@@ -1001,11 +1004,11 @@ namespace Quindim
         
          
         }
-        public void GenerarTripletas()
+        public void GenerarTripletas( List<string> lineas)
         {
             DataTable Tripleta = GenerarTabla();
             string entrada = LimpiarEntrada();
-            List<string> LineasTokens = Lexico.AnalizadorLexico(entrada);
+            List<string> LineasTokens = lineas;
             int T = 1;
             string postFijoIncremento = "";
             bool banderafor = false;
@@ -1013,7 +1016,8 @@ namespace Quindim
             bool condicion = false;
             foreach (string Linea in LineasTokens)
             {
-                string LineaActual = Linea.Substring(0, Linea.Length - 1);
+                //string LineaActual = Linea.Substring(0, Linea.Length - 1); JULIOOOOOOOOO POR QUEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+                string LineaActual = Linea.Trim();
                 string[] Tokens = MetodosSe.CrearCombinaciones(1, LineaActual);
                 string LineaPostFijo = "";
 
@@ -1608,7 +1612,6 @@ T++;
         }
 
 
-
         private void btnOpt2_Click(object sender, EventArgs e)
         {
             List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
@@ -1746,6 +1749,160 @@ T++;
         {
 
         }
+
+        #region Optimización de ciclos
+        /*
+         *  Si se tiene un ciclo cuyo funcionamiento depende de una condición compuesta 
+         *  (quizá incluso operaciones aritméticas) se debe aislar la condición para 
+         *  resolverse antes de que se eejecute el ciclo, pues el programa tomará en cuenta realizar
+         *  el cálculo. Se debería transladar la condición a un identificador antes de iniciar el ciclo.
+         *  Es muy importante considerar que el valor que se va a reducir no sea incluido dentro del ciclo. 
+         *  
+         *  Se necesita:
+         *      + DETERMINAR QUE TIENE UN CICLO FOR
+         *      + Identificar que nos encontramos en un ciclo.
+         *      + Determinar la condición del ciclo         
+         *      + Determinar que la condición del ciclo es compuesta.
+         *      - Buscar que las variables de la condición compuestas no sean modificadas dentro del ciclo
+         *      - Si todo se cumple, asignar la parte distinta la variable de condición del ciclo en otra variable y sustituir.
+         *      
+         *  Si se utiliza la variable del ciclo para hacer multiplicaciones, se recomienda hacer sumas partiendo desde cero 
+         *  por fuera del ciclo.
+         *  
+         *  Se necesita:
+         *      + DETERMINAR QUE TIENE UN CICLO FOR
+         *      + Identificar que nos encontramos en un ciclo.
+         *      + Conocer la variable de iteración
+         *      + Buscar si hay reaparición de la variable de iteración en una línea que NO es la línea del foreach.
+         *      + Checar si dicha línea tiene una operación de multiplicación
+         *      + Reescribir con suma
+         *      - Inicializar la variable
+         * 
+         */
+
+        bool CondicionCicloCompuesta(List<string> listaTokens)
+        {
+            string provisional = "";
+            foreach (string lineaToken in listaTokens)
+            {
+                if (lineaToken.Contains("PR06") && lineaToken.Contains("PR19"))
+                {
+                    provisional = lineaToken.Substring(lineaToken.IndexOf("PR19"));
+                    provisional = provisional.Substring(0, provisional.IndexOf("PR17"));
+                    provisional = provisional.Substring(provisional.IndexOf(" "));
+                }
+            }
+            return provisional.Contains("OL01") || provisional.Contains("OL02");
+        }
+
+        string TokenCiclo(List<string> listaTokens)
+        {
+            string provisional = "";
+            foreach (string lineaToken in listaTokens)
+            {
+                if (lineaToken.Contains("PR06") && lineaToken.Contains("OPA6"))
+                {
+                    provisional = lineaToken.Substring(0, lineaToken.IndexOf("OPA6") - 1);
+                    provisional = provisional.Substring(provisional.LastIndexOf(" "));
+                }
+            }
+            return provisional.Trim();
+        }
+
+        List<string> AparicionesTokenCiclo(List<string> listaTokens)
+        {
+            List<string> apariciones = new List<string>();
+            foreach (string lineaToken in listaTokens)
+            {
+                if (lineaToken.Contains(TokenCiclo(listaTokens)) && !lineaToken.Contains("PR06"))
+                    apariciones.Add(lineaToken);
+            }
+            return apariciones;
+        }
+
+        List<string> MultiplicandoTokenCiclo(List<string> listaTokens)
+        {
+            List<string> multiplicando = new List<string>();
+            foreach (string lineaToken in AparicionesTokenCiclo(listaTokens))
+            {
+                if (lineaToken.Contains("OPA1 " + TokenCiclo(listaTokens)) || lineaToken.Contains(TokenCiclo(listaTokens) + " OPA1"))
+                    multiplicando.Add(lineaToken);
+            }
+            return multiplicando;
+        }
+
+        string ObtenerVariableProductoConTipo(List<string> listaTokens)
+        {
+            string str = "";
+            foreach (string lineaToken in MultiplicandoTokenCiclo(listaTokens))
+            {
+                str = lineaToken.Substring(0, lineaToken.IndexOf("OPA6"));
+            }
+            return str.Trim();
+        }
+
+        string ObtenerVariableProducto(List<string> listaTokens)
+        {
+            string str = "";
+            foreach (string lineaToken in MultiplicandoTokenCiclo(listaTokens))
+            {
+                str = lineaToken.Substring(0, lineaToken.IndexOf("OPA6"));
+            }
+            return str.Substring(str.IndexOf(" "));
+
+        }
+
+        List<string> SustituirMultiplicaciones(List<string> listaTokens)
+        {
+            List<string> nuevaLista = new List<string>();
+            foreach (string lineaToken in listaTokens)
+            {
+                if (lineaToken.Contains("PR06"))
+                {
+                    bool cero = false;
+                    int lastIndex = 0;
+                    foreach (NumericoEntero unEntero in MetodosAL.ConstantesNumericasEnteras)
+                    {
+                        if (unEntero.Contenido == 0)
+                        {
+                            cero = true;
+                            lastIndex = unEntero.Index;
+                            break;
+                        }
+                        lastIndex = unEntero.Index;
+                    }
+                    if (!cero)
+                    {
+                        lastIndex++;
+                        MetodosAL.ConstantesNumericasEnteras.Add(new NumericoEntero { Index = lastIndex, Contenido = 0 });
+                    }
+                    nuevaLista.Add(ObtenerVariableProductoConTipo(listaTokens) + " OPA6 " + "CNE" + lastIndex);
+                    nuevaLista.Add(lineaToken);
+                }
+                else
+                {
+                    foreach (string tokesion in MultiplicandoTokenCiclo(listaTokens))
+                    {
+                        if (lineaToken == tokesion)
+                        {
+                            string provisional = lineaToken.Replace("OPA1 " + TokenCiclo(listaTokens), "OPA4 " + ObtenerVariableProducto(listaTokens));
+                            provisional = provisional.Replace(TokenCiclo(listaTokens) + " OPA1", ObtenerVariableProducto(listaTokens) + " OPA4").Replace("  ", " ");
+                            if (provisional.Contains("TDD"))
+                                provisional = provisional.Substring(provisional.IndexOf(" "));
+                            nuevaLista.Add(provisional.Trim());
+                        }
+                        else
+                        {
+                            nuevaLista.Add(lineaToken);
+                        }
+                    }
+                }
+
+            }
+            return nuevaLista;
+        }
+        #endregion
+
     }
-    
+
 }

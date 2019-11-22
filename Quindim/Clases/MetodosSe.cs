@@ -201,7 +201,8 @@ namespace Quindim.Clases
                 foreach (string cadena in LineasSemantica)
                 {
                     strActual = cadena;
-                    strActual = strActual.Substring(0, strActual.Length - 1);
+                    strActual = strActual.Trim();
+                    //strActual = strActual.Substring(0, strActual.Length - 1); JULIOOOOOOOOOOOOO
                     salida += cadena + "\n";
                     temp = strActual.Split(' ').Length;
 
