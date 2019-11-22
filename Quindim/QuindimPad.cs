@@ -31,7 +31,7 @@ namespace Quindim
             //MessageBox.Show("Capture una instancia para la conexion", "Analizador Sintactico", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //btnleertodo.Enabled = false;
             //gbLexico.Enabled = false;
-           //gbSintax.Enabled = false;
+            //gbSintax.Enabled = false;
             //btnleertodo.Enabled = false;
             /*lblServidor.Text = "Servidor: " + System.Environment.MachineName;
             lblconexion.BackColor = Color.Red;
@@ -82,7 +82,7 @@ namespace Quindim
             return ArregloLineas;
         }
 
-        private void Btnleertodo_Click(object sender, EventArgs e){}
+        private void Btnleertodo_Click(object sender, EventArgs e) { }
 
         private void MostrarIdentificadoresConstantes()
         {
@@ -104,7 +104,7 @@ namespace Quindim
             dgvConstatesNumericasEnteras.CurrentCell = null;
             dgvConstatesNumericasReales.CurrentCell = null;
             dgvConstantesExpo.CurrentCell = null;
-            
+
         }
 
 
@@ -161,7 +161,7 @@ namespace Quindim
 
 
             }
-            catch (Exception ex)
+             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -193,8 +193,8 @@ namespace Quindim
             this.Close();
         }
 
-        private void RUNToolStripMenuItem_Click(object sender, EventArgs e){}
-        private void AbriToolStripMenuItem_Click(object sender, EventArgs e){}
+        private void RUNToolStripMenuItem_Click(object sender, EventArgs e) { }
+        private void AbriToolStripMenuItem_Click(object sender, EventArgs e) { }
 
         private void CargarEntradaToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -701,7 +701,7 @@ namespace Quindim
                         banderaNumero = true;
                         tempLinea += token + ' ';
                     }
-                    else if (token.Contains("ID")||token.Contains("CN"))
+                    else if (token.Contains("ID") || token.Contains("CN"))
                     {
                         banderaIdentificador = true;
                         tokenIdentificador = token;
@@ -719,16 +719,16 @@ namespace Quindim
             }
             return loQueSeRegresa;
         }
-        
+
         int jerarquiaOperador(String operador)
         {
             switch (operador)
-            {                
+            {
                 case "OPA3": // ^
-                    return 8;  
+                    return 8;
                 case "OPA1":// *                                                  
                 case "OPA2":// /
-                    return 7;                
+                    return 7;
                 case "OPA4": // +                                              
                 case "OPA5": // -
                     return 6;
@@ -738,15 +738,15 @@ namespace Quindim
                 case "OPR3": // <                    
                 case "OPR2": // >=                    
                 case "OPR1": // >
-                    return 5;                                
+                    return 5;
                 case "OL03": // !
-                    return 4;                                
+                    return 4;
                 case "OL01": // &
-                    return 2;                                
+                    return 2;
                 case "OL02": // |
-                    return 3;                                
+                    return 3;
                 case "OPA6": // =
-                    return 1;                
+                    return 1;
                 default:
                     return 0;
             }
@@ -757,7 +757,7 @@ namespace Quindim
         {
             Stack<string> pilaTokens = new Stack<string>();
             string[] cadenaTokens = strCadenaTokens.Split(' ');
-            string strNumeritos = "";            
+            string strNumeritos = "";
             int operador1 = 0;
             int operador2 = 0;
             int contadorRelacional = 0;
@@ -768,22 +768,22 @@ namespace Quindim
             foreach (string token in cadenaTokens)
             {
                 if (banderaParentesis)
-                {  
+                {
                     if (token.Contains("PAR2"))
                     {
                         contadorParentesis--;
                         if (contadorParentesis == 0)
                         {
                             subCadenaParentesis = subCadenaParentesis.Remove(subCadenaParentesis.Length - 1);
-                            strNumeritos += Reordenar(subCadenaParentesis)+ " ";
+                            strNumeritos += Reordenar(subCadenaParentesis) + " ";
                             subCadenaParentesis = "";
                             banderaParentesis = false;
                         }
                     }
-                    else if (token.Contains("PAR1"))                    
-                        contadorParentesis++;                    
-                    else                    
-                        subCadenaParentesis += token + ' ';                    
+                    else if (token.Contains("PAR1"))
+                        contadorParentesis++;
+                    else
+                        subCadenaParentesis += token + ' ';
                 }
                 else
                 {
@@ -802,17 +802,17 @@ namespace Quindim
                         {
                             operador2 = jerarquiaOperador(token);
                             if (operador1 < operador2)
-                            {                                
-                                if (operador1 < 4 && contadorRelacional >1)
+                            {
+                                if (operador1 < 4 && contadorRelacional > 1)
                                 {
                                     string tokenDePila = pilaTokens.Pop();
-                                    pilaTokens.Push(token + " "+ tokenDePila);
-                                    operador1 = operador2;                                                                        
+                                    pilaTokens.Push(token + " " + tokenDePila);
+                                    operador1 = operador2;
                                 }
                                 else
                                     pilaTokens.Push(token);
                                 operador1 = operador2;
-                            }                                
+                            }
                             else if (operador2 < operador1)
                             {
                                 string tokenDePila = pilaTokens.Pop();
@@ -821,13 +821,13 @@ namespace Quindim
                                 strNumeritos += tokenDePila + " ";
                             }
                             else if (operador2 == operador1)
-                            {                                
+                            {
                                 strNumeritos += pilaTokens.Pop() + " ";
                                 pilaTokens.Push(token);
                             }
                         }
                     }
-                        
+
                     if (token.Contains("PAR1"))
                     {
                         contadorParentesis++;
@@ -862,7 +862,7 @@ namespace Quindim
             int valordeT = 0;
             int valordeTRemplazador = 0;
             bool coincidencia = false;
-            
+
             List<int> listaReemplazables = new List<int>();
             foreach (DataGridViewRow dr in dataGridView1.Rows)
             {
@@ -924,25 +924,25 @@ namespace Quindim
                 }
                 else { coincidencia = false; renglon++; }
             }
-            
+
             dataGridView1.Rows.Clear();
-            for(int x = 0; x < listaReemplazables.Count; x+=2)
+            for (int x = 0; x < listaReemplazables.Count; x += 2)
             {
-                string Remplazador = 'T'+listaReemplazables[x].ToString();
-                string Remplazado = 'T'+listaReemplazables[x + 1].ToString();
-                Tripleta=Tripleta.Replace(Remplazado, Remplazador);
+                string Remplazador = 'T' + listaReemplazables[x].ToString();
+                string Remplazado = 'T' + listaReemplazables[x + 1].ToString();
+                Tripleta = Tripleta.Replace(Remplazado, Remplazador);
             }
-            for(int x =0; x < renglonesEnTripleta; x++)
+            for (int x = 0; x < renglonesEnTripleta; x++)
             {
                 string dobjeto = Tripleta.Split('\n')[x].Split(':')[1].Split('x')[0];
                 string dfuente = Tripleta.Split('\n')[x].Split(':')[1].Split('x')[1];
                 string operador = Tripleta.Split('\n')[x].Split(':')[1].Split('x')[2];
-               
-                dataGridView1.Rows.Add(x+1,dobjeto , dfuente, operador);
+
+                dataGridView1.Rows.Add(x + 1, dobjeto, dfuente, operador);
             }
-            dataGridView1.Rows.Add(renglonesEnTripleta+1, "FIN");
+            dataGridView1.Rows.Add(renglonesEnTripleta + 1, "FIN");
             //RASTREO 3 OPTIMIZACION
-            foreach(DataGridViewRow dr in dataGridView1.Rows)
+            foreach (DataGridViewRow dr in dataGridView1.Rows)
             {
                 if (!coincidencia)
                 {
@@ -965,9 +965,9 @@ namespace Quindim
                                 {
                                     if (x + 1 < renglonesEnTripleta)
                                     {
-                                        string compdatofuente= (Tripleta.Split('\n')[x].Split('x')[1]);
+                                        string compdatofuente = (Tripleta.Split('\n')[x].Split('x')[1]);
 
-                                        string compoperacio = Tripleta.Split('\n')[x + 1].Split('x')[1] +'x'+ Tripleta.Split('\n')[x + 1].Split('x')[2];
+                                        string compoperacio = Tripleta.Split('\n')[x + 1].Split('x')[1] + 'x' + Tripleta.Split('\n')[x + 1].Split('x')[2];
                                         if (compdatofuente.Contains(datofuente) && compoperacio.Contains(linea2))
                                         {
                                             valordeTRemplazador = int.Parse(Tripleta.Split('\n')[x].Split(':')[1].Split('x')[0].Replace("T", string.Empty).Trim());
@@ -1000,9 +1000,9 @@ namespace Quindim
                 }
                 else { coincidencia = false; renglon++; }
             }
-            
-        
-         
+
+
+
         }
         public void GenerarTripletas( List<string> lineas)
         {
@@ -1064,11 +1064,11 @@ namespace Quindim
                             banderafor = false;
                         }
                         else if (condicion) condicion = false;
-                        
-                        CerrarFalse(ref Tripleta,"");
+
+                        CerrarFalse(ref Tripleta, "");
                         break;
                     case "PR05":
-                        condicion = true; 
+                        condicion = true;
                         break;
                     case "PR06":
                         string LineaInicializacion = $"{Tokens[2]} {Tokens[3]} {Tokens[4]} {Tokens[5]}";
@@ -1083,7 +1083,7 @@ namespace Quindim
                         break;
                     case "PR07":
                         Tripleta.Rows.Add("FUNC", "TR" + Tokens[2], "-");
-                        inicializarParametros(ref Tripleta , Tokens, ref T);
+                        inicializarParametros(ref Tripleta, Tokens, ref T);
                         banderafunc = true;
                         break;
                     case "PR11":
@@ -1100,18 +1100,19 @@ namespace Quindim
             Tripleta.Rows.Add("FIN", "", "");
             dataGridView1.Rows.Clear();
             int num = 0;
+            Tripleta = OptimizacionDeMirilla(Tripleta);
             foreach (DataRow s in Tripleta.Rows)
             {
                 num++;
                 dataGridView1.Rows.Add(num, s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]);
             }
-            
+
 
         }
 
         private void GenerarTripleta_Click(object sender, EventArgs e)
         {
-            DataTable Tripleta = GenerarTabla();            
+            DataTable Tripleta = GenerarTabla();
             List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
             int T = 0;
             string postFijoIncremento = "";
@@ -1126,7 +1127,7 @@ namespace Quindim
                 //TOKEN[0]  PALABRA RESERVADA,  IDENTIFICADOR, TIPO DE DATO
                 switch (Tokens[0])
                 {
-                    case string strValue when strValue.Substring(0, 3) == "TDD" || strValue.Substring(0,2) == "ID":
+                    case string strValue when strValue.Substring(0, 3) == "TDD" || strValue.Substring(0, 2) == "ID":
                         //SI HAY 2 TOKENS ES UNA DECLARACION DE UN IDENTIFICADOR
                         if (Tokens.Length == 2) { Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPR6"); T++; }
                         //SI NO ES UNA ASIGNACION
@@ -1137,8 +1138,8 @@ namespace Quindim
                             bool Metodo = RevisarMetodo(LineaActual, ref metodo);
                             if (Metodo)
                             {
-                                Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPR6"); 
-T++;
+                                Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPR6");
+                                T++;
                                 Tripleta.Rows.Add(Tokens[1], "TR" + metodo, "OPR6");
                             }
                             else
@@ -1162,7 +1163,7 @@ T++;
                         {
 
                         }
-                        CerrarFalse(ref Tripleta,"");
+                        CerrarFalse(ref Tripleta, "");
                         break;
                     case "PR05":
                         break;
@@ -1228,7 +1229,7 @@ T++;
                         {
                             paramestros.Add(tokens[control]);
                             control++;
-                        } 
+                        }
                         else break;
                     }
                     break;
@@ -1279,15 +1280,16 @@ T++;
                         case "OL01":
                             nueva.Rows.Add(dataRow.ItemArray[0], dataRow.ItemArray[1], (Tripleta.Rows.Count) + 2);
                             break;
-                        case "OL02": 
+                        case "OL02":
                             nueva.Rows.Add(dataRow.ItemArray[0], dataRow.ItemArray[1], (Tripleta.Rows.Count));
                             break;
                         default:
-                            nueva.Rows.Add(dataRow.ItemArray[0], dataRow.ItemArray[1], (Tripleta.Rows.Count) + 1 );
+                            nueva.Rows.Add(dataRow.ItemArray[0], dataRow.ItemArray[1], (Tripleta.Rows.Count) + 1);
                             break;
                     }
-                     
-                } else nueva.Rows.Add(s.ItemArray[0],s.ItemArray[1],s.ItemArray[2]); //podria  poner solo la s pero por alguna razon no jala
+
+                }
+                else nueva.Rows.Add(s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]); //podria  poner solo la s pero por alguna razon no jala
             }
             Tripleta = nueva;
         }
@@ -1342,7 +1344,7 @@ T++;
             foreach (DataRow s in trip.Rows) if (s.ItemArray[1].ToString() == pf[c - 2] && s.ItemArray[0].ToString() != "") temp = s.ItemArray[0].ToString();
             trip.Rows.Add("T" + T, pf[c - 1], "OPA6");
             trip.Rows.Add(temp, "T" + T, pf[c]);
-           
+
             if (Operadores.Count != 0)
             {
 
@@ -1353,31 +1355,31 @@ T++;
 
                         trip.Rows.Add("TR" + T, "FALSE", (trip.Rows.Count) + 3);
                         trip.Rows.Add("TR" + T, "TRUE", "");
-                        
+
                         break;
                     default:
                         trip.Rows.Add("TR" + T, "TRUE", (trip.Rows.Count) + 3);
                         CerrarFalse(ref trip, "OL01");
                         trip.Rows.Add("TR" + T, "FALSE", "");
                         break;
-                }  
+                }
             }
             else
-            { 
+            {
                 switch (operador)
                 {
                     case "OL02":
 
                         trip.Rows.Add("TR" + T, "TRUE", (trip.Rows.Count) + 3);
-                        CerrarFalse(ref trip,operador);
+                        CerrarFalse(ref trip, operador);
                         trip.Rows.Add("TR" + T, "FALSE", "");
                         break;
                     default:
                         CerrarFalse(ref trip, operador);
                         trip.Rows.Add("TR" + T, "FALSE", "");
                         trip.Rows.Add("TR" + T, "TRUE", (trip.Rows.Count) + 2);
-                        
-                       
+
+
                         break;
                 }
             }
@@ -1405,12 +1407,12 @@ T++;
                 }
                 strPostfijoTemporal = strPostfijoTemporal.Replace(remplazo, "T" + (T - 1));
                 pf = strPostfijoTemporal.Split(' ');
-            } 
+            }
             CrearRenglones(ref Tripleta, pf, 2, ref T);
 
         }
 
-        string CrearRenglones(ref DataTable trip ,string[] pf, int c,ref int T)
+        string CrearRenglones(ref DataTable trip, string[] pf, int c, ref int T)
         {
 
             trip.Rows.Add("T" + T, pf[c - 2], "OPA6");
@@ -1423,7 +1425,7 @@ T++;
         static DataTable GenerarTabla()
         {
             DataTable Tripleta = new DataTable("Tripletas");
-            DataColumn column;            
+            DataColumn column;
             column = new DataColumn();
             column.DataType = System.Type.GetType("System.String");
             column.ColumnName = "DatoObjeto";
@@ -1535,7 +1537,7 @@ T++;
             //    }
             //}
 
-          
+
             return (LineasTokens);
         }
 
@@ -1562,7 +1564,7 @@ T++;
                             if ((valor == 0 && tokens1[i - 1].ToString() == "OPA4" || (valor == 0 && tokens1[i + 1].ToString() == "OPA4")) || valor == 0 && tokens1[i - 1].ToString() == "OPA5" || (valor == 1 && tokens1[i - 1].ToString() == "OPA1") || (valor == 1 && tokens1[i + 1].ToString() == "OPA1") || (valor == 1 && tokens1[i - 1].ToString() == "OPA2"))
                             {
                                 tokens1.RemoveAt(i);
-                                tokens1.RemoveAt(i-1);
+                                tokens1.RemoveAt(i - 1);
                                 //i = i - 1;
                             }
                         }
@@ -1571,36 +1573,36 @@ T++;
             }
             string strLinea = "";
             List<string> ListaDeLineas = new List<string>();
-            foreach(string token in tokens1)
+            foreach (string token in tokens1)
             {
-                if(token != "")
+                if (token != "")
                 {
-                    strLinea += token.ToString()+ " ";
+                    strLinea += token.ToString() + " ";
                 }
                 else
                 {
-                  
+
                     ListaDeLineas.Add(strLinea);
                     strLinea = "";
                 }
             }
-             
 
-            
-           
+
+
+
             //foreach(string token in tokens1)
             //{
             //    MessageBox.Show(token);
             //}
 
             return (ListaDeLineas);
-            
+
         }
 
         public int TomarValorAlmacenado(string strCNE)
         {
-            int valor=0;
-            for (int i = 0; i <= dgvConstatesNumericasEnteras.Rows.Count-1; i++)
+            int valor = 0;
+            for (int i = 0; i <= dgvConstatesNumericasEnteras.Rows.Count - 1; i++)
             {
                 if (dgvConstatesNumericasEnteras.Rows[i].Cells[0].Value.ToString() == strCNE)
                 {
@@ -1622,7 +1624,7 @@ T++;
             string tipodato = "";
             bool bandera = false;
             string iden = "";
-            int contadorIden=0;
+            int contadorIden = 0;
             int lineaActual = 0;
             List<string> tokensProcesados = new List<string>();
             foreach (string linea in LineasTokens)
@@ -1666,28 +1668,28 @@ T++;
             //    }
             //}
 
-            for (int i=0; i<= tokens.Count-1; i++)
+            for (int i = 0; i <= tokens.Count - 1; i++)
             {
                 if (tokens[i] == "") { lineaActual++; }
-                if(tokens[i].Contains("ID"))
+                if (tokens[i].Contains("ID"))
                 {
                     tipodato = tokens[i].ToString();
                     if (tokensProcesados.Contains(tokens[i])) { continue; }
                     tokensProcesados.Add(tokens[i]);
 
                     iden = tokens[i];
-                    
-                    for(int j=0; j<=tokens.Count-1; j++)
+
+                    for (int j = 0; j <= tokens.Count - 1; j++)
                     {
-                        if(tokens[j].ToString()==iden)
+                        if (tokens[j].ToString() == iden)
                         {
                             contadorIden++;
                         }
                     }
 
-                    if(contadorIden<=1)
+                    if (contadorIden <= 1)
                     {
-                        MessageBox.Show("Se elimino una linea." +LineasTokens[lineaActual].ToString());
+                        MessageBox.Show("Se elimino una linea." + LineasTokens[lineaActual].ToString());
                         LineasTokens.RemoveAt(lineaActual);
                         lineaActual--;
                         contadorIden = 0;
@@ -1739,7 +1741,7 @@ T++;
 
         private void button1_Click(object sender, EventArgs e)
         {
-            for(int i=0; i <= dataGridView1.Rows.Count; i ++)
+            for (int i = 0; i <= dataGridView1.Rows.Count; i++)
             {
 
             }
@@ -1903,6 +1905,89 @@ T++;
         }
         #endregion
 
+
+        public DataTable OptimizacionDeMirilla(DataTable Tripleta)
+        {
+            int lineasDentroDelMetodo = 0;
+            DataTable nuevaTripleta =  GenerarTabla();
+            bool dentroDeUnMetodo = false;
+            DataTable temp = GenerarTabla();
+            string nombreTemporalMetodoInutil = "";
+            string nombreTemporalMetodoUtil = "";
+            bool esInutil = false;
+            foreach (DataRow dtr in Tripleta.Rows)
+            {
+                DataRow matar = nuevaTripleta.NewRow();
+                object[] matriz = { dtr.ItemArray[0], dtr.ItemArray[1], dtr.ItemArray[2] };
+                matar.ItemArray = matriz;
+                nuevaTripleta.Rows.Add(matar);
+                if (dtr.ItemArray[0].ToString() == "FUNC")
+                {
+                    dentroDeUnMetodo = true;
+                    nombreTemporalMetodoInutil = dtr.ItemArray[1].ToString();
+                    temp.Rows.Add(dtr.ItemArray[0],dtr.ItemArray[1],dtr.ItemArray[2]);
+                    nuevaTripleta.Rows.Remove(matar);
+                    continue;
+
+                }
+                if (dentroDeUnMetodo)
+                {
+                    lineasDentroDelMetodo++;
+                    temp.Rows.Add(dtr.ItemArray[0], dtr.ItemArray[1], dtr.ItemArray[2]);
+                    nuevaTripleta.Rows.Remove(matar);
+                    if (dtr.ItemArray[0].ToString() == "ENDP")
+                    {
+                        dentroDeUnMetodo = false;
+                    }
+                    else {
+                        continue;
+                    }
+                 
+                }
+                switch (lineasDentroDelMetodo)
+                {
+                    case 5:
+                        foreach (DataRow tempdtr in temp.Rows)
+                        {
+                            if (tempdtr.ItemArray[1].ToString().Contains("TR")) 
+                            {
+                                nombreTemporalMetodoUtil = tempdtr.ItemArray[1].ToString();
+                                esInutil = true;
+                            }
+                            lineasDentroDelMetodo = 0;
+                        }
+                        break;
+                    case 6:
+                        //Codificar aqui el caso en que se haga una declaracion extra
+                        break;
+                    default:
+                        lineasDentroDelMetodo = 0;
+                        esInutil = false;
+                        break;
+                }
+                if (!esInutil)
+                {
+                    foreach (DataRow tempdtr in temp.Rows)
+                    {
+                            nuevaTripleta.Rows.Add(tempdtr.ItemArray[0],tempdtr.ItemArray[1],tempdtr.ItemArray[2]);
+                    }
+                }
+                else
+                {
+                    foreach (DataRow tempdtr in nuevaTripleta.Rows)
+                    {
+                        if (tempdtr.ItemArray[1].ToString().Contains(nombreTemporalMetodoInutil))
+                        {
+                            object[] nuevosDatos = { tempdtr.ItemArray[0], nombreTemporalMetodoUtil, tempdtr.ItemArray[2] };
+                            tempdtr.ItemArray = nuevosDatos;
+                        }
+                    }
+                }
+                temp = GenerarTabla();
+               
+            }
+            return nuevaTripleta;
+        }
     }
 
 }
