@@ -1023,7 +1023,6 @@ namespace Quindim
             bool condicion = false;
             foreach (string Linea in LineasTokens)
             {
-                //string LineaActual = Linea.Substring(0, Linea.Length - 1); JULIOOOOOOOOO POR QUEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
                 string LineaActual = Linea.Trim();
                 string[] Tokens = MetodosSe.CrearCombinaciones(1, LineaActual);
                 string LineaPostFijo = "";
@@ -1067,7 +1066,9 @@ namespace Quindim
                         }
                         else if (banderafor)
                         {
+                            int volver =  encontrarUltimaComparacion(Tripleta);
                             TripletaOperacionesAritmeticas(ref Tripleta, postFijoIncremento, ref T);
+                            Tripleta.Rows.Add("", "BACK", volver.ToString());
                             banderafor = false;
                         }
                         else if (condicion) condicion = false;
@@ -1988,12 +1989,28 @@ namespace Quindim
                             object[] nuevosDatos = { tempdtr.ItemArray[0], nombreTemporalMetodoUtil, tempdtr.ItemArray[2] };
                             tempdtr.ItemArray = nuevosDatos;
                         }
+                        
                     }
                 }
                 temp = GenerarTabla();
                
             }
             return nuevaTripleta;
+        }
+        int encontrarUltimaComparacion(DataTable tripleta)
+        {
+            int ultimo = 0;
+            int c = 0;
+            foreach(DataRow s in tripleta.Rows)
+            {
+                c++;
+                if (s.ItemArray[2].ToString().Contains("OPR"))
+                {
+
+                    ultimo = c;
+                }
+            }
+            return ultimo;
         }
     }
 
