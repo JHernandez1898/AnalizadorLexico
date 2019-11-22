@@ -137,9 +137,14 @@ namespace Quindim
                     rtxtcodigointermediolexico.Text += token + " ";
                     rtxtcodigointermediolexico.Text += "\n";
                 }
-
+                
                 LineasTokens = SustituirMultiplicaciones(LineasTokens);
-
+                string str = "";
+                foreach (string unstr in LineasTokens)
+                {
+                    str += unstr + "\n";
+                }
+                MessageBox.Show(str);
 
                 //SINTAXIS
                 List<string> SintaxResult = Sintaxis.AnalisisSintactico(LineasTokens);
@@ -163,6 +168,7 @@ namespace Quindim
             }
              catch (Exception ex)
             {
+                //REVISAR
                 MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -483,6 +489,7 @@ namespace Quindim
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+
             }
         }
 

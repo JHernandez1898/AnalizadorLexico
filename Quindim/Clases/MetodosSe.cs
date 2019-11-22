@@ -71,7 +71,7 @@ namespace Quindim.Clases
                 foreach (string cadena in LineasTokens)
                 {
                     strActual = cadena;
-                    strActual = strActual.Substring(0, strActual.Length - 1);
+                    strActual = strActual.Trim();
                     string[] combinacionesde2 = CrearCombinaciones(2, strActual);
                     foreach (string str in combinacionesde2)
                     {
@@ -191,7 +191,7 @@ namespace Quindim.Clases
             List<string> salidas = new List<string>();
             int linea = 1;
             string strCambio;
-            string strActual;
+            string strActual = "";
             int begins = 0;
             int ends = 0;
             int temp;
@@ -254,7 +254,7 @@ namespace Quindim.Clases
                 return salidas;
 
             }
-            catch (Exception ex) { MessageBox.Show("Error: Error de semantica en la linea: " + linea +" Los tipos de dato no concuerdan"+ ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);  return salidas; }
+            catch (Exception ex) { MessageBox.Show("Error: Error de semantica en la linea: " + linea +strActual+" Los tipos de dato no concuerdan"+ ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);  return salidas; }
         }
     }
 }
