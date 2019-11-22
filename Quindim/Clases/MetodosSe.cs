@@ -25,7 +25,7 @@ namespace Quindim.Clases
                     else Elemento += arreglo[j + i];
                 }
                 if (temp == 1) NuevaLinea[j] = Elemento;
-                else NuevaLinea[j] = Elemento.Substring(0, Elemento.Length - 1);
+                else NuevaLinea[j] = Elemento.Trim();
             }
             return NuevaLinea;
         }
@@ -34,11 +34,12 @@ namespace Quindim.Clases
            Linea = Linea.Replace("CADE", "STRG");
            Linea = Linea.Replace("PR23", "BOOL");
            Linea = Linea.Replace("PR22", "BOOL");
+          
             foreach (Identificador elemento in MetodosAL.Identificadores)
             {
                 string id = "ID" + elemento.Index;
                 if (Linea.Contains("PR11") && elemento.Tipo == null) { Linea = Linea.Replace(id, "VOID"); elemento.Tipo = "VOID"; }
-                else Linea = Linea.Replace(id, elemento.Tipo);
+                else Linea = Linea.Replace(id, elemento.Tipo); 
             }
            foreach(NumericoEntero x in MetodosAL.ConstantesNumericasEnteras)
             {
@@ -107,7 +108,8 @@ namespace Quindim.Clases
                         }
                     }
                 }
-                foreach(string d in LineasTokens)
+                MetodosAL.Identificadores.Sort((t, y) => y.Index.CompareTo(t.Index));
+                foreach (string d in LineasTokens)
                 {
                     LineasSemantica.Add(ObtenerArchivoTemporal(d));
                 }
