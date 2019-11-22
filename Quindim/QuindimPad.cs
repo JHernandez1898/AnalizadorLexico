@@ -120,6 +120,7 @@ namespace Quindim
             rtxtcodigointermediolexico.Text = "";
             rtxtcodigointermediosintax.Text = "";
             rtxSintaxLineaxLinea.Text = "";
+            string entrada = LimpiarEntrada();
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -128,7 +129,7 @@ namespace Quindim
             {
                 //LEXICO
                 List<string> LineasTokens;
-                LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+                LineasTokens = Lexico.AnalizadorLexico(entrada);
                 foreach (String token in LineasTokens)
                 {
                     rtxtcodigointermediolexico.Text += token + " ";
@@ -170,6 +171,11 @@ namespace Quindim
         private void LeerTodoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LeerTodo();
+        }
+
+        private string LimpiarEntrada()
+        {
+            return rtxtentrada.Text.Replace("\t", "");
         }
 
         private void InstanciasSQLToolStripMenuItem_Click(object sender, EventArgs e)
@@ -843,8 +849,9 @@ namespace Quindim
         #region Tripletas
         public void GenerarTripletas()
         {
-            DataTable Tripleta = GenerarTabla();            
-            List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+            DataTable Tripleta = GenerarTabla();
+            string entrada = LimpiarEntrada();
+            List<string> LineasTokens = Lexico.AnalizadorLexico(entrada);
             int T = 1;
             string postFijoIncremento = "";
             bool banderafor = false;
@@ -941,9 +948,6 @@ namespace Quindim
                 dataGridView1.Rows.Add(num, s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]);
             }
         }
-
-
-
 
         private void GenerarTripleta_Click(object sender, EventArgs e)
         {
