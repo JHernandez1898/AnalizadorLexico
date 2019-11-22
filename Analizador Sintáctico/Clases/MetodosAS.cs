@@ -10,8 +10,6 @@ namespace Analizador_Sintáctico.Clases
 {
     class MetodosAS
     {
-       
-
         public static void CrearMatriz()
         {
 
@@ -24,6 +22,7 @@ namespace Analizador_Sintáctico.Clases
             }
 
         }
+
         public static DataTable Matriz = new DataTable();
         public static string ObtenerConversion(string Combinacion)
         {

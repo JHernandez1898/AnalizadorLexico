@@ -60,6 +60,7 @@
     <Compile Include="Clases\NumericoExponencial.cs" />
     <Compile Include="Clases\NumericoExpReal.cs" />
     <Compile Include="Clases\NumericoReal.cs" />
+    <Compile Include="Clases\RenglonTripleta.cs" />
     <Compile Include="Clases\SintaxLibre.cs" />
     <Compile Include="QuindimPad.cs">
       <SubType>Form</SubType>

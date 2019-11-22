@@ -9,12 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace Quindim
 {
-    public partial class QuindimPad : Form
+    public partial class btnOpt4 : Form
     {
-        public QuindimPad()
+        public btnOpt4()
         {
             InitializeComponent();
         }
@@ -103,6 +104,7 @@ namespace Quindim
             dgvConstatesNumericasEnteras.CurrentCell = null;
             dgvConstatesNumericasReales.CurrentCell = null;
             dgvConstantesExpo.CurrentCell = null;
+            
         }
 
 
@@ -151,6 +153,8 @@ namespace Quindim
                 rchtxtSemantic.Text = bottomupSemantica[1];
 
                 GenerarTripletas();
+              Optimizacion();
+
 
 
             }
@@ -804,7 +808,7 @@ namespace Quindim
                                 }
                                 else
                                     pilaTokens.Push(token);
-
+                                operador1 = operador2;
                             }                                
                             else if (operador2 < operador1)
                             {
@@ -814,7 +818,7 @@ namespace Quindim
                                 strNumeritos += tokenDePila + " ";
                             }
                             else if (operador2 == operador1)
-                            {
+                            {                                
                                 strNumeritos += pilaTokens.Pop() + " ";
                                 pilaTokens.Push(token);
                             }
@@ -847,6 +851,156 @@ namespace Quindim
         #endregion
 
         #region Tripletas
+        public void Optimizacion()
+        {
+            string Tripleta = "";
+            int renglon = 0;
+            int renglonesEnTripleta = 0;
+            int valordeT = 0;
+            int valordeTRemplazador = 0;
+            bool coincidencia = false;
+            
+            List<int> listaReemplazables = new List<int>();
+            foreach (DataGridViewRow dr in dataGridView1.Rows)
+            {
+                if (!coincidencia)
+                {
+                    string nuevaLinea;
+                    if (dr.Cells[1].Value.ToString().Substring(0, 1) == "T")
+                    {
+                        valordeT = int.Parse(dr.Cells[1].Value.ToString().Split('T')[1]);
+                    }
+                    nuevaLinea = renglon.ToString() + ':' + dr.Cells[1].Value.ToString() + 'x' + dr.Cells[2].Value.ToString() + 'x' + dr.Cells[3].Value.ToString() + '\n';
+                    string lineaoperacion = dr.Cells[2].Value.ToString() + 'x' + dr.Cells[3].Value.ToString();
+                    if (Tripleta.Contains(lineaoperacion))
+                    {
+                        if (renglon + 1 < dataGridView1.Rows.Count)
+                        {
+                            DataGridViewRow dr2 = dataGridView1.Rows[renglon + 1];
+                            string linea2 = dr2.Cells[2].Value.ToString() + 'x' + dr2.Cells[3].Value.ToString();
+                            if (Tripleta.Contains(linea2))
+                            {
+                                for (int x = 0; x < renglonesEnTripleta; x++)
+                                {
+                                    if (x + 1 < renglonesEnTripleta)
+                                    {
+                                        if (Tripleta.Split('\n')[x].Contains(lineaoperacion) && Tripleta.Split('\n')[x + 1].Contains(linea2))
+                                        {
+
+
+                                            valordeTRemplazador = int.Parse(Tripleta.Split('\n')[x].Split(':')[1].Split('x')[0].Replace("T", string.Empty).Trim());
+                                            listaReemplazables.Add(valordeTRemplazador);
+                                            listaReemplazables.Add(valordeT);
+                                            coincidencia = true;
+
+
+                                        }
+                                    }
+                                }
+                                if (!coincidencia)
+                                {
+                                    Tripleta += nuevaLinea;
+                                    renglonesEnTripleta++;
+                                }
+
+                            }
+                            else
+                            {
+                                Tripleta += nuevaLinea;
+                                renglonesEnTripleta++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Tripleta += nuevaLinea;
+                        renglonesEnTripleta++;
+                    }
+                    renglon++;
+
+                }
+                else { coincidencia = false; renglon++; }
+            }
+            
+            dataGridView1.Rows.Clear();
+            for(int x = 0; x < listaReemplazables.Count; x+=2)
+            {
+                string Remplazador = 'T'+listaReemplazables[x].ToString();
+                string Remplazado = 'T'+listaReemplazables[x + 1].ToString();
+                Tripleta=Tripleta.Replace(Remplazado, Remplazador);
+            }
+            for(int x =0; x < renglonesEnTripleta; x++)
+            {
+                string dobjeto = Tripleta.Split('\n')[x].Split(':')[1].Split('x')[0];
+                string dfuente = Tripleta.Split('\n')[x].Split(':')[1].Split('x')[1];
+                string operador = Tripleta.Split('\n')[x].Split(':')[1].Split('x')[2];
+               
+                dataGridView1.Rows.Add(x+1,dobjeto , dfuente, operador);
+            }
+            dataGridView1.Rows.Add(renglonesEnTripleta+1, "FIN");
+            //RASTREO 3 OPTIMIZACION
+            foreach(DataGridViewRow dr in dataGridView1.Rows)
+            {
+                if (!coincidencia)
+                {
+                    string nuevaLinea;
+                    if (dr.Cells[1].Value.ToString().Substring(0, 1) == "T")
+                    {
+                        valordeT = int.Parse(dr.Cells[1].Value.ToString().Split('T')[1]);
+                    }
+                    nuevaLinea = dr.Cells[1].Value.ToString() + 'x' + dr.Cells[2].Value.ToString() + 'x' + dr.Cells[3].Value.ToString() + '\n';
+                    string datofuente = dr.Cells[2].Value.ToString() + 'x';
+                    if (Tripleta.Contains(datofuente))
+                    {
+                        if (renglon + 1 < dataGridView1.Rows.Count)
+                        {
+                            DataGridViewRow dr2 = dataGridView1.Rows[renglon + 1];
+                            string linea2 = dr2.Cells[2].Value.ToString() + 'x' + dr2.Cells[3].Value.ToString();
+                            if (Tripleta.Contains(linea2))
+                            {
+                                for (int x = 0; x < renglonesEnTripleta; x++)
+                                {
+                                    if (x + 1 < renglonesEnTripleta)
+                                    {
+                                        string compdatofuente= (Tripleta.Split('\n')[x].Split('x')[1]);
+
+                                        string compoperacio = Tripleta.Split('\n')[x + 1].Split('x')[1] +'x'+ Tripleta.Split('\n')[x + 1].Split('x')[2];
+                                        if (compdatofuente.Contains(datofuente) && compoperacio.Contains(linea2))
+                                        {
+                                            valordeTRemplazador = int.Parse(Tripleta.Split('\n')[x].Split(':')[1].Split('x')[0].Replace("T", string.Empty).Trim());
+                                            listaReemplazables.Add(valordeTRemplazador);
+                                            listaReemplazables.Add(valordeT);
+                                            coincidencia = true;
+                                        }
+                                    }
+                                }
+                                if (!coincidencia)
+                                {
+                                    Tripleta += nuevaLinea;
+                                    renglonesEnTripleta++;
+                                }
+                            }
+                            else
+                            {
+                                Tripleta += nuevaLinea;
+                                renglonesEnTripleta++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Tripleta += nuevaLinea;
+                        renglonesEnTripleta++;
+                    }
+                    renglon++;
+
+                }
+                else { coincidencia = false; renglon++; }
+            }
+            
+        
+         
+        }
         public void GenerarTripletas()
         {
             DataTable Tripleta = GenerarTabla();
@@ -947,6 +1101,8 @@ namespace Quindim
                 num++;
                 dataGridView1.Rows.Add(num, s.ItemArray[0], s.ItemArray[1], s.ItemArray[2]);
             }
+            
+
         }
 
         private void GenerarTripleta_Click(object sender, EventArgs e)
@@ -1290,11 +1446,306 @@ T++;
             Tripleta.Columns.Add(column);
             return Tripleta;
         }
-        #endregion
 
         #endregion
 
-                
+        #endregion
+
+        public List<string> Optimizar2()
+        {
+            List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+
+            List<string> tokens = new List<string>();
+            List<string> tokens1 = new List<string>();
+
+            string tipodato = "";
+            string iden = "";
+            int contadorIden = 0;
+            int lineaActual = 0;
+            List<string> tokensProcesados = new List<string>();
+            foreach (string linea in LineasTokens)
+            {
+                foreach (string token in linea.Split(' '))
+                {
+                    tokens.Add(token);
+                }
+            }
+
+            for (int i = 0; i <= tokens.Count - 1; i++)
+            {
+                if (tokens[i] == "") { lineaActual++; }
+                if (tokens[i].Contains("ID")) //aqui estaba ID
+                {
+                    tipodato = tokens[i + 1].ToString();
+                    if (tokensProcesados.Contains(tokens[i])) { continue; }
+                    tokensProcesados.Add(tokens[i]);
+
+                    iden = tokens[i];
+
+                    for (int j = 0; j <= tokens.Count - 1; j++)
+                    {
+                        if (tokens[j].ToString() == iden)
+                        {
+                            contadorIden++;
+                        }
+                    }
+
+                    if (contadorIden <= 1)
+                    {
+                        MessageBox.Show("Se elimino una linea." + LineasTokens[lineaActual].ToString());
+                        LineasTokens.RemoveAt(lineaActual);
+                        lineaActual--;
+                        contadorIden = 0;
+                    }
+                    else { contadorIden = 0; }
+                }
+            }
+
+            foreach (string linea in LineasTokens)
+            {
+                foreach (string token in linea.Split(' '))
+                {
+                    tokens1.Add(token);
+                }
+            }
+
+            //int valor;
+            //for (int i = 0; i <= tokens1.Count - 1; i++)
+            //{
+            //    switch (tokens1[i].ToString().Substring(0,3))
+            //    {
+            //        case "CNE":
+            //            {
+            //                valor = TomarValorAlmacenado(tokens1[i].ToString());
+            //                if (valor == 0 && tokens1[i - 1].ToString() == "OPA4")
+            //                {
+            //                    tokens1.RemoveAt(i);
+            //                    tokens1.RemoveAt(i - 1);
+            //                    i = i - 2;
+            //                }
+            //            }
+            //            break;
+
+            //        default:
+            //            break;
+            //    }
+            //}
+
+          
+            return (LineasTokens);
+        }
+
+        public List<string> OptimizarExpresionesAlgebraicas(List<string> listaOptimizada)
+        {
+            List<string> tokens1 = new List<string>();
+            foreach (string linea in listaOptimizada)
+            {
+                foreach (string token in linea.Split(' '))
+                {
+                    tokens1.Add(token);
+                }
+            }
+
+            int valor;
+            for (int i = 0; i <= tokens1.Count - 1; i++)
+            {
+                if (tokens1[i].ToString() == "") { continue; }
+                switch (tokens1[i].ToString().Substring(0, 2))
+                {
+                    case "CN":
+                        {
+                            valor = TomarValorAlmacenado(tokens1[i].ToString());
+                            if ((valor == 0 && tokens1[i - 1].ToString() == "OPA4" || (valor == 0 && tokens1[i + 1].ToString() == "OPA4")) || valor == 0 && tokens1[i - 1].ToString() == "OPA5" || (valor == 1 && tokens1[i - 1].ToString() == "OPA1") || (valor == 1 && tokens1[i + 1].ToString() == "OPA1") || (valor == 1 && tokens1[i - 1].ToString() == "OPA2"))
+                            {
+                                tokens1.RemoveAt(i);
+                                tokens1.RemoveAt(i-1);
+                                //i = i - 1;
+                            }
+                        }
+                        break;
+                }
+            }
+            string strLinea = "";
+            List<string> ListaDeLineas = new List<string>();
+            foreach(string token in tokens1)
+            {
+                if(token != "")
+                {
+                    strLinea += token.ToString()+ " ";
+                }
+                else
+                {
+                  
+                    ListaDeLineas.Add(strLinea);
+                    strLinea = "";
+                }
+            }
+             
+
+            
+           
+            //foreach(string token in tokens1)
+            //{
+            //    MessageBox.Show(token);
+            //}
+
+            return (ListaDeLineas);
+            
+        }
+
+        public int TomarValorAlmacenado(string strCNE)
+        {
+            int valor=0;
+            for (int i = 0; i <= dgvConstatesNumericasEnteras.Rows.Count-1; i++)
+            {
+                if (dgvConstatesNumericasEnteras.Rows[i].Cells[0].Value.ToString() == strCNE)
+                {
+                    valor = int.Parse(dgvConstatesNumericasEnteras.Rows[i].Cells[1].Value.ToString());
+                }
+            }
+
+            return (valor);
+        }
+
+
+
+        private void btnOpt2_Click(object sender, EventArgs e)
+        {
+            List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+
+            List<string> tokens = new List<string>();
+            List<string> tokens1 = new List<string>();
+
+            string tipodato = "";
+            bool bandera = false;
+            string iden = "";
+            int contadorIden=0;
+            int lineaActual = 0;
+            List<string> tokensProcesados = new List<string>();
+            foreach (string linea in LineasTokens)
+            {
+                foreach (string token in linea.Split(' '))
+                {
+                    tokens.Add(token);
+                }
+            }
+
+            //foreach (string linea in LineasTokens)
+            //{
+            //    if (linea.Contains("TDD"))
+            //    {
+            //        foreach (string token in linea.Split(' '))
+            //        {
+            //            if (token.Contains("TDD"))
+            //            {
+            //                tipodato = token;
+            //                continue;
+            //                if (token.Contains("ID"))
+            //                {
+            //                    iden = token;
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
+
+            //foreach (string token in tokens)
+            //{
+            //    if (token.Contains("TDD"))
+            //    {
+            //        tipodato = token;
+            //        bandera = true;
+            //    }
+
+            //    if (bandera)
+            //    {
+            //        iden = token;
+            //    }
+            //}
+
+            for (int i=0; i<= tokens.Count-1; i++)
+            {
+                if (tokens[i] == "") { lineaActual++; }
+                if(tokens[i].Contains("ID"))
+                {
+                    tipodato = tokens[i].ToString();
+                    if (tokensProcesados.Contains(tokens[i])) { continue; }
+                    tokensProcesados.Add(tokens[i]);
+
+                    iden = tokens[i];
+                    
+                    for(int j=0; j<=tokens.Count-1; j++)
+                    {
+                        if(tokens[j].ToString()==iden)
+                        {
+                            contadorIden++;
+                        }
+                    }
+
+                    if(contadorIden<=1)
+                    {
+                        MessageBox.Show("Se elimino una linea." +LineasTokens[lineaActual].ToString());
+                        LineasTokens.RemoveAt(lineaActual);
+                        lineaActual--;
+                        contadorIden = 0;
+                    }
+                    else { contadorIden = 0; }
+                }
+            }
+
+            foreach (string linea in LineasTokens)
+            {
+                foreach (string token in linea.Split(' '))
+                {
+                    tokens1.Add(token);
+                }
+            }
+
+
+            //bool bandera = false;
+            //string temporal = "";
+
+            //for (int i = 0; i <= dataGridView1.Rows.Count - 1; i++)
+            //{
+            //    temporal = dataGridView1.Rows[i].Cells[1].Value.ToString();
+
+            //    for (int j = 0; j <= dataGridView1.Rows.Count - 1; j++)
+            //    {
+            //        if (dataGridView1.Rows[j].Cells[2].Value.ToString() == temporal)
+            //        {
+            //            bandera = true;
+            //            break;
+            //        }
+            //        else { bandera = false; };
+            //    }
+
+            //    if (bandera)
+            //    {
+            //    }
+            //    else
+            //    {
+            //        //eliminar ese registro de alguna forma
+            //        dataGridView1.Rows.RemoveAt(dataGridView1.Rows[i].Index);
+            //        dataGridView1.Refresh();
+            //        i--;
+            //    }
+            //}
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            for(int i=0; i <= dataGridView1.Rows.Count; i ++)
+            {
+
+            }
+        }
+
+        private void tabPage5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     
 }
