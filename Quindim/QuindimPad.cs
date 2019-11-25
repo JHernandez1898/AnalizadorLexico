@@ -1714,7 +1714,7 @@ namespace Quindim
 
                     if (contadorIden <= 1)
                     {
-                        MessageBox.Show("Se elimino una linea." + LineasTokens[lineaActual].ToString());
+                        //MessageBox.Show("Se elimino una linea." + LineasTokens[lineaActual].ToString());
                         LineasTokens.RemoveAt(lineaActual);
                         lineaActual--;
                         contadorIden = 0;
