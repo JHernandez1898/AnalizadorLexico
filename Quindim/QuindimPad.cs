@@ -138,7 +138,7 @@ namespace Quindim
                     rtxtcodigointermediolexico.Text += "\n";
                 }
                 
-                LineasTokens = SustituirMultiplicaciones(LineasTokens);
+               
                 //string str = "";
                 //foreach (string unstr in LineasTokens)
                 //{
@@ -1015,7 +1015,8 @@ namespace Quindim
         {
             DataTable Tripleta = GenerarTabla();
             string entrada = LimpiarEntrada();
-            List<string> LineasTokens = lineas;
+            List<string> LineasTokens = OptimizarExpresionesAlgebraicas(Optimizar2(lineas));
+            LineasTokens = SustituirMultiplicaciones(LineasTokens);
             int T = 1;
             string postFijoIncremento = "";
             bool banderafor = false;
@@ -1026,7 +1027,7 @@ namespace Quindim
                 string LineaActual = Linea.Trim();
                 string[] Tokens = MetodosSe.CrearCombinaciones(1, LineaActual);
                 string LineaPostFijo = "";
-
+                if (Linea == "") continue;
 
                 switch (Tokens[0])
                 {
@@ -1121,6 +1122,7 @@ namespace Quindim
         private void GenerarTripleta_Click(object sender, EventArgs e)
         {
             DataTable Tripleta = GenerarTabla();
+            //List<string> LineasTokens = OptimizarExpresionesAlgebraicas(Optimizar2());
             List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
             int T = 0;
             string postFijoIncremento = "";
@@ -1465,9 +1467,9 @@ namespace Quindim
 
         #endregion
 
-        public List<string> Optimizar2()
+        public List<string> Optimizar2(List<string> lineas)
         {
-            List<string> LineasTokens = Lexico.AnalizadorLexico(rtxtentrada.Text);
+            List<string> LineasTokens = lineas;
 
             List<string> tokens = new List<string>();
             List<string> tokens1 = new List<string>();
@@ -1506,7 +1508,7 @@ namespace Quindim
 
                     if (contadorIden <= 1)
                     {
-                        MessageBox.Show("Se elimino una linea." + LineasTokens[lineaActual].ToString());
+                      //  MessageBox.Show("Se elimino una linea." + LineasTokens[lineaActual].ToString());
                         LineasTokens.RemoveAt(lineaActual);
                         lineaActual--;
                         contadorIden = 0;
