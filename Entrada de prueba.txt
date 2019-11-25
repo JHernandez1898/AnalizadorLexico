@@ -1,23 +1,28 @@
 int num
+int cant = 1 + 1
 read num
 dbl res = resultado ( num )
 print ( res )
 
-function dbl resultado ( int numero )
-dbl as = Calcfact ( numero )
-return ( as )
+function dbl Calcfact ( int num )
+	int numero = 5 + 5 + 0 * 1
+	if ( num == 0 )
+		print ( numero )
+		return ( 1 )
+	end
+	else
+		for ( int x = num to num > 1 step x = x - 1 )
+			int R = 8 * x
+
+		end
+	end
+	int otronumeroigual = 5 + 5
+	return ( R )  
 end
 
-function dbl Calcfact ( int num )
-if ( num == 0 )
-return ( 1 )
-end
-else
-for ( int x = num to num > 1 step x = x - 1 )
-int R = R * x
-end
-end
-return ( R )
+function dbl resultado ( int numero )
+	dbl as = Calcfact ( numero )
+	return ( as )
 end
 
 
