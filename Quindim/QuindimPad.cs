@@ -1418,7 +1418,7 @@ namespace Quindim
                 strPostfijoTemporal = strPostfijoTemporal.Replace(remplazo, "T" + (T - 1));
                 pf = strPostfijoTemporal.Split(' ');
             }
-            CrearRenglones(ref Tripleta, pf, 2, ref T);
+            CrearRenglonesFinal(ref Tripleta, pf, 2, ref T);
 
         }
 
@@ -1427,6 +1427,15 @@ namespace Quindim
 
             trip.Rows.Add("T" + T, pf[c - 2], "OPA6");
             trip.Rows.Add("T" + T, pf[c - 1], pf[c]);
+            T++;
+            return (pf[c - 2] + " " + pf[c - 1] + " " + pf[c]);
+
+        }
+        string CrearRenglonesFinal(ref DataTable trip, string[] pf, int c, ref int T)
+        {
+
+         
+            trip.Rows.Add(pf[c - 2], pf[c - 1], pf[c]);
             T++;
             return (pf[c - 2] + " " + pf[c - 1] + " " + pf[c]);
 
@@ -1508,10 +1517,14 @@ namespace Quindim
 
                     if (contadorIden <= 1)
                     {
-                      //  MessageBox.Show("Se elimino una linea." + LineasTokens[lineaActual].ToString());
-                        LineasTokens.RemoveAt(lineaActual);
-                        lineaActual--;
-                        contadorIden = 0;
+                        MessageBox.Show("Se elimino una linea." + LineasTokens[lineaActual].ToString());
+                        if (!(LineasTokens[lineaActual].ToString().Contains("PR08") | LineasTokens[lineaActual].ToString().Contains("PR07")))
+                        {
+                            LineasTokens.RemoveAt(lineaActual);
+                            lineaActual--;
+                            contadorIden = 0;
+                        }
+                      
                     }
                     else { contadorIden = 0; }
                 }
@@ -1556,10 +1569,11 @@ namespace Quindim
             List<string> tokens1 = new List<string>();
             foreach (string linea in listaOptimizada)
             {
-                foreach (string token in linea.Split(' '))
+                foreach (string token in linea.Trim().Split())
                 {
                     tokens1.Add(token);
                 }
+                tokens1.Add("");
             }
 
             int valor;
@@ -1570,12 +1584,18 @@ namespace Quindim
                 {
                     case "CN":
                         {
+
                             valor = TomarValorAlmacenado(tokens1[i].ToString());
-                            if ((valor == 0 && tokens1[i - 1].ToString() == "OPA4" || (valor == 0 && tokens1[i + 1].ToString() == "OPA4")) || valor == 0 && tokens1[i - 1].ToString() == "OPA5" || (valor == 1 && tokens1[i - 1].ToString() == "OPA1") || (valor == 1 && tokens1[i + 1].ToString() == "OPA1") || (valor == 1 && tokens1[i - 1].ToString() == "OPA2"))
+                            if ((valor == 0 && tokens1[i - 1].ToString() == "OPA4") ||
+                                (valor == 0 && tokens1[i + 1].ToString() == "OPA4") || 
+                                (valor == 0 && tokens1[i - 1].ToString() == "OPA5") ||
+                                (valor == 1 && tokens1[i - 1].ToString() == "OPA1") ||
+                                (valor == 1 && tokens1[i + 1].ToString() == "OPA1") ||
+                                (valor == 1 && tokens1[i - 1].ToString() == "OPA2"))
                             {
                                 tokens1.RemoveAt(i);
                                 tokens1.RemoveAt(i - 1);
-                                //i = i - 1;
+                                i = i - 3;
                             }
                         }
                         break;
@@ -1605,21 +1625,16 @@ namespace Quindim
             //    MessageBox.Show(token);
             //}
 
-            return (ListaDeLineas);
+             return (ListaDeLineas);
 
         }
 
         public int TomarValorAlmacenado(string strCNE)
         {
             int valor = 0;
-            for (int i = 0; i <= dgvConstatesNumericasEnteras.Rows.Count - 1; i++)
-            {
-                if (dgvConstatesNumericasEnteras.Rows[i].Cells[0].Value.ToString() == strCNE)
-                {
-                    valor = int.Parse(dgvConstatesNumericasEnteras.Rows[i].Cells[1].Value.ToString());
-                }
-            }
-
+            int index = int.Parse(strCNE.Replace("CNE", ""));
+            foreach(NumericoEntero n in MetodosAL.ConstantesNumericasEnteras)
+                if (n.Index == index) valor = n.Contenido;
             return (valor);
         }
 
