@@ -165,6 +165,7 @@ namespace Quindim
       
 
 
+
             }
              catch (Exception ex)
             {
@@ -1316,7 +1317,6 @@ namespace Quindim
                 string remplazo = "";
                 foreach (string Token in pf)
                 {
-
                     if (Token.Substring(0, 1) == "O")
                     {
                         remplazo = CrearRenglonesCondicional(ref Tripleta, pf, c, ref T, ref OperadoresLogicos);
@@ -1517,7 +1517,7 @@ namespace Quindim
 
                     if (contadorIden <= 1)
                     {
-                        MessageBox.Show("Se elimino una linea." + LineasTokens[lineaActual].ToString());
+                        //MessageBox.Show("Se elimino una linea." + LineasTokens[lineaActual].ToString());
                         if (!(LineasTokens[lineaActual].ToString().Contains("PR08") | LineasTokens[lineaActual].ToString().Contains("PR07")))
                         {
                             LineasTokens.RemoveAt(lineaActual);
@@ -1886,43 +1886,53 @@ namespace Quindim
             {
                 if (lineaToken.Contains("PR06"))
                 {
-                    bool cero = false;
-                    int lastIndex = 0;
-                    foreach (NumericoEntero unEntero in MetodosAL.ConstantesNumericasEnteras)
+
+                    if (ObtenerVariableProductoConTipo(listaTokens) != "")
                     {
-                        if (unEntero.Contenido == 0)
+                        bool cero = false;
+                        int lastIndex = 0;
+                        foreach (NumericoEntero unEntero in MetodosAL.ConstantesNumericasEnteras)
                         {
-                            cero = true;
+                            if (unEntero.Contenido == 0)
+                            {
+                                cero = true;
+                                lastIndex = unEntero.Index;
+                                break;
+                            }
                             lastIndex = unEntero.Index;
-                            break;
                         }
-                        lastIndex = unEntero.Index;
+                        if (!cero)
+                        {
+                            lastIndex++;
+                            MetodosAL.ConstantesNumericasEnteras.Add(new NumericoEntero { Index = lastIndex, Contenido = 0 });
+                        }
+                        nuevaLista.Add(ObtenerVariableProductoConTipo(listaTokens) + " OPA6 " + "CNE" + lastIndex);
                     }
-                    if (!cero)
-                    {
-                        lastIndex++;
-                        MetodosAL.ConstantesNumericasEnteras.Add(new NumericoEntero { Index = lastIndex, Contenido = 0 });
-                    }
-                    nuevaLista.Add(ObtenerVariableProductoConTipo(listaTokens) + " OPA6 " + "CNE" + lastIndex);
                     nuevaLista.Add(lineaToken);
                 }
                 else
                 {
-                    foreach (string tokesion in MultiplicandoTokenCiclo(listaTokens))
+                    if (ObtenerVariableProductoConTipo(listaTokens) != "")
                     {
-                        if (lineaToken == tokesion)
+                        foreach (string tokesion in MultiplicandoTokenCiclo(listaTokens))
                         {
-                            string provisional = lineaToken.Replace("OPA1 " + TokenCiclo(listaTokens), "OPA4 " + ObtenerVariableProducto(listaTokens));
-                            provisional = provisional.Replace(TokenCiclo(listaTokens) + " OPA1", ObtenerVariableProducto(listaTokens) + " OPA4").Replace("  ", " ");
-                            if (provisional.Contains("TDD"))
-                                provisional = provisional.Substring(provisional.IndexOf(" "));
-                            nuevaLista.Add(provisional.Trim());
-                        }
-                        else
-                        {
-                            nuevaLista.Add(lineaToken);
+                            if (lineaToken == tokesion)
+                            {
+                                //Aquí se cambia el por a mas
+                                string provisional = lineaToken.Replace("OPA1 " + TokenCiclo(listaTokens), "OPA4 " + ObtenerVariableProducto(listaTokens));
+                                provisional = provisional.Replace(TokenCiclo(listaTokens) + " OPA1", ObtenerVariableProducto(listaTokens) + " OPA4").Replace("  ", " ");
+                                if (provisional.Contains("TDD"))
+                                    provisional = provisional.Substring(provisional.IndexOf(" "));
+                                nuevaLista.Add(provisional.Trim());
+                            }
+                            else
+                            {
+                                nuevaLista.Add(lineaToken);
+                            }
                         }
                     }
+                    else
+                        nuevaLista.Add(lineaToken);
                 }
 
             }

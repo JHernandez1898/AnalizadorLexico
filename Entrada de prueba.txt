@@ -12,7 +12,7 @@ function dbl Calcfact ( int num )
 	end
 	else
 		for ( int x = num to num > 1 step x = x - 1 )
-			int R = 8 * x
+			int R = R * x
 
 		end
 	end
