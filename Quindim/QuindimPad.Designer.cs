@@ -1027,7 +1027,6 @@
             this.tabPage5.Size = new System.Drawing.Size(504, 363);
             this.tabPage5.TabIndex = 0;
             this.tabPage5.Text = "Tripleta";
-            this.tabPage5.Click += new System.EventHandler(this.tabPage5_Click);
             // 
             // GenerarTripleta
             // 

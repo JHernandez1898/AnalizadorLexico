@@ -1764,19 +1764,6 @@ namespace Quindim
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i <= dataGridView1.Rows.Count; i++)
-            {
-
-            }
-        }
-
-        private void tabPage5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         #region Optimización de ciclos
         /*
          *  Si se tiene un ciclo cuyo funcionamiento depende de una condición compuesta 
@@ -1939,7 +1926,6 @@ namespace Quindim
             return nuevaLista;
         }
         #endregion
-
 
         public DataTable OptimizacionDeMirilla(DataTable Tripleta)
         {
