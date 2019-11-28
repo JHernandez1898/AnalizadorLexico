@@ -1045,7 +1045,8 @@ namespace Quindim
                             if (Metodo)
                             {
                                 Tripleta.Rows.Add("T" + T.ToString(), Tokens[1], "OPA6");
-                                Tripleta.Rows.Add("T" + T.ToString(), "TR" + metodo, "OPA6");
+                                string parametros  =  obtenerParametros(ref Tripleta, Tokens, ref T);
+                                Tripleta.Rows.Add("T" + T.ToString(),parametros , "TR" + metodo);
                                 T++;
                             }
                             else
@@ -1097,7 +1098,10 @@ namespace Quindim
                         banderafunc = true;
                         break;
                     case "PR11":
-                        Tripleta.Rows.Add("PROC", "TR" + Tokens[2], "-");
+                        string nombreMetodo = MetodosAL.Identificadores.Find(t => "ID" +  t.Index == Tokens[1]).Nombre;
+                        if(nombreMetodo  == "main")
+                        Tripleta.Rows.Add("PROC", nombreMetodo, "-");
+                        else Tripleta.Rows.Add("PROC", "TR" + Tokens[1], "-");
                         inicializarParametros(ref Tripleta, Tokens, ref T);
                         banderafunc = true;
                         break;
@@ -1223,6 +1227,31 @@ namespace Quindim
                 }
             }
             return hayUnMetodo;
+        }
+
+        string obtenerParametros(ref DataTable Tripleta, string[] tokens, ref int t)
+        {
+            int control = 0;
+            string parametros = "";
+            for (int i = 0; i <= tokens.Length; i++)
+            {
+                if (tokens[i] == "PAR1")
+                {
+                    control = i + 1;
+                    for (int j = 0; j <= tokens.Length - i; j++)
+                    {
+                        if (tokens[control] != "PAR2")
+                        {
+                            parametros += tokens[control] + ",";
+                            control++;
+                        }
+                        else break;
+                    }
+                    break;
+                }
+            }
+            parametros = parametros.Substring(0, parametros.Length - 1);
+            return parametros;
         }
 
         void inicializarParametros(ref DataTable Tripleta, string[] tokens, ref int t)
@@ -1518,7 +1547,7 @@ namespace Quindim
                     if (contadorIden <= 1)
                     {
                         //MessageBox.Show("Se elimino una linea." + LineasTokens[lineaActual].ToString());
-                        if (!(LineasTokens[lineaActual].ToString().Contains("PR08") | LineasTokens[lineaActual].ToString().Contains("PR07")))
+                        if (!(LineasTokens[lineaActual].ToString().Contains("PR08") | LineasTokens[lineaActual].ToString().Contains("PR07")| LineasTokens[lineaActual].ToString().Contains("PR11")))
                         {
                             LineasTokens.RemoveAt(lineaActual);
                             lineaActual--;
@@ -1942,7 +1971,7 @@ namespace Quindim
                 object[] matriz = { dtr.ItemArray[0], dtr.ItemArray[1], dtr.ItemArray[2] };
                 matar.ItemArray = matriz;
                 nuevaTripleta.Rows.Add(matar);
-                if (dtr.ItemArray[0].ToString() == "FUNC")
+                if (dtr.ItemArray[0].ToString() == "FUNC" | dtr.ItemArray[0].ToString() == "PROC")
                 {
                     dentroDeUnMetodo = true;
                     nombreTemporalMetodoInutil = dtr.ItemArray[1].ToString();
