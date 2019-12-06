@@ -1,3 +1,4 @@
+
 int num
 int cant = 1 + 1
 read num
@@ -12,7 +13,7 @@ function dbl Calcfact ( int num )
 	end
 	else
 		for ( int x = num to num > 1 step x = x - 1 )
-			int R = R * x
+			int R = 8 * x
 
 		end
 	end

@@ -1999,9 +1999,9 @@ namespace Quindim
                     case 5:
                         foreach (DataRow tempdtr in temp.Rows)
                         {
-                            if (tempdtr.ItemArray[1].ToString().Contains("TR")) 
+                            if (tempdtr.ItemArray[2].ToString().Contains("TR")) 
                             {
-                                nombreTemporalMetodoUtil = tempdtr.ItemArray[1].ToString();
+                                nombreTemporalMetodoUtil = tempdtr.ItemArray[2].ToString();
                                 esInutil = true;
                             }
                             lineasDentroDelMetodo = 0;
@@ -2026,9 +2026,9 @@ namespace Quindim
                 {
                     foreach (DataRow tempdtr in nuevaTripleta.Rows)
                     {
-                        if (tempdtr.ItemArray[1].ToString().Contains(nombreTemporalMetodoInutil))
+                        if (tempdtr.ItemArray[2].ToString().Contains(nombreTemporalMetodoInutil))
                         {
-                            object[] nuevosDatos = { tempdtr.ItemArray[0], nombreTemporalMetodoUtil, tempdtr.ItemArray[2] };
+                            object[] nuevosDatos = { tempdtr.ItemArray[0], tempdtr.ItemArray[1], nombreTemporalMetodoUtil };
                             tempdtr.ItemArray = nuevosDatos;
                         }
                         
